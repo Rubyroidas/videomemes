@@ -2,7 +2,7 @@ import {useEffect, useRef, useState} from 'react';
 import {FFmpeg} from '@ffmpeg/ffmpeg';
 import {fetchFile, toBlobURL} from '@ffmpeg/util';
 
-const baseURL = 'https://unpkg.com/@ffmpeg/core-mt@0.12.7/dist/umd';
+const baseURL = 'https://unpkg.com/@ffmpeg/core-mt@0.12.4/dist/esm';
 
 const usePrepareFfmpeg = (ffmpeg: FFmpeg) => {
     const [isLoaded, setIsLoaded] = useState(false);

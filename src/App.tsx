@@ -17,16 +17,6 @@ const usePrepareFfmpeg = (ffmpeg: FFmpeg) => {
         (async () => {
             try {
                 console.log('loading ffmpeg...');
-                ffmpeg.on("log", ({message, type}) => {
-                    switch (type) {
-                        case 'stderr':
-                            console.error('log', message);
-                            break;
-                        default:
-                            console.log('log', message, type);
-                    }
-                });
-
                 await ffmpeg.load({
                     coreURL: await toBlobURL(`${baseURL}/ffmpeg-core.js`, 'text/javascript'),
                     wasmURL: await toBlobURL(`${baseURL}/ffmpeg-core.wasm`, 'application/wasm'),
@@ -44,6 +34,46 @@ const usePrepareFfmpeg = (ffmpeg: FFmpeg) => {
 };
 
 const templateFile = 'tinkoff_output.mp4';
+
+const ffmpegExec = async (ffmpeg: FFmpeg, args: string[], progressCallback?: (e: ProgressEvent) => void) => {
+    const logs: Record<string, string[]> = {};
+
+    ffmpeg.on('log', ({message, type}) => {
+        if (!logs[type]) {
+            logs[type] = [];
+        }
+        logs[type].push(message);
+    });
+    if (progressCallback) {
+        ffmpeg.on('progress', progressCallback);
+    }
+    await ffmpeg.exec(args);
+    if (progressCallback) {
+        ffmpeg.off('progress', progressCallback);
+    }
+    return Object.fromEntries(
+        Object.entries(logs)
+            .map(([k, v]) => [k, v.join('\n')])
+    );
+};
+
+interface VideoProperties {
+    fps: number;
+}
+const getVideoProperties = async (ffmpeg: FFmpeg, fileName: string): Promise<VideoProperties> => {
+    const result: VideoProperties = {
+        fps: 0,
+    };
+    const infoResult = await ffmpegExec(ffmpeg, ['-i', fileName]);
+    const match = /(\d+)\sfps/i.exec(infoResult.stderr);
+    if (match?.[1]) {
+        result.fps = parseInt(match[1], 10);
+    }
+    return result;
+}
+
+const listFiles = async (ffmpeg: FFmpeg, path: string)=>
+    (await ffmpeg.listDir(path)).filter(p => !(['.', '..'].includes(p.name) && p.isDir));
 
 export const App = () => {
     const ffmpegRef = useRef(new FFmpeg());
@@ -72,22 +102,37 @@ export const App = () => {
             setIsDecoding(true);
             setDecodingStatus('loading source video...');
             const fetchedFile = await fetchFile(templateFile);
-            // videoRef.current.src = URL.createObjectURL(new Blob([fetchedFile.buffer], {type: 'video/mp4'}));
+            videoRef.current.src = URL.createObjectURL(new Blob([fetchedFile.buffer], {type: 'video/mp4'}));
             
             setDecodingStatus('feeding source video to ffmpeg...');
             await ffmpeg.writeFile('input.mp4', fetchedFile);
-            console.log(await ffmpeg.listDir('.'));
+
+            setDecodingStatus('extracting frames...');
             
-            setDecodingStatus('converting video...');
-            ffmpeg.on("progress", updateDecodingStatus);
-            await ffmpeg.exec(['-i', 'input.mp4', 'output.mp4']);
-            ffmpeg.off("progress", updateDecodingStatus);
+            // pics
+            await ffmpeg.createDir('pics');
+            const splitPicsResult = await ffmpegExec(ffmpeg, '-y -i input.mp4 -qscale:v 8 pics/%05d.jpg'.split(' '), updateDecodingStatus);
+            console.log('splitPicsResult', splitPicsResult.stderr);
             
-            setDecodingStatus('reading output video...');
-            const data = await ffmpeg.readFile('output.mp4') as Uint8Array;
+            // mp3
+            await ffmpegExec(ffmpeg, ['-i', 'input.mp4', '-vn', '-f', 'mp3', 'output.mp3']);
             
-            setDecodingStatus('previewing video...');
-            videoRef.current.src = URL.createObjectURL(new Blob([data.buffer], {type: 'video/mp4'}));
+            // info
+            const videoProperties = await getVideoProperties(ffmpeg, 'input.mp4');
+            console.log('infoResult', videoProperties);
+            
+            // await ffmpeg.exec(['-i', 'input.mp4', '-vn', '-f', 'mp3', 'output.mp3']);
+            console.log('dir [.]', await listFiles(ffmpeg, '.'));
+            console.log('dir [pics]', await listFiles(ffmpeg, 'pics'));
+            console.log('dir [captions]', await listFiles(ffmpeg, 'pics'));
+            
+            // setDecodingStatus('reading output video...');
+            // const data = await ffmpeg.readFile('output.mp4') as Uint8Array;
+            
+            // setDecodingStatus('previewing video...');
+            // videoRef.current.src = URL.createObjectURL(new Blob([data.buffer], {type: 'video/mp4'}));
+            setDecodingStatus('ready 👌');
+            
             setIsDecoding(false);
         })();
     }, [isFfmpegLoaded]);

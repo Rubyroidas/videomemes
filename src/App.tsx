@@ -12,8 +12,8 @@ const tinkoffConfig: {phrase: string, timecode: string}[] = _tinkoffConfig;
 
 const TEXT_COLOR = '#ff0000';
 const TEXT_FONT = 'bold 24px sans-serif';
-// const templateFile = 'tinkoff_output.mp4';
-const templateFile = 'tinkoff_3.mp4';
+const templateFile = 'tinkoff_output.mp4';
+// const templateFile = 'tinkoff_3.mp4';
 const templateConfig = tinkoffConfig; // .slice(0, 3);
 
 const listFiles = async (ffmpeg: FFmpeg, path: string)=>

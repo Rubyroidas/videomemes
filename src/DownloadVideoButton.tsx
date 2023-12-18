@@ -1,4 +1,15 @@
-import {FC} from "react";
+import {FC} from 'react';
+import styled from '@emotion/styled';
+
+const Wrapper = styled.div`
+  display: inline-block;
+  background-color: black;
+  color: white;
+  padding: 4px;
+  font-family: sans-serif;
+  font-size: 16px;
+  cursor: pointer;
+`;
 
 type Props = {
     data: Blob;
@@ -14,6 +25,6 @@ export const DownloadVideoButton: FC<Props> = ({data}) => {
     };
     
     return (
-        <div onClick={handleClick}>Download</div>
+        <Wrapper onClick={handleClick}>Download</Wrapper>
     );
 };

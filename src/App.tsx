@@ -179,12 +179,14 @@ export const App = () => {
             {isDecoding && (
                 <ProgressBar value={decodingProgress}/>
             )}
+            {generatedVideo && (
+                <div>
+                    <DownloadVideoButton data={generatedVideo}/>
+                </div>
+            )}
             <video controls={true} ref={videoRef} style={{
                 display: !generatedVideo ? 'none' : ''
             }}></video>
-            {generatedVideo && (
-                <DownloadVideoButton data={generatedVideo}/>
-            )}
         </div>
     );
 };

@@ -4,9 +4,10 @@ import {fetchFile} from '@ffmpeg/util';
 
 import _tinkoffConfig from './tinkoff.json';
 
-import {usePrepareFfmpeg} from './hooks.ts';
-import {ffmpegExec, getVideoProperties, ProgressEvent} from './utils.ts';
-import {ProgressBar} from "./ProgressBar.tsx";
+import {usePrepareFfmpeg} from './hooks';
+import {ffmpegExec, getVideoProperties, ProgressEvent} from './utils';
+import {ProgressBar} from './ProgressBar';
+import {DownloadVideoButton} from './DownloadVideoButton';
 
 const tinkoffConfig: {phrase: string, timecode: string}[] = _tinkoffConfig;
 
@@ -28,6 +29,7 @@ export const App = () => {
     const [decodingProgress, setDecodingProgress] = useState(0);
     const [decodingStatus, setDecodingStatus] = useState('');
     const {isLoaded: isFfmpegLoaded} = usePrepareFfmpeg(ffmpegRef.current);
+    const [generatedVideo, setGeneratedVideo] = useState<Blob | null>(null);
     
     console.log('%cdecodingStatus', 'color: pink', decodingStatus);
 
@@ -155,23 +157,34 @@ export const App = () => {
             console.log('output.mp4 file size', data.length);
             
             setDecodingStatus('previewing video...');
-            videoRef.current.src = URL.createObjectURL(new Blob([data.buffer], {type: 'video/mp4'}));
+            setGeneratedVideo(new Blob([data.buffer], {type: 'video/mp4'}));
             setDecodingStatus('ready 👌');
             
             setIsDecoding(false);
         })();
     }, [isFfmpegLoaded]);
+
+    useEffect(() => {
+        if (!videoRef.current || !generatedVideo) {
+            return;
+        }
+        
+        videoRef.current.src = URL.createObjectURL(generatedVideo);
+    }, [generatedVideo]);
     
     return (
         <div>
             <h4>Video meme generator app</h4>
-            <div>Decoding status: {decodingStatus}</div>
+            <div>Encoding status: {decodingStatus}</div>
             {isDecoding && (
                 <ProgressBar value={decodingProgress}/>
             )}
             <video controls={true} ref={videoRef} style={{
-                display: isDecoding ? 'none' : ''
+                display: !generatedVideo ? 'none' : ''
             }}></video>
+            {generatedVideo && (
+                <DownloadVideoButton data={generatedVideo}/>
+            )}
         </div>
     );
 };

@@ -139,7 +139,8 @@ export const App = () => {
             compileCommandArgs.push('-filter_complex', complexFilter.join(';'));
             compileCommandArgs.push('-map', `[v${imageTimePairs.length}]`,
                 '-map', '0:a',
-                '-vcodec', 'libx264', '-preset', 'ultrafast',
+                // '-vcodec', 'libx264',
+                '-preset', 'ultrafast',
                 'output.mp4'
             );
             

@@ -8,6 +8,7 @@ import {usePrepareFfmpeg} from './hooks';
 import {ffmpegExec, getVideoProperties, ProgressEvent} from './utils';
 import {ProgressBar} from './ProgressBar';
 import {DownloadVideoButton} from './DownloadVideoButton';
+import {AppTitle, Button} from './App.styles';
 
 const tinkoffConfig: {phrase: string, timecode: string}[] = _tinkoffConfig;
 
@@ -33,7 +34,7 @@ export const App = () => {
     
     console.log('%cdecodingStatus', 'color: pink', decodingStatus);
 
-    useEffect(() => {
+    const handleGenerateClick = () => {
         (async () => {
             if (isDecoding || !isFfmpegLoaded || !ffmpegRef.current || !videoRef.current) {
                 console.log('return');
@@ -162,7 +163,7 @@ export const App = () => {
             
             setIsDecoding(false);
         })();
-    }, [isFfmpegLoaded]);
+    };
 
     useEffect(() => {
         if (!videoRef.current || !generatedVideo) {
@@ -174,8 +175,11 @@ export const App = () => {
     
     return (
         <div>
-            <h4>Video meme generator app</h4>
+            <AppTitle>Video meme generator</AppTitle>
             <div>Encoding status: {decodingStatus}</div>
+            {!isDecoding && !generatedVideo && (
+                <Button onClick={handleGenerateClick}>Generate!</Button>
+            )}
             {isDecoding && (
                 <ProgressBar value={decodingProgress}/>
             )}

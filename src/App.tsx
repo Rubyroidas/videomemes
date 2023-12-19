@@ -9,8 +9,10 @@ import {ffmpegExec, getVideoProperties, ProgressEvent} from './utils';
 import {ProgressBar} from './ProgressBar';
 import {DownloadVideoButton} from './DownloadVideoButton';
 import {AppTitle, Button} from './App.styles';
+import {PhraseConfig} from './models';
+import {PhraseEditor} from './PhraseEditor';
 
-const tinkoffConfig: {phrase: string, timecode: string}[] = _tinkoffConfig;
+const tinkoffConfig: PhraseConfig[] = _tinkoffConfig;
 
 const TEXT_COLOR = '#ff0000';
 const TEXT_FONT = 'bold 24px sans-serif';
@@ -21,19 +23,17 @@ const templateConfig = tinkoffConfig; // .slice(0, 3);
 const listFiles = async (ffmpeg: FFmpeg, path: string)=>
     (await ffmpeg.listDir(path)).filter(p => !(['.', '..'].includes(p.name) && p.isDir));
 
-
 export const App = () => {
     const ffmpegRef = useRef(new FFmpeg());
     const videoRef = useRef<HTMLVideoElement>(null);
 
+    const [phrases, setPhrases] = useState(templateConfig.map(p => p.phrase));
     const [isDecoding, setIsDecoding] = useState(false);
     const [decodingProgress, setDecodingProgress] = useState(0);
     const [decodingStatus, setDecodingStatus] = useState('');
     const {isLoaded: isFfmpegLoaded} = usePrepareFfmpeg(ffmpegRef.current);
     const [generatedVideo, setGeneratedVideo] = useState<Blob | null>(null);
     
-    console.log('%cdecodingStatus', 'color: pink', decodingStatus);
-
     const handleGenerateClick = () => {
         (async () => {
             if (isDecoding || !isFfmpegLoaded || !ffmpegRef.current || !videoRef.current) {
@@ -42,8 +42,7 @@ export const App = () => {
             }
             
             const ffmpeg = ffmpegRef.current;
-            const updateDecodingStatus = ({progress, time}: ProgressEvent) => {
-                console.log('progress', progress, time);
+            const updateDecodingStatus = ({progress}: ProgressEvent) => {
                 setDecodingProgress(progress);
             };
 
@@ -74,11 +73,11 @@ export const App = () => {
             const imageTimePairs: {timecode: number, imageFileName: string}[] = [];
             const ctx = canvas.getContext('2d')!;
             let imageNumber = 0;
-            for (const rec of templateConfig) {
-                console.log('generating image from', rec);
-                const timecode = parseFloat(rec.timecode);
-                const phrase = rec.phrase;
-                
+            const currentConfig: PhraseConfig[] = templateConfig.map((p, index) => ({
+                phrase: phrases[index],
+                timecode: p.timecode,
+            }));
+            for (const {phrase, timecode} of currentConfig) {
                 ctx.fillStyle = '#fff';
                 ctx.fillRect(0, 0, width, height);
                 
@@ -103,10 +102,7 @@ export const App = () => {
                         }, 'image/png');
                     });
                     
-                    console.log('got blob', blob);
-
                     const imageFileName = `captions/${imageNumber.toString().padStart(5, '0')}.png`;
-                    console.log('file name for image is', imageFileName);
                     await ffmpeg.writeFile(imageFileName, new Uint8Array(await blob.arrayBuffer()));
 
                     imageTimePairs.push({timecode, imageFileName});
@@ -149,13 +145,10 @@ export const App = () => {
             
             // montage
             setDecodingStatus('converting video...');
-            const compileResult = await ffmpegExec(ffmpeg, compileCommandArgs, updateDecodingStatus);
-            console.log('compileResult', compileResult.stderr);
+            await ffmpegExec(ffmpeg, compileCommandArgs, updateDecodingStatus);
 
             setDecodingStatus('reading output video...');
             const data = await ffmpeg.readFile('output.mp4') as Uint8Array;
-            
-            console.log('output.mp4 file size', data.length);
             
             setDecodingStatus('previewing video...');
             setGeneratedVideo(new Blob([data.buffer], {type: 'video/mp4'}));
@@ -177,6 +170,11 @@ export const App = () => {
         <div>
             <AppTitle>Video meme generator</AppTitle>
             <div>Encoding status: {decodingStatus}</div>
+            <PhraseEditor
+                phrasesConfig={templateConfig}
+                phrases={phrases}
+                onChange={setPhrases}
+            />
             {!isDecoding && !generatedVideo && (
                 <Button onClick={handleGenerateClick}>Generate!</Button>
             )}

@@ -139,7 +139,8 @@ export const App = () => {
             compileCommandArgs.push('-filter_complex', complexFilter.join(';'));
             compileCommandArgs.push('-map', `[v${imageTimePairs.length}]`,
                 '-map', '0:a',
-                // '-vcodec', 'libx264',
+                '-codec:v', 'libx264',
+                '-codec:a', 'aac', '-b:a', '128k',
                 '-preset', 'ultrafast',
                 'output.mp4'
             );
@@ -154,7 +155,9 @@ export const App = () => {
             setDecodingStatus('previewing video...');
             setGeneratedVideo(new Blob([data.buffer], {type: 'video/mp4'}));
             setDecodingStatus('ready 👌');
-            
+
+            console.log('dir [.]', await listFiles(ffmpeg, '.'));
+
             setIsDecoding(false);
         })();
     };
@@ -190,6 +193,7 @@ export const App = () => {
             <video controls={true} ref={videoRef} style={{
                 display: !generatedVideo ? 'none' : ''
             }}></video>
+            {/*<video controls={true} src="./tinkoff_3.mp4"></video>*/}
         </div>
     );
 };

@@ -28,7 +28,8 @@ const generateVideo = async (
     videoFiles: string[],
     phrases: string[],
     setDecodingProgress: (progress: number) => void,
-    setDecodingStatus: (status: string) => void
+    setDecodingStatus: (status: string) => void,
+    preset: string
 ): Promise<Blob> => {
     const updateDecodingStatus = ({progress}: ProgressEvent) => {
         setDecodingProgress(progress);
@@ -143,7 +144,7 @@ const generateVideo = async (
         // common
         '-x264opts', 'opencl', // slight boost
         '-brand', 'mp42', // brand compat
-        '-preset', 'superfast', // super fast preset
+        '-preset', preset, // super fast preset
         '-movflags', '+faststart', // ability to start video earlier (streaming?)
 
         // output file
@@ -176,7 +177,7 @@ export const App = () => {
     const {isLoaded: isFfmpegLoaded} = usePrepareFfmpeg(ffmpegRef.current);
     const [generatedVideo, setGeneratedVideo] = useState<Blob | null>(null);
     
-    const handleGenerateClick = () => {
+    const handleGenerateClick = (preset: string) => {
         (async () => {
             if (isDecoding || !isFfmpegLoaded || !ffmpegRef.current || !videoRef.current) {
                 console.log('return');
@@ -187,7 +188,7 @@ export const App = () => {
             setIsDecoding(true);
             console.log('start');
 
-            const vid = await generateVideo(ffmpeg, [templateFile], phrases, setDecodingProgress, setDecodingStatus);
+            const vid = await generateVideo(ffmpeg, [templateFile], phrases, setDecodingProgress, setDecodingStatus, preset);
 
             setGeneratedVideo(vid);
             setIsDecoding(false);
@@ -212,7 +213,11 @@ export const App = () => {
                 onChange={setPhrases}
             />
             {!isDecoding && !generatedVideo && (
-                <Button onClick={handleGenerateClick}>Generate!</Button>
+                <>
+                    <Button onClick={() => handleGenerateClick('fast')}>Generate fast</Button>
+                    <Button onClick={() => handleGenerateClick('superfast')}>Generate superfast</Button>
+                    <Button onClick={() => handleGenerateClick('ultrafast')}>Generate ultrafast</Button>
+                </>
             )}
             {isDecoding && (
                 <ProgressBar value={decodingProgress}/>

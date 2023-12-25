@@ -8,8 +8,9 @@ export const Button = styled.div`
   display: inline-block;
   background-color: black;
   color: white;
-  padding: 4px;
+  padding: 8px 16px;
+  margin: 0 8px 0 0;
   font-family: sans-serif;
-  font-size: 16px;
+  font-size: 24px;
   cursor: pointer;
 `;

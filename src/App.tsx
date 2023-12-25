@@ -128,8 +128,10 @@ const generateVideo = async (
     compileCommandArgs.push('-map', `[v${imageTimePairs.length}]`,
         '-map', '0:a',
         '-codec:v', 'libx264',
-        '-preset', 'ultrafast',
+        '-profile:v', 'main',
+        // '-vf', 'format=yuv420p',
         '-codec:a', 'aac', '-b:a', '128k',
+        '-movflags', '+faststart',
         '-preset', 'ultrafast',
         'output.mp4'
     );

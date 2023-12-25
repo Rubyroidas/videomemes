@@ -16,9 +16,9 @@ const tinkoffConfig: PhraseConfig[] = _tinkoffConfig;
 
 const TEXT_COLOR = '#ff0000';
 const TEXT_FONT = 'bold 24px sans-serif';
-const templateFile = 'tinkoff_output.mp4';
-// const templateFile = 'tinkoff_3.mp4';
-const templateConfig = tinkoffConfig; // .slice(0, 3);
+// const templateFile = 'tinkoff_output.mp4';
+const templateFile = 'tinkoff_3.mp4';
+const templateConfig = tinkoffConfig.slice(0, 3);
 
 const listFiles = async (ffmpeg: FFmpeg, path: string)=>
     (await ffmpeg.listDir(path)).filter(p => !(['.', '..'].includes(p.name) && p.isDir));
@@ -127,12 +127,26 @@ const generateVideo = async (
     compileCommandArgs.push('-filter_complex', complexFilter.join(';'));
     compileCommandArgs.push('-map', `[v${imageTimePairs.length}]`,
         '-map', '0:a',
-        '-codec:v', 'libx264',
-        '-profile:v', 'main',
-        // '-vf', 'format=yuv420p',
-        '-codec:a', 'aac', '-b:a', '128k',
-        '-movflags', '+faststart',
-        '-preset', 'ultrafast',
+
+        // video
+        '-c:v', 'libx264',
+        '-profile:v', 'high',
+        '-level:v', '4.0',
+        '-pix_fmt', 'yuv420p',
+        '-colorspace:v', 'bt709',
+        '-color_primaries:v', 'bt709', '-color_trc:v', 'bt709', '-color_range:v', 'tv', '-bsf:v',
+        'h264_metadata=chroma_sample_loc_type=0',
+
+        // audio
+        '-c:a', 'aac', '-b:a', '128k',
+
+        // common
+        '-x264opts', 'opencl', // slight boost
+        '-brand', 'mp42', // brand compat
+        '-preset', 'ultrafast', // super fast preset
+        '-movflags', '+faststart', // ability to start video earlier (streaming?)
+
+        // output file
         'output.mp4'
     );
 

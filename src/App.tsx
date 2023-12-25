@@ -143,7 +143,7 @@ const generateVideo = async (
         // common
         '-x264opts', 'opencl', // slight boost
         '-brand', 'mp42', // brand compat
-        '-preset', 'ultrafast', // super fast preset
+        '-preset', 'superfast', // super fast preset
         '-movflags', '+faststart', // ability to start video earlier (streaming?)
 
         // output file

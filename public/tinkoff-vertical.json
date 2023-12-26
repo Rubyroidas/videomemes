@@ -1,0 +1,42 @@
+{
+  "name": "Tinkoff-vertical",
+  "textArea": {
+    "x": 0,
+    "y": 0,
+    "width": 720,
+    "height": 640
+  },
+  "watermarkArea": {
+    "x": 0,
+    "y": 0,
+    "width": 100,
+    "height": 100
+  },
+  "items": [
+    {
+      "videoFile": "tinkoff-vertical/001.mp4",
+      "name": "Я как бы не понимал масштаб этого пиздеца...",
+      "duration": 5.2
+    },
+    {
+      "videoFile": "tinkoff-vertical/002.mp4",
+      "name": "В принципе, в моей фразе...",
+      "duration": 6.7
+    },
+    {
+      "videoFile": "tinkoff-vertical/003.mp4",
+      "name": "Нету ни-ху-я...",
+      "duration": 4.933
+    },
+    {
+      "videoFile": "tinkoff-vertical/004.mp4",
+      "name": "Ну вот какая разница? ...",
+      "duration": 4.767
+    },
+    {
+      "videoFile": "tinkoff-vertical/005.mp4",
+      "name": "Сомнительно... ну... окэй...",
+      "duration": 3.5
+    }
+  ]
+}

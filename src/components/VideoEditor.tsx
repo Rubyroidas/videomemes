@@ -15,6 +15,24 @@ type Props = {
     ffmpeg: FFmpeg
 }
 
+type Rect = {
+    x: number;
+    y: number;
+    width: number;
+    height: number;
+}
+type CollectionItem = {
+    videoFile: string;
+    name: string;
+    duration: number;
+}
+type Collection = {
+    name: string;
+    textArea: Rect;
+    watermarkArea: Rect;
+    items: CollectionItem[];
+}
+
 const tinkoffConfig: PhraseConfig[] = _tinkoffConfig;
 
 const TEXT_COLOR = '#ff0000';
@@ -170,11 +188,22 @@ const generateVideo = async (
 export const VideoEditor: FC<Props> = ({ffmpeg}) => {
     const videoRef = useRef<HTMLVideoElement>(null);
 
+    const [collection, setCollection] = useState<Collection | null>(null);
     const [phrases, setPhrases] = useState(templateConfig.map(p => p.phrase));
     const [isDecoding, setIsDecoding] = useState(false);
     const [decodingProgress, setDecodingProgress] = useState(0);
     const [decodingStatus, setDecodingStatus] = useState('');
     const [generatedVideo, setGeneratedVideo] = useState<Blob | null>(null);
+
+    console.log('collection', collection);
+
+    useEffect(() => {
+        const load = async () => {
+            const res = await fetch('tinkoff-vertical.json');
+            setCollection(await res.json());
+        };
+        load();
+    }, []);
 
     const handleGenerateClick = () => {
         (async () => {

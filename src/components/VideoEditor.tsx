@@ -76,13 +76,13 @@ export const VideoEditor: FC<Props> = ({ffmpeg, collections}) => {
             {isDecoding && (
                 <ProgressBar value={decodingProgress}/>
             )}
-            {generatedVideo && (
+            {generatedVideo && !isDecoding && (
                 <div>
                     <DownloadVideoButton data={generatedVideo}/>
                 </div>
             )}
             <video controls={true} ref={videoRef} style={{
-                display: !generatedVideo ? 'none' : ''
+                display: !generatedVideo || isDecoding ? 'none' : ''
             }}></video>
             {/*<video controls={true} src="./tinkoff_3.mp4"></video>*/}
         </>

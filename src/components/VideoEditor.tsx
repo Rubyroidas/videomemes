@@ -65,6 +65,7 @@ export const VideoEditor: FC<Props> = ({ffmpeg, collections}) => {
         <>
             <div>Encoding status: {decodingStatus}</div>
             <PhraseEditor
+                disabled={isDecoding}
                 collections={collections}
                 userPhrases={userPhrases}
                 onChange={setUserPhrases}

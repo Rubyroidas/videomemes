@@ -1,6 +1,5 @@
 import {FFmpeg} from '@ffmpeg/ffmpeg';
 import {fetchFile} from "@ffmpeg/util";
-import {PhraseConfig} from "./models.ts";
 
 import {Collection, UserPhrase} from "./types.ts";
 
@@ -55,7 +54,6 @@ const templateFile = 'tinkoff_3.mp4';
 const listFiles = async (ffmpeg: FFmpeg, path: string)=>
     (await ffmpeg.listDir(path)).filter(p => !(['.', '..'].includes(p.name) && p.isDir));
 
-
 export const generateVideo = async (
     ffmpeg: FFmpeg,
     userPhrases: UserPhrase[],
@@ -83,27 +81,24 @@ export const generateVideo = async (
     // captions
     await ffmpeg.createDir('captions');
 
-    const width = 720;
-    const height = 640;
-    const canvas = document.createElement('canvas');
-    canvas.width = width;
-    canvas.height = height;
-
-    const imageTimePairs: {timecode: number, imageFileName: string}[] = [];
-    const ctx = canvas.getContext('2d')!;
+    const imageTimePairs: {timecode: number, imageFileName: string, x: number, y: number}[] = [];
     let imageNumber = 0;
-    const currentConfig: PhraseConfig[] = userPhrases.map(userPhrase => {
+    for (const userPhrase of userPhrases) {
         const collection = collections.find(c => c.id === userPhrase.collectionId)!;
         const itemIndex = collection.items.findIndex(item => item.id === userPhrase.phraseId);
         const itemsBefore = collection.items.slice(0, itemIndex);
-        return {
-            phrase: userPhrase.text!,
-            timecode: itemsBefore
-                .map(r => r.duration)
-                .reduce((acc, ii) => acc + ii, 0),
-        };
-    });
-    for (const {phrase, timecode} of currentConfig) {
+        const phrase = userPhrase.text!;
+        const timecode = itemsBefore
+            .map(r => r.duration)
+            .reduce((acc, ii) => acc + ii, 0);
+
+        const {x, y, width, height} = collection.textArea;
+        const canvas = document.createElement('canvas');
+        canvas.width = width;
+        canvas.height = height;
+
+        const ctx = canvas.getContext('2d')!;
+
         ctx.fillStyle = '#fff';
         ctx.fillRect(0, 0, width, height);
 
@@ -131,7 +126,7 @@ export const generateVideo = async (
             const imageFileName = `captions/${imageNumber.toString().padStart(5, '0')}.png`;
             await ffmpeg.writeFile(imageFileName, new Uint8Array(await blob.arrayBuffer()));
 
-            imageTimePairs.push({timecode, imageFileName});
+            imageTimePairs.push({timecode, imageFileName, x, y});
         } catch (e) {
             console.error(`error putting image #${imageNumber}`);
         }
@@ -139,8 +134,8 @@ export const generateVideo = async (
         imageNumber++;
     }
 
-    // console.log('dir [.]', await listFiles(ffmpeg, '.'));
-    // console.log('dir [captions]', await listFiles(ffmpeg, 'captions'));
+    console.log('dir [.]', await listFiles(ffmpeg, '.'));
+    console.log('dir [captions]', await listFiles(ffmpeg, 'captions'));
 
     const compileCommandArgs: string[] = ['-i', 'input.mp4'];
 
@@ -151,7 +146,7 @@ export const generateVideo = async (
 
     const complexFilter: string[] = [];
     for (let i = 0; i < imageTimePairs.length; i++) {
-        const {timecode } = imageTimePairs[i];
+        const {timecode, x, y } = imageTimePairs[i];
         const startTag = i === 0
             ? '[0:v]'
             : `[v${i}]`;
@@ -159,7 +154,7 @@ export const generateVideo = async (
         const endTime = i === imageTimePairs.length - 1
             ? 'inf'
             : `${imageTimePairs[i + 1].timecode.toFixed(3)}`;
-        complexFilter.push(`${startTag}[${i + 1}:v]overlay=0:0:enable='between(t,${startTime},${endTime})'[v${i + 1}]`);
+        complexFilter.push(`${startTag}[${i + 1}:v]overlay=${x}:${y}:enable='between(t,${startTime},${endTime})'[v${i + 1}]`);
     }
 
     compileCommandArgs.push('-filter_complex', complexFilter.join(';'));

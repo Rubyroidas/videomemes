@@ -1,6 +1,7 @@
 import {FFmpeg} from '@ffmpeg/ffmpeg';
 import {useEffect, useState} from 'react';
 import {toBlobURL} from '@ffmpeg/util';
+import {Collection} from "./types.ts";
 
 const baseURL = 'https://unpkg.com/@ffmpeg/core@0.12.4/dist/esm';
 
@@ -27,3 +28,17 @@ export const usePrepareFfmpeg = (ffmpeg: FFmpeg) => {
 
     return {isLoaded};
 };
+
+export const useLoadCollections = () => {
+    const [collections, setCollections] = useState<Collection[] | null>(null);
+
+    useEffect(() => {
+        const load = async () => {
+            const res = await fetch('tinkoff-vertical.json');
+            setCollections([await res.json()]);
+        };
+        load();
+    }, []);
+
+    return {collections};
+}

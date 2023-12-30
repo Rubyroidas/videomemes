@@ -1,29 +1,41 @@
 import {ChangeEvent, FC} from 'react';
 
-import {PhraseConfig} from './models';
+import {Collection, UserPhrase} from './types';
 
 type PhraseEditorProps = {
-    phrases: string[];
-    phrasesConfig: PhraseConfig[];
-    onChange: (phrases: string[]) => void;
+    collections: Collection[];
+    userPhrases: UserPhrase[];
+    onChange: (phrases: UserPhrase[]) => void;
 }
-export const PhraseEditor: FC<PhraseEditorProps> = ({phrases, phrasesConfig, onChange}) => {
+export const PhraseEditor: FC<PhraseEditorProps> = ({collections, userPhrases, onChange}) => {
     const handlePhraseChange = (index: number, e: ChangeEvent) => {
         console.log(`input at ${index}`, e);
-        const result = [...phrases];
-        result[index] = (e.target as HTMLInputElement).value;
+        const result = [...userPhrases];
+        result[index] = {
+            ...result[index],
+            text: (e.target as HTMLInputElement).value,
+        }
         onChange(result);
     };
+
+    const texts = userPhrases.map(userPhrase => {
+        const collection = collections.find(c => c.id === userPhrase.collectionId);
+        const item = collection?.items.find(item => item.id === userPhrase.phraseId);
+        return {
+            text: userPhrase.text,
+            placeholder: item?.name
+        };
+    });
 
     return (
         <div>
             Edit phrases
-            {phrases.map((phrase, index) => (
+            {texts.map(({text, placeholder}, index) => (
                 <div key={index}>
                     <input
-                        placeholder={phrasesConfig[index].phrase}
+                        placeholder={placeholder}
                         type="text"
-                        value={phrase}
+                        value={text}
                         onChange={e => handlePhraseChange(index, e)}
                     />
                 </div>

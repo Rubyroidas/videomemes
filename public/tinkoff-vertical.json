@@ -1,5 +1,5 @@
 {
-  "name": "Tinkoff-vertical",
+  "id": "tinkoff-vertical",
   "textArea": {
     "x": 0,
     "y": 0,
@@ -14,26 +14,31 @@
   },
   "items": [
     {
+      "id": 1,
       "videoFile": "tinkoff-vertical/001.mp4",
       "name": "Я как бы не понимал масштаб этого пиздеца...",
       "duration": 5.2
     },
     {
+      "id": 2,
       "videoFile": "tinkoff-vertical/002.mp4",
       "name": "В принципе, в моей фразе...",
       "duration": 6.7
     },
     {
+      "id": 3,
       "videoFile": "tinkoff-vertical/003.mp4",
       "name": "Нету ни-ху-я...",
       "duration": 4.933
     },
     {
+      "id": 4,
       "videoFile": "tinkoff-vertical/004.mp4",
       "name": "Ну вот какая разница? ...",
       "duration": 4.767
     },
     {
+      "id": 5,
       "videoFile": "tinkoff-vertical/005.mp4",
       "name": "Сомнительно... ну... окэй...",
       "duration": 3.5

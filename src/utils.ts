@@ -1,7 +1,7 @@
 import {FFmpeg} from '@ffmpeg/ffmpeg';
-import {fetchFile} from "@ffmpeg/util";
+import {fetchFile} from '@ffmpeg/util';
 
-import {Collection, UserPhrase} from "./types.ts";
+import {Collection, UserPhrase} from './types';
 
 export interface VideoProperties {
     fps: number;

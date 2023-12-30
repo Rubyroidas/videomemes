@@ -1,7 +1,8 @@
 import {FFmpeg} from '@ffmpeg/ffmpeg';
 import {useEffect, useState} from 'react';
 import {toBlobURL} from '@ffmpeg/util';
-import {Collection} from "./types.ts";
+
+import {Collection} from './types';
 
 const baseURL = 'https://unpkg.com/@ffmpeg/core@0.12.4/dist/esm';
 

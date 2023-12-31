@@ -24,8 +24,7 @@ body {
   }
 }
 
-@media (max-width: 480px) {
-  video {
-    width: 100vw;
-  }
+.buttons {
+  display: flex;
+  flex-direction: row;
 }

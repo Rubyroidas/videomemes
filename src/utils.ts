@@ -54,6 +54,37 @@ const templateFile = 'tinkoff_3.mp4';
 const listFiles = async (ffmpeg: FFmpeg, path: string)=>
     (await ffmpeg.listDir(path)).filter(p => !(['.', '..'].includes(p.name) && p.isDir));
 
+const renderTextSlide = async (width: number, height: number, text: string) => {
+    const canvas = document.createElement('canvas');
+    canvas.width = width;
+    canvas.height = height;
+
+    const ctx = canvas.getContext('2d')!;
+
+    ctx.fillStyle = '#fff';
+    ctx.fillRect(0, 0, width, height);
+
+    ctx.fillStyle = TEXT_COLOR;
+    ctx.textBaseline = 'middle';
+    ctx.textAlign = 'center';
+    ctx.font = TEXT_FONT;
+    ctx.fillText(text, width / 2, height / 2);
+
+    const img = document.createElement('img');
+    img.src = canvas.toDataURL('image/png');
+    img.style.border = 'solid 1px red';
+
+    return await new Promise<Blob>((resolve, reject) => {
+        canvas.toBlob(blob => {
+            if (blob) {
+                resolve(blob);
+            } else {
+                reject();
+            }
+        }, 'image/png');
+    });
+};
+
 export const generateVideo = async (
     ffmpeg: FFmpeg,
     userPhrases: UserPhrase[],
@@ -81,11 +112,12 @@ export const generateVideo = async (
     // captions
     await ffmpeg.createDir('captions');
 
-    const imageTimePairs: {timecode: number, imageFileName: string, x: number, y: number}[] = [];
+    const imageTimePairs: {timecode: number, imageFileName: string, x: number, y: number, sourceVideoFile: string}[] = [];
     let imageNumber = 0;
     for (const userPhrase of userPhrases) {
         const collection = collections.find(c => c.id === userPhrase.collectionId)!;
         const itemIndex = collection.items.findIndex(item => item.id === userPhrase.phraseId);
+        const item = collection.items[itemIndex];
         const itemsBefore = collection.items.slice(0, itemIndex);
         const phrase = userPhrase.text!;
         const timecode = itemsBefore
@@ -93,46 +125,15 @@ export const generateVideo = async (
             .reduce((acc, ii) => acc + ii, 0);
 
         const {x, y, width, height} = collection.textArea;
-        const canvas = document.createElement('canvas');
-        canvas.width = width;
-        canvas.height = height;
+        const blob = await renderTextSlide(width, height, phrase);
+        const imageFileName = `captions/${imageNumber.toString().padStart(5, '0')}.png`;
+        await ffmpeg.writeFile(imageFileName, new Uint8Array(await blob.arrayBuffer()));
 
-        const ctx = canvas.getContext('2d')!;
-
-        ctx.fillStyle = '#fff';
-        ctx.fillRect(0, 0, width, height);
-
-        ctx.fillStyle = TEXT_COLOR;
-        ctx.textBaseline = 'middle';
-        ctx.textAlign = 'center';
-        ctx.font = TEXT_FONT;
-        ctx.fillText(phrase, width / 2, height / 2);
-
-        const img = document.createElement('img');
-        img.src = canvas.toDataURL('image/png');
-        img.style.border = 'solid 1px red';
-
-        try {
-            const blob = await new Promise<Blob>((resolve, reject) => {
-                canvas.toBlob(blob => {
-                    if (blob) {
-                        resolve(blob);
-                    } else {
-                        reject();
-                    }
-                }, 'image/png');
-            });
-
-            const imageFileName = `captions/${imageNumber.toString().padStart(5, '0')}.png`;
-            await ffmpeg.writeFile(imageFileName, new Uint8Array(await blob.arrayBuffer()));
-
-            imageTimePairs.push({timecode, imageFileName, x, y});
-        } catch (e) {
-            console.error(`error putting image #${imageNumber}`);
-        }
-
+        imageTimePairs.push({timecode, imageFileName, x, y, sourceVideoFile: item.videoFile});
         imageNumber++;
     }
+
+    console.log('imageTimePairs', imageTimePairs);
 
     console.log('dir [.]', await listFiles(ffmpeg, '.'));
     console.log('dir [captions]', await listFiles(ffmpeg, 'captions'));

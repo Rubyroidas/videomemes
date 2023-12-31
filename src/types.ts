@@ -12,6 +12,7 @@ export type CollectionItem = {
 }
 export type Collection = {
     id: string;
+    name: string;
     textArea: Rect;
     watermarkArea: Rect;
     items: CollectionItem[];

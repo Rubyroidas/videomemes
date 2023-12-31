@@ -63,24 +63,26 @@ export const VideoEditor: FC<Props> = ({ffmpeg, collections}) => {
 
     return (
         <>
-            <div>Encoding status: {decodingStatus}</div>
+            {isDecoding && (
+                <div>Encoding status: {decodingStatus}</div>
+            )}
+            <div className="buttons">
+            {!isDecoding && (
+                <Button onClick={handleGenerateClick}>Generate</Button>
+            )}
+            {generatedVideo && !isDecoding && (
+                <DownloadVideoButton data={generatedVideo}/>
+            )}
+            </div>
+            {isDecoding && (
+                <ProgressBar value={decodingProgress}/>
+            )}
             <PhraseEditor
                 disabled={isDecoding}
                 collections={collections}
                 userPhrases={userPhrases}
                 onChange={setUserPhrases}
             />
-            {!isDecoding && (
-                <Button onClick={handleGenerateClick}>Generate</Button>
-            )}
-            {isDecoding && (
-                <ProgressBar value={decodingProgress}/>
-            )}
-            {generatedVideo && !isDecoding && (
-                <div>
-                    <DownloadVideoButton data={generatedVideo}/>
-                </div>
-            )}
             <video controls={true} ref={videoRef} style={{
                 display: !generatedVideo || isDecoding ? 'none' : ''
             }}></video>

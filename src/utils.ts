@@ -49,8 +49,6 @@ export const getVideoProperties = async (ffmpeg: FFmpeg, fileName: string): Prom
 const TEXT_COLOR = '#ff0000';
 const TEXT_FONT = 'bold 24px sans-serif';
 
-const templateFile = 'tinkoff_3.mp4';
-// const templateFile = 'tinkoff_output.mp4';
 const listFiles = async (ffmpeg: FFmpeg, path: string)=>
     (await ffmpeg.listDir(path)).filter(p => !(['.', '..'].includes(p.name) && p.isDir));
 
@@ -96,23 +94,15 @@ export const generateVideo = async (
         setDecodingProgress(progress);
     };
 
-    setDecodingStatus('loading source video...');
-    const fetchedFile = await fetchFile(templateFile);
-    // videoRef.current.src = URL.createObjectURL(new Blob([fetchedFile.buffer], {type: 'video/mp4'}));
-
-    setDecodingStatus('feeding source video to ffmpeg...');
-    await ffmpeg.writeFile('input.mp4', fetchedFile);
-
-    setDecodingStatus('extracting frames...');
-
     // info
     const videoProperties = await getVideoProperties(ffmpeg, 'input.mp4');
     console.log('infoResult', videoProperties);
 
     // captions
     await ffmpeg.createDir('captions');
+    await ffmpeg.createDir('videos');
 
-    const imageTimePairs: {timecode: number, imageFileName: string, x: number, y: number, sourceVideoFile: string}[] = [];
+    const imageTimePairs: {timecode: number, imageFileName: string, x: number, y: number, videoFileName: string}[] = [];
     let imageNumber = 0;
     for (const userPhrase of userPhrases) {
         const collection = collections.find(c => c.id === userPhrase.collectionId)!;
@@ -124,21 +114,30 @@ export const generateVideo = async (
             .map(r => r.duration)
             .reduce((acc, ii) => acc + ii, 0);
 
+        const fileNumberSuffix = imageNumber.toString().padStart(5, '0');
+
+        const fetchedFile = await fetchFile(item.videoFile);
+        const videoFileName = `videos/${fileNumberSuffix}.mp4`;
+        await ffmpeg.writeFile(videoFileName, fetchedFile);
+
         const {x, y, width, height} = collection.textArea;
         const blob = await renderTextSlide(width, height, phrase);
-        const imageFileName = `captions/${imageNumber.toString().padStart(5, '0')}.png`;
+        const imageFileName = `captions/${fileNumberSuffix}.png`;
         await ffmpeg.writeFile(imageFileName, new Uint8Array(await blob.arrayBuffer()));
 
-        imageTimePairs.push({timecode, imageFileName, x, y, sourceVideoFile: item.videoFile});
+        imageTimePairs.push({timecode, imageFileName, x, y, videoFileName});
         imageNumber++;
     }
 
-    console.log('imageTimePairs', imageTimePairs);
+    const concatBody = imageTimePairs.map(f => `file '${f.videoFileName}'`).join('\n');
+
+    await ffmpeg.writeFile('concat.txt', new Uint8Array(
+        await (new Blob([concatBody], {type: 'text/plain'}).arrayBuffer())
+    ));
 
     console.log('dir [.]', await listFiles(ffmpeg, '.'));
-    console.log('dir [captions]', await listFiles(ffmpeg, 'captions'));
 
-    const compileCommandArgs: string[] = ['-i', 'input.mp4'];
+    const compileCommandArgs: string[] = ['-f', 'concat', '-i', 'concat.txt'];
 
     for (let i = 0; i < imageTimePairs.length; i++) {
         const {imageFileName} = imageTimePairs[i];
@@ -184,6 +183,8 @@ export const generateVideo = async (
         'output.mp4'
     );
 
+    console.log(compileCommandArgs.join(' '));
+
     // montage
     setDecodingStatus('converting video...');
     await ffmpegExec(ffmpeg, compileCommandArgs, updateDecodingStatus);
@@ -196,12 +197,15 @@ export const generateVideo = async (
     setDecodingStatus('ready 👌');
 
     // cleanup
-    for (const {imageFileName} of imageTimePairs) {
+    for (const {imageFileName, videoFileName} of imageTimePairs) {
         await ffmpeg.deleteFile(imageFileName);
+        await ffmpeg.deleteFile(videoFileName);
     }
     await ffmpeg.deleteDir('captions');
-    await ffmpeg.deleteFile('input.mp4');
+    await ffmpeg.deleteDir('videos');
     await ffmpeg.deleteFile('output.mp4');
+    await ffmpeg.deleteFile('concat.txt');
+    console.log('dir [.]', await listFiles(ffmpeg, '.'));
 
     return result;
 };

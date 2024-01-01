@@ -135,6 +135,9 @@ export const generateVideo = async (
         await (new Blob([concatBody], {type: 'text/plain'}).arrayBuffer())
     ));
 
+    const watermarkFile = await fetchFile('watermark.png');
+    await ffmpeg.writeFile('watermark.png', watermarkFile);
+
     console.log('dir [.]', await listFiles(ffmpeg, '.'));
 
     const compileCommandArgs: string[] = ['-f', 'concat', '-i', 'concat.txt'];
@@ -157,8 +160,13 @@ export const generateVideo = async (
         complexFilter.push(`${startTag}[${i + 1}:v]overlay=${x}:${y}:enable='between(t,${startTime},${endTime})'[v${i + 1}]`);
     }
 
+    // watermark
+    compileCommandArgs.push('-i', 'watermark.png');
+    const collection = collections.find(c => c.id === userPhrases[0].collectionId)!;
+    const {watermarkArea} = collection;
+    complexFilter.push(`[v${imageTimePairs.length}][${imageTimePairs.length + 1}:v]overlay=${watermarkArea.x}:${watermarkArea.y}[v${imageTimePairs.length + 1}]`)
     compileCommandArgs.push('-filter_complex', complexFilter.join(';'));
-    compileCommandArgs.push('-map', `[v${imageTimePairs.length}]`,
+    compileCommandArgs.push('-map', `[v${complexFilter.length}]`,
         '-map', '0:a',
 
         // video
@@ -205,6 +213,7 @@ export const generateVideo = async (
     await ffmpeg.deleteDir('videos');
     await ffmpeg.deleteFile('output.mp4');
     await ffmpeg.deleteFile('concat.txt');
+    await ffmpeg.deleteFile('watermark.png');
     console.log('dir [.]', await listFiles(ffmpeg, '.'));
 
     return result;

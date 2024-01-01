@@ -161,12 +161,14 @@ export const generateVideo = async (
     }
 
     // watermark
-    compileCommandArgs.push('-i', 'watermark.png');
     const collection = collections.find(c => c.id === userPhrases[0].collectionId)!;
     const {watermarkArea} = collection;
     complexFilter.push(`[v${imageTimePairs.length}][${imageTimePairs.length + 1}:v]overlay=${watermarkArea.x}:${watermarkArea.y}[v${imageTimePairs.length + 1}]`)
-    compileCommandArgs.push('-filter_complex', complexFilter.join(';'));
-    compileCommandArgs.push('-map', `[v${complexFilter.length}]`,
+
+    compileCommandArgs.push(
+        '-i', 'watermark.png',
+        '-filter_complex', complexFilter.join(';'),
+        '-map', `[v${complexFilter.length}]`,
         '-map', '0:a',
 
         // video

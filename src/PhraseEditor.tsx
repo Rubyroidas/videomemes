@@ -32,7 +32,7 @@ const InputBackground = styled.div<Rect>`
   background-color: #fff;
   z-index: 1;
 `;
-const TextAreaClass = (fontSize: number, placeHolder: string) => css`
+const TextAreaClass = (fontSizeDesktop: number, fontSizeMobile: number, paddingDesktop: number, paddingMobile: number, placeHolder: string) => css`
   position: absolute;
   width: 100%;
   height: 100%;
@@ -41,16 +41,24 @@ const TextAreaClass = (fontSize: number, placeHolder: string) => css`
   color: red;
   font-family: sans-serif;
   font-weight: bold;
-  font-size: ${fontSize}px;
+  font-size: ${fontSizeDesktop}px;
   text-align: center;
   display: flex;
   align-items: center;
   justify-content: center;
+  
+  box-sizing: border-box;
+  padding: ${paddingDesktop}px;
 
   border: none;
   outline: none;
   overflow: hidden;
   resize: none;
+
+  @media (max-width: 480px) {
+    font-size: ${fontSizeMobile}vw;
+    padding: ${paddingMobile}vw;
+  }
 
   &:empty::before {
     content: "${placeHolder}";
@@ -92,7 +100,11 @@ export const PhraseEditor: FC<PhraseEditorProps> = (props) => {
         width: collection.textArea.width / collection.size.width * 100,
         height: collection.textArea.height / collection.size.height * 100,
     };
-    const fontSize = 24 * collection.size.width / 512;
+    const FONT_SIZE = 24;
+    const fontSizeDesktop = FONT_SIZE * collection.size.width / 512;
+    const fontSizeMobile = FONT_SIZE * 100 / 512;
+    const paddingDesktop = 5 * collection.size.width / 100;
+    const paddingMobile = 5;
 
     return (
         <div>
@@ -117,7 +129,7 @@ export const PhraseEditor: FC<PhraseEditorProps> = (props) => {
                     <ContentEditable
                         onPaste={handlePaste}
                         disabled={disabled}
-                        className={TextAreaClass(fontSize, item.name)}
+                        className={TextAreaClass(fontSizeDesktop, fontSizeMobile, paddingDesktop, paddingMobile, item.name)}
                         html={userPhrase.text!}
                         onChange={handlePhraseChange} />
                 </InputBackground>

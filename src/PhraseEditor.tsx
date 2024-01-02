@@ -1,4 +1,4 @@
-import {ClipboardEventHandler, FC, useState} from 'react';
+import {ClipboardEventHandler, FC, MouseEventHandler, useState} from 'react';
 import ContentEditable, {ContentEditableEvent} from 'react-contenteditable';
 import styled from '@emotion/styled';
 import { css } from '@emotion/css';
@@ -86,6 +86,14 @@ export const PhraseEditor: FC<PhraseEditorProps> = (props) => {
         e.preventDefault();
         document.execCommand('inserttext', false, e.clipboardData.getData('text/plain'));
     };
+    const handleVideoClick: MouseEventHandler = (e) => {
+        const video = e.target as HTMLVideoElement;
+        if (video.paused) {
+            video.play();
+        } else {
+            video.pause();
+        }
+    };
 
     const userPhrase = userPhrases[phraseIndex];
     const collection = collections.find(c => c.id === userPhrase.collectionId)!;
@@ -134,9 +142,12 @@ export const PhraseEditor: FC<PhraseEditorProps> = (props) => {
                         onChange={handlePhraseChange} />
                 </InputBackground>
                 <Video
-                    controls={true}
+                    onClick={handleVideoClick}
+                    controls={false}
+                    loop={false}
                     src={item.videoFile}
                     disablePictureInPicture={true}
+                    disableRemotePlayback={true}
                     controlsList="nofullscreen"
                 />
             </EditingAreaContainer>

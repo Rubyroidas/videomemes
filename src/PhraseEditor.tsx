@@ -32,7 +32,7 @@ const InputBackground = styled.div<Rect>`
   background-color: #fff;
   z-index: 1;
 `;
-const TextAreaClass = (fontSize: number) => css`
+const TextAreaClass = (fontSize: number, placeHolder: string) => css`
   position: absolute;
   width: 100%;
   height: 100%;
@@ -51,6 +51,12 @@ const TextAreaClass = (fontSize: number) => css`
   outline: none;
   overflow: hidden;
   resize: none;
+
+  &:empty::before {
+    content: "${placeHolder}";
+    font-style: italic;
+    color: gray;
+  }
 `;
 const Video = styled.video`
   width: 100%;
@@ -111,7 +117,7 @@ export const PhraseEditor: FC<PhraseEditorProps> = (props) => {
                     <ContentEditable
                         onPaste={handlePaste}
                         disabled={disabled}
-                        className={TextAreaClass(fontSize)}
+                        className={TextAreaClass(fontSize, item.name)}
                         html={userPhrase.text!}
                         onChange={handlePhraseChange} />
                 </InputBackground>

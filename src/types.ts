@@ -1,3 +1,7 @@
+export type Size = {
+    width: number;
+    height: number;
+}
 export type Rect = {
     x: number;
     y: number;
@@ -13,6 +17,7 @@ export type CollectionItem = {
 export type Collection = {
     id: string;
     name: string;
+    size: Size;
     textArea: Rect;
     watermarkArea: Rect;
     items: CollectionItem[];

@@ -46,13 +46,10 @@ export const getVideoProperties = async (ffmpeg: FFmpeg, fileName: string): Prom
     return result;
 };
 
-const TEXT_COLOR = '#ff0000';
-const TEXT_FONT = 'bold 24px sans-serif';
-
 const listFiles = async (ffmpeg: FFmpeg, path: string)=>
     (await ffmpeg.listDir(path)).filter(p => !(['.', '..'].includes(p.name) && p.isDir));
 
-const renderTextSlide = async (width: number, height: number, text: string) => {
+const renderTextSlide = async (width: number, height: number, text: string, fontSize: number) => {
     const canvas = document.createElement('canvas');
     canvas.width = width;
     canvas.height = height;
@@ -62,10 +59,10 @@ const renderTextSlide = async (width: number, height: number, text: string) => {
     ctx.fillStyle = '#fff';
     ctx.fillRect(0, 0, width, height);
 
-    ctx.fillStyle = TEXT_COLOR;
+    ctx.fillStyle = '#ff0000';
     ctx.textBaseline = 'middle';
     ctx.textAlign = 'center';
-    ctx.font = TEXT_FONT;
+    ctx.font = `bold ${fontSize}px sans-serif`;
     ctx.fillText(text, width / 2, height / 2);
 
     const img = document.createElement('img');
@@ -121,7 +118,7 @@ export const generateVideo = async (
         await ffmpeg.writeFile(videoFileName, fetchedFile);
 
         const {x, y, width, height} = collection.textArea;
-        const blob = await renderTextSlide(width, height, phrase);
+        const blob = await renderTextSlide(width, height, phrase, 24 * collection.size.width / 512);
         const imageFileName = `captions/${fileNumberSuffix}.png`;
         await ffmpeg.writeFile(imageFileName, new Uint8Array(await blob.arrayBuffer()));
 

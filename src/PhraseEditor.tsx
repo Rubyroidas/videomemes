@@ -1,7 +1,9 @@
-import {ChangeEvent, FC, useState} from 'react';
+import {ClipboardEventHandler, FC, useState} from 'react';
+import ContentEditable, {ContentEditableEvent} from 'react-contenteditable';
 import styled from '@emotion/styled';
+import { css } from '@emotion/css';
 
-import {Collection, UserPhrase} from './types';
+import {Collection, Rect, Size, UserPhrase} from './types';
 
 type PhraseEditorProps = {
     disabled: boolean;
@@ -11,31 +13,39 @@ type PhraseEditorProps = {
 }
 const Header = styled.div`
 `;
-const EditingAreaContainer = styled.div`
-  width: 400px;
-    position: relative;
+const EditingAreaContainer = styled.div<Size>`
+  width: ${props => props.width}px;
+  height: ${props => props.height}px;
+  position: relative;
 
   @media (max-width: 480px) {
     width: 100vw;
+    height: ${props => props.height / props.width * 100}vw;
   }
 `;
-const InputBackground = styled.div`
-    position: absolute;
-  width: 100%;
-  height: 50%;
+const InputBackground = styled.div<Rect>`
+  position: absolute;
+  left: ${props => props.x}%;
+  top: ${props => props.y}%;
+  width: ${props => props.width}%;
+  height: ${props => props.height}%;
   background-color: #fff;
   z-index: 1;
 `;
-const TextArea = styled.textarea`
-    position: absolute;
+const TextAreaClass = (fontSize: number) => css`
+  position: absolute;
   width: 100%;
   height: 100%;
 
   background-color: transparent;
   color: red;
   font-family: sans-serif;
-  font-size: 24px;
+  font-weight: bold;
+  font-size: ${fontSize}px;
   text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
   border: none;
   outline: none;
@@ -43,13 +53,13 @@ const TextArea = styled.textarea`
   resize: none;
 `;
 const Video = styled.video`
-    width: 100%;
+  width: 100%;
 `;
 
 export const PhraseEditor: FC<PhraseEditorProps> = (props) => {
     const {disabled, collections, userPhrases, onChange} = props;
     const [phraseIndex, setPhraseIndex] = useState(0);
-    const handlePhraseChange = (e: ChangeEvent) => {
+    const handlePhraseChange = (e: ContentEditableEvent) => {
         const result = [...userPhrases];
         const text = (e.target as HTMLInputElement).value;
         result[phraseIndex] = {
@@ -58,6 +68,10 @@ export const PhraseEditor: FC<PhraseEditorProps> = (props) => {
         };
         onChange(result);
     };
+    const handlePaste: ClipboardEventHandler = (e) => {
+        e.preventDefault();
+        document.execCommand('inserttext', false, e.clipboardData.getData('text/plain'));
+    };
 
     const userPhrase = userPhrases[phraseIndex];
     const collection = collections.find(c => c.id === userPhrase.collectionId)!;
@@ -65,6 +79,14 @@ export const PhraseEditor: FC<PhraseEditorProps> = (props) => {
 
     const canGoLeft = phraseIndex > 0;
     const canGoRight = phraseIndex < userPhrases.length - 1;
+
+    const virtualRect: Rect = {
+        x: collection.textArea.x / collection.size.width * 100,
+        y: collection.textArea.y / collection.size.height * 100,
+        width: collection.textArea.width / collection.size.width * 100,
+        height: collection.textArea.height / collection.size.height * 100,
+    };
+    const fontSize = 24 * collection.size.width / 512;
 
     return (
         <div>
@@ -84,21 +106,21 @@ export const PhraseEditor: FC<PhraseEditorProps> = (props) => {
                     <b>{collection.name}</b> "{item.name}"
                 </div>
             </Header>
-            <EditingAreaContainer>
-            <InputBackground>
-                <TextArea
-                    placeholder={item.name}
-                    disabled={disabled}
-                    value={userPhrase.text}
-                    onChange={handlePhraseChange}
+            <EditingAreaContainer {...collection.size}>
+                <InputBackground {...virtualRect}>
+                    <ContentEditable
+                        onPaste={handlePaste}
+                        disabled={disabled}
+                        className={TextAreaClass(fontSize)}
+                        html={userPhrase.text!}
+                        onChange={handlePhraseChange} />
+                </InputBackground>
+                <Video
+                    controls={true}
+                    src={item.videoFile}
+                    disablePictureInPicture={true}
+                    controlsList="nofullscreen"
                 />
-            </InputBackground>
-            <Video
-                controls={true}
-                src={item.videoFile}
-                disablePictureInPicture={true}
-                controlsList="nofullscreen"
-            />
             </EditingAreaContainer>
         </div>
     );

@@ -1,6 +1,10 @@
 {
   "id": "tinkoff-vertical",
   "name": "Tinkoff vertical",
+  "size": {
+    "width": 720,
+    "height": 1280
+  },
   "textArea": {
     "x": 10,
     "y": 10,

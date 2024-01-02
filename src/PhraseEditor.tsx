@@ -43,9 +43,10 @@ const TextAreaClass = (fontSizeDesktop: number, fontSizeMobile: number, paddingD
   font-weight: bold;
   font-size: ${fontSizeDesktop}px;
   text-align: center;
-  display: flex;
-  align-items: center;
+  display: grid;
   justify-content: center;
+  align-items: center;
+  align-content: center;
   
   box-sizing: border-box;
   padding: ${paddingDesktop}px;
@@ -54,7 +55,7 @@ const TextAreaClass = (fontSizeDesktop: number, fontSizeMobile: number, paddingD
   outline: none;
   overflow: hidden;
   resize: none;
-
+  
   @media (max-width: 480px) {
     font-size: ${fontSizeMobile}vw;
     padding: ${paddingMobile}vw;

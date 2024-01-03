@@ -7,7 +7,7 @@ import {DownloadVideoButton} from './DownloadVideoButton';
 
 import {Button} from './App.styles';
 import {Collection, UserPhrase} from '../types';
-import {generateVideo} from '../utils';
+import {generateVideo} from '../generate';
 
 type Props = {
     ffmpeg: FFmpeg;
@@ -17,7 +17,7 @@ type Props = {
 const debugUserPhrases: UserPhrase[] = [{
     collectionId: 'tinkoff-vertical',
     phraseId: 1,
-    text: '<div>hello world\nfgdfgfdgfg',
+    text: 'You decide to\nsearch for the\nnew job',
 }, {
     collectionId: 'tinkoff-vertical',
     phraseId: 2,

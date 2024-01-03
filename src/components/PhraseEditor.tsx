@@ -5,6 +5,7 @@ import { css } from '@emotion/css';
 
 import {Collection, Rect, Size, UserPhrase} from '../types';
 import {escapeHTML} from '../utils';
+import {FONT_SIZE, TEXT_PADDING} from "../config.ts";
 
 type PhraseEditorProps = {
     disabled: boolean;
@@ -150,11 +151,10 @@ export const PhraseEditor: FC<PhraseEditorProps> = (props) => {
         width: collection.textArea.width / collection.size.width * 100,
         height: collection.textArea.height / collection.size.height * 100,
     };
-    const FONT_SIZE = 24;
-    const fontSizeDesktop = FONT_SIZE * collection.size.width / 512;
-    const fontSizeMobile = FONT_SIZE * 100 / 512;
-    const paddingDesktop = 5 * collection.size.width / 100;
-    const paddingMobile = 5;
+    const fontSizeDesktop = FONT_SIZE * collection.size.width;
+    const fontSizeMobile = FONT_SIZE * 100;
+    const paddingDesktop = TEXT_PADDING * collection.size.width / 100;
+    const paddingMobile = TEXT_PADDING;
     const inputClassName = TextAreaClass(fontSizeDesktop, fontSizeMobile, paddingDesktop, paddingMobile, item.name);
 
     return (

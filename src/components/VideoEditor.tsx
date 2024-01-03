@@ -1,11 +1,11 @@
 import {FC, useEffect, useRef, useState} from 'react';
 import {FFmpeg} from '@ffmpeg/ffmpeg';
 
-import {PhraseEditorProxy} from '../PhraseEditor';
-import {ProgressBar} from '../ProgressBar';
-import {DownloadVideoButton} from '../DownloadVideoButton';
+import {PhraseEditorProxy} from './PhraseEditor';
+import {ProgressBar} from './ProgressBar';
+import {DownloadVideoButton} from './DownloadVideoButton';
 
-import {Button} from '../App.styles';
+import {Button} from './App.styles';
 import {Collection, UserPhrase} from '../types';
 import {generateVideo} from '../utils';
 

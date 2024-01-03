@@ -1,8 +1,8 @@
 import {useRef} from 'react';
 import {FFmpeg} from '@ffmpeg/ffmpeg';
 
-import {VideoEditor} from './components/VideoEditor';
-import {useLoadCollections, usePrepareFfmpeg} from './hooks';
+import {VideoEditor} from './VideoEditor';
+import {useLoadCollections, usePrepareFfmpeg} from '../hooks';
 import {AppTitle} from './App.styles';
 
 export const App = () => {

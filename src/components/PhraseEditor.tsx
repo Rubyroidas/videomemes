@@ -3,8 +3,8 @@ import ContentEditable, {ContentEditableEvent} from 'react-contenteditable';
 import styled from '@emotion/styled';
 import { css } from '@emotion/css';
 
-import {Collection, Rect, Size, UserPhrase} from './types';
-import {escapeHTML} from './utils';
+import {Collection, Rect, Size, UserPhrase} from '../types';
+import {escapeHTML} from '../utils';
 
 type PhraseEditorProps = {
     disabled: boolean;

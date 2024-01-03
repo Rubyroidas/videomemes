@@ -1,7 +1,7 @@
 import {FC, useEffect, useRef, useState} from 'react';
 import {FFmpeg} from '@ffmpeg/ffmpeg';
 
-import {PhraseEditor} from '../PhraseEditor';
+import {PhraseEditorProxy} from '../PhraseEditor';
 import {ProgressBar} from '../ProgressBar';
 import {DownloadVideoButton} from '../DownloadVideoButton';
 
@@ -17,7 +17,7 @@ type Props = {
 const debugUserPhrases: UserPhrase[] = [{
     collectionId: 'tinkoff-vertical',
     phraseId: 1,
-    text: 'hello world',
+    text: '<div>hello world\nfgdfgfdgfg',
 }, {
     collectionId: 'tinkoff-vertical',
     phraseId: 2,
@@ -77,7 +77,7 @@ export const VideoEditor: FC<Props> = ({ffmpeg, collections}) => {
             {isDecoding && (
                 <ProgressBar value={decodingProgress}/>
             )}
-            <PhraseEditor
+            <PhraseEditorProxy
                 disabled={isDecoding}
                 collections={collections}
                 userPhrases={userPhrases}

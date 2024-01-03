@@ -4,6 +4,7 @@ import styled from '@emotion/styled';
 import { css } from '@emotion/css';
 
 import {Collection, Rect, Size, UserPhrase} from './types';
+import {escapeHTML} from './utils';
 
 type PhraseEditorProps = {
     disabled: boolean;
@@ -71,15 +72,55 @@ const Video = styled.video`
   width: 100%;
 `;
 
+export const PhraseEditorProxy: FC<PhraseEditorProps> = (props) => {
+    const {userPhrases, onChange, ...rest} = props;
+
+    const onProxyChange = (phrases: UserPhrase[]) => {
+        const escapedPhrases: UserPhrase[] = phrases.map(({text, ...ppp}) => {
+            if (!text) {
+                return {text, ...ppp};
+            }
+            const c = document.createElement('div');
+            c.innerHTML = text;
+
+            const els = c.firstChild?.constructor === Text
+                ? [c.firstChild, ...c.children]
+                : [...c.children];
+
+            return ({
+                ...ppp,
+                text: els.map(el => el.textContent).join('\n'),
+            });
+        });
+        onChange(escapedPhrases);
+    };
+
+    const phrases = userPhrases.map(({text, ...ppp}) => ({
+        ...ppp,
+        text: text
+            ? text.split('\n')
+            .map((line) => `<div>${escapeHTML(line)}</div>`)
+            .join('')
+            : undefined
+    }));
+
+    return (
+        <PhraseEditor
+            userPhrases={phrases}
+            onChange={onProxyChange}
+            {...rest}
+        />
+    );
+};
+
 export const PhraseEditor: FC<PhraseEditorProps> = (props) => {
     const {disabled, collections, userPhrases, onChange} = props;
     const [phraseIndex, setPhraseIndex] = useState(0);
     const handlePhraseChange = (e: ContentEditableEvent) => {
         const result = [...userPhrases];
-        const text = (e.target as HTMLInputElement).value;
         result[phraseIndex] = {
             ...result[phraseIndex],
-            text,
+            text: e.target.value,
         };
         onChange(result);
     };
@@ -114,6 +155,7 @@ export const PhraseEditor: FC<PhraseEditorProps> = (props) => {
     const fontSizeMobile = FONT_SIZE * 100 / 512;
     const paddingDesktop = 5 * collection.size.width / 100;
     const paddingMobile = 5;
+    const inputClassName = TextAreaClass(fontSizeDesktop, fontSizeMobile, paddingDesktop, paddingMobile, item.name);
 
     return (
         <div>
@@ -138,9 +180,10 @@ export const PhraseEditor: FC<PhraseEditorProps> = (props) => {
                     <ContentEditable
                         onPaste={handlePaste}
                         disabled={disabled}
-                        className={TextAreaClass(fontSizeDesktop, fontSizeMobile, paddingDesktop, paddingMobile, item.name)}
+                        className={inputClassName}
                         html={userPhrase.text!}
-                        onChange={handlePhraseChange} />
+                        onChange={handlePhraseChange}
+                    />
                 </InputBackground>
                 <Video
                     onClick={handleVideoClick}

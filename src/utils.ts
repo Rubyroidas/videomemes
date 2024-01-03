@@ -224,3 +224,15 @@ export const debugCanvas = (canvas: HTMLCanvasElement) => {
     console.log(img);
     console.log('%c ', `color: transparent;font-size:1px;width:${width}px;height:${height}px;background:transparent url('${img}') no-repeat 0 0;background-zie: ${width}px ${height}px;`);
 };
+
+const _escape = document.createElement('textarea');
+
+export const escapeHTML = (html: string) => {
+    _escape.textContent = html;
+    return _escape.innerHTML;
+};
+
+export const unescapeHTML = (html: string) => {
+    _escape.innerHTML = html;
+    return _escape.textContent;
+};

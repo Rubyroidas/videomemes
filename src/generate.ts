@@ -1,24 +1,54 @@
 import {FFmpeg} from '@ffmpeg/ffmpeg';
 import {fetchFile} from '@ffmpeg/util';
 
-import {Collection, UserPhrase} from './types';
+import {Collection, Rect, Size, UserPhrase} from './types';
 import {ffmpegExec, ffmpegListFiles, getVideoProperties, ProgressEvent} from './utils';
+import {FONT_SIZE, LINE_HEIGHT, TEXT_COLOR, TEXT_PADDING} from './config';
 
-const renderTextSlide = async (width: number, height: number, text: string, fontSize: number) => {
+export const renderTextSlide = async (videoSize: Size, width: number, height: number, text: string) => {
+    console.log('text', text);
+    text = (text ?? '').trim();
     const canvas = document.createElement('canvas');
     canvas.width = width;
     canvas.height = height;
+
+    const fontSize = FONT_SIZE * videoSize.width;
+    const padding = TEXT_PADDING * videoSize.width / 100;
+    const textBounds: Rect = {
+        x: padding,
+        y: padding,
+        width: width - padding * 2,
+        height: height - padding * 2,
+    };
 
     const ctx = canvas.getContext('2d')!;
 
     ctx.fillStyle = '#fff';
     ctx.fillRect(0, 0, width, height);
 
-    ctx.fillStyle = '#ff0000';
-    ctx.textBaseline = 'middle';
+    ctx.fillStyle = TEXT_COLOR;
+    ctx.textBaseline = "alphabetic";
     ctx.textAlign = 'center';
     ctx.font = `bold ${fontSize}px sans-serif`;
-    ctx.fillText(text, width / 2, height / 2);
+    const lines = text.split('\n');
+    const linesHeights: {height: number, measure: TextMetrics}[] = [];
+    for (const line of lines) {
+        const measure = ctx.measureText(line);
+        linesHeights.push({
+            height: (measure.fontBoundingBoxAscent + measure.fontBoundingBoxDescent) * LINE_HEIGHT,
+            measure,
+        });
+        console.log('measure', line, measure);
+    }
+    const totalTextHeight = linesHeights.reduce<number>((acc, i) => acc + i.height, 0);
+    let y = textBounds.x + textBounds.height / 2 - totalTextHeight / 2;
+
+    for (let i = 0; i < lines.length; i++) {
+        const line = lines[i];
+        const measure = linesHeights[i].measure;
+        ctx.fillText(line, width / 2, y + measure.fontBoundingBoxAscent * LINE_HEIGHT);
+        y += linesHeights[i].height;
+    }
 
     const img = document.createElement('img');
     img.src = canvas.toDataURL('image/png');
@@ -73,7 +103,7 @@ export const generateVideo = async (
         await ffmpeg.writeFile(videoFileName, fetchedFile);
 
         const {x, y, width, height} = collection.textArea;
-        const blob = await renderTextSlide(width, height, phrase, 24 * collection.size.width / 512);
+        const blob = await renderTextSlide(collection.size, width, height, phrase);
         const imageFileName = `captions/${fileNumberSuffix}.png`;
         await ffmpeg.writeFile(imageFileName, new Uint8Array(await blob.arrayBuffer()));
 

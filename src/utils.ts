@@ -1,4 +1,5 @@
 import {FFmpeg} from '@ffmpeg/ffmpeg';
+import {Point, Rect} from "./types.ts";
 
 export interface VideoProperties {
     fps: number;
@@ -63,4 +64,27 @@ export const escapeHTML = (html: string) => {
 export const unescapeHTML = (html: string) => {
     _escape.innerHTML = html;
     return _escape.textContent;
+};
+
+export const drawLine = (ctx: CanvasRenderingContext2D, color: string, point1: Point, point2: Point) => {
+    ctx.strokeStyle = color;
+    ctx.beginPath();
+    ctx.moveTo(point1.x, point1.y);
+    ctx.lineTo(point2.x, point2.y);
+    ctx.stroke();
+};
+export const drawRect = (ctx: CanvasRenderingContext2D, color: string, rect: Rect) => {
+    ctx.strokeStyle = color;
+    ctx.strokeRect(rect.x, rect.y, rect.width, rect.height);
+};
+
+export const html2text = (html: string) => {
+    const c = document.createElement('div');
+    c.innerHTML = html;
+
+    const els = c.firstChild?.constructor === Text
+        ? [c.firstChild, ...c.children]
+        : [...c.children];
+
+    return els.map(el => el.textContent).join('\n');
 };

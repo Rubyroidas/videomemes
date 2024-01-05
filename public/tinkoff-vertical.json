@@ -6,10 +6,10 @@
     "height": 1280
   },
   "textArea": {
-    "x": 10,
-    "y": 10,
-    "width": 700,
-    "height": 620
+    "x": 0,
+    "y": 0,
+    "width": 720,
+    "height": 640
   },
   "watermarkArea": {
     "x": 60,

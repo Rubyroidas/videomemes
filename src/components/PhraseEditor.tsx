@@ -5,7 +5,7 @@ import {Collection, Rect, UserPhrase} from '../types';
 import {escapeHTML, html2text} from '../utils';
 import {FONT_SIZE, TEXT_PADDING} from '../config';
 import {EditingAreaContainer, Header, InputBackground, TextAreaClass, Video} from './PhraseEditor.styles';
-import {DebugImage} from "./DebugImage.tsx";
+// import {DebugImage} from "./DebugImage.tsx";
 
 type PhraseEditorProps = {
     disabled: boolean;
@@ -114,12 +114,12 @@ export const PhraseEditor: FC<PhraseEditorProps> = (props) => {
             <div>
                 <EditingAreaContainer {...collection.size}>
                     <InputBackground {...virtualRect}>
-                        {userPhrase.text && (
+                        {/* userPhrase.text && (
                             <DebugImage
                                 collection={collection}
                                 text={userPhrase.text}
                             />
-                        )}
+                        ) */}
                         <ContentEditable
                             onPaste={handlePaste}
                             disabled={disabled}

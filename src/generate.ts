@@ -27,7 +27,7 @@ export const renderTextSlide = async (videoSize: Size, width: number, height: nu
     ctx.fillRect(0, 0, width, height);
 
     ctx.fillStyle = TEXT_COLOR;
-    ctx.textBaseline = "alphabetic";
+    ctx.textBaseline = 'alphabetic';
     ctx.textAlign = 'center';
     ctx.font = `bold ${fontSize}px sans-serif`;
     const getTextWidth = (text: string) => ctx.measureText(text).width;

@@ -4,8 +4,16 @@ import ContentEditable, {ContentEditableEvent} from 'react-contenteditable';
 import {Collection, Rect, UserPhrase} from '../types';
 import {escapeHTML, html2text} from '../utils';
 import {FONT_SIZE, TEXT_PADDING} from '../config';
-import {EditingAreaContainer, Header, InputBackground, TextAreaClass, Video} from './PhraseEditor.styles';
-// import {DebugImage} from "./DebugImage.tsx";
+import {
+    EditingAreaContainer,
+    Header,
+    InputBackground,
+    NavigateCaption,
+    TextAreaClass,
+    Video
+} from './PhraseEditor.styles';
+import {NavigationBar} from './NavigationBar';
+// import {DebugImage} from './DebugImage';
 
 type PhraseEditorProps = {
     disabled: boolean;
@@ -35,8 +43,8 @@ export const PhrasesEditor: FC<PhraseEditorProps> = (props) => {
         ...ppp,
         text: text
             ? text.split('\n')
-            .map((line) => `<div>${escapeHTML(line)}</div>`)
-            .join('')
+                .map((line) => `<div>${escapeHTML(line)}</div>`)
+                .join('')
             : ''
     }));
 
@@ -96,20 +104,16 @@ export const PhraseEditor: FC<PhraseEditorProps> = (props) => {
     return (
         <div>
             <Header>
-                <div>
-                    {canGoLeft && (
-                        <span onClick={() => setPhraseIndex(i => i - 1)}>⬅️</span>
-                    )}
-                    <span>
-                    <span style={{color: '#888'}}>{phraseIndex + 1} / {userPhrases.length}</span>
-                </span>
-                    {canGoRight && (
-                        <span onClick={() => setPhraseIndex(i => i + 1)}>➡️</span>
-                    )}
-                </div>
-                <div>
+                <NavigationBar
+                    page={phraseIndex + 1}
+                    totalPages={userPhrases.length}
+                    canGoLeft={canGoLeft}
+                    canGoRight={canGoRight}
+                    setIndex={setPhraseIndex}
+                />
+                <NavigateCaption>
                     <b>{collection.name}</b> "{item.name}"
-                </div>
+                </NavigateCaption>
             </Header>
             <div>
                 <EditingAreaContainer {...collection.size}>

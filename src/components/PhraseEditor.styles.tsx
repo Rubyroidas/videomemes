@@ -64,3 +64,27 @@ export const TextAreaClass = (fontSizeDesktop: number, fontSizeMobile: number, p
 export const Video = styled.video`
   width: 100%;
 `;
+export const NavigateCaption = styled.div`
+  font-size: 2rem;
+  text-align: center;
+
+  @media (max-width: 480px) {
+    font-size: 4vw;
+  }
+`;
+export const NavigatePosition = styled.div`
+  display: inline-block;
+  font-size: 3rem;
+
+  @media (max-width: 480px) {
+    font-size: 10vw;
+  }
+`;
+export const NavigateButton = styled.div`
+  display: inline-block;
+  font-size: 3rem;
+
+  @media (max-width: 480px) {
+    font-size: 10vw;
+  }
+`;

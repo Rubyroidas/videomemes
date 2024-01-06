@@ -1,5 +1,6 @@
 import {FFmpeg} from '@ffmpeg/ffmpeg';
-import {Point, Rect} from "./types.ts";
+
+import {Point, Rect} from './types';
 
 export interface VideoProperties {
     fps: number;

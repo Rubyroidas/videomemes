@@ -88,3 +88,31 @@ export const html2text = (html: string) => {
 
     return els.map(el => el.textContent).join('\n');
 };
+
+export function* reduceWideLines(getTextWidth: (text: string) => number, text: string, maxWidth: number): Generator<string> {
+    for (const line of text.split('\n')) {
+        const lineWidth = getTextWidth(line);
+        if (lineWidth > maxWidth) {
+            let parts = [line, ''];
+            let m;
+            do {
+                m = parts[0].match(/^(.+)(\s+?)(\S+?)$/);
+                if (m) {
+                    const partWidth = getTextWidth(m[1]);
+                    if (partWidth <= maxWidth) {
+                        yield m[1];
+                        parts = [`${m[3]}${parts[1]}`, ''];
+                        if (getTextWidth(parts[0]) <= maxWidth) {
+                            break;
+                        }
+                    } else {
+                        parts = [m[1], `${m[2]}${m[3]}${parts[1]}`];
+                    }
+                }
+            } while (m);
+            yield parts[0];
+        } else {
+            yield line;
+        }
+    }
+}

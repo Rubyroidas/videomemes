@@ -2,17 +2,17 @@ import {FFmpeg} from '@ffmpeg/ffmpeg';
 import {fetchFile} from '@ffmpeg/util';
 
 import {Collection, Rect, Size, UserPhrase} from './types';
-import {ffmpegExec, ffmpegListFiles, getVideoProperties, ProgressEvent} from './utils';
+import {ffmpegExec, ffmpegListFiles, getVideoProperties, ProgressEvent, reduceWideLines} from './utils';
 import {FONT_SIZE, LINE_HEIGHT, TEXT_COLOR, TEXT_PADDING} from './config';
 
 export const renderTextSlide = async (videoSize: Size, width: number, height: number, text: string) => {
-    console.log('text', text);
     text = (text ?? '').trim();
     const canvas = document.createElement('canvas');
     canvas.width = width;
     canvas.height = height;
 
     const fontSize = FONT_SIZE * videoSize.width;
+    const lineHeight = fontSize * LINE_HEIGHT;
     const padding = TEXT_PADDING * videoSize.width / 100;
     const textBounds: Rect = {
         x: padding,
@@ -30,24 +30,25 @@ export const renderTextSlide = async (videoSize: Size, width: number, height: nu
     ctx.textBaseline = "alphabetic";
     ctx.textAlign = 'center';
     ctx.font = `bold ${fontSize}px sans-serif`;
-    const lines = text.split('\n');
-    const linesHeights: {height: number, measure: TextMetrics}[] = [];
-    for (const line of lines) {
+    const getTextWidth = (text: string) => ctx.measureText(text).width;
+    const lines: string[] = [...reduceWideLines(getTextWidth, text, textBounds.width)];
+    const linesHeights: {width: number, height: number, measure: TextMetrics}[] = lines.map(line => {
         const measure = ctx.measureText(line);
-        linesHeights.push({
+        return {
+            width: measure.width,
             height: (measure.fontBoundingBoxAscent + measure.fontBoundingBoxDescent) * LINE_HEIGHT,
             measure,
-        });
-        console.log('measure', line, measure);
-    }
-    const totalTextHeight = linesHeights.reduce<number>((acc, i) => acc + i.height, 0);
-    let y = textBounds.x + textBounds.height / 2 - totalTextHeight / 2;
+        };
+    });
+
+    // const totalTextHeight = linesHeights.reduce<number>((acc, i) => acc + i.height, 0);
+    let y = textBounds.x + textBounds.height / 2 - lineHeight * lines.length / 2;
 
     for (let i = 0; i < lines.length; i++) {
         const line = lines[i];
         const measure = linesHeights[i].measure;
-        ctx.fillText(line, width / 2, y + measure.fontBoundingBoxAscent * LINE_HEIGHT);
-        y += linesHeights[i].height;
+        ctx.fillText(line, width / 2, y + measure.fontBoundingBoxAscent);
+        y += lineHeight;
     }
 
     const img = document.createElement('img');

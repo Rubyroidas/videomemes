@@ -5,7 +5,7 @@ import {Collection, Rect, UserPhrase} from '../types';
 import {escapeHTML, html2text} from '../utils';
 import {FONT_SIZE, TEXT_PADDING} from '../config';
 import {EditingAreaContainer, Header, InputBackground, TextAreaClass, Video} from './PhraseEditor.styles';
-// import {renderTextSlide} from '../generate';
+import {DebugImage} from "./DebugImage.tsx";
 
 type PhraseEditorProps = {
     disabled: boolean;
@@ -14,7 +14,7 @@ type PhraseEditorProps = {
     onChange: (phrases: UserPhrase[]) => void;
 }
 
-export const PhraseEditorProxy: FC<PhraseEditorProps> = (props) => {
+export const PhrasesEditor: FC<PhraseEditorProps> = (props) => {
     const {userPhrases, onChange, ...rest} = props;
 
     const onProxyChange = (phrases: UserPhrase[]) => {
@@ -51,7 +51,6 @@ export const PhraseEditorProxy: FC<PhraseEditorProps> = (props) => {
 
 export const PhraseEditor: FC<PhraseEditorProps> = (props) => {
     const {disabled, collections, userPhrases, onChange} = props;
-    // const debugImage = useRef<HTMLImageElement>(null);
     const [phraseIndex, setPhraseIndex] = useState(0);
     const handlePhraseChange = (e: ContentEditableEvent) => {
         const result = [...userPhrases];
@@ -75,18 +74,6 @@ export const PhraseEditor: FC<PhraseEditorProps> = (props) => {
     };
 
     const userPhrase = userPhrases[phraseIndex];
-    // useEffect(() => {
-    //     const render = async () => {
-    //         const userPhrase = userPhrases[phraseIndex];
-    //         const collection = collections.find(c => c.id === userPhrase.collectionId)!;
-    //         const {width, height} = collection.textArea;
-    //         const blob = await renderTextSlide(collection.size, width, height, html2text(userPhrase.text!));
-    //
-    //         const img = debugImage.current!;
-    //         img.src = URL.createObjectURL(blob);
-    //     };
-    //     render();
-    // }, [userPhrase.text]);
 
     const collection = collections.find(c => c.id === userPhrase.collectionId)!;
     const item = collection.items.find(item => item.id === userPhrase.phraseId)!;
@@ -127,7 +114,12 @@ export const PhraseEditor: FC<PhraseEditorProps> = (props) => {
             <div>
                 <EditingAreaContainer {...collection.size}>
                     <InputBackground {...virtualRect}>
-                        {/*<DebugImage ref={debugImage}/>*/}
+                        {userPhrase.text && (
+                            <DebugImage
+                                collection={collection}
+                                text={userPhrase.text}
+                            />
+                        )}
                         <ContentEditable
                             onPaste={handlePaste}
                             disabled={disabled}

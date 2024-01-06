@@ -2,7 +2,7 @@ import styled from '@emotion/styled';
 import {css} from '@emotion/css';
 
 import {Rect, Size} from '../types';
-import {TEXT_COLOR} from '../config';
+import {LINE_HEIGHT, TEXT_COLOR} from '../config';
 
 export const Header = styled.div`
 `;
@@ -33,6 +33,7 @@ export const TextAreaClass = (fontSizeDesktop: number, fontSizeMobile: number, p
   background-color: transparent;
   color: ${TEXT_COLOR};
   font-family: sans-serif;
+  line-height: ${LINE_HEIGHT * 100}%;
   font-weight: bold;
   font-size: ${fontSizeDesktop}px;
   text-align: center;
@@ -63,6 +64,3 @@ export const TextAreaClass = (fontSizeDesktop: number, fontSizeMobile: number, p
 export const Video = styled.video`
   width: 100%;
 `;
-export const DebugImage = styled.img`
-   position: absolute;
- `;

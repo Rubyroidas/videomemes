@@ -1,6 +1,5 @@
 import {FC} from 'react';
-
-import {NavigateButton, NavigatePosition} from './PhraseEditor.styles';
+import styled from '@emotion/styled';
 
 type Props = {
     canGoLeft: boolean;
@@ -9,8 +8,33 @@ type Props = {
     totalPages: number;
     setIndex: (callback: (v: number) => number) => void;
 }
+
+const NavigatePosition = styled.div`
+  display: inline-block;
+  font-size: 3rem;
+
+  @media (max-width: 480px) {
+    font-size: 10vw;
+  }
+`;
+const NavigateButton = styled.div`
+  display: inline-block;
+  font-size: 3rem;
+
+  @media (max-width: 480px) {
+    font-size: 10vw;
+  }
+`;
+
+const Wrapper = styled.div`
+  width: 720px;
+
+  @media (max-width: 480px) {
+    width: 100vw;
+  }
+`;
 export const NavigationBar: FC<Props> = ({canGoLeft, canGoRight, page, totalPages, setIndex}) => (
-    <div>
+    <Wrapper>
         {canGoLeft && (
             <NavigateButton onClick={() => setIndex(i => i - 1)}>⬅️</NavigateButton>
         )}
@@ -18,5 +42,5 @@ export const NavigationBar: FC<Props> = ({canGoLeft, canGoRight, page, totalPage
         {canGoRight && (
             <NavigateButton onClick={() => setIndex(i => i + 1)}>➡️</NavigateButton>
         )}
-    </div>
+    </Wrapper>
 );

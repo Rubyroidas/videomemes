@@ -67,24 +67,10 @@ export const Video = styled.video`
 export const NavigateCaption = styled.div`
   font-size: 2rem;
   text-align: center;
+  width: 720px;
 
   @media (max-width: 480px) {
     font-size: 4vw;
-  }
-`;
-export const NavigatePosition = styled.div`
-  display: inline-block;
-  font-size: 3rem;
-
-  @media (max-width: 480px) {
-    font-size: 10vw;
-  }
-`;
-export const NavigateButton = styled.div`
-  display: inline-block;
-  font-size: 3rem;
-
-  @media (max-width: 480px) {
-    font-size: 10vw;
+    width: 100vw;
   }
 `;

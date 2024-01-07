@@ -5,7 +5,8 @@ export const AppTitle = styled.div`
 `;
 
 export const Button = styled.div`
-  display: inline-block;
+  display: inline-flex;
+    align-items: center;
   background-color: black;
   color: white;
   padding: 8px 16px;
@@ -13,4 +14,8 @@ export const Button = styled.div`
   font-family: sans-serif;
   font-size: 24px;
   cursor: pointer;
+    
+    & > div {
+        margin-right: 12px;
+    }
 `;

@@ -3,6 +3,7 @@ import styled from '@emotion/styled';
 
 import {ArrowLeft} from '../icons/ArrowLeft';
 import {ArrowRight} from '../icons/ArrowRight';
+import {Icon} from './PhraseEditor.styles';
 
 type Props = {
     canGoLeft: boolean;
@@ -28,17 +29,6 @@ const NavigateButton = styled.div`
     font-size: 10vw;
   }
 `;
-const NavigationIcon = styled.div`
-  display: inline-block;
-  width: 48px;
-  height: 48px;
-    
-    & > svg {
-        width: 100%;
-        height: 100%;
-        fill: #ffffff;
-    }
-`;
 
 const Wrapper = styled.div`
   width: 720px;
@@ -51,17 +41,17 @@ export const NavigationBar: FC<Props> = ({canGoLeft, canGoRight, page, totalPage
     <Wrapper>
         {canGoLeft && (
             <NavigateButton onClick={() => setIndex(i => i - 1)}>
-                <NavigationIcon>
+                <Icon>
                     <ArrowLeft/>
-                </NavigationIcon>
+                </Icon>
             </NavigateButton>
         )}
         <NavigatePosition style={{color: '#888'}}>{page} / {totalPages}</NavigatePosition>
         {canGoRight && (
             <NavigateButton onClick={() => setIndex(i => i + 1)}>
-                <NavigationIcon>
+                <Icon>
                     <ArrowRight/>
-                </NavigationIcon>
+                </Icon>
             </NavigateButton>
         )}
     </Wrapper>

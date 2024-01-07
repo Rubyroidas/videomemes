@@ -74,3 +74,14 @@ export const NavigateCaption = styled.div`
     width: 100vw;
   }
 `;
+export const Icon = styled.div`
+  display: inline-block;
+  width: 48px;
+  height: 48px;
+    
+    & > svg {
+        width: 100%;
+        height: 100%;
+        fill: #ffffff;
+    }
+`;

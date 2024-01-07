@@ -1,11 +1,11 @@
-import {FC} from 'react';
+import {FC, PropsWithChildren} from 'react';
 
 import {Button} from './App.styles';
 
-type Props = {
+type Props = PropsWithChildren & {
     data: Blob;
 }
-export const DownloadVideoButton: FC<Props> = ({data}) => {
+export const DownloadVideoButton: FC<Props> = ({data, children}) => {
     const handleClick = () => {
         const url = URL.createObjectURL(data);
         const a = document.createElement('a');
@@ -16,6 +16,8 @@ export const DownloadVideoButton: FC<Props> = ({data}) => {
     };
     
     return (
-        <Button onClick={handleClick}>Download</Button>
+        <Button onClick={handleClick}>
+            {children}
+        </Button>
     );
 };

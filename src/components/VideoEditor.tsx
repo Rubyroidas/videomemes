@@ -8,6 +8,9 @@ import {DownloadVideoButton} from './DownloadVideoButton';
 import {Button} from './App.styles';
 import {Collection, UserPhrase} from '../types';
 import {generateVideo} from '../generate';
+import {Icon} from './PhraseEditor.styles';
+import {PlayIcon} from '../icons/PlayIcon';
+import {DownloadIcon} from '../icons/DownloadIcon';
 
 type Props = {
     ffmpeg: FFmpeg;
@@ -68,10 +71,20 @@ export const VideoEditor: FC<Props> = ({ffmpeg, collections}) => {
             )}
             <div className="buttons">
             {!isEncoding && (
-                <Button onClick={handleGenerateClick}>Generate</Button>
+                <Button onClick={handleGenerateClick}>
+                    <Icon>
+                        <PlayIcon/>
+                    </Icon>
+                    Generate
+                </Button>
             )}
             {generatedVideo && !isEncoding && (
-                <DownloadVideoButton data={generatedVideo}/>
+                <DownloadVideoButton data={generatedVideo}>
+                    <Icon>
+                        <DownloadIcon/>
+                    </Icon>
+                    Download
+                </DownloadVideoButton>
             )}
             </div>
             {isEncoding && (

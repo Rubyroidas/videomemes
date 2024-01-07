@@ -70,11 +70,11 @@ export const generateVideo = async (
     ffmpeg: FFmpeg,
     userPhrases: UserPhrase[],
     collections: Collection[],
-    setDecodingProgress: (progress: number) => void,
-    setDecodingStatus: (status: string) => void
+    setEncodingProgress: (progress: number) => void,
+    setEncodingStatus: (status: string) => void
 ): Promise<Blob> => {
-    const updateDecodingStatus = ({progress}: ProgressEvent) => {
-        setDecodingProgress(progress);
+    const updateEncodingStatus = ({progress}: ProgressEvent) => {
+        setEncodingProgress(progress);
     };
 
     // info
@@ -179,15 +179,15 @@ export const generateVideo = async (
     console.log(compileCommandArgs.join(' '));
 
     // montage
-    setDecodingStatus('converting video...');
-    await ffmpegExec(ffmpeg, compileCommandArgs, updateDecodingStatus);
+    setEncodingStatus('converting video...');
+    await ffmpegExec(ffmpeg, compileCommandArgs, updateEncodingStatus);
 
-    setDecodingStatus('reading output video...');
+    setEncodingStatus('reading output video...');
     const data = await ffmpeg.readFile('output.mp4') as Uint8Array;
     const result = new Blob([data.buffer], {type: 'video/mp4'});
 
-    setDecodingStatus('previewing video...');
-    setDecodingStatus('ready 👌');
+    setEncodingStatus('previewing video...');
+    setEncodingStatus('ready 👌');
 
     // cleanup
     for (const {imageFileName, videoFileName} of imageTimePairs) {

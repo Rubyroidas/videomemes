@@ -32,24 +32,24 @@ export const VideoEditor: FC<Props> = ({ffmpeg, collections}) => {
     const videoRef = useRef<HTMLVideoElement>(null);
 
     const [userPhrases, setUserPhrases] = useState<UserPhrase[]>(debugUserPhrases);
-    const [isDecoding, setIsDecoding] = useState(false);
-    const [decodingProgress, setDecodingProgress] = useState(0);
-    const [decodingStatus, setDecodingStatus] = useState('');
+    const [isEncoding, setIsEncoding] = useState(false);
+    const [encoodingProgress, setEncoodingProgress] = useState(0);
+    const [encodingStatus, setEncodingStatus] = useState('');
     const [generatedVideo, setGeneratedVideo] = useState<Blob | null>(null);
 
     const handleGenerateClick = () => {
         (async () => {
-            if (isDecoding || !videoRef.current) {
+            if (isEncoding || !videoRef.current) {
                 console.log('return');
                 return;
             }
 
-            setIsDecoding(true);
+            setIsEncoding(true);
             console.log('start generate');
-            const vid = await generateVideo(ffmpeg, userPhrases, collections, setDecodingProgress, setDecodingStatus);
+            const vid = await generateVideo(ffmpeg, userPhrases, collections, setEncoodingProgress, setEncodingStatus);
             setGeneratedVideo(vid);
             console.log('end generate');
-            setIsDecoding(false);
+            setIsEncoding(false);
         })();
     };
 
@@ -63,28 +63,28 @@ export const VideoEditor: FC<Props> = ({ffmpeg, collections}) => {
 
     return (
         <>
-            {isDecoding && (
-                <div>Encoding status: {decodingStatus}</div>
+            {isEncoding && (
+                <div>Encoding status: {encodingStatus}</div>
             )}
             <div className="buttons">
-            {!isDecoding && (
+            {!isEncoding && (
                 <Button onClick={handleGenerateClick}>Generate</Button>
             )}
-            {generatedVideo && !isDecoding && (
+            {generatedVideo && !isEncoding && (
                 <DownloadVideoButton data={generatedVideo}/>
             )}
             </div>
-            {isDecoding && (
-                <ProgressBar value={decodingProgress}/>
+            {isEncoding && (
+                <ProgressBar value={encoodingProgress}/>
             )}
             <PhrasesEditor
-                disabled={isDecoding}
+                disabled={isEncoding}
                 collections={collections}
                 userPhrases={userPhrases}
                 onChange={setUserPhrases}
             />
             <video controls={true} ref={videoRef} style={{
-                display: !generatedVideo || isDecoding ? 'none' : ''
+                display: !generatedVideo || isEncoding ? 'none' : ''
             }}></video>
             {/*<video controls={true} src="./tinkoff_3.mp4"></video>*/}
         </>

@@ -2,8 +2,16 @@ import {FFmpeg} from '@ffmpeg/ffmpeg';
 import {fetchFile} from '@ffmpeg/util';
 
 import {Collection, Rect, Size, UserPhrase} from './types';
-import {ffmpegExec, ffmpegListFiles, getVideoProperties, ProgressEvent, reduceWideLines} from './utils';
+import {
+    ffmpegExec,
+    ffmpegListFiles,
+    getVideoProperties,
+    hexToUint8Array,
+    ProgressEvent,
+    reduceWideLines
+} from './utils';
 import {FONT_SIZE, LINE_HEIGHT, TEXT_COLOR, TEXT_PADDING} from './config';
+import watermarkRaw from './icons/watermark.png?raw-hex';
 
 export const renderTextSlide = async (videoSize: Size, width: number, height: number, text: string) => {
     text = (text ?? '').trim();
@@ -118,7 +126,7 @@ export const generateVideo = async (
         await (new Blob([concatBody], {type: 'text/plain'}).arrayBuffer())
     ));
 
-    const watermarkFile = await fetchFile('watermark.png');
+    const watermarkFile = hexToUint8Array(watermarkRaw);
     await ffmpeg.writeFile('watermark.png', watermarkFile);
 
     console.log('dir [.]', await ffmpegListFiles(ffmpeg, '.'));

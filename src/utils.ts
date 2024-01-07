@@ -117,3 +117,15 @@ export function* reduceWideLines(getTextWidth: (text: string) => number, text: s
         }
     }
 }
+
+export const hexToUint8Array = (hex: string) => {
+    const len = hex.length / 2;
+    const arr = new Uint8Array(len);
+
+    for (let i = 0; i < len; i++) {
+        const h = hex.substring(i * 2, (i + 1) * 2);
+        arr[i] = parseInt(h, 16);
+    }
+
+    return arr;
+}

@@ -4,7 +4,10 @@ import {toBlobURL} from '@ffmpeg/util';
 
 import {Collection} from './types';
 
-const baseURL = 'https://unpkg.com/@ffmpeg/core@0.12.4/dist/esm';
+const pkgVersion = '0.12.6';
+const pkgName = 'core';
+// const baseURL = `https://unpkg.com/@ffmpeg/${pkgName}@${pkgVersion}/dist/esm`;
+const baseURL = `/ffmpeg-${pkgName}/${pkgVersion}`;
 
 export const usePrepareFfmpeg = (ffmpeg: FFmpeg) => {
     const [isLoaded, setIsLoaded] = useState(false);
@@ -13,13 +16,13 @@ export const usePrepareFfmpeg = (ffmpeg: FFmpeg) => {
     useEffect(() => {
         (async () => {
             try {
-                console.log('loading ffmpeg...');
+                console.log('ffmpeg: start loading...');
                 await ffmpeg.load({
                     coreURL: await toBlobURL(`${baseURL}/ffmpeg-core.js`, 'text/javascript'),
                     wasmURL: await toBlobURL(`${baseURL}/ffmpeg-core.wasm`, 'application/wasm'),
-                    // workerURL: await toBlobURL(`${baseURL}/ffmpeg-core.worker.js`, 'text/javascript'),
+                    // workerURL: await toBlobURL(`${baseURL}/ffmpeg-core.worker.js`, 'text/javascript')
                 });
-                console.log('loaded');
+                console.log('ffmpeg: loaded');
                 setIsLoaded(true);
             } catch (e) {
                 console.error('not loaded', e);

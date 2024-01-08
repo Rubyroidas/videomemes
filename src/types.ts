@@ -22,9 +22,16 @@ export type Collection = {
     items: CollectionItem[];
 }
 
+export enum TextSize {
+    Small = 'small',
+    Normal = 'normal',
+    Big = 'big',
+}
+
 export type UserPhrase = {
     collectionId: string;
     phraseId: number;
     text?: string;
+    textSize: TextSize;
     image?: Blob;
 }

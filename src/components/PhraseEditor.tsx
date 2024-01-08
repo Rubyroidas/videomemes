@@ -1,86 +1,29 @@
-import {ClipboardEventHandler, FC, MouseEventHandler, useState} from 'react';
+import {ClipboardEventHandler, FC, MouseEventHandler} from 'react';
 import ContentEditable, {ContentEditableEvent} from 'react-contenteditable';
 
-import {Rect, UserPhrase} from '../types';
-import {escapeHTML, html2text} from '../utils';
+import {Rect, TextSize, UserPhrase} from '../types';
 import {FONT_SIZE, TEXT_PADDING} from '../config';
-import {
-    EditingAreaContainer,
-    Header,
-    InputBackground,
-    NavigateCaption,
-    TextAreaClass,
-    Video
-} from './PhraseEditor.styles';
-import {NavigationBar} from './NavigationBar';
+import {EditingAreaContainer, InputBackground, TextAreaClass, Video} from './PhraseEditor.styles';
 import {useStore} from '../store';
+import {ButtonSelector} from './App.styles';
 // import {DebugImage} from './DebugImage';
 
-type PhrasesEditorProps = {
-    disabled: boolean;
-    userPhrases: UserPhrase[];
-    onChange: (phrases: UserPhrase[]) => void;
-}
 type PhraseEditorProps = {
     disabled: boolean;
     userPhrase: UserPhrase;
     onChange: (phrases: UserPhrase) => void;
 }
 
-export const PhrasesEditor: FC<PhrasesEditorProps> = (props) => {
-    const {disabled, userPhrases, onChange} = props;
-    const [phraseIndex, setPhraseIndex] = useState(0);
-    const store = useStore();
-
-    const onProxyChange = (phrase: UserPhrase) => {
-        const result = [...userPhrases];
-        const escapedPhrase: UserPhrase = {
-            ...phrase,
-            text: phrase.text
-                ? html2text(phrase.text)
-                : phrase.text,
-        };
-        result[phraseIndex] = escapedPhrase;
-
-        onChange(result);
-    };
-
-    const userPhrase = userPhrases[phraseIndex];
-    const preparedUserPhrase = {
-        ...userPhrase,
-        text: userPhrase.text
-            ? userPhrase.text.split('\n')
-                .map((line) => `<div>${escapeHTML(line)}</div>`)
-                .join('')
-            : ''
-    };
-    const canGoLeft = phraseIndex > 0;
-    const canGoRight = phraseIndex < userPhrases.length - 1;
-    const collection = store.collections!.find(c => c.id === userPhrase.collectionId)!;
-    const item = collection.items.find(item => item.id === userPhrase.phraseId)!;
-
-    return (
-        <div>
-            <Header>
-                <NavigationBar
-                    page={phraseIndex + 1}
-                    totalPages={userPhrases.length}
-                    canGoLeft={canGoLeft}
-                    canGoRight={canGoRight}
-                    setIndex={setPhraseIndex}
-                />
-                <NavigateCaption>
-                    <b>{collection.name}</b> "{item.name}"
-                </NavigateCaption>
-            </Header>
-            <PhraseEditor
-                userPhrase={preparedUserPhrase}
-                disabled={disabled}
-                onChange={onProxyChange}
-            />
-        </div>
-    );
-};
+const textSizeValues = [{
+    value: TextSize.Small,
+    text: 'small',
+}, {
+    value: TextSize.Normal,
+    text: 'normal',
+}, {
+    value: TextSize.Big,
+    text: 'big',
+}];
 
 export const PhraseEditor: FC<PhraseEditorProps> = (props) => {
     const {disabled, userPhrase, onChange} = props;
@@ -104,6 +47,13 @@ export const PhraseEditor: FC<PhraseEditorProps> = (props) => {
             video.pause();
         }
     };
+    const handleChangeTextSize = (value: TextSize) => {
+        userPhrase.textSize = value;
+        onChange({
+            ...userPhrase,
+            textSize: value,
+        });
+    };
 
     const collection = store.collections!.find(c => c.id === userPhrase.collectionId)!;
     const item = collection.items.find(item => item.id === userPhrase.phraseId)!;
@@ -114,14 +64,29 @@ export const PhraseEditor: FC<PhraseEditorProps> = (props) => {
         width: collection.textArea.width / collection.size.width * 100,
         height: collection.textArea.height / collection.size.height * 100,
     };
-    const fontSizeDesktop = FONT_SIZE * collection.size.width;
-    const fontSizeMobile = FONT_SIZE * 100;
+    let textSizeCoeff = 1;
+    switch (userPhrase.textSize) {
+        case TextSize.Small:
+            textSizeCoeff = 0.5;
+            break;
+        case TextSize.Big:
+            textSizeCoeff = 1.5;
+            break;
+    }
+    const fontSizeDesktop = textSizeCoeff * FONT_SIZE * collection.size.width;
+    const fontSizeMobile = textSizeCoeff * FONT_SIZE * 100;
     const paddingDesktop = TEXT_PADDING * collection.size.width / 100;
     const paddingMobile = TEXT_PADDING;
     const inputClassName = TextAreaClass(fontSizeDesktop, fontSizeMobile, paddingDesktop, paddingMobile, item.name);
 
     return (
         <div>
+            <ButtonSelector
+                caption="Text size"
+                value={userPhrase.textSize}
+                values={textSizeValues}
+                onChange={handleChangeTextSize}
+            />
             <EditingAreaContainer {...collection.size}>
                 <InputBackground {...virtualRect}>
                     {/* userPhrase.text && (

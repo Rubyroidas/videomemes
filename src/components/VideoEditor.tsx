@@ -1,6 +1,6 @@
 import {FC, useEffect, useRef, useState} from 'react';
 
-import {PhrasesEditor} from './PhraseEditor';
+import {PhrasesEditor} from './PhrasesEditor';
 import {ProgressBar} from './ProgressBar';
 import {DownloadVideoButton} from './DownloadVideoButton';
 
@@ -16,14 +16,17 @@ const debugUserPhrases: UserPhrase[] = [{
     collectionId: 'tinkoff-vertical',
     phraseId: 1,
     text: 'You decide to search for the\nnew job',
+    textSize: 'normal',
 }, {
     collectionId: 'tinkoff-vertical',
     phraseId: 2,
     text: 'hello world 2',
+    textSize: 'normal',
 }, {
     collectionId: 'tinkoff-vertical',
     phraseId: 3,
     text: 'hello world 3',
+    textSize: 'normal',
 }];
 
 export const VideoEditor: FC = () => {

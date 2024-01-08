@@ -4,7 +4,7 @@ import {observer} from 'mobx-react';
 
 import {VideoEditor} from './VideoEditor';
 import {AppTitle} from './App.styles';
-import {loadCollections, loadFFmpeg} from '../utils.ts';
+import {loadCollections, loadFFmpeg} from '../utils';
 import {useStore} from '../store';
 
 export const App = observer(() => {

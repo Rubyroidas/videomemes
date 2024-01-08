@@ -1,7 +1,7 @@
 import {FFmpeg} from '@ffmpeg/ffmpeg';
 import {fetchFile} from '@ffmpeg/util';
 
-import {Collection, Rect, Size, UserPhrase} from './types';
+import {Collection, Rect, Size, TextSize, UserPhrase} from './types';
 import {
     ffmpegExec,
     ffmpegListFiles,
@@ -13,13 +13,22 @@ import {
 import {FONT_SIZE, LINE_HEIGHT, TEXT_COLOR, TEXT_PADDING} from './config';
 import watermarkRaw from './icons/watermark.png?raw-hex';
 
-export const renderTextSlide = async (videoSize: Size, width: number, height: number, text: string) => {
+export const renderTextSlide = async (videoSize: Size, width: number, height: number, text: string, textSize: TextSize) => {
     text = (text ?? '').trim();
     const canvas = document.createElement('canvas');
     canvas.width = width;
     canvas.height = height;
 
-    const fontSize = FONT_SIZE * videoSize.width;
+    let textSizeCoeff = 1;
+    switch (textSize) {
+        case TextSize.Small:
+            textSizeCoeff = 0.5;
+            break;
+        case TextSize.Big:
+            textSizeCoeff = 1.5;
+            break;
+    }
+    const fontSize = textSizeCoeff * FONT_SIZE * videoSize.width;
     const lineHeight = fontSize * LINE_HEIGHT;
     const padding = TEXT_PADDING * videoSize.width / 100;
     const textBounds: Rect = {
@@ -112,7 +121,7 @@ export const generateVideo = async (
         await ffmpeg.writeFile(videoFileName, fetchedFile);
 
         const {x, y, width, height} = collection.textArea;
-        const blob = await renderTextSlide(collection.size, width, height, phrase);
+        const blob = await renderTextSlide(collection.size, width, height, phrase, userPhrase.textSize);
         const imageFileName = `captions/${fileNumberSuffix}.png`;
         await ffmpeg.writeFile(imageFileName, new Uint8Array(await blob.arrayBuffer()));
 

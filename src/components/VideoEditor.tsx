@@ -1,21 +1,16 @@
 import {FC, useEffect, useRef, useState} from 'react';
-import {FFmpeg} from '@ffmpeg/ffmpeg';
 
 import {PhrasesEditor} from './PhraseEditor';
 import {ProgressBar} from './ProgressBar';
 import {DownloadVideoButton} from './DownloadVideoButton';
 
 import {Button} from './App.styles';
-import {Collection, UserPhrase} from '../types';
+import {UserPhrase} from '../types';
 import {generateVideo} from '../generate';
 import {Icon} from './PhraseEditor.styles';
 import {PlayIcon} from '../icons/PlayIcon';
 import {DownloadIcon} from '../icons/DownloadIcon';
-
-type Props = {
-    ffmpeg: FFmpeg;
-    collections: Collection[];
-}
+import {useStore} from '../store';
 
 const debugUserPhrases: UserPhrase[] = [{
     collectionId: 'tinkoff-vertical',
@@ -31,7 +26,9 @@ const debugUserPhrases: UserPhrase[] = [{
     text: 'hello world 3',
 }];
 
-export const VideoEditor: FC<Props> = ({ffmpeg, collections}) => {
+export const VideoEditor: FC = () => {
+    const store = useStore();
+    console.log(store.ffmpeg, store.collections);
     const videoRef = useRef<HTMLVideoElement>(null);
 
     const [userPhrases, setUserPhrases] = useState<UserPhrase[]>(debugUserPhrases);
@@ -49,7 +46,7 @@ export const VideoEditor: FC<Props> = ({ffmpeg, collections}) => {
 
             setIsEncoding(true);
             console.log('start generate');
-            const vid = await generateVideo(ffmpeg, userPhrases, collections, setEncoodingProgress, setEncodingStatus);
+            const vid = await generateVideo(store.ffmpeg!, userPhrases, store.collections!, setEncoodingProgress, setEncodingStatus);
             setGeneratedVideo(vid);
             console.log('end generate');
             setIsEncoding(false);
@@ -92,7 +89,6 @@ export const VideoEditor: FC<Props> = ({ffmpeg, collections}) => {
             )}
             <PhrasesEditor
                 disabled={isEncoding}
-                collections={collections}
                 userPhrases={userPhrases}
                 onChange={setUserPhrases}
             />

@@ -1,26 +1,37 @@
-import {useRef} from 'react';
+import {useEffect} from 'react';
 import {FFmpeg} from '@ffmpeg/ffmpeg';
+import {observer} from 'mobx-react';
 
 import {VideoEditor} from './VideoEditor';
-import {useLoadCollections, usePrepareFfmpeg} from '../hooks';
 import {AppTitle} from './App.styles';
+import {loadCollections, loadFFmpeg} from '../utils.ts';
+import {useStore} from '../store';
 
-export const App = () => {
-    const ffmpegRef = useRef(new FFmpeg());
-    const {isLoaded} = usePrepareFfmpeg(ffmpegRef.current);
-    const {collections} = useLoadCollections();
+export const App = observer(() => {
+    const store = useStore();
+    useEffect(() => {
+        const load = async () => {
+            store.collections = await loadCollections();
+        };
+        load();
+    }, []);
+    useEffect(() => {
+        const load = async () => {
+            const ffmpeg = new FFmpeg();
+            await loadFFmpeg(ffmpeg);
+            store.ffmpeg = ffmpeg;
+        };
+        load();
+    }, []);
 
     return (
         <div>
             <AppTitle>Video meme generator</AppTitle>
-            {!isLoaded || !collections ? (
+            {!store.ffmpeg || !store.collections ? (
                 <div>Loading...</div>
             ) : (
-                <VideoEditor
-                    ffmpeg={ffmpegRef.current}
-                    collections={collections}
-                />
+                <VideoEditor/>
             )}
         </div>
     );
-};
+});

@@ -1,6 +1,7 @@
 import {FFmpeg} from '@ffmpeg/ffmpeg';
 
 import {Point, Rect} from './types';
+import {toBlobURL} from '@ffmpeg/util';
 
 export interface VideoProperties {
     fps: number;
@@ -90,6 +91,25 @@ export const html2text = (html: string) => {
     return els.map(el => el.textContent).join('\n');
 };
 
+const pkgVersion = '0.12.6';
+const pkgName = 'core';
+// const baseURL = `https://unpkg.com/@ffmpeg/${pkgName}@${pkgVersion}/dist/esm`;
+const baseURL = `/ffmpeg-${pkgName}/${pkgVersion}`;
+
+export const loadFFmpeg = async (ffmpeg: FFmpeg) => {
+    try {
+        console.log('ffmpeg: start loading...');
+        await ffmpeg.load({
+            coreURL: await toBlobURL(`${baseURL}/ffmpeg-core.js`, 'text/javascript'),
+            wasmURL: await toBlobURL(`${baseURL}/ffmpeg-core.wasm`, 'application/wasm'),
+            // workerURL: await toBlobURL(`${baseURL}/ffmpeg-core.worker.js`, 'text/javascript')
+        });
+        console.log('ffmpeg: loaded');
+    } catch (e) {
+        console.error('not loaded', e);
+    }
+}
+
 export function* reduceWideLines(getTextWidth: (text: string) => number, text: string, maxWidth: number): Generator<string> {
     for (const line of text.split('\n')) {
         const lineWidth = getTextWidth(line);
@@ -128,4 +148,9 @@ export const hexToUint8Array = (hex: string) => {
     }
 
     return arr;
-}
+};
+
+export const loadCollections = async () => {
+    const res = await fetch('tinkoff-vertical.json');
+    return [await res.json()];
+};

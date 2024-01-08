@@ -1,7 +1,7 @@
 import {ClipboardEventHandler, FC, MouseEventHandler, useState} from 'react';
 import ContentEditable, {ContentEditableEvent} from 'react-contenteditable';
 
-import {Collection, Rect, UserPhrase} from '../types';
+import {Rect, UserPhrase} from '../types';
 import {escapeHTML, html2text} from '../utils';
 import {FONT_SIZE, TEXT_PADDING} from '../config';
 import {
@@ -13,11 +13,11 @@ import {
     Video
 } from './PhraseEditor.styles';
 import {NavigationBar} from './NavigationBar';
+import {useStore} from '../store';
 // import {DebugImage} from './DebugImage';
 
 type PhraseEditorProps = {
     disabled: boolean;
-    collections: Collection[];
     userPhrases: UserPhrase[];
     onChange: (phrases: UserPhrase[]) => void;
 }
@@ -58,7 +58,8 @@ export const PhrasesEditor: FC<PhraseEditorProps> = (props) => {
 };
 
 export const PhraseEditor: FC<PhraseEditorProps> = (props) => {
-    const {disabled, collections, userPhrases, onChange} = props;
+    const {disabled, userPhrases, onChange} = props;
+    const store = useStore();
     const [phraseIndex, setPhraseIndex] = useState(0);
     const handlePhraseChange = (e: ContentEditableEvent) => {
         const result = [...userPhrases];
@@ -83,7 +84,7 @@ export const PhraseEditor: FC<PhraseEditorProps> = (props) => {
 
     const userPhrase = userPhrases[phraseIndex];
 
-    const collection = collections.find(c => c.id === userPhrase.collectionId)!;
+    const collection = store.collections!.find(c => c.id === userPhrase.collectionId)!;
     const item = collection.items.find(item => item.id === userPhrase.phraseId)!;
 
     const canGoLeft = phraseIndex > 0;

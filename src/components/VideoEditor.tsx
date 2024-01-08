@@ -28,7 +28,6 @@ const debugUserPhrases: UserPhrase[] = [{
 
 export const VideoEditor: FC = () => {
     const store = useStore();
-    console.log(store.ffmpeg, store.collections);
     const videoRef = useRef<HTMLVideoElement>(null);
 
     const [userPhrases, setUserPhrases] = useState<UserPhrase[]>(debugUserPhrases);

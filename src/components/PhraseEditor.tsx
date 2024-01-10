@@ -130,6 +130,7 @@ export const PhraseEditor: FC<PhraseEditorProps> = (props) => {
                         <DebugImage
                             collection={collection}
                             text={userPhrase.text}
+                            textSize={userPhrase.textSize}
                         />
                     ) */}
                     {userPhrase.text && (

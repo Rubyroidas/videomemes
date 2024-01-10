@@ -113,6 +113,7 @@ export const PhraseEditor: FC<PhraseEditorProps> = (props) => {
                         onChange={handleChangeTextSize}
                     />
                     <FileUploader
+                        types={['png', 'jpeg', 'jpg']}
                         multiple={false}
                         handleChange={handleDrop}
                     />

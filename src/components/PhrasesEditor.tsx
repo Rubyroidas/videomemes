@@ -37,7 +37,7 @@ export const PhrasesEditor: FC<PhrasesEditorProps> = (props) => {
             ? userPhrase.text.split('\n')
                 .map((line) => `<div>${escapeHTML(line)}</div>`)
                 .join('')
-            : ''
+            : undefined
     };
     const canGoLeft = phraseIndex > 0;
     const canGoRight = phraseIndex < userPhrases.length - 1;

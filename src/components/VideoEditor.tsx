@@ -5,29 +5,33 @@ import {ProgressBar} from './ProgressBar';
 import {DownloadVideoButton} from './DownloadVideoButton';
 
 import {Button} from './App.styles';
-import {UserPhrase} from '../types';
+import {TextSize, UserPhrase} from '../types';
 import {generateVideo} from '../generate';
 import {Icon} from './PhraseEditor.styles';
 import {PlayIcon} from '../icons/PlayIcon';
 import {DownloadIcon} from '../icons/DownloadIcon';
 import {useStore} from '../store';
 
-const debugUserPhrases: UserPhrase[] = [{
-    collectionId: 'tinkoff-vertical',
-    phraseId: 1,
-    text: 'You decide to search for the\nnew job',
-    textSize: 'normal',
-}, {
-    collectionId: 'tinkoff-vertical',
-    phraseId: 2,
-    text: 'hello world 2',
-    textSize: 'normal',
-}, {
-    collectionId: 'tinkoff-vertical',
-    phraseId: 3,
-    text: 'hello world 3',
-    textSize: 'normal',
-}];
+const debugUserPhrases: UserPhrase[] = [
+    {
+        collectionId: 'tinkoff-vertical',
+        phraseId: 1,
+        text: 'You decide to search for the\nnew job',
+        textSize: TextSize.Normal,
+    },
+    {
+        collectionId: 'tinkoff-vertical',
+        phraseId: 2,
+        text: 'hello world 2',
+        textSize: TextSize.Normal,
+    },
+    {
+        collectionId: 'tinkoff-vertical',
+        phraseId: 3,
+        text: 'hello world 3',
+        textSize: TextSize.Normal,
+    },
+];
 
 export const VideoEditor: FC = () => {
     const store = useStore();

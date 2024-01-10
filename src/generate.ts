@@ -7,6 +7,7 @@ import {
     ffmpegListFiles,
     getVideoProperties,
     hexToUint8Array,
+    imageLoadPromise,
     ProgressEvent,
     reduceWideLines
 } from './utils';
@@ -68,9 +69,44 @@ export const renderTextSlide = async (videoSize: Size, width: number, height: nu
         y += lineHeight;
     }
 
+    return await new Promise<Blob>((resolve, reject) => {
+        canvas.toBlob(blob => {
+            if (blob) {
+                resolve(blob);
+            } else {
+                reject();
+            }
+        }, 'image/png');
+    });
+};
+
+export const renderImageSlide = async (width: number, height: number, image: Blob) => {
+    const canvas = document.createElement('canvas');
+    canvas.width = width;
+    canvas.height = height;
+
+    const ctx = canvas.getContext('2d')!;
+
+    ctx.fillStyle = '#fff';
+    ctx.fillRect(0, 0, width, height);
+
     const img = document.createElement('img');
-    img.src = canvas.toDataURL('image/png');
-    img.style.border = 'solid 1px red';
+    img.src = URL.createObjectURL(image);
+
+    await imageLoadPromise(img);
+    const isWider = img.naturalWidth / img.naturalHeight > width / height;
+    const imageScale = isWider
+        ? width / img.naturalWidth
+        : height / img.naturalHeight;
+    const scaledSize: Size = {
+        width: img.naturalWidth * imageScale,
+        height: img.naturalHeight * imageScale,
+    };
+    ctx.drawImage(img,
+        width / 2 - scaledSize.width / 2,
+        height / 2 - scaledSize.height / 2,
+        scaledSize.width, scaledSize.height
+    );
 
     return await new Promise<Blob>((resolve, reject) => {
         canvas.toBlob(blob => {
@@ -109,7 +145,6 @@ export const generateVideo = async (
         const itemIndex = collection.items.findIndex(item => item.id === userPhrase.phraseId);
         const item = collection.items[itemIndex];
         const itemsBefore = collection.items.slice(0, itemIndex);
-        const phrase = userPhrase.text!;
         const timecode = itemsBefore
             .map(r => r.duration)
             .reduce((acc, ii) => acc + ii, 0);
@@ -121,7 +156,9 @@ export const generateVideo = async (
         await ffmpeg.writeFile(videoFileName, fetchedFile);
 
         const {x, y, width, height} = collection.textArea;
-        const blob = await renderTextSlide(collection.size, width, height, phrase, userPhrase.textSize);
+        const blob = userPhrase.text
+            ? await renderTextSlide(collection.size, width, height, userPhrase.text, userPhrase.textSize)
+            : await renderImageSlide(width, height, userPhrase.image!);
         const imageFileName = `captions/${fileNumberSuffix}.png`;
         await ffmpeg.writeFile(imageFileName, new Uint8Array(await blob.arrayBuffer()));
 

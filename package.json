@@ -20,7 +20,8 @@
     "mobx-react": "^9.1.0",
     "react": "^18.2.0",
     "react-contenteditable": "^3.3.7",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "react-drag-drop-files": "^2.3.10"
   },
   "devDependencies": {
     "@types/react": "^18.2.47",

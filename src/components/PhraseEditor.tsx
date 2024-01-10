@@ -1,11 +1,12 @@
-import {ClipboardEventHandler, FC, MouseEventHandler} from 'react';
+import {ClipboardEventHandler, FC, MouseEventHandler, useEffect, useState} from 'react';
 import ContentEditable, {ContentEditableEvent} from 'react-contenteditable';
+import {FileUploader} from 'react-drag-drop-files';
 
 import {Rect, TextSize, UserPhrase} from '../types';
 import {FONT_SIZE, TEXT_PADDING} from '../config';
 import {EditingAreaContainer, InputBackground, TextAreaClass, Video} from './PhraseEditor.styles';
 import {useStore} from '../store';
-import {ButtonSelector} from './App.styles';
+import {Button, ButtonSelector} from './App.styles';
 // import {DebugImage} from './DebugImage';
 
 type PhraseEditorProps = {
@@ -28,6 +29,7 @@ const textSizeValues = [{
 export const PhraseEditor: FC<PhraseEditorProps> = (props) => {
     const {disabled, userPhrase, onChange} = props;
     const store = useStore();
+    const [imageBlobUrl, setImageBlobUrl] = useState<string | undefined>(undefined);
 
     const handlePhraseChange = (e: ContentEditableEvent) => {
         onChange({
@@ -54,6 +56,27 @@ export const PhraseEditor: FC<PhraseEditorProps> = (props) => {
             textSize: value,
         });
     };
+    const handleDrop = (file: File) => {
+        onChange({
+            ...userPhrase,
+            text: undefined,
+            image: file,
+        });
+    };
+    const handleClickSwitchToTextMode = () => {
+        onChange({
+            ...userPhrase,
+            text: '<div>Enter some text...</div>',
+            image: undefined,
+        });
+    };
+    useEffect(() => {
+        if (userPhrase.image) {
+            setImageBlobUrl(URL.createObjectURL(userPhrase.image));
+        } else {
+            setImageBlobUrl(undefined);
+        }
+    }, [userPhrase.image]);
 
     const collection = store.collections!.find(c => c.id === userPhrase.collectionId)!;
     const item = collection.items.find(item => item.id === userPhrase.phraseId)!;
@@ -81,27 +104,43 @@ export const PhraseEditor: FC<PhraseEditorProps> = (props) => {
 
     return (
         <div>
-            <ButtonSelector
-                caption="Text size"
-                value={userPhrase.textSize}
-                values={textSizeValues}
-                onChange={handleChangeTextSize}
-            />
+            {userPhrase.text ? (
+                <>
+                    <ButtonSelector
+                        caption="Text size"
+                        value={userPhrase.textSize}
+                        values={textSizeValues}
+                        onChange={handleChangeTextSize}
+                    />
+                    <FileUploader
+                        multiple={false}
+                        handleChange={handleDrop}
+                    />
+                </>
+            ) : (
+                <Button onClick={handleClickSwitchToTextMode}>
+                    switch to text mode
+                </Button>
+            )}
             <EditingAreaContainer {...collection.size}>
-                <InputBackground {...virtualRect}>
+                <InputBackground {...virtualRect} style={{
+                    backgroundImage: imageBlobUrl ? `url(${imageBlobUrl})` : undefined,
+                }}>
                     {/* userPhrase.text && (
                         <DebugImage
                             collection={collection}
                             text={userPhrase.text}
                         />
                     ) */}
-                    <ContentEditable
-                        onPaste={handlePaste}
-                        disabled={disabled}
-                        className={inputClassName}
-                        html={userPhrase.text!}
-                        onChange={handlePhraseChange}
-                    />
+                    {userPhrase.text && (
+                        <ContentEditable
+                            onPaste={handlePaste}
+                            disabled={disabled}
+                            className={inputClassName}
+                            html={userPhrase.text!}
+                            onChange={handlePhraseChange}
+                        />
+                    )}
                 </InputBackground>
                 <Video
                     onClick={handleVideoClick}

@@ -24,6 +24,9 @@ export const InputBackground = styled.div<Rect>`
   height: ${props => props.height}%;
   background-color: #fff;
   z-index: 1;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center center;
 `;
 export const TextAreaClass = (fontSizeDesktop: number, fontSizeMobile: number, paddingDesktop: number, paddingMobile: number, placeHolder: string) => css`
   position: absolute;

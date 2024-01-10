@@ -25,10 +25,13 @@ export const Button = styled.div`
 export const ButtonSelectorWrapper = styled.div`
     display: flex;
     flex-direction: row;
+    align-items: center;
 `;
 export const ButtonSelectorCaption = styled.div`
     display: flex;
     flex-direction: row;
+    font-weight: bold;
+    margin: 8px 12px;
 `;
 export const ButtonSelectorItem = styled.div<{selected: boolean}>`
     display: inline-block;

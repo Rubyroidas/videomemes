@@ -7,84 +7,85 @@ import {LINE_HEIGHT, TEXT_COLOR} from '../config';
 export const Header = styled.div`
 `;
 export const EditingAreaContainer = styled.div<Size>`
-  width: ${props => props.width}px;
-  height: ${props => props.height}px;
-  position: relative;
+    width: ${props => props.width}px;
+    height: ${props => props.height}px;
+    position: relative;
 
-  @media (max-width: 480px) {
-    width: 100vw;
-    height: ${props => props.height / props.width * 100}vw;
-  }
+    @media (max-width: 480px) {
+        width: 100vw;
+        height: ${props => props.height / props.width * 100}vw;
+    }
 `;
 export const InputBackground = styled.div<Rect>`
-  position: absolute;
-  left: ${props => props.x}%;
-  top: ${props => props.y}%;
-  width: ${props => props.width}%;
-  height: ${props => props.height}%;
-  background-color: #fff;
-  z-index: 1;
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-position: center center;
+    position: absolute;
+    left: ${props => props.x}%;
+    top: ${props => props.y}%;
+    width: ${props => props.width}%;
+    height: ${props => props.height}%;
+    background-color: #fff;
+    z-index: 1;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center center;
 `;
 export const TextAreaClass = (fontSizeDesktop: number, fontSizeMobile: number, paddingDesktop: number, paddingMobile: number, placeHolder: string) => css`
-  position: absolute;
-  width: 100%;
-  height: 100%;
+    position: absolute;
+    width: 100%;
+    height: 100%;
 
-  background-color: transparent;
-  color: ${TEXT_COLOR};
-  font-family: sans-serif;
-  line-height: ${LINE_HEIGHT * 100}%;
-  font-weight: bold;
-  font-size: ${fontSizeDesktop}px;
-  text-align: center;
-  display: grid;
-  justify-content: center;
-  align-items: center;
-  align-content: center;
-  
-  box-sizing: border-box;
-  padding: ${paddingDesktop}px;
+    background-color: transparent;
+    color: ${TEXT_COLOR};
+    font-family: sans-serif;
+    line-height: ${LINE_HEIGHT * 100}%;
+    font-weight: bold;
+    font-size: ${fontSizeDesktop}px;
+    text-align: center;
+    display: grid;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
 
-  border: none;
-  outline: none;
-  overflow: hidden;
-  resize: none;
-  
-  @media (max-width: 480px) {
-    font-size: ${fontSizeMobile}vw;
-    padding: ${paddingMobile}vw;
-  }
+    box-sizing: border-box;
+    padding: ${paddingDesktop}px;
 
-  &:empty::before {
-    content: "${placeHolder}";
-    font-style: italic;
-    color: gray;
-  }
+    border: none;
+    outline: none;
+    overflow: hidden;
+    resize: none;
+
+    @media (max-width: 480px) {
+        font-size: ${fontSizeMobile}vw;
+        padding: ${paddingMobile}vw;
+    }
+
+    &:empty::before {
+        content: "${placeHolder}";
+        font-style: italic;
+        color: gray;
+    }
 `;
 export const Video = styled.video`
-  width: 100%;
+    width: 100%;
 `;
 export const NavigateCaption = styled.div`
-  font-size: 2rem;
-  text-align: center;
-  width: 720px;
+    font-size: 2rem;
+    text-align: center;
+    width: 720px;
 
-  @media (max-width: 480px) {
-    font-size: 4vw;
-    width: 100vw;
-  }
+    @media (max-width: 480px) {
+        font-size: 4vw;
+        width: 100vw;
+    }
 `;
 export const Icon = styled.div`
-  display: inline-block;
-  width: 48px;
-  height: 48px;
-    
+    display: inline-block;
+    width: 48px;
+    height: 48px;
+    color: var(--button-text-color);
+
     & > svg {
         width: 100%;
         height: 100%;
-        fill: #ffffff;
+        fill: var(--button-text-color);
     }
 `;

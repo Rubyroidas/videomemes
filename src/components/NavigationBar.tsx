@@ -14,28 +14,28 @@ type Props = {
 }
 
 const NavigatePosition = styled.div`
-  display: inline-block;
-  font-size: 3rem;
+    display: inline-block;
+    font-size: 3rem;
 
-  @media (max-width: 480px) {
-    font-size: 10vw;
-  }
+    @media (max-width: 480px) {
+        font-size: 10vw;
+    }
 `;
 const NavigateButton = styled.div`
-  display: inline-block;
-  font-size: 3rem;
+    display: inline-block;
+    font-size: 3rem;
 
-  @media (max-width: 480px) {
-    font-size: 10vw;
-  }
+    @media (max-width: 480px) {
+        font-size: 10vw;
+    }
 `;
 
 const Wrapper = styled.div`
-  width: 720px;
+    width: 720px;
 
-  @media (max-width: 480px) {
-    width: 100vw;
-  }
+    @media (max-width: 480px) {
+        width: 100vw;
+    }
 `;
 export const NavigationBar: FC<Props> = ({canGoLeft, canGoRight, page, totalPages, setIndex}) => (
     <Wrapper>

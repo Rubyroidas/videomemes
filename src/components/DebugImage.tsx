@@ -6,8 +6,8 @@ import {html2text} from '../utils';
 import {Collection, TextSize} from '../types';
 
 const Wrapper = styled.img`
-   position: absolute;
- `;
+    position: absolute;
+`;
 
 type Props = {
     collection: Collection;

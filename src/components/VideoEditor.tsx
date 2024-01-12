@@ -1,7 +1,6 @@
 import {FC, useEffect, useRef, useState} from 'react';
 
 import {PhrasesEditor} from './PhrasesEditor';
-import {ProgressBar} from './ProgressBar';
 import {DownloadVideoButton} from './DownloadVideoButton';
 
 import {Button} from './App.styles';
@@ -39,7 +38,6 @@ export const VideoEditor: FC = () => {
 
     const [userPhrases, setUserPhrases] = useState<UserPhrase[]>(debugUserPhrases);
     const [isEncoding, setIsEncoding] = useState(false);
-    const [encoodingProgress, setEncoodingProgress] = useState(0);
     const [encodingStatus, setEncodingStatus] = useState('');
     const [generatedVideo, setGeneratedVideo] = useState<Blob | null>(null);
 
@@ -52,7 +50,7 @@ export const VideoEditor: FC = () => {
 
             setIsEncoding(true);
             console.log('start generate');
-            const vid = await generateVideo(store.ffmpeg!, userPhrases, store.collections!, setEncoodingProgress, setEncodingStatus);
+            const vid = await generateVideo(store.ffmpeg!, userPhrases, store.collections!, () => {}, setEncodingStatus);
             setGeneratedVideo(vid);
             console.log('end generate');
             setIsEncoding(false);
@@ -90,9 +88,9 @@ export const VideoEditor: FC = () => {
                 </DownloadVideoButton>
             )}
             </div>
-            {isEncoding && (
-                <ProgressBar value={encoodingProgress}/>
-            )}
+            {/*{isEncoding && (*/}
+            {/*    <ProgressBar value={encoodingProgress}/>*/}
+            {/*)}*/}
             <PhrasesEditor
                 disabled={isEncoding}
                 userPhrases={userPhrases}

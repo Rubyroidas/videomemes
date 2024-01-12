@@ -8,16 +8,16 @@ export const AppTitle = styled.div`
 `;
 
 export const Button = styled.div`
-  display: inline-flex;
+    display: inline-flex;
     align-items: center;
-  background-color: black;
-  color: white;
-  padding: 8px 16px;
-  margin: 0 8px 0 0;
-  font-family: sans-serif;
-  font-size: 24px;
-  cursor: pointer;
-    
+    background-color: var(--button-bg-color);
+    color: var(--button-text-color);
+    padding: 8px 16px;
+    margin: 0 8px 0 0;
+    font-family: sans-serif;
+    font-size: 24px;
+    cursor: pointer;
+
     & > div {
         margin-right: 12px;
     }

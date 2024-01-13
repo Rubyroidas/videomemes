@@ -3,8 +3,13 @@
     font-size: 16px;
     font-weight: 400;
 
-    color: #000;
-    background-color: #fff;
+    color: var(--text-color);
+    background-color: var(--bg-color);
+
+    --button-bg-color: #aaa;
+    --button-text-color: #000;
+    --text-color: #000;
+    --bg-color: #fff;
 }
 
 :root,
@@ -13,16 +18,14 @@ body {
     padding: 0;
     width: 100%;
     height: 100%;
-    --button-bg-color: #aaa;
-    --button-text-color: #000;
 }
 
 @media (prefers-color-scheme: dark) {
     :root {
-        color: #dedede;
-        background-color: #363636;
         --button-bg-color: #000;
         --button-text-color: #fff;
+        --text-color: #dedede;
+        --bg-color: #363636;
     }
 }
 

@@ -2,7 +2,7 @@ import {ClipboardEventHandler, FC, MouseEventHandler, useEffect, useState} from 
 import ContentEditable, {ContentEditableEvent} from 'react-contenteditable';
 import {FileUploader} from 'react-drag-drop-files';
 
-import {ImageSize, Rect, TextSize, UserPhrase} from '../types';
+import {Rect, TextSize, UserPhrase} from '../types';
 import {FONT_SIZE, TEXT_PADDING} from '../config';
 import {EditingAreaContainer, InputBackground, TextAreaClass, Video} from './PhraseEditor.styles';
 import {useStore} from '../store';
@@ -27,14 +27,14 @@ const textSizeValues = [{
 }];
 
 const imageSizeValues = [{
-    value: ImageSize.Small,
-    text: 'small',
+    value: 0.5,
+    text: 'half',
 }, {
-    value: ImageSize.Normal,
-    text: 'normal',
+    value: 0.75,
+    text: '3/4',
 }, {
-    value: ImageSize.Big,
-    text: 'big',
+    value: 1,
+    text: 'full',
 }];
 
 export const PhraseEditor: FC<PhraseEditorProps> = (props) => {
@@ -66,7 +66,7 @@ export const PhraseEditor: FC<PhraseEditorProps> = (props) => {
             textSize: value,
         });
     };
-    const handleChangeImageSize = (value: ImageSize) => {
+    const handleChangeImageSize = (value: number) => {
         onChange({
             ...userPhrase,
             imageSize: value,

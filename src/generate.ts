@@ -1,7 +1,7 @@
 import {FFmpeg} from '@ffmpeg/ffmpeg';
 import {fetchFile} from '@ffmpeg/util';
 
-import {Collection, ImageSize, Rect, Size, TextSize, UserPhrase} from './types';
+import {Collection, Rect, Size, TextSize, UserPhrase} from './types';
 import {
     ffmpegExec,
     ffmpegListFiles,
@@ -80,20 +80,10 @@ export const renderTextSlide = async (videoSize: Size, width: number, height: nu
     });
 };
 
-export const renderImageSlide = async (width: number, height: number, image: Blob, imageSize: ImageSize, background?: string) => {
+export const renderImageSlide = async (width: number, height: number, image: Blob, imageSize: number, background?: string) => {
     const canvas = document.createElement('canvas');
     canvas.width = width;
     canvas.height = height;
-
-    let userImageScale = 1;
-    switch (imageSize) {
-        case ImageSize.Normal:
-            userImageScale = 0.75;
-            break;
-        case ImageSize.Small:
-            userImageScale = 0.5;
-            break;
-    }
 
     const ctx = canvas.getContext('2d')!;
 
@@ -108,7 +98,7 @@ export const renderImageSlide = async (width: number, height: number, image: Blo
 
     await imageLoadPromise(img);
     const isWider = img.naturalWidth / img.naturalHeight > width / height;
-    const imageScale = userImageScale * (
+    const imageScale = imageSize * (
         isWider
             ? width / img.naturalWidth
             : height / img.naturalHeight
@@ -215,7 +205,7 @@ export const generateVideo = async (
 
     const watermarkFileRaw = hexToUint8Array(watermarkRaw);
     const watermarkFile = new Uint8Array(await (
-        await renderImageSlide(watermarkArea.width, watermarkArea.height, new Blob([watermarkFileRaw]), ImageSize.Big)
+        await renderImageSlide(watermarkArea.width, watermarkArea.height, new Blob([watermarkFileRaw]), 1)
     ).arrayBuffer());
     await ffmpeg.writeFile('watermark.png', watermarkFile);
 

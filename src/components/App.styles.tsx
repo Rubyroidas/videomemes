@@ -1,7 +1,4 @@
-import {FC} from 'react';
 import styled from '@emotion/styled';
-
-import {TextSize} from '../types';
 
 export const AppTitle = styled.div`
     font-size: 2rem;
@@ -41,16 +38,16 @@ export const ButtonSelectorItem = styled.div<{selected: boolean}>`
     margin: 0 4px;
     cursor: pointer;
 `;
-type ButtonSelectorProps = {
+type ButtonSelectorProps<T> = {
     caption: string;
-    value: TextSize;
+    value: T;
     values: {
-        value: TextSize,
+        value: T,
         text: string,
     }[];
-    onChange: (value: TextSize) => void;
+    onChange: (value: T) => void;
 }
-export const ButtonSelector: FC<ButtonSelectorProps> = ({caption, value, values, onChange}) => (
+export const ButtonSelector = <T extends string | number>({caption, value, values, onChange}: ButtonSelectorProps<T>) => (
     <ButtonSelectorWrapper>
         <ButtonSelectorCaption>{caption}</ButtonSelectorCaption>
         {values.map(item => (

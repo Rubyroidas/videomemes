@@ -1,7 +1,7 @@
 import {FFmpeg} from '@ffmpeg/ffmpeg';
 import {fetchFile} from '@ffmpeg/util';
 
-import {Collection, Rect, Size, TextSize, UserPhrase} from './types';
+import {Collection, ImageSize, Rect, Size, TextSize, UserPhrase} from './types';
 import {
     ffmpegExec,
     ffmpegListFiles,
@@ -80,10 +80,20 @@ export const renderTextSlide = async (videoSize: Size, width: number, height: nu
     });
 };
 
-export const renderImageSlide = async (width: number, height: number, image: Blob, background?: string) => {
+export const renderImageSlide = async (width: number, height: number, image: Blob, imageSize: ImageSize, background?: string) => {
     const canvas = document.createElement('canvas');
     canvas.width = width;
     canvas.height = height;
+
+    let userImageScale = 1;
+    switch (imageSize) {
+        case ImageSize.Normal:
+            userImageScale = 0.75;
+            break;
+        case ImageSize.Small:
+            userImageScale = 0.5;
+            break;
+    }
 
     const ctx = canvas.getContext('2d')!;
 
@@ -98,9 +108,11 @@ export const renderImageSlide = async (width: number, height: number, image: Blo
 
     await imageLoadPromise(img);
     const isWider = img.naturalWidth / img.naturalHeight > width / height;
-    const imageScale = isWider
-        ? width / img.naturalWidth
-        : height / img.naturalHeight;
+    const imageScale = userImageScale * (
+        isWider
+            ? width / img.naturalWidth
+            : height / img.naturalHeight
+    );
     const scaledSize: Size = {
         width: img.naturalWidth * imageScale,
         height: img.naturalHeight * imageScale,
@@ -161,7 +173,7 @@ export const generateVideo = async (
         const {x, y, width, height} = collection.textArea;
         const blob = userPhrase.text
             ? await renderTextSlide(collection.size, width, height, userPhrase.text, userPhrase.textSize)
-            : await renderImageSlide(width, height, userPhrase.image!, '#fff');
+            : await renderImageSlide(width, height, userPhrase.image!, userPhrase.imageSize, '#fff');
         const imageFileName = `captions/${fileNumberSuffix}.png`;
         await ffmpeg.writeFile(imageFileName, new Uint8Array(await blob.arrayBuffer()));
 
@@ -203,7 +215,7 @@ export const generateVideo = async (
 
     const watermarkFileRaw = hexToUint8Array(watermarkRaw);
     const watermarkFile = new Uint8Array(await (
-        await renderImageSlide(watermarkArea.width, watermarkArea.height, new Blob([watermarkFileRaw]))
+        await renderImageSlide(watermarkArea.width, watermarkArea.height, new Blob([watermarkFileRaw]), ImageSize.Big)
     ).arrayBuffer());
     await ffmpeg.writeFile('watermark.png', watermarkFile);
 

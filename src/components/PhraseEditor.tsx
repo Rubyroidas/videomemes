@@ -2,7 +2,7 @@ import {ClipboardEventHandler, FC, MouseEventHandler, useEffect, useState} from 
 import ContentEditable, {ContentEditableEvent} from 'react-contenteditable';
 import {FileUploader} from 'react-drag-drop-files';
 
-import {Rect, TextSize, UserPhrase} from '../types';
+import {ImageSize, Rect, TextSize, UserPhrase} from '../types';
 import {FONT_SIZE, TEXT_PADDING} from '../config';
 import {EditingAreaContainer, InputBackground, TextAreaClass, Video} from './PhraseEditor.styles';
 import {useStore} from '../store';
@@ -23,6 +23,17 @@ const textSizeValues = [{
     text: 'normal',
 }, {
     value: TextSize.Big,
+    text: 'big',
+}];
+
+const imageSizeValues = [{
+    value: ImageSize.Small,
+    text: 'small',
+}, {
+    value: ImageSize.Normal,
+    text: 'normal',
+}, {
+    value: ImageSize.Big,
     text: 'big',
 }];
 
@@ -50,10 +61,15 @@ export const PhraseEditor: FC<PhraseEditorProps> = (props) => {
         }
     };
     const handleChangeTextSize = (value: TextSize) => {
-        userPhrase.textSize = value;
         onChange({
             ...userPhrase,
             textSize: value,
+        });
+    };
+    const handleChangeImageSize = (value: ImageSize) => {
+        onChange({
+            ...userPhrase,
+            imageSize: value,
         });
     };
     const handleDrop = (file: File) => {
@@ -119,9 +135,17 @@ export const PhraseEditor: FC<PhraseEditorProps> = (props) => {
                     />
                 </>
             ) : (
-                <Button onClick={handleClickSwitchToTextMode}>
-                    switch to text mode
-                </Button>
+                <>
+                    <ButtonSelector
+                        caption="Image size"
+                        value={userPhrase.imageSize}
+                        values={imageSizeValues}
+                        onChange={handleChangeImageSize}
+                    />
+                    <Button onClick={handleClickSwitchToTextMode}>
+                        switch to text mode
+                    </Button>
+                </>
             )}
             <EditingAreaContainer {...collection.size}>
                 <InputBackground {...virtualRect} style={{

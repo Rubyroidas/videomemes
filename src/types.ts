@@ -28,10 +28,17 @@ export enum TextSize {
     Big = 'big',
 }
 
+export enum ImageSize {
+    Small = 'small',
+    Normal = 'normal',
+    Big = 'big',
+}
+
 export type UserPhrase = {
     collectionId: string;
     phraseId: number;
     text?: string;
     textSize: TextSize;
+    imageSize: ImageSize;
     image?: Blob;
 }

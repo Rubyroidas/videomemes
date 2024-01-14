@@ -4,7 +4,7 @@ import {PhrasesEditor} from './PhrasesEditor';
 import {DownloadVideoButton} from './DownloadVideoButton';
 
 import {Button} from './App.styles';
-import {TextSize, UserPhrase} from '../types';
+import {ImageSize, TextSize, UserPhrase} from '../types';
 import {generateVideo} from '../generate';
 import {Icon} from './PhraseEditor.styles';
 import {PlayIcon} from '../icons/PlayIcon';
@@ -17,18 +17,21 @@ const debugUserPhrases: UserPhrase[] = [
         phraseId: 1,
         text: 'You decide to search for the\nnew job',
         textSize: TextSize.Normal,
+        imageSize: ImageSize.Big,
     },
     {
         collectionId: 'tinkoff-vertical',
         phraseId: 2,
         text: 'hello world 2',
         textSize: TextSize.Normal,
+        imageSize: ImageSize.Big,
     },
     {
         collectionId: 'tinkoff-vertical',
         phraseId: 3,
         text: 'hello world 3',
         textSize: TextSize.Normal,
+        imageSize: ImageSize.Big,
     },
 ];
 

@@ -80,15 +80,18 @@ export const renderTextSlide = async (videoSize: Size, width: number, height: nu
     });
 };
 
-export const renderImageSlide = async (width: number, height: number, image: Blob) => {
+export const renderImageSlide = async (width: number, height: number, image: Blob, background?: string) => {
     const canvas = document.createElement('canvas');
     canvas.width = width;
     canvas.height = height;
 
     const ctx = canvas.getContext('2d')!;
 
-    ctx.fillStyle = '#fff';
-    ctx.fillRect(0, 0, width, height);
+    ctx.clearRect(0, 0, width, height);
+    if (background) {
+        ctx.fillStyle = background;
+        ctx.fillRect(0, 0, width, height);
+    }
 
     const img = document.createElement('img');
     img.src = URL.createObjectURL(image);
@@ -158,7 +161,7 @@ export const generateVideo = async (
         const {x, y, width, height} = collection.textArea;
         const blob = userPhrase.text
             ? await renderTextSlide(collection.size, width, height, userPhrase.text, userPhrase.textSize)
-            : await renderImageSlide(width, height, userPhrase.image!);
+            : await renderImageSlide(width, height, userPhrase.image!, '#fff');
         const imageFileName = `captions/${fileNumberSuffix}.png`;
         await ffmpeg.writeFile(imageFileName, new Uint8Array(await blob.arrayBuffer()));
 
@@ -171,9 +174,6 @@ export const generateVideo = async (
     await ffmpeg.writeFile('concat.txt', new Uint8Array(
         await (new Blob([concatBody], {type: 'text/plain'}).arrayBuffer())
     ));
-
-    const watermarkFile = hexToUint8Array(watermarkRaw);
-    await ffmpeg.writeFile('watermark.png', watermarkFile);
 
     console.log('dir [.]', await ffmpegListFiles(ffmpeg, '.'));
 
@@ -200,6 +200,13 @@ export const generateVideo = async (
     // watermark
     const collection = collections.find(c => c.id === userPhrases[0].collectionId)!;
     const {watermarkArea} = collection;
+
+    const watermarkFileRaw = hexToUint8Array(watermarkRaw);
+    const watermarkFile = new Uint8Array(await (
+        await renderImageSlide(watermarkArea.width, watermarkArea.height, new Blob([watermarkFileRaw]))
+    ).arrayBuffer());
+    await ffmpeg.writeFile('watermark.png', watermarkFile);
+
     complexFilter.push(`[v${imageTimePairs.length}][${imageTimePairs.length + 1}:v]overlay=${watermarkArea.x}:${watermarkArea.y}[v${imageTimePairs.length + 1}]`)
 
     compileCommandArgs.push(

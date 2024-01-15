@@ -89,3 +89,20 @@ export const Icon = styled.div`
         fill: var(--button-text-color);
     }
 `;
+export const PlayButton = styled.div`
+    position: absolute;
+    width: 100%;
+    height: 50%;
+    left: 0;
+    bottom: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    pointer-events: none;
+    
+    & > svg {
+        width: 100px;
+        height: 100px;
+        fill: #fff;
+    }
+`;

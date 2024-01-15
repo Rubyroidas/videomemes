@@ -1,10 +1,17 @@
-import {ClipboardEventHandler, FC, MouseEventHandler, useEffect, useState} from 'react';
+import {ClipboardEventHandler, FC, MouseEventHandler, useEffect, useRef, useState} from 'react';
 import ContentEditable, {ContentEditableEvent} from 'react-contenteditable';
 import {FileUploader} from 'react-drag-drop-files';
 
+import {PlayIcon} from '../icons/PlayIcon';
 import {Rect, TextSize, UserPhrase} from '../types';
 import {FONT_SIZE, TEXT_PADDING} from '../config';
-import {EditingAreaContainer, InputBackground, TextAreaClass, Video} from './PhraseEditor.styles';
+import {
+    EditingAreaContainer,
+    InputBackground,
+    PlayButton,
+    TextAreaClass,
+    Video
+} from './PhraseEditor.styles';
 import {useStore} from '../store';
 import {Button, ButtonSelector} from './App.styles';
 // import {DebugImage} from './DebugImage';
@@ -40,6 +47,8 @@ const imageSizeValues = [{
 export const PhraseEditor: FC<PhraseEditorProps> = (props) => {
     const {disabled, userPhrase, onChange} = props;
     const store = useStore();
+    const videoRef = useRef<HTMLVideoElement | null>(null);
+    const [isVideoPlaying, setIsVideoPlaying] = useState(false);
     const [imageBlobUrl, setImageBlobUrl] = useState<string | undefined>(undefined);
 
     const handlePhraseChange = (e: ContentEditableEvent) => {
@@ -56,8 +65,10 @@ export const PhraseEditor: FC<PhraseEditorProps> = (props) => {
         const video = e.target as HTMLVideoElement;
         if (video.paused) {
             video.play();
+            setIsVideoPlaying(true);
         } else {
             video.pause();
+            setIsVideoPlaying(false);
         }
     };
     const handleChangeTextSize = (value: TextSize) => {
@@ -169,6 +180,7 @@ export const PhraseEditor: FC<PhraseEditorProps> = (props) => {
                     )}
                 </InputBackground>
                 <Video
+                    ref={videoRef}
                     onClick={handleVideoClick}
                     controls={false}
                     loop={false}
@@ -178,6 +190,11 @@ export const PhraseEditor: FC<PhraseEditorProps> = (props) => {
                     controlsList="nofullscreen"
                     playsInline={true}
                 />
+                {!isVideoPlaying && (
+                    <PlayButton>
+                        <PlayIcon/>
+                    </PlayButton>
+                )}
             </EditingAreaContainer>
         </div>
     );

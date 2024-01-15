@@ -176,6 +176,7 @@ export const PhraseEditor: FC<PhraseEditorProps> = (props) => {
                     disablePictureInPicture={true}
                     disableRemotePlayback={true}
                     controlsList="nofullscreen"
+                    playsInline={true}
                 />
             </EditingAreaContainer>
         </div>

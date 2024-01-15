@@ -17,6 +17,10 @@
     "width": 200,
     "height": 40
   },
+  "playButton": {
+    "x": 360,
+    "y": 960
+  },
   "items": [
     {
       "id": 1,

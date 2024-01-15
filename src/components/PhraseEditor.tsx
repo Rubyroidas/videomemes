@@ -3,7 +3,7 @@ import ContentEditable, {ContentEditableEvent} from 'react-contenteditable';
 import {FileUploader} from 'react-drag-drop-files';
 
 import {PlayIcon} from '../icons/PlayIcon';
-import {Rect, TextSize, UserPhrase} from '../types';
+import {Point, Rect, TextSize, UserPhrase} from '../types';
 import {FONT_SIZE, TEXT_PADDING} from '../config';
 import {
     EditingAreaContainer,
@@ -128,6 +128,10 @@ export const PhraseEditor: FC<PhraseEditorProps> = (props) => {
     const paddingDesktop = TEXT_PADDING * collection.size.width / 100;
     const paddingMobile = TEXT_PADDING;
     const inputClassName = TextAreaClass(fontSizeDesktop, fontSizeMobile, paddingDesktop, paddingMobile, item.name);
+    const playButtonPosition: Point = {
+        x: collection.playButton.x / collection.size.width * 100,
+        y: collection.playButton.y / collection.size.height * 100,
+    };
 
     return (
         <div>
@@ -191,7 +195,9 @@ export const PhraseEditor: FC<PhraseEditorProps> = (props) => {
                     playsInline={true}
                 />
                 {!isVideoPlaying && (
-                    <PlayButton>
+                    <PlayButton
+                        position={playButtonPosition}
+                    >
                         <PlayIcon/>
                     </PlayButton>
                 )}

@@ -1,7 +1,7 @@
 import styled from '@emotion/styled';
 import {css} from '@emotion/css';
 
-import {Rect, Size} from '../types';
+import {Point, Rect, Size} from '../types';
 import {LINE_HEIGHT, TEXT_COLOR} from '../config';
 
 export const Header = styled.div`
@@ -89,20 +89,24 @@ export const Icon = styled.div`
         fill: var(--button-text-color);
     }
 `;
-export const PlayButton = styled.div`
+
+type PlayButtonProps = {
+    position: Point;
+}
+export const PlayButton = styled.div<PlayButtonProps>`
     position: absolute;
-    width: 100%;
-    height: 50%;
-    left: 0;
-    bottom: 0;
+    left: ${props => props.position.x}%;
+    top: ${props => props.position.y}%;
     display: flex;
     align-items: center;
     justify-content: center;
     pointer-events: none;
+    translate: -50% -50%;
     
     & > svg {
         width: 100px;
         height: 100px;
         fill: #fff;
+        opacity: 0.5;
     }
 `;

@@ -19,6 +19,7 @@ export type Collection = {
     size: Size;
     textArea: Rect;
     watermarkArea: Rect;
+    playButton: Point;
     items: CollectionItem[];
 }
 

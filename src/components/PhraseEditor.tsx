@@ -188,7 +188,7 @@ export const PhraseEditor: FC<PhraseEditorProps> = (props) => {
                     onClick={handleVideoClick}
                     controls={false}
                     loop={false}
-                    src={item.videoFile}
+                    src={`${item.videoFile}#t=0.01`}
                     disablePictureInPicture={true}
                     disableRemotePlayback={true}
                     controlsList="nofullscreen"

@@ -193,6 +193,7 @@ export const PhraseEditor: FC<PhraseEditorProps> = (props) => {
                     disableRemotePlayback={true}
                     controlsList="nofullscreen"
                     playsInline={true}
+                    preload="metadata"
                 />
                 {!isVideoPlaying && (
                     <PlayButton

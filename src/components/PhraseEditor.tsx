@@ -14,7 +14,7 @@ import {
 } from './PhraseEditor.styles';
 import {useStore} from '../store';
 import {Button, ButtonSelector} from './App.styles';
-// import {DebugImage} from './DebugImage';
+import {DebugImage} from './DebugImage';
 
 type PhraseEditorProps = {
     disabled: boolean;
@@ -166,13 +166,16 @@ export const PhraseEditor: FC<PhraseEditorProps> = (props) => {
                 <InputBackground {...virtualRect} style={{
                     backgroundImage: imageBlobUrl ? `url(${imageBlobUrl})` : undefined,
                 }}>
-                    {/* userPhrase.text && (
+                    { userPhrase.image && (
                         <DebugImage
+                            background="#fff"
                             collection={collection}
                             text={userPhrase.text}
+                            image={userPhrase.image}
                             textSize={userPhrase.textSize}
+                            imageSize={userPhrase.imageSize}
                         />
-                    ) */}
+                    ) }
                     {userPhrase.text && (
                         <ContentEditable
                             onPaste={handlePaste}

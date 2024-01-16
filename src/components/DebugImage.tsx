@@ -1,7 +1,7 @@
 import {FC, useEffect, useRef} from 'react';
 import styled from '@emotion/styled';
 
-import {renderTextSlide} from '../generate';
+import {renderImageSlide, renderTextSlide} from '../generate';
 import {html2text} from '../utils';
 import {Collection, TextSize} from '../types';
 
@@ -10,23 +10,31 @@ const Wrapper = styled.img`
 `;
 
 type Props = {
+    background: string,
     collection: Collection;
-    text: string;
+    text?: string;
+    image?: Blob;
     textSize: TextSize;
+    imageSize: number;
 }
 
-export const DebugImage: FC<Props> = ({collection, text, textSize}) => {
+export const DebugImage: FC<Props> = ({background, collection, text, textSize, image, imageSize}) => {
     const debugImage = useRef<HTMLImageElement>(null);
     useEffect(() => {
         const render = async () => {
             const {width, height} = collection.textArea;
-            const blob = await renderTextSlide(collection.size, width, height, html2text(text), textSize);
+            let blob;
+            if (text !== undefined) {
+                blob = await renderTextSlide(collection.size, width, height, html2text(text), textSize);
+            } else {
+                blob = await renderImageSlide(width, height, image!, imageSize, background);
+            }
 
             const img = debugImage.current!;
             img.src = URL.createObjectURL(blob);
         };
         render();
-    }, [text]);
+    }, [text, textSize, image, imageSize]);
 
     return (
         <Wrapper ref={debugImage}/>

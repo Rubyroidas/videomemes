@@ -1,55 +1,72 @@
 {
   "id": "tinkoff-vertical",
   "name": "Tinkoff vertical",
-  "size": {
-    "width": 720,
-    "height": 1280
-  },
   "textArea": {
-    "x": 0,
-    "y": 0,
-    "width": 720,
-    "height": 640
+    "ig_story": {
+      "x": 0,
+      "y": 0,
+      "width": 1080,
+      "height": 960
+    }
   },
   "watermarkArea": {
-    "x": 520,
-    "y": 1240,
-    "width": 200,
-    "height": 40
+    "ig_story": {
+      "x": 520,
+      "y": 1240,
+      "width": 200,
+      "height": 40
+    }
   },
   "playButton": {
-    "x": 360,
-    "y": 960
+    "ig_story": {
+      "x": 540,
+      "y": 1440
+    }
   },
   "items": [
     {
       "id": 1,
-      "videoFile": "tinkoff-vertical/001.mp4",
-      "name": "Я как бы не понимал масштаб этого пиздеца...",
+      "text": "Это было не просто смело, это было пиздец как смело.",
+      "snapshot": "https://cdn.memely.net/templates/tinkoff/tinkoff.snapshot.01.jpg",
+      "templates": {
+        "ig_story": "https://cdn.memely.net/templates/tinkoff/tinkoff.story.01.mp4"
+      },
       "duration": 5.2
     },
     {
       "id": 2,
-      "videoFile": "tinkoff-vertical/002.mp4",
-      "name": "В принципе, в моей фразе...",
+      "text": "Это был сарказм.",
+      "snapshot": "https://cdn.memely.net/templates/tinkoff/tinkoff.snapshot.02.jpg",
+      "templates": {
+        "ig_story": "https://cdn.memely.net/templates/tinkoff/tinkoff.story.02.mp4"
+      },
       "duration": 6.7
     },
     {
       "id": 3,
-      "videoFile": "tinkoff-vertical/003.mp4",
-      "name": "Нету ни-ху-я...",
+      "text": "Я делал то, что я мог делать.",
+      "snapshot": "https://cdn.memely.net/templates/tinkoff/tinkoff.snapshot.03.jpg",
+      "templates": {
+        "ig_story": "https://cdn.memely.net/templates/tinkoff/tinkoff.story.03.mp4"
+      },
       "duration": 4.933
     },
     {
       "id": 4,
-      "videoFile": "tinkoff-vertical/004.mp4",
-      "name": "Ну вот какая разница? ...",
+      "text": "Ну это пиздец какой-то просто. Ну сколько можно?",
+      "snapshot": "https://cdn.memely.net/templates/tinkoff/tinkoff.snapshot.04.jpg",
+      "templates": {
+        "ig_story": "https://cdn.memely.net/templates/tinkoff/tinkoff.story.04.mp4"
+      },
       "duration": 4.767
     },
     {
       "id": 5,
-      "videoFile": "tinkoff-vertical/005.mp4",
-      "name": "Сомнительно... ну... окэй...",
+      "text": "Заебись.",
+      "snapshot": "https://cdn.memely.net/templates/tinkoff/tinkoff.snapshot.05.jpg",
+      "templates": {
+        "ig_story": "https://cdn.memely.net/templates/tinkoff/tinkoff.story.05.mp4"
+      },
       "duration": 3.5
     }
   ]

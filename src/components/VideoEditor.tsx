@@ -4,7 +4,7 @@ import {PhrasesEditor} from './PhrasesEditor';
 import {DownloadVideoButton} from './DownloadVideoButton';
 
 import {Button} from './App.styles';
-import {TextSize, UserPhrase} from '../types';
+import {Format, TextSize, UserPhrase} from '../types';
 import {generateVideo} from '../generate';
 import {Icon} from './PhraseEditor.styles';
 import {PlayIcon} from '../icons/PlayIcon';
@@ -40,8 +40,8 @@ export const VideoEditor: FC = () => {
     const videoRef = useRef<HTMLVideoElement>(null);
 
     const [userPhrases, setUserPhrases] = useState<UserPhrase[]>(debugUserPhrases);
+    const [format, setFormat] = useState(Format.InstagramStory);
     const [isEncoding, setIsEncoding] = useState(false);
-    const [encodingStatus, setEncodingStatus] = useState('');
     const [generatedVideo, setGeneratedVideo] = useState<Blob | null>(null);
 
     const handleGenerateClick = () => {
@@ -53,7 +53,13 @@ export const VideoEditor: FC = () => {
 
             setIsEncoding(true);
             console.log('start generate');
-            const vid = await generateVideo(store.ffmpeg!, userPhrases, store.collections!, () => {}, setEncodingStatus);
+            const vid = await generateVideo(
+                store.ffmpeg!,
+                userPhrases,
+                store.collections!,
+                format,
+                () => {}, () => {}
+            );
             setGeneratedVideo(vid);
             console.log('end generate');
             setIsEncoding(false);
@@ -70,9 +76,6 @@ export const VideoEditor: FC = () => {
 
     return (
         <>
-            {isEncoding && (
-                <div>Encoding status: {encodingStatus}</div>
-            )}
             <div className="buttons">
             {!isEncoding && (
                 <Button onClick={handleGenerateClick}>
@@ -91,18 +94,15 @@ export const VideoEditor: FC = () => {
                 </DownloadVideoButton>
             )}
             </div>
-            {/*{isEncoding && (*/}
-            {/*    <ProgressBar value={encoodingProgress}/>*/}
-            {/*)}*/}
             <PhrasesEditor
                 disabled={isEncoding}
                 userPhrases={userPhrases}
+                format={format}
                 onChange={setUserPhrases}
             />
             <video controls={true} ref={videoRef} style={{
                 display: !generatedVideo || isEncoding ? 'none' : ''
             }}></video>
-            {/*<video controls={true} src="./tinkoff_3.mp4"></video>*/}
         </>
     );
 }

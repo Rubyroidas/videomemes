@@ -1,6 +1,7 @@
 import {FC, useState} from 'react';
+
 import {useStore} from '../store';
-import {UserPhrase} from '../types';
+import {Format, UserPhrase} from '../types';
 import {escapeHTML, html2text} from '../utils';
 import {Header, NavigateCaption} from './PhraseEditor.styles';
 import {NavigationBar} from './NavigationBar';
@@ -9,6 +10,7 @@ import {PhraseEditor} from './PhraseEditor';
 type PhrasesEditorProps = {
     disabled: boolean;
     userPhrases: UserPhrase[];
+    format: Format;
     onChange: (phrases: UserPhrase[]) => void;
 }
 
@@ -55,11 +57,12 @@ export const PhrasesEditor: FC<PhrasesEditorProps> = (props) => {
                     setIndex={setPhraseIndex}
                 />
                 <NavigateCaption>
-                    <b>{collection.name}</b> "{item.name}"
+                    <b>{collection.name}</b> "{item.text}"
                 </NavigateCaption>
             </Header>
             <PhraseEditor
                 userPhrase={preparedUserPhrase}
+                format={props.format}
                 disabled={disabled}
                 onChange={onProxyChange}
             />

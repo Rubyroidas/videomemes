@@ -1,7 +1,7 @@
 import {FFmpeg} from '@ffmpeg/ffmpeg';
 import {fetchFile} from '@ffmpeg/util';
 
-import {Collection, Rect, Size, TextSize, UserPhrase} from './types';
+import {Collection, Format, Rect, Size, TextSize, UserPhrase} from './types';
 import {
     ffmpegExec,
     ffmpegListFiles,
@@ -13,6 +13,7 @@ import {
 } from './utils';
 import {FONT_SIZE, LINE_HEIGHT, TEXT_COLOR, TEXT_PADDING} from './config';
 import watermarkRaw from './icons/watermark.png?raw-hex';
+import {formatSizes} from './statics';
 
 export const renderTextSlide = async (videoSize: Size, width: number, height: number, text: string, textSize: TextSize) => {
     text = (text ?? '').trim();
@@ -128,6 +129,7 @@ export const generateVideo = async (
     ffmpeg: FFmpeg,
     userPhrases: UserPhrase[],
     collections: Collection[],
+    format: Format,
     setEncodingProgress: (progress: number) => void,
     setEncodingStatus: (status: string) => void
 ): Promise<Blob> => {
@@ -156,13 +158,14 @@ export const generateVideo = async (
 
         const fileNumberSuffix = imageNumber.toString().padStart(5, '0');
 
-        const fetchedFile = await fetchFile(item.videoFile);
+        const fetchedFile = await fetchFile(item.templates[format]);
         const videoFileName = `videos/${fileNumberSuffix}.mp4`;
         await ffmpeg.writeFile(videoFileName, fetchedFile);
 
-        const {x, y, width, height} = collection.textArea;
+        const {x, y, width, height} = collection.textArea[format];
+        const collectionSize = formatSizes[format];
         const blob = userPhrase.text
-            ? await renderTextSlide(collection.size, width, height, userPhrase.text, userPhrase.textSize)
+            ? await renderTextSlide(collectionSize, width, height, userPhrase.text, userPhrase.textSize)
             : await renderImageSlide(width, height, userPhrase.image!, userPhrase.imageSize, '#fff');
         const imageFileName = `captions/${fileNumberSuffix}.png`;
         await ffmpeg.writeFile(imageFileName, new Uint8Array(await blob.arrayBuffer()));
@@ -201,7 +204,7 @@ export const generateVideo = async (
 
     // watermark
     const collection = collections.find(c => c.id === userPhrases[0].collectionId)!;
-    const {watermarkArea} = collection;
+    const watermarkArea = collection.watermarkArea[format];
 
     const watermarkFileRaw = hexToUint8Array(watermarkRaw);
     const watermarkFile = new Uint8Array(await (

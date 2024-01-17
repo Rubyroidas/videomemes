@@ -1,23 +1,19 @@
-import {ClipboardEventHandler, FC, MouseEventHandler, useEffect, useRef, useState} from 'react';
+import {ClipboardEventHandler, FC, MouseEventHandler, useRef, useState} from 'react';
 import ContentEditable, {ContentEditableEvent} from 'react-contenteditable';
 import {FileUploader} from 'react-drag-drop-files';
 
 import {PlayIcon} from '../icons/PlayIcon';
-import {Point, Rect, TextSize, UserPhrase} from '../types';
+import {Format, Point, Rect, TextSize, UserPhrase} from '../types';
 import {FONT_SIZE, TEXT_PADDING} from '../config';
-import {
-    EditingAreaContainer,
-    InputBackground,
-    PlayButton,
-    TextAreaClass,
-    Video
-} from './PhraseEditor.styles';
+import {EditingAreaContainer, InputBackground, PlayButton, TextAreaClass, Video} from './PhraseEditor.styles';
 import {useStore} from '../store';
 import {Button, ButtonSelector} from './App.styles';
 import {DebugImage} from './DebugImage';
+import {formatSizes} from '../statics';
 
 type PhraseEditorProps = {
     disabled: boolean;
+    format: Format;
     userPhrase: UserPhrase;
     onChange: (phrases: UserPhrase) => void;
 }
@@ -45,11 +41,10 @@ const imageSizeValues = [{
 }];
 
 export const PhraseEditor: FC<PhraseEditorProps> = (props) => {
-    const {disabled, userPhrase, onChange} = props;
+    const {disabled, userPhrase, format, onChange} = props;
     const store = useStore();
     const videoRef = useRef<HTMLVideoElement | null>(null);
     const [isVideoPlaying, setIsVideoPlaying] = useState(false);
-    const [imageBlobUrl, setImageBlobUrl] = useState<string | undefined>(undefined);
 
     const handlePhraseChange = (e: ContentEditableEvent) => {
         onChange({
@@ -97,22 +92,17 @@ export const PhraseEditor: FC<PhraseEditorProps> = (props) => {
             image: undefined,
         });
     };
-    useEffect(() => {
-        if (userPhrase.image) {
-            setImageBlobUrl(URL.createObjectURL(userPhrase.image));
-        } else {
-            setImageBlobUrl(undefined);
-        }
-    }, [userPhrase.image]);
 
     const collection = store.collections!.find(c => c.id === userPhrase.collectionId)!;
     const item = collection.items.find(item => item.id === userPhrase.phraseId)!;
+    const collectionSize = formatSizes[format];
+    const textAreaRect = collection.textArea[format];
 
     const virtualRect: Rect = {
-        x: collection.textArea.x / collection.size.width * 100,
-        y: collection.textArea.y / collection.size.height * 100,
-        width: collection.textArea.width / collection.size.width * 100,
-        height: collection.textArea.height / collection.size.height * 100,
+        x: textAreaRect.x / collectionSize.width * 100,
+        y: textAreaRect.y / collectionSize.height * 100,
+        width: textAreaRect.width / collectionSize.width * 100,
+        height: textAreaRect.height / collectionSize.height * 100,
     };
     let textSizeCoeff = 1;
     switch (userPhrase.textSize) {
@@ -123,14 +113,14 @@ export const PhraseEditor: FC<PhraseEditorProps> = (props) => {
             textSizeCoeff = 1.5;
             break;
     }
-    const fontSizeDesktop = textSizeCoeff * FONT_SIZE * collection.size.width;
+    const fontSizeDesktop = textSizeCoeff * FONT_SIZE * collectionSize.width;
     const fontSizeMobile = textSizeCoeff * FONT_SIZE * 100;
-    const paddingDesktop = TEXT_PADDING * collection.size.width / 100;
+    const paddingDesktop = TEXT_PADDING * collectionSize.width / 100;
     const paddingMobile = TEXT_PADDING;
-    const inputClassName = TextAreaClass(fontSizeDesktop, fontSizeMobile, paddingDesktop, paddingMobile, item.name);
+    const inputClassName = TextAreaClass(fontSizeDesktop, fontSizeMobile, paddingDesktop, paddingMobile, item.text);
     const playButtonPosition: Point = {
-        x: collection.playButton.x / collection.size.width * 100,
-        y: collection.playButton.y / collection.size.height * 100,
+        x: collection.playButton[format].x / collectionSize.width * 100,
+        y: collection.playButton[format].y / collectionSize.height * 100,
     };
 
     return (
@@ -162,14 +152,13 @@ export const PhraseEditor: FC<PhraseEditorProps> = (props) => {
                     </Button>
                 </>
             )}
-            <EditingAreaContainer {...collection.size}>
-                <InputBackground {...virtualRect} style={{
-                    backgroundImage: imageBlobUrl ? `url(${imageBlobUrl})` : undefined,
-                }}>
+            <EditingAreaContainer {...collectionSize}>
+                <InputBackground {...virtualRect}>
                     { userPhrase.image && (
                         <DebugImage
                             background="#fff"
                             collection={collection}
+                            format={format}
                             text={userPhrase.text}
                             image={userPhrase.image}
                             textSize={userPhrase.textSize}
@@ -191,12 +180,13 @@ export const PhraseEditor: FC<PhraseEditorProps> = (props) => {
                     onClick={handleVideoClick}
                     controls={false}
                     loop={false}
-                    src={`${item.videoFile}#t=0.01`}
+                    src={`${item.templates[format]}#t=0.01`}
                     disablePictureInPicture={true}
                     disableRemotePlayback={true}
                     controlsList="nofullscreen"
                     playsInline={true}
                     preload="auto"
+                    crossOrigin="anonymous"
                 />
                 {!isVideoPlaying && (
                     <PlayButton

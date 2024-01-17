@@ -9,17 +9,17 @@ export type Size = {
 export type Rect = Point & Size;
 export type CollectionItem = {
     id: number;
-    videoFile: string;
-    name: string;
+    text: string;
+    snapshot: string;
     duration: number;
+    templates: Record<Format, string>;
 }
 export type Collection = {
     id: string;
     name: string;
-    size: Size;
-    textArea: Rect;
-    watermarkArea: Rect;
-    playButton: Point;
+    textArea: Record<Format, Rect>;
+    watermarkArea: Record<Format, Rect>;
+    playButton: Record<Format, Point>;
     items: CollectionItem[];
 }
 
@@ -27,6 +27,18 @@ export enum TextSize {
     Small = 'small',
     Normal = 'normal',
     Big = 'big',
+}
+
+export enum Format {
+    InstagramStory = 'ig_story',
+    InstagramPost = 'ig_post',
+    YoutubeVideo = 'yt_video',
+}
+
+export type UserScenario = {
+    format: Format;
+    title?: string;
+    userPhrases: UserPhrase[];
 }
 
 export type UserPhrase = {

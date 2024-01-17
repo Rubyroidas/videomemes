@@ -40,6 +40,7 @@ export const VideoEditor: FC = () => {
     const videoRef = useRef<HTMLVideoElement>(null);
 
     const [userPhrases, setUserPhrases] = useState<UserPhrase[]>(debugUserPhrases);
+    // @ts-ignore
     const [format, setFormat] = useState(Format.InstagramStory);
     const [isEncoding, setIsEncoding] = useState(false);
     const [generatedVideo, setGeneratedVideo] = useState<Blob | null>(null);

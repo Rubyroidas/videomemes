@@ -13,21 +13,21 @@ import {useStore} from '../store';
 
 const debugUserPhrases: UserPhrase[] = [
     {
-        collectionId: 'tinkoff-vertical',
+        collectionId: 'tinkoff',
         phraseId: 1,
         text: 'You decide to search for the\nnew job',
         textSize: TextSize.Normal,
         imageSize: 1,
     },
     {
-        collectionId: 'tinkoff-vertical',
+        collectionId: 'tinkoff',
         phraseId: 2,
         text: 'hello world 2',
         textSize: TextSize.Normal,
         imageSize: 1,
     },
     {
-        collectionId: 'tinkoff-vertical',
+        collectionId: 'tinkoff',
         phraseId: 3,
         text: 'hello world 3',
         textSize: TextSize.Normal,
@@ -41,7 +41,7 @@ export const VideoEditor: FC = () => {
 
     const [userPhrases, setUserPhrases] = useState<UserPhrase[]>(debugUserPhrases);
     // @ts-ignore
-    const [format, setFormat] = useState(Format.InstagramStory);
+    const [format, setFormat] = useState(Format.YoutubeVideo);
     const [isEncoding, setIsEncoding] = useState(false);
     const [generatedVideo, setGeneratedVideo] = useState<Blob | null>(null);
 

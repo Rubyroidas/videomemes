@@ -151,7 +151,8 @@ export const hexToUint8Array = (hex: string) => {
 };
 
 export const loadCollections = async () => {
-    const res = await fetch('tinkoff-vertical.json');
+    // const res = await fetch('tinkoff-vertical.json');
+    const res = await fetch('https://cdn.memely.net/templates/tinkoff/items.json');
     return [await res.json()];
 };
 

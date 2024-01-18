@@ -1,9 +1,21 @@
-import {Link} from 'react-router-dom';
+import {Button, Header, LinksList, MinorLink, Paragraph} from './HomePage.styles';
 
 export const HomePage = () => (
     <div>
-        Home
-        <Link to="/edit-scenario">edit scenario</Link>
-        <Link to="/edit-phrases">edit phrases</Link>
+        <Header>
+            Memely.net
+        </Header>
+        <Paragraph>
+            Free service for short funny videos creation
+        </Paragraph>
+        <LinksList>
+            <Button to="/edit-scenario">Choose preset scenario</Button>
+            <Button to="/edit-phrases">Create your scenario</Button>
+        </LinksList>
+        <LinksList>
+            <MinorLink to="/about">About the project</MinorLink>
+            <MinorLink to="/contact-us">Contact us</MinorLink>
+            <MinorLink to="/donate">Donate for development</MinorLink>
+        </LinksList>
     </div>
 );

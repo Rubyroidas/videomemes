@@ -2,10 +2,31 @@ import {useEffect} from 'react';
 import {FFmpeg} from '@ffmpeg/ffmpeg';
 import {observer} from 'mobx-react';
 
-import {VideoEditor} from './VideoEditor';
-import {AppTitle} from './App.styles';
+import {
+    createBrowserRouter,
+    RouterProvider,
+} from 'react-router-dom';
+
 import {loadCollections, loadFFmpeg} from '../utils';
 import {useStore} from '../store';
+import {HomePage} from '../pages/HomePage';
+import {EditPhrasesPage} from '../pages/EditPhrasesPage';
+import {EditScenarioPage} from '../pages/EditScenarioPage';
+
+const router = createBrowserRouter([
+    {
+        path: '/',
+        element: <HomePage/>,
+    },
+    {
+        path: '/edit-scenario',
+        element: <EditScenarioPage/>,
+    },
+    {
+        path: '/edit-phrases',
+        element: <EditPhrasesPage/>,
+    },
+]);
 
 export const App = observer(() => {
     const store = useStore();
@@ -24,14 +45,9 @@ export const App = observer(() => {
         load();
     }, []);
 
-    return (
-        <div>
-            <AppTitle>Video meme generator</AppTitle>
-            {!store.ffmpeg || !store.collections ? (
-                <div>Loading...</div>
-            ) : (
-                <VideoEditor/>
-            )}
-        </div>
-    );
+    return !store.ffmpeg || !store.collections ? (
+        <div>Loading...</div>
+    ) : (
+        <RouterProvider router={router}/>
+    )
 });

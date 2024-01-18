@@ -30,9 +30,10 @@ export const renderTextSlide = async (videoSize: Size, width: number, height: nu
             textSizeCoeff = 1.5;
             break;
     }
-    const fontSize = textSizeCoeff * FONT_SIZE * videoSize.width;
+    const minVideoSize = Math.min(videoSize.width, videoSize.height);
+    const fontSize = textSizeCoeff * FONT_SIZE * minVideoSize;
     const lineHeight = fontSize * LINE_HEIGHT;
-    const padding = TEXT_PADDING * videoSize.width / 100;
+    const padding = TEXT_PADDING * minVideoSize / 100;
     const textBounds: Rect = {
         x: padding,
         y: padding,

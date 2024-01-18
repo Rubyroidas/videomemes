@@ -113,9 +113,10 @@ export const PhraseEditor: FC<PhraseEditorProps> = (props) => {
             textSizeCoeff = 1.5;
             break;
     }
-    const fontSizeDesktop = textSizeCoeff * FONT_SIZE * collectionSize.width;
+    const minCollectionSize = Math.min(collectionSize.width, collectionSize.height);
+    const fontSizeDesktop = textSizeCoeff * FONT_SIZE * minCollectionSize;
     const fontSizeMobile = textSizeCoeff * FONT_SIZE * 100;
-    const paddingDesktop = TEXT_PADDING * collectionSize.width / 100;
+    const paddingDesktop = TEXT_PADDING * minCollectionSize / 100;
     const paddingMobile = TEXT_PADDING;
     const inputClassName = TextAreaClass(fontSizeDesktop, fontSizeMobile, paddingDesktop, paddingMobile, item.text);
     const playButtonPosition: Point = {

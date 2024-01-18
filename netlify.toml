@@ -1,0 +1,10 @@
+[[redirects]]
+  from = "/edit-scenario"
+  to = "/index.html"
+  status = 200
+  force = true
+[[redirects]]
+  from = "/edit-phrases"
+  to = "/index.html"
+  status = 200
+  force = true

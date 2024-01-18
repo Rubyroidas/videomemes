@@ -35,13 +35,17 @@ const debugUserPhrases: UserPhrase[] = [
     },
 ];
 
+const queryFormat = new URLSearchParams(location.search).get('format') ?? Format.YoutubeVideo;
+const format = Object.values(Format).includes(queryFormat as Format)
+    ? (queryFormat as Format)
+    : Format.YoutubeVideo;
+
 export const VideoEditor: FC = () => {
     const store = useStore();
     const videoRef = useRef<HTMLVideoElement>(null);
 
     const [userPhrases, setUserPhrases] = useState<UserPhrase[]>(debugUserPhrases);
     // @ts-ignore
-    const [format, setFormat] = useState(Format.YoutubeVideo);
     const [isEncoding, setIsEncoding] = useState(false);
     const [generatedVideo, setGeneratedVideo] = useState<Blob | null>(null);
 

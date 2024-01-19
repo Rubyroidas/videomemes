@@ -15,7 +15,7 @@ export const HomePage = () => (
         <LinksList>
             <MinorLink to="/about">About the project</MinorLink>
             <MinorLink to="/contact-us">Contact us</MinorLink>
-            <MinorLink to="/donate">Donate for development</MinorLink>
+            {/*<MinorLink to="/donate">Donate for development</MinorLink>*/}
         </LinksList>
     </div>
 );

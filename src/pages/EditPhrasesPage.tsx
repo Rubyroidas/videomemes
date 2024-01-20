@@ -1,7 +1,7 @@
-import {Link, useNavigate} from 'react-router-dom';
+import {useNavigate} from 'react-router-dom';
 
 import {VideoEditor} from '../components/VideoEditor';
-import {AppTitle} from '../components/App.styles';
+import {AppTitle, BasicLink} from '../components/App.styles';
 import {useEffect} from 'react';
 import {useStore} from '../store';
 import {Format} from '../types.ts';
@@ -21,7 +21,7 @@ export const EditPhrasesPage = () => {
 
     return (
         <div>
-            <Link to="/">go home</Link>
+            <BasicLink to="/">go home</BasicLink>
             <AppTitle>Video meme generator</AppTitle>
             <VideoEditor/>
         </div>

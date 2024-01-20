@@ -1,7 +1,13 @@
 import styled from '@emotion/styled';
+import {Link} from 'react-router-dom';
 
 export const AppTitle = styled.div`
     font-size: 2rem;
+`;
+
+export const BasicLink = styled(Link)`
+    color: var(--text-color);
+    text-decoration: underline;
 `;
 
 export const Button = styled.div`

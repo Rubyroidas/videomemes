@@ -24,6 +24,8 @@ const NavigatePosition = styled.div`
 const NavigateButton = styled.div`
     display: inline-block;
     font-size: 3rem;
+    cursor: pointer;
+    user-select: none;
 
     @media (max-width: 480px) {
         font-size: 10vw;

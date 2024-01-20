@@ -6,11 +6,16 @@ import {EditScenarioPage} from './pages/EditScenarioPage';
 import {AboutPage} from './pages/AboutPage';
 import {ContactUsPage} from './pages/ContactUsPage';
 import {DonatePage} from './pages/DonatePage';
+import {PickPresetScenarioPage} from './pages/PickPresetScenarioPage';
 
 const router = createBrowserRouter([
     {
         path: '/',
         element: <HomePage/>,
+    },
+    {
+        path: '/pick-preset-scenario',
+        element: <PickPresetScenarioPage/>,
     },
     {
         path: '/edit-scenario',

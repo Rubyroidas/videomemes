@@ -4,36 +4,12 @@ import {PhrasesEditor} from './PhrasesEditor';
 import {DownloadVideoButton} from './DownloadVideoButton';
 
 import {Button} from './App.styles';
-import {Format, TextSize, UserPhrase} from '../types';
+import {Format, UserPhrase} from '../types';
 import {generateVideo} from '../generate';
 import {Icon} from './PhraseEditor.styles';
 import {PlayIcon} from '../icons/PlayIcon';
 import {DownloadIcon} from '../icons/DownloadIcon';
 import {useStore} from '../store';
-
-const debugUserPhrases: UserPhrase[] = [
-    {
-        collectionId: 'tinkoff',
-        phraseId: 1,
-        text: 'You decide to search for the\nnew job',
-        textSize: TextSize.Normal,
-        imageSize: 1,
-    },
-    {
-        collectionId: 'tinkoff',
-        phraseId: 2,
-        text: 'hello world 2',
-        textSize: TextSize.Normal,
-        imageSize: 1,
-    },
-    {
-        collectionId: 'tinkoff',
-        phraseId: 3,
-        text: 'hello world 3',
-        textSize: TextSize.Normal,
-        imageSize: 1,
-    },
-];
 
 const queryFormat = new URLSearchParams(location.search).get('format') ?? Format.YoutubeVideo;
 const format = Object.values(Format).includes(queryFormat as Format)
@@ -44,14 +20,19 @@ export const VideoEditor: FC = () => {
     const store = useStore();
     const videoRef = useRef<HTMLVideoElement>(null);
 
-    const [userPhrases, setUserPhrases] = useState<UserPhrase[]>(debugUserPhrases);
+    const userPhrases = store.scenario?.phrases;
+    const setUserPhrases = (value: UserPhrase[]) => {
+        if (store.scenario) {
+            store.scenario.phrases = value;
+        }
+    }
     // @ts-ignore
     const [isEncoding, setIsEncoding] = useState(false);
     const [generatedVideo, setGeneratedVideo] = useState<Blob | null>(null);
 
     const handleGenerateClick = () => {
         (async () => {
-            if (isEncoding || !videoRef.current) {
+            if (isEncoding || !videoRef.current || !userPhrases) {
                 console.log('return');
                 return;
             }
@@ -78,6 +59,10 @@ export const VideoEditor: FC = () => {
 
         videoRef.current.src = URL.createObjectURL(generatedVideo);
     }, [generatedVideo]);
+
+    if (!userPhrases) {
+        return null;
+    }
 
     return (
         <>

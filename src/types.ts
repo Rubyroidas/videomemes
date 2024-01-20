@@ -22,6 +22,16 @@ export type Collection = {
     playButton: Record<Format, Point>;
     items: CollectionItem[];
 }
+export type ScenarioPresetItem = {
+    collectionId: string;
+    itemId: number;
+    placeholder: string;
+}
+export type ScenarioPreset = {
+    id: string;
+    name: string;
+    items: ScenarioPresetItem[];
+}
 
 export enum TextSize {
     Small = 'small',
@@ -38,7 +48,7 @@ export enum Format {
 export type UserScenario = {
     format: Format;
     title?: string;
-    userPhrases: UserPhrase[];
+    phrases: UserPhrase[];
 }
 
 export type UserPhrase = {

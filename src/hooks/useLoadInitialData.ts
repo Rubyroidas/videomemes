@@ -1,7 +1,7 @@
 import {useEffect} from 'react';
 import {FFmpeg} from '@ffmpeg/ffmpeg';
 
-import {loadCollections, loadFFmpeg} from '../utils';
+import {loadCollections, loadFFmpeg, loadScenarioPresets} from '../utils';
 import {useStore} from '../store';
 
 export const useLoadInitialData = () => {
@@ -10,11 +10,18 @@ export const useLoadInitialData = () => {
         const loadCollectionsData = async () => {
             store.collections = await loadCollections();
         };
+        const loadPresetsData = async () => {
+            store.presets = await loadScenarioPresets();
+        };
         const initFfmpeg = async () => {
             const ffmpeg = new FFmpeg();
             await loadFFmpeg(ffmpeg);
             store.ffmpeg = ffmpeg;
         };
-        Promise.all([loadCollectionsData(), initFfmpeg()]);
+        Promise.all([
+            loadCollectionsData(),
+            loadPresetsData(),
+            initFfmpeg(),
+        ]);
     }, []);
 }

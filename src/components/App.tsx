@@ -8,7 +8,7 @@ export const App = observer(() => {
     const store = useStore();
     useLoadInitialData();
 
-    return !store.ffmpeg || !store.collections ? (
+    return !store.ffmpeg || !store.collections || !store.presets ? (
         <div>Loading...</div>
     ) : (
         <AppRouter/>

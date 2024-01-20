@@ -11,11 +11,6 @@ import {PlayIcon} from '../icons/PlayIcon';
 import {DownloadIcon} from '../icons/DownloadIcon';
 import {useStore} from '../store';
 
-const queryFormat = new URLSearchParams(location.search).get('format') ?? Format.YoutubeVideo;
-const format = Object.values(Format).includes(queryFormat as Format)
-    ? (queryFormat as Format)
-    : Format.YoutubeVideo;
-
 export const VideoEditor: FC = () => {
     const store = useStore();
     const videoRef = useRef<HTMLVideoElement>(null);
@@ -29,6 +24,7 @@ export const VideoEditor: FC = () => {
     // @ts-ignore
     const [isEncoding, setIsEncoding] = useState(false);
     const [generatedVideo, setGeneratedVideo] = useState<Blob | null>(null);
+    const format = store.scenario?.format ?? Format.InstagramStory;
 
     const handleGenerateClick = () => {
         (async () => {

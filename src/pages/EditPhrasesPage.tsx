@@ -4,7 +4,7 @@ import {VideoEditor} from '../components/VideoEditor';
 import {AppTitle, BasicLink} from '../components/App.styles';
 import {useEffect} from 'react';
 import {useStore} from '../store';
-import {Format} from '../types.ts';
+import {Format} from '../types';
 
 export const EditPhrasesPage = () => {
     const navigate = useNavigate();

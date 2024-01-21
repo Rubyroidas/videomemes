@@ -22,7 +22,11 @@ export const ScenarioItem: FC<ScenarioItemProps> = ({phrase}) => {
             <div>drag me (TODO)</div>
             <button>remove (TODO)</button>
             <div>
-                <img alt={collection.name} src={collectionItem.snapshot}/>
+                <img
+                    alt={collection.name}
+                    src={collectionItem.snapshot}
+                    crossOrigin="anonymous"
+                />
             </div>
             <div>collection: {collection.name}</div>
             <div>clip: {collectionItem.text}</div>

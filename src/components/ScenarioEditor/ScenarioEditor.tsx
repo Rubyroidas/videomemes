@@ -1,11 +1,16 @@
-import {useStore} from '../../store';
+import {useNavigate} from 'react-router-dom';
 
+import {useStore} from '../../store';
 import {ScenarioItem} from './ScenarioItem';
 
 export const ScenarioEditor = () => {
     const store = useStore();
+    const navigate = useNavigate();
 
     const handleAddClip = () => {
+    };
+    const handleEditPhrases = () => {
+        navigate('/edit-phrases')
     };
 
     if (!store.scenario || !store.collections) {
@@ -16,6 +21,7 @@ export const ScenarioEditor = () => {
 
     return (
         <div>
+            <button onClick={handleEditPhrases}>Edit phrases</button>
             {phrases.map((phrase, index) => (
                 <div>
                     #{index + 1}.

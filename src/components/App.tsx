@@ -2,7 +2,7 @@ import {observer} from 'mobx-react';
 
 import {useStore} from '../store';
 import {useLoadInitialData} from '../hooks/useLoadInitialData';
-import {AppRouter} from '../AppRouter.tsx';
+import {AppRouter} from '../AppRouter';
 
 export const App = observer(() => {
     const store = useStore();

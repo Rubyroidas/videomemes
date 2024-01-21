@@ -148,15 +148,11 @@ export const generateVideo = async (
 
     const imageTimePairs: {timecode: number, imageFileName: string, x: number, y: number, videoFileName: string}[] = [];
     let imageNumber = 0;
+    let timeShift = 0;
     for (const userPhrase of userPhrases) {
         const collection = collections.find(c => c.id === userPhrase.collectionId)!;
         const itemIndex = collection.items.findIndex(item => item.id === userPhrase.phraseId);
         const item = collection.items[itemIndex];
-        const itemsBefore = collection.items.slice(0, itemIndex);
-        const timecode = itemsBefore
-            .map(r => r.duration)
-            .reduce((acc, ii) => acc + ii, 0);
-
         const fileNumberSuffix = imageNumber.toString().padStart(5, '0');
 
         const fetchedFile = await fetchFile(item.templates[format]);
@@ -171,7 +167,8 @@ export const generateVideo = async (
         const imageFileName = `captions/${fileNumberSuffix}.png`;
         await ffmpeg.writeFile(imageFileName, new Uint8Array(await blob.arrayBuffer()));
 
-        imageTimePairs.push({timecode, imageFileName, x, y, videoFileName});
+        imageTimePairs.push({timecode: timeShift, imageFileName, x, y, videoFileName});
+        timeShift += item.duration;
         imageNumber++;
     }
 

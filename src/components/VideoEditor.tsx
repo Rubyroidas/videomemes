@@ -10,9 +10,11 @@ import {Icon} from './PhraseEditor.styles';
 import {PlayIcon} from '../icons/PlayIcon';
 import {DownloadIcon} from '../icons/DownloadIcon';
 import {useStore} from '../store';
+import {useNavigate} from 'react-router-dom';
 
 export const VideoEditor: FC = () => {
     const store = useStore();
+    const navigate = useNavigate();
     const videoRef = useRef<HTMLVideoElement>(null);
 
     const userPhrases = store.scenario?.phrases;
@@ -47,6 +49,9 @@ export const VideoEditor: FC = () => {
             setIsEncoding(false);
         })();
     };
+    const handleEditScenario = () => {
+        navigate('/edit-scenario');
+    };
 
     useEffect(() => {
         if (!videoRef.current || !generatedVideo) {
@@ -63,6 +68,12 @@ export const VideoEditor: FC = () => {
     return (
         <>
             <div className="buttons">
+            <Button onClick={handleEditScenario}>
+                <Icon>
+                    <PlayIcon/>
+                </Icon>
+                Edit scenario
+            </Button>
             {!isEncoding && (
                 <Button onClick={handleGenerateClick}>
                     <Icon>

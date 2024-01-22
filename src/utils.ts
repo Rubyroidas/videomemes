@@ -157,12 +157,12 @@ const loadJSON = async <T>(url: string): Promise<T> => {
 
 export const loadCollections = async () => {
     // const url = await fetch('tinkoff-vertical.json');
-    const url = 'https://cdn.memely.net/templates/tinkoff/items.json';
+    const url = `https://cdn.memely.net/templates/tinkoff/items.json?q=${Date.now()}`;
     return [await loadJSON<Collection>(url)];
 };
 
 export const loadScenarioPresets = async () => {
-    const url = 'https://cdn.memely.net/templates/tinkoff/scenarios.json';
+    const url = `https://cdn.memely.net/templates/tinkoff/scenarios.json?q=${Date.now()}`;
     return await loadJSON<ScenarioPreset[]>(url);
 };
 

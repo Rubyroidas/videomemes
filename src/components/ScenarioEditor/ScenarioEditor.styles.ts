@@ -1,9 +1,16 @@
 import styled from '@emotion/styled';
 
 export const ScenarioItemWrapper = styled.div`
-    display: flex;
-    flex-direction: row;
+    display: grid;
+    grid-template-areas:
+"dragger index snapshot collectionname"
+"dragger index snapshot cliptitle"
+"dragger index snapshot usertext"
+"dragger index snapshot usertext";
+    grid-template-columns: 40px 40px 200px 1fr;
     user-select: none;
+    width: 600px;
+    margin: 0 0 16px;
 `;
 
 export const ScenarioItemButton = styled.button`
@@ -26,13 +33,26 @@ export const ScenarioItemDragger = styled.button`
 `;
 
 export const SnapshotPreview = styled.div`
-    width: 200px;
+    grid-area: snapshot;
     
-    & > img {
-        width: 100%;
+    & > div {
+        position: relative;
+        & > img {
+            width: 100%;
+        }
+
+        & > label {
+            position: absolute;
+            right: 8px;
+            bottom: 8px;
+            padding: 4px 6px;
+            background: rgba(0, 0, 0, 0.75);
+            color: #fff;
+        }
     }
 `;
 export const IndexColumn = styled.div`
+    grid-area: index;
     width: 40px;
     display: flex;
     align-items: center;
@@ -41,7 +61,25 @@ export const IndexColumn = styled.div`
     color: yellow;
 `;
 
-export const ScenarioItemTexts = styled.div`
-    display: flex;
-    flex-direction: column;
+export const ScenarioItem = styled.div`
+    margin: 0 0 8px 0;
+
+    & > label {
+        background: #cece7e;
+        color: #113b62;
+        display: inline-block;
+        padding: 4px;
+        margin-right: 8px;
+        font-weight: bold;
+    }
+`;
+
+export const ScenarioItemCollectionName = styled(ScenarioItem)`
+    grid-area: collectionname;
+`;
+export const ScenarioItemClipTitle = styled(ScenarioItem)`
+    grid-area: cliptitle;
+`;
+export const ScenarioItemUserText = styled(ScenarioItem)`
+    grid-area: usertext;
 `;

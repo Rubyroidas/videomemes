@@ -35,12 +35,24 @@ export const ScenarioItem: FC<ScenarioItemProps> = (props) => {
 
     return (
         <ScenarioItemWrapper>
-            <ScenarioItemDragger>
+            <ScenarioItemDragger title="TODO: drag up/down by this">
                 <DragIcon/>
             </ScenarioItemDragger>
-            <ScenarioItemButton onClick={onDelete} disabled={disabled}>❌</ScenarioItemButton>
-            <ScenarioItemButton onClick={onMoveUp} disabled={!canMoveUp || disabled}>🔼</ScenarioItemButton>
-            <ScenarioItemButton onClick={onMoveDown} disabled={!canMoveDown || disabled}>🔽</ScenarioItemButton>
+            <ScenarioItemButton
+                title="delete"
+                onClick={onDelete}
+                disabled={disabled}
+            >❌</ScenarioItemButton>
+            <ScenarioItemButton
+                title="move up"
+                onClick={onMoveUp}
+                disabled={!canMoveUp || disabled}
+            >🔼</ScenarioItemButton>
+            <ScenarioItemButton
+                title="move down"
+                onClick={onMoveDown}
+                disabled={!canMoveDown || disabled}
+            >🔽</ScenarioItemButton>
             <div>
                 <img
                     alt={collection.name}

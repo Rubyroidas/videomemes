@@ -2,10 +2,17 @@ import {FC} from 'react';
 
 import {UserPhrase} from '../../types';
 import {useStore} from '../../store';
-import {ScenarioItemButton, ScenarioItemDragger, ScenarioItemWrapper} from './ScenarioEditor.styles';
-import {DragIcon} from '../../icons/DragIcon.tsx';
+import {
+    IndexColumn,
+    ScenarioItemButton,
+    ScenarioItemDragger, ScenarioItemTexts,
+    ScenarioItemWrapper,
+    SnapshotPreview
+} from './ScenarioEditor.styles';
+import {DragIcon} from '../../icons/DragIcon';
 
 type ScenarioItemProps = {
+    index: number;
     phrase: UserPhrase;
     canMoveUp: boolean;
     canMoveDown: boolean;
@@ -16,6 +23,7 @@ type ScenarioItemProps = {
 }
 export const ScenarioItem: FC<ScenarioItemProps> = (props) => {
     const {
+        index,
         phrase,
         canMoveUp,
         canMoveDown,
@@ -53,18 +61,21 @@ export const ScenarioItem: FC<ScenarioItemProps> = (props) => {
                 onClick={onMoveDown}
                 disabled={!canMoveDown || disabled}
             >🔽</ScenarioItemButton>
-            <div>
+            <IndexColumn>
+                #{index}
+            </IndexColumn>
+            <SnapshotPreview>
                 <img
                     alt={collection.name}
                     src={collectionItem.snapshot}
                     crossOrigin="anonymous"
                 />
-            </div>
-            <div>
+            </SnapshotPreview>
+            <ScenarioItemTexts>
                 <div>collection: {collection.name}</div>
                 <div>clip: {collectionItem.text}</div>
                 <div>your text: {phrase.text ?? (<i>image was specified</i>)}</div>
-            </div>
+            </ScenarioItemTexts>
         </ScenarioItemWrapper>
     );
 };

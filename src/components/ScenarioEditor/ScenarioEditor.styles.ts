@@ -24,3 +24,24 @@ export const ScenarioItemDragger = styled.button`
         fill: none;
     }
 `;
+
+export const SnapshotPreview = styled.div`
+    width: 200px;
+    
+    & > img {
+        width: 100%;
+    }
+`;
+export const IndexColumn = styled.div`
+    width: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+    color: yellow;
+`;
+
+export const ScenarioItemTexts = styled.div`
+    display: flex;
+    flex-direction: column;
+`;

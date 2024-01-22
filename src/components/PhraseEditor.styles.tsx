@@ -87,6 +87,12 @@ export const Icon = styled.div`
         width: 100%;
         height: 100%;
         fill: var(--button-text-color);
+        stroke: none;
+    }
+
+    & > svg.stroked {
+        fill: none;
+        stroke: var(--button-text-color);
     }
 `;
 

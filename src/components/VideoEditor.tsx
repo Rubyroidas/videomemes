@@ -8,6 +8,7 @@ import {Format, UserPhrase} from '../types';
 import {generateVideo} from '../generate';
 import {Icon} from './PhraseEditor.styles';
 import {PlayIcon} from '../icons/PlayIcon';
+import {EditListIcon} from '../icons/EditListIcon';
 import {DownloadIcon} from '../icons/DownloadIcon';
 import {useStore} from '../store';
 import {useNavigate} from 'react-router-dom';
@@ -23,7 +24,6 @@ export const VideoEditor: FC = () => {
             store.scenario.phrases = value;
         }
     }
-    // @ts-ignore
     const [isEncoding, setIsEncoding] = useState(false);
     const [generatedVideo, setGeneratedVideo] = useState<Blob | null>(null);
     const format = store.scenario?.format ?? Format.InstagramStory;
@@ -68,28 +68,28 @@ export const VideoEditor: FC = () => {
     return (
         <>
             <div className="buttons">
-            <Button onClick={handleEditScenario}>
-                <Icon>
-                    <PlayIcon/>
-                </Icon>
-                Edit scenario
-            </Button>
-            {!isEncoding && (
-                <Button onClick={handleGenerateClick}>
+                <Button onClick={handleEditScenario}>
                     <Icon>
-                        <PlayIcon/>
+                        <EditListIcon/>
                     </Icon>
-                    Generate
+                    Edit scenario
                 </Button>
-            )}
-            {generatedVideo && !isEncoding && (
-                <DownloadVideoButton data={generatedVideo}>
-                    <Icon>
-                        <DownloadIcon/>
-                    </Icon>
-                    Download
-                </DownloadVideoButton>
-            )}
+                {!isEncoding && (
+                    <Button onClick={handleGenerateClick}>
+                        <Icon>
+                            <PlayIcon/>
+                        </Icon>
+                        Generate
+                    </Button>
+                )}
+                {generatedVideo && !isEncoding && (
+                    <DownloadVideoButton data={generatedVideo}>
+                        <Icon>
+                            <DownloadIcon/>
+                        </Icon>
+                        Download
+                    </DownloadVideoButton>
+                )}
             </div>
             <PhrasesEditor
                 disabled={isEncoding}

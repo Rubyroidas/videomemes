@@ -3,6 +3,9 @@ import {observer} from 'mobx-react';
 
 import {useStore} from '../../store';
 import {ScenarioItem} from './ScenarioItem';
+import {Button} from '../App.styles';
+import {Icon} from '../PhraseEditor.styles';
+import {EditListIcon} from '../../icons/EditListIcon';
 
 export const ScenarioEditor = observer(() => {
     const store = useStore();
@@ -52,20 +55,23 @@ export const ScenarioEditor = observer(() => {
 
     return (
         <div>
-            <button onClick={handleEditPhrases}>Edit phrases</button>
+            <Button onClick={handleEditPhrases}>
+                <Icon>
+                    <EditListIcon/>
+                </Icon>
+                Edit phrases
+            </Button>
             {phrases.map((phrase, index) => (
-                <div>
-                    #{index + 1}.
-                    <ScenarioItem
-                        phrase={phrase}
-                        disabled={false}
-                        canMoveUp={index > 0}
-                        canMoveDown={index < phrases.length - 1}
-                        onDelete={() => handleDelete(index)}
-                        onMoveUp={() => handleMoveUp(index)}
-                        onMoveDown={() => handleMoveDown(index)}
-                        key={index}/>
-                </div>
+                <ScenarioItem
+                    index={index + 1}
+                    phrase={phrase}
+                    disabled={false}
+                    canMoveUp={index > 0}
+                    canMoveDown={index < phrases.length - 1}
+                    onDelete={() => handleDelete(index)}
+                    onMoveUp={() => handleMoveUp(index)}
+                    onMoveDown={() => handleMoveDown(index)}
+                    key={index}/>
             ))}
             <button onClick={handleAddClip}>Add clip</button>
         </div>

@@ -1,3 +1,4 @@
+import {useCallback} from 'react';
 import {useNavigate} from 'react-router-dom';
 import {observer} from 'mobx-react';
 
@@ -23,14 +24,14 @@ export const ScenarioEditor = observer(() => {
 
     const phrases = store.scenario.phrases;
 
-    const handleDelete = (index: number) => {
+    const handleDelete = useCallback((index: number) => {
         console.log('delete', index);
         store.scenario!.phrases = [
             ...store.scenario!.phrases.slice(0, index),
             ...store.scenario!.phrases.slice(index + 1),
         ];
-    };
-    const handleMoveUp = (index: number) => {
+    }, []);
+    const handleMoveUp = useCallback((index: number) => {
         console.log('move up', index);
         const upper = store.scenario!.phrases[index - 1];
         const current = store.scenario!.phrases[index];
@@ -40,8 +41,8 @@ export const ScenarioEditor = observer(() => {
             upper,
             ...store.scenario!.phrases.slice(index + 1),
         ];
-    };
-    const handleMoveDown = (index: number) => {
+    }, []);
+    const handleMoveDown = useCallback((index: number) => {
         console.log('move down', index);
         const current = store.scenario!.phrases[index];
         const downer = store.scenario!.phrases[index + 1];
@@ -51,7 +52,7 @@ export const ScenarioEditor = observer(() => {
             current,
             ...store.scenario!.phrases.slice(index + 2),
         ];
-    };
+    }, []);
 
     return (
         <div>

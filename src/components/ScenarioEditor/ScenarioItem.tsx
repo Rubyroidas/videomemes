@@ -5,35 +5,26 @@ import {useStore} from '../../store';
 import {
     ScenarioItemWrapper,
     ScenarioItemButton,
-    ScenarioItemDragger,
-    IndexColumn,
     SnapshotPreview,
     ScenarioItemUserText,
     ScenarioItemClipTitle,
     ScenarioItemCollectionName
 } from './ScenarioEditor.styles';
-import {DragIcon} from '../../icons/DragIcon';
 
 type ScenarioItemProps = {
     index: number;
+    isDragging: boolean;
     phrase: UserPhrase;
-    canMoveUp: boolean;
-    canMoveDown: boolean;
     disabled: boolean;
     onDelete: () => void;
-    onMoveUp: () => void;
-    onMoveDown: () => void;
 }
 export const ScenarioItem: FC<ScenarioItemProps> = (props) => {
     const {
         index,
+        isDragging,
         phrase,
-        canMoveUp,
-        canMoveDown,
         disabled,
         onDelete,
-        onMoveUp,
-        onMoveDown
     } = props;
     const store = useStore();
     const collection = store.collections
@@ -47,30 +38,15 @@ export const ScenarioItem: FC<ScenarioItemProps> = (props) => {
     const durationText = (Math.round(collectionItem.duration * 10) / 10).toFixed(1);
 
     return (
-        <ScenarioItemWrapper>
+        <ScenarioItemWrapper isDragging={isDragging}>
             <div style={{gridArea: 'dragger'}}>
-                <ScenarioItemDragger title="TODO: drag up/down by this">
-                    <DragIcon/>
-                </ScenarioItemDragger>
+                #{index}
                 <ScenarioItemButton
                     title="delete"
                     onClick={onDelete}
                     disabled={disabled}
                 >❌</ScenarioItemButton>
-                <ScenarioItemButton
-                    title="move up"
-                    onClick={onMoveUp}
-                    disabled={!canMoveUp || disabled}
-                >🔼</ScenarioItemButton>
-                <ScenarioItemButton
-                    title="move down"
-                    onClick={onMoveDown}
-                    disabled={!canMoveDown || disabled}
-                >🔽</ScenarioItemButton>
             </div>
-            <IndexColumn>
-                #{index}
-            </IndexColumn>
             <SnapshotPreview>
                 <div>
                     <img

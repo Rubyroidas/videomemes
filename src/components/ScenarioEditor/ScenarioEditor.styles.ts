@@ -1,13 +1,14 @@
 import styled from '@emotion/styled';
 
-export const ScenarioItemWrapper = styled.div`
+export const ScenarioItemWrapper = styled.div<{isDragging: boolean}>`
     display: grid;
+    background: ${props => props.isDragging ? 'rgba(0, 0, 0, 0.3)' : ''};
     grid-template-areas:
-"dragger index snapshot collectionname"
-"dragger index snapshot cliptitle"
-"dragger index snapshot usertext"
-"dragger index snapshot usertext";
-    grid-template-columns: 40px 40px 200px 1fr;
+"dragger snapshot collectionname"
+"dragger snapshot cliptitle"
+"dragger snapshot usertext"
+"dragger snapshot usertext";
+    grid-template-columns: 40px 200px 1fr;
     user-select: none;
     width: 600px;
     margin: 0 0 16px;
@@ -17,19 +18,6 @@ export const ScenarioItemButton = styled.button`
     background: none;
     border: none;
     cursor: pointer;
-`;
-
-export const ScenarioItemDragger = styled.button`
-    background: none;
-    border: none;
-    cursor: ns-resize;
-    
-    & > svg {
-        width: 40px;
-        height: 40px;
-        stroke: var(--button-text-color);
-        fill: none;
-    }
 `;
 
 export const SnapshotPreview = styled.div`
@@ -50,15 +38,6 @@ export const SnapshotPreview = styled.div`
             color: #fff;
         }
     }
-`;
-export const IndexColumn = styled.div`
-    grid-area: index;
-    width: 40px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    
-    color: yellow;
 `;
 
 export const ScenarioItem = styled.div`

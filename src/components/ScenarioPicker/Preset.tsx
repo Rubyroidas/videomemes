@@ -1,5 +1,6 @@
 import {FC} from 'react';
 import {useNavigate} from 'react-router-dom';
+import shortUuid from 'short-uuid';
 
 import {Format, ScenarioPreset, TextSize} from '../../types';
 import {Button} from '../App.styles';
@@ -14,6 +15,7 @@ export const Preset: FC<{preset: ScenarioPreset}> = ({preset}) => {
         store.scenario = {
             format: Format.InstagramStory,
             phrases: preset.items.map(item => ({
+                id: shortUuid().uuid(),
                 collectionId: item.collectionId,
                 phraseId: item.itemId,
                 text: item.placeholder,

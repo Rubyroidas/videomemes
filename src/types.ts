@@ -52,6 +52,7 @@ export type UserScenario = {
 }
 
 export type UserPhrase = {
+    id: string;
     collectionId: string;
     phraseId: number;
     text?: string;

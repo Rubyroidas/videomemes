@@ -12,6 +12,17 @@ export const ScenarioItemWrapper = styled.div<{isDragging: boolean}>`
     user-select: none;
     width: 600px;
     margin: 0 0 16px;
+
+    @media (max-width: 480px) {
+        grid-template-columns: 10vw 1fr;
+        grid-template-areas:
+"dragger snapshot"
+"dragger collectionname"
+"dragger cliptitle"
+"dragger usertext";
+        width: 100%;
+        margin: 0 0 2vw;
+    }
 `;
 
 export const ScenarioItemButton = styled.button`
@@ -36,6 +47,12 @@ export const SnapshotPreview = styled.div`
             padding: 4px 6px;
             background: rgba(0, 0, 0, 0.75);
             color: #fff;
+
+            @media (max-width: 480px) {
+                right: 2vw;
+                bottom: 2vw;
+                padding: 2vw 1.5vw;
+            }
         }
     }
 `;
@@ -50,6 +67,15 @@ export const ScenarioItem = styled.div`
         padding: 4px;
         margin-right: 8px;
         font-weight: bold;
+    }
+
+    @media (max-width: 480px) {
+        margin: 0 0 2vw 0;
+
+        & > label {
+            padding: 1vw;
+            margin-right: 2vw;
+        }
     }
 `;
 

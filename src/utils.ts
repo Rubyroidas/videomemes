@@ -94,9 +94,10 @@ export const html2text = (html: string) => {
 const pkgVersion = '0.12.6';
 const pkgName = 'core';
 // const baseURL = `https://unpkg.com/@ffmpeg/${pkgName}@${pkgVersion}/dist/esm`;
-// const baseURL = `/ffmpeg-${pkgName}/${pkgVersion}`;
-const baseURL = `https://cdn.memely.net/ffmpeg/ffmpeg-${pkgName}/${pkgVersion}`;
-
+const ffmpegUrlPrefix = __DEV__
+    ? ''
+    : `https://cdn.memely.net/ffmpeg`;
+const baseURL = `${ffmpegUrlPrefix}/ffmpeg-${pkgName}/${pkgVersion}`;
 export const loadFFmpeg = async (ffmpeg: FFmpeg) => {
     try {
         console.log('ffmpeg: start loading...');

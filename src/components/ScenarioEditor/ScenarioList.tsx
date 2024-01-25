@@ -34,9 +34,6 @@ export const ScenarioList = observer(() => {
     }
 
     const phrases = store.scenario.phrases;
-    if (!store.scenario || !store.collections) {
-        return null;
-    }
     const handleDelete = useCallback((index: number) => {
         console.log('delete', index);
         store.scenario!.phrases = [

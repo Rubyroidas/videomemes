@@ -3,7 +3,7 @@ import {useNavigate} from 'react-router-dom';
 import shortUuid from 'short-uuid';
 
 import {Button} from '../App.styles';
-import {Icon} from '../PhraseEditor.styles';
+import {Icon} from '../PhrasesEditor/PhraseEditor.styles';
 import {EditListIcon} from '../../icons/EditListIcon';
 import {ScenarioList} from './ScenarioList';
 import {AddPhrase} from './AddPhrase';

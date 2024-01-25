@@ -1,6 +1,6 @@
 import {FC, PropsWithChildren} from 'react';
 
-import {Button} from './App.styles';
+import {Button} from '../App.styles';
 
 type Props = PropsWithChildren & {
     data: Blob;

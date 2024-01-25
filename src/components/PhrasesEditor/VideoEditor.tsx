@@ -3,14 +3,14 @@ import {FC, useEffect, useRef, useState} from 'react';
 import {PhrasesEditor} from './PhrasesEditor';
 import {DownloadVideoButton} from './DownloadVideoButton';
 
-import {Button} from './App.styles';
-import {Format, UserPhrase} from '../types';
-import {generateVideo} from '../generate';
+import {Button} from '../App.styles';
+import {Format, UserPhrase} from '../../types';
+import {generateVideo} from '../../generate';
 import {Icon} from './PhraseEditor.styles';
-import {PlayIcon} from '../icons/PlayIcon';
-import {EditListIcon} from '../icons/EditListIcon';
-import {DownloadIcon} from '../icons/DownloadIcon';
-import {useStore} from '../store';
+import {PlayIcon} from '../../icons/PlayIcon';
+import {EditListIcon} from '../../icons/EditListIcon';
+import {DownloadIcon} from '../../icons/DownloadIcon';
+import {useStore} from '../../store';
 import {useNavigate} from 'react-router-dom';
 
 export const VideoEditor: FC = () => {

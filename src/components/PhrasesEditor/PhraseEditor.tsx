@@ -2,14 +2,14 @@ import {ClipboardEventHandler, FC, MouseEventHandler, useRef, useState} from 're
 import ContentEditable, {ContentEditableEvent} from 'react-contenteditable';
 import {FileUploader} from 'react-drag-drop-files';
 
-import {PlayIcon} from '../icons/PlayIcon';
-import {Format, Point, Rect, TextSize, UserPhrase} from '../types';
-import {FONT_SIZE, TEXT_PADDING} from '../config';
+import {PlayIcon} from '../../icons/PlayIcon';
+import {Format, Point, Rect, TextSize, UserPhrase} from '../../types';
+import {FONT_SIZE, TEXT_PADDING} from '../../config';
 import {EditingAreaContainer, InputBackground, PlayButton, TextAreaClass, Video} from './PhraseEditor.styles';
-import {useStore} from '../store';
-import {Button, ButtonSelector} from './App.styles';
-import {DebugImage} from './DebugImage';
-import {formatSizes} from '../statics';
+import {useStore} from '../../store';
+import {Button, ButtonSelector} from '../App.styles';
+import {DebugImage} from '../DebugImage';
+import {formatSizes} from '../../statics';
 
 type PhraseEditorProps = {
     disabled: boolean;

@@ -1,8 +1,8 @@
 import styled from '@emotion/styled';
 import {css} from '@emotion/css';
 
-import {Point, Rect, Size} from '../types';
-import {LINE_HEIGHT, TEXT_COLOR} from '../config';
+import {Point, Rect, Size} from '../../types';
+import {LINE_HEIGHT, TEXT_COLOR} from '../../config';
 
 export const Header = styled.div`
 `;

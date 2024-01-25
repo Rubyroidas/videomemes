@@ -1,8 +1,8 @@
 import {FC, useState} from 'react';
 
-import {useStore} from '../store';
-import {Format, UserPhrase} from '../types';
-import {escapeHTML, html2text} from '../utils';
+import {useStore} from '../../store';
+import {Format, UserPhrase} from '../../types';
+import {escapeHTML, html2text} from '../../utils';
 import {Header, NavigateCaption} from './PhraseEditor.styles';
 import {NavigationBar} from './NavigationBar';
 import {PhraseEditor} from './PhraseEditor';

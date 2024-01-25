@@ -1,8 +1,8 @@
 import {FC} from 'react';
 import styled from '@emotion/styled';
 
-import {ArrowLeft} from '../icons/ArrowLeft';
-import {ArrowRight} from '../icons/ArrowRight';
+import {ArrowLeft} from '../../icons/ArrowLeft';
+import {ArrowRight} from '../../icons/ArrowRight';
 import {Icon} from './PhraseEditor.styles';
 
 type Props = {

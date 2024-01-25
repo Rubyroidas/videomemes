@@ -46,7 +46,7 @@ export const ScenarioList = observer(() => {
     }, []);
     const onDragEnd: OnDragEndResponder = useCallback((result) => {
         // dropped outside the list
-        if (!result.destination || !store.scenario) {
+        if (!result.destination || !store.scenario || result.source.index === result.destination.index) {
             return;
         }
 

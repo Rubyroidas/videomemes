@@ -88,3 +88,22 @@ export const ScenarioItemClipTitle = styled(ScenarioItem)`
 export const ScenarioItemUserText = styled(ScenarioItem)`
     grid-area: usertext;
 `;
+
+export const AddPhraseCollectionList = styled.div`
+    width: 600px;
+
+    @media (max-width: 480px) {
+        width: 100vw;
+    }
+`;
+export const AddPhraseCollectionItemList = styled.div`
+    width: 600px;
+
+    @media (max-width: 480px) {
+        width: 100vw;
+    }
+`;
+export const CollectionElement = styled.div`
+    cursor: pointer;
+    padding: 16px;
+`;

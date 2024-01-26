@@ -64,6 +64,8 @@ export const ScenarioEditor = observer(() => {
         return null;
     }
 
+    const scenarioTotalDuration = store.scenarioTotalDuration.toFixed(1);
+
     return (
         <div>
             {store.scenario.phrases.length > 0 && (
@@ -84,6 +86,7 @@ export const ScenarioEditor = observer(() => {
                         values={formatSelectorValues}
                         onChange={handleChangeFormat}
                     />
+                    <div>Scenario total duration: {scenarioTotalDuration}s</div>
                     <ScenarioList/>
                 </>
             )}

@@ -1,15 +1,10 @@
 import {FC, useState} from 'react';
-import styled from '@emotion/styled';
 
 import {useStore} from '../../store';
 import {Collection, CollectionItem} from '../../types';
-
-const CollectionElement = styled.div`
-    cursor: pointer;
-`;
-const CollectionItemElement = styled.div`
-    cursor: pointer;
-`;
+import {CollectionItemElement} from './CollectionItemElement.tsx';
+import {MAX_VIDEO_LENGTH_SECONDS} from '../../config.ts';
+import {AddPhraseCollectionItemList, AddPhraseCollectionList, CollectionElement} from './ScenarioEditor.styles.ts';
 
 type Props = {
     onSelect: (collection: Collection, item: CollectionItem) => void;
@@ -27,7 +22,7 @@ export const AddPhrase: FC<Props> = ({onSelect}) => {
     return !selectedCollection ? (
         <div>
             pick a collection:
-            <div>
+            <AddPhraseCollectionList>
                 {collections.map(collection => (
                     <CollectionElement
                         key={collection.id}
@@ -36,21 +31,21 @@ export const AddPhrase: FC<Props> = ({onSelect}) => {
                         {collection.name}
                     </CollectionElement>
                 ))}
-            </div>
+            </AddPhraseCollectionList>
         </div>
     ) : (
         <div>
             pick a clip:
-            <div>
+            <AddPhraseCollectionItemList>
                 {selectedCollection.items.map(item => (
                     <CollectionItemElement
                         key={item.id}
+                        item={item}
                         onClick={() => onSelect(selectedCollection, item)}
-                    >
-                        {item.text}
-                    </CollectionItemElement>
+                        disabled={store.scenarioTotalDuration + item.duration > MAX_VIDEO_LENGTH_SECONDS}
+                    />
                 ))}
-            </div>
+            </AddPhraseCollectionItemList>
         </div>
     );
 }

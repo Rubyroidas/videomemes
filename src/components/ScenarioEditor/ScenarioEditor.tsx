@@ -2,14 +2,32 @@ import {useCallback, useState} from 'react';
 import {useNavigate} from 'react-router-dom';
 import shortUuid from 'short-uuid';
 
-import {Button} from '../App.styles';
+import {Button, ButtonSelector} from '../App.styles';
 import {Icon} from '../PhrasesEditor/PhraseEditor.styles';
 import {EditListIcon} from '../../icons/EditListIcon';
 import {ScenarioList} from './ScenarioList';
 import {AddPhrase} from './AddPhrase';
-import {Collection, CollectionItem, TextSize} from '../../types';
+import {Collection, CollectionItem, Format, TextSize} from '../../types';
 import {useStore} from '../../store';
 import {observer} from 'mobx-react';
+
+const formatSelectorValues: {
+    value: Format,
+    text: string,
+}[] = [
+    {
+        value: Format.InstagramStory,
+        text: 'Instagram story',
+    },
+    {
+        value: Format.InstagramPost,
+        text: 'Instagram post',
+    },
+    {
+        value: Format.YoutubeVideo,
+        text: 'Youtube video',
+    },
+];
 
 export const ScenarioEditor = observer(() => {
     const navigate = useNavigate();
@@ -35,6 +53,12 @@ export const ScenarioEditor = observer(() => {
         });
         setIsAddingVisible(false);
     }, []);
+    const handleChangeFormat = useCallback((format: Format) => {
+        if (!store.scenario) {
+            return;
+        }
+        store.scenario.format = format;
+    }, []);
 
     if (!store.scenario?.phrases) {
         return null;
@@ -53,7 +77,15 @@ export const ScenarioEditor = observer(() => {
             {isAddingVisible ? (
                 <AddPhrase onSelect={handleAddItem}/>
             ) : (
-                <ScenarioList/>
+                <>
+                    <ButtonSelector
+                        caption="Video format"
+                        value={store.scenario.format}
+                        values={formatSelectorValues}
+                        onChange={handleChangeFormat}
+                    />
+                    <ScenarioList/>
+                </>
             )}
             <Button onClick={toggleAddClip}>
                 {isAddingVisible ? 'Back to phrases list' : 'Add clip'}

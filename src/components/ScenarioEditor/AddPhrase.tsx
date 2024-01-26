@@ -37,14 +37,15 @@ export const AddPhrase: FC<Props> = ({onSelect}) => {
         <div>
             pick a clip:
             <AddPhraseCollectionItemList>
-                {selectedCollection.items.map(item => (
+                {selectedCollection.items.map(((item, index) => (
                     <CollectionItemElement
                         key={item.id}
+                        index={index + 1}
                         item={item}
                         onClick={() => onSelect(selectedCollection, item)}
                         disabled={store.scenarioTotalDuration + item.duration > MAX_VIDEO_LENGTH_SECONDS}
                     />
-                ))}
+                )))}
             </AddPhraseCollectionItemList>
         </div>
     );

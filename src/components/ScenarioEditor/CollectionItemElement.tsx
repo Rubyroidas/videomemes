@@ -15,10 +15,11 @@ const CollectionItemElementWrapper = styled.div<{ disabled: boolean }>`
 `;
 
 type Props = {
+    index: number;
     disabled: boolean;
     item: CollectionItem;
 }
-export const CollectionItemElement: FC<HTMLProps<HTMLDivElement> & Props> = ({item, disabled, onClick}) => (
+export const CollectionItemElement: FC<HTMLProps<HTMLDivElement> & Props> = ({index, item, disabled, onClick}) => (
     <CollectionItemElementWrapper onClick={disabled ? undefined : onClick} disabled={disabled}>
         <SnapshotPreview>
             <div>
@@ -31,7 +32,7 @@ export const CollectionItemElement: FC<HTMLProps<HTMLDivElement> & Props> = ({it
             </div>
         </SnapshotPreview>
         <ScenarioItemClipTitle>
-            {item.text}
+            <b>{index}</b> {item.text}
         </ScenarioItemClipTitle>
     </CollectionItemElementWrapper>
 );

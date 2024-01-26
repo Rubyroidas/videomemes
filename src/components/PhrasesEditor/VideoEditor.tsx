@@ -31,7 +31,6 @@ export const VideoEditor: FC = () => {
     const handleGenerateClick = () => {
         (async () => {
             if (isEncoding || !videoRef.current || !userPhrases) {
-                console.log('return');
                 return;
             }
 

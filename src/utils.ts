@@ -108,7 +108,7 @@ export const loadFFmpeg = async (ffmpeg: FFmpeg) => {
         });
         console.log('ffmpeg: loaded');
     } catch (e) {
-        console.error('not loaded', e);
+        console.error('ffmpeg: not loaded', e);
     }
 }
 

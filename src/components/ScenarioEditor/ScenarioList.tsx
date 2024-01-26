@@ -35,7 +35,6 @@ export const ScenarioList = observer(() => {
 
     const phrases = store.scenario.phrases;
     const handleDelete = useCallback((index: number) => {
-        console.log('delete', index);
         store.scenario!.phrases = [
             ...store.scenario!.phrases.slice(0, index),
             ...store.scenario!.phrases.slice(index + 1),
@@ -47,7 +46,6 @@ export const ScenarioList = observer(() => {
             return;
         }
 
-        console.log('onDragEnd', result);
         store.scenario.phrases = moveItem(store.scenario.phrases, result.source.index, result.destination.index);
     }, []);
 

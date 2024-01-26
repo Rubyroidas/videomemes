@@ -7,11 +7,9 @@ import {Button} from '../App.styles';
 import {useStore} from '../../store';
 
 export const Preset: FC<{preset: ScenarioPreset}> = ({preset}) => {
-    console.log('preset', preset.id);
     const store = useStore();
     const navigate = useNavigate();
     const handleClick = () => {
-        console.log(preset.id);
         store.scenario = {
             format: Format.InstagramStory,
             phrases: preset.items.map(item => ({

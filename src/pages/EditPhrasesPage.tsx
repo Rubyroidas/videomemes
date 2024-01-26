@@ -4,17 +4,12 @@ import {VideoEditor} from '../components/PhrasesEditor/VideoEditor';
 import {AppTitle, BasicLink} from '../components/App.styles';
 import {useEffect} from 'react';
 import {useStore} from '../store';
-import {Format} from '../types';
 
 export const EditPhrasesPage = () => {
-    const navigate = useNavigate();
     const store = useStore();
+    const navigate = useNavigate();
     useEffect(() => {
         if (!store.scenario) {
-            store.scenario = {
-                format: Format.InstagramStory,
-                phrases: [],
-            };
             navigate('/edit-scenario');
         }
     }, []);
@@ -26,4 +21,4 @@ export const EditPhrasesPage = () => {
             <VideoEditor/>
         </div>
     );
-}
+};

@@ -6,13 +6,11 @@ import {
     ffmpegExec,
     ffmpegListFiles,
     getVideoProperties,
-    hexToUint8Array,
     imageLoadPromise,
-    ProgressEvent,
     reduceWideLines
 } from './utils';
 import {FONT_SIZE, LINE_HEIGHT, TEXT_COLOR, TEXT_PADDING} from './config';
-import watermarkRaw from './icons/watermark.png?raw-hex';
+import watermarkRaw2 from './icons/watermark.svg?raw';
 import {formatSizes} from './statics';
 
 export const renderTextSlide = async (videoSize: Size, width: number, height: number, text: string, textSize: TextSize) => {
@@ -99,6 +97,7 @@ export const renderImageSlide = async (width: number, height: number, image: Blo
     img.src = URL.createObjectURL(image);
 
     await imageLoadPromise(img);
+    // URL.revokeObjectURL(img.src)
     const isWider = img.naturalWidth / img.naturalHeight > width / height;
     const imageScale = imageSize * (
         isWider
@@ -130,14 +129,8 @@ export const generateVideo = async (
     ffmpeg: FFmpeg,
     userPhrases: UserPhrase[],
     collections: Collection[],
-    format: Format,
-    setEncodingProgress: (progress: number) => void,
-    setEncodingStatus: (status: string) => void
+    format: Format
 ): Promise<Blob> => {
-    const updateEncodingStatus = ({progress}: ProgressEvent) => {
-        setEncodingProgress(progress);
-    };
-
     // info
     const videoProperties = await getVideoProperties(ffmpeg, 'input.mp4');
     console.log('infoResult', videoProperties);
@@ -201,13 +194,19 @@ export const generateVideo = async (
     }
 
     // watermark
+    console.log('waternark >>>');
     const collection = collections.find(c => c.id === userPhrases[0].collectionId)!;
     const watermarkArea = collection.watermarkArea[format];
 
-    const watermarkFileRaw = hexToUint8Array(watermarkRaw);
-    const watermarkFile = new Uint8Array(await (
-        await renderImageSlide(watermarkArea.width, watermarkArea.height, new Blob([watermarkFileRaw]), 1)
-    ).arrayBuffer());
+    const watermarkFile = new Uint8Array(
+        await (
+            await renderImageSlide(
+                watermarkArea.width,
+                watermarkArea.height,
+                new Blob([watermarkRaw2], {type: 'image/svg+xml'}),
+                1)
+        ).arrayBuffer()
+    );
     await ffmpeg.writeFile('watermark.png', watermarkFile);
 
     complexFilter.push(`[v${imageTimePairs.length}][${imageTimePairs.length + 1}:v]overlay=${watermarkArea.x}:${watermarkArea.y}[v${imageTimePairs.length + 1}]`)
@@ -243,15 +242,10 @@ export const generateVideo = async (
     console.log(compileCommandArgs.join(' '));
 
     // montage
-    setEncodingStatus('converting video...');
-    await ffmpegExec(ffmpeg, compileCommandArgs, updateEncodingStatus);
+    await ffmpegExec(ffmpeg, compileCommandArgs, () => {});
 
-    setEncodingStatus('reading output video...');
     const data = await ffmpeg.readFile('output.mp4') as Uint8Array;
     const result = new Blob([data.buffer], {type: 'video/mp4'});
-
-    setEncodingStatus('previewing video...');
-    setEncodingStatus('ready 👌');
 
     // cleanup
     for (const {imageFileName, videoFileName} of imageTimePairs) {

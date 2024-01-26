@@ -1,4 +1,4 @@
-import {FC, useEffect, useRef, useState} from 'react';
+import {FC, useCallback, useEffect, useRef, useState} from 'react';
 
 import {PhrasesEditor} from './PhrasesEditor';
 import {DownloadVideoButton} from './DownloadVideoButton';
@@ -19,16 +19,16 @@ export const VideoEditor: FC = () => {
     const videoRef = useRef<HTMLVideoElement>(null);
 
     const userPhrases = store.scenario?.phrases;
-    const setUserPhrases = (value: UserPhrase[]) => {
-        if (store.scenario) {
-            store.scenario.phrases = value;
-        }
-    }
     const [isEncoding, setIsEncoding] = useState(false);
     const [generatedVideo, setGeneratedVideo] = useState<Blob | null>(null);
     const format = store.scenario?.format ?? Format.InstagramStory;
 
-    const handleGenerateClick = () => {
+    const setUserPhrases = useCallback((value: UserPhrase[]) => {
+        if (store.scenario) {
+            store.scenario.phrases = value;
+        }
+    }, []);
+    const handleGenerateClick = useCallback(() => {
         (async () => {
             if (isEncoding || !videoRef.current || !userPhrases) {
                 return;
@@ -40,17 +40,16 @@ export const VideoEditor: FC = () => {
                 store.ffmpeg!,
                 userPhrases,
                 store.collections!,
-                format,
-                () => {}, () => {}
+                format
             );
             setGeneratedVideo(vid);
             console.log('end generate');
             setIsEncoding(false);
         })();
-    };
-    const handleEditScenario = () => {
+    }, []);
+    const handleEditScenario = useCallback(() => {
         navigate('/edit-scenario');
-    };
+    }, []);
 
     useEffect(() => {
         if (!videoRef.current || !generatedVideo) {

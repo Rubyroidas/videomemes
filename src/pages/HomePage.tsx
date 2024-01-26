@@ -10,7 +10,7 @@ export const HomePage = () => (
         </Paragraph>
         <LinksList>
             <Button to="/pick-preset-scenario">Choose preset scenario</Button>
-            <Button to="/edit-phrases">Create your scenario</Button>
+            <Button to="/edit-scenario">Create your scenario</Button>
         </LinksList>
         <LinksList>
             <MinorLink to="/about">About the project</MinorLink>

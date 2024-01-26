@@ -1,10 +1,30 @@
 [[redirects]]
+  from = "/pick-preset-scenario"
+  to = "/index.html"
+  status = 200
+  force = true
+[[redirects]]
   from = "/edit-scenario"
   to = "/index.html"
   status = 200
   force = true
 [[redirects]]
   from = "/edit-phrases"
+  to = "/index.html"
+  status = 200
+  force = true
+[[redirects]]
+  from = "/about"
+  to = "/index.html"
+  status = 200
+  force = true
+[[redirects]]
+  from = "/contact-us"
+  to = "/index.html"
+  status = 200
+  force = true
+[[redirects]]
+  from = "/donate"
   to = "/index.html"
   status = 200
   force = true

@@ -171,3 +171,12 @@ export const loadScenarioPresets = async () => {
 export const imageLoadPromise = async (img: HTMLImageElement): Promise<void> => new Promise(resolve => {
     img.addEventListener('load', () => resolve());
 });
+
+export const downloadBlob = (data: Blob, filename: string) => {
+    const url = URL.createObjectURL(data);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = filename;
+    a.click();
+    window.URL.revokeObjectURL(url);
+}

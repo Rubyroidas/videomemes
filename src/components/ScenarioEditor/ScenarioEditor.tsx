@@ -9,8 +9,9 @@ import {ScenarioList} from './ScenarioList';
 import {AddPhrase} from './AddPhrase';
 import {Collection, CollectionItem, TextSize} from '../../types';
 import {useStore} from '../../store';
+import {observer} from 'mobx-react';
 
-export const ScenarioEditor = () => {
+export const ScenarioEditor = observer(() => {
     const navigate = useNavigate();
     const store = useStore();
     const [isAddingVisible, setIsAddingVisible] = useState(false);
@@ -35,14 +36,20 @@ export const ScenarioEditor = () => {
         setIsAddingVisible(false);
     }, []);
 
+    if (!store.scenario?.phrases) {
+        return null;
+    }
+
     return (
         <div>
-            <Button onClick={handleEditPhrases}>
-                <Icon>
-                    <EditListIcon/>
-                </Icon>
-                Edit phrases
-            </Button>
+            {store.scenario.phrases.length > 0 && (
+                <Button onClick={handleEditPhrases}>
+                    <Icon>
+                        <EditListIcon/>
+                    </Icon>
+                    Edit phrases
+                </Button>
+            )}
             {isAddingVisible ? (
                 <AddPhrase onSelect={handleAddItem}/>
             ) : (
@@ -53,4 +60,4 @@ export const ScenarioEditor = () => {
             </Button>
         </div>
     )
-};
+});

@@ -98,19 +98,13 @@ const ffmpegUrlPrefix = __DEV__
     ? ''
     : `https://cdn.memely.net/ffmpeg`;
 const baseURL = `${ffmpegUrlPrefix}/ffmpeg-${pkgName}/${pkgVersion}`;
-export const loadFFmpeg = async (ffmpeg: FFmpeg) => {
-    try {
-        console.log('ffmpeg: start loading...');
-        await ffmpeg.load({
-            coreURL: await toBlobURL(`${baseURL}/ffmpeg-core.js`, 'text/javascript'),
-            wasmURL: await toBlobURL(`${baseURL}/ffmpeg-core.wasm`, 'application/wasm'),
-            // workerURL: await toBlobURL(`${baseURL}/ffmpeg-core.worker.js`, 'text/javascript')
-        });
-        console.log('ffmpeg: loaded');
-    } catch (e) {
-        console.error('ffmpeg: not loaded', e);
-    }
-}
+export const loadFFMpeg = async (ffmpeg: FFmpeg) => {
+    await ffmpeg.load({
+        coreURL: await toBlobURL(`${baseURL}/ffmpeg-core.js`, 'text/javascript'),
+        wasmURL: await toBlobURL(`${baseURL}/ffmpeg-core.wasm`, 'application/wasm'),
+        // workerURL: await toBlobURL(`${baseURL}/ffmpeg-core.worker.js`, 'text/javascript')
+    });
+};
 
 export function* reduceWideLines(getTextWidth: (text: string) => number, text: string, maxWidth: number): Generator<string> {
     for (const line of text.split('\n')) {

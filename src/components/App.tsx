@@ -6,7 +6,12 @@ import {AppRouter} from '../AppRouter';
 
 export const App = observer(() => {
     const store = useStore();
-    useLoadInitialData();
+    const {failedBrowser} = useLoadInitialData();
+    if (failedBrowser) {
+        return (
+            <div>your browser is outdated. Please upgrade to the newest version</div>
+        );
+    }
 
     return !store.ffmpeg || !store.collections || !store.presets ? (
         <div>Loading...</div>

@@ -6,8 +6,12 @@ import {ScenarioItemClipTitle, SnapshotPreview} from './ScenarioEditor.styles';
 
 const CollectionItemElementWrapper = styled.div<{ disabled: boolean }>`
     cursor: pointer;
-
     opacity: ${props => props.disabled ? '0.5' : '1'};
+    margin: 0 0 24px 0;
+
+    @media (max-width: 480px) {
+        margin: 0 0 6vw 0;
+    }
 `;
 
 type Props = {
@@ -16,7 +20,6 @@ type Props = {
 }
 export const CollectionItemElement: FC<HTMLProps<HTMLDivElement> & Props> = ({item, disabled, onClick}) => (
     <CollectionItemElementWrapper onClick={disabled ? undefined : onClick} disabled={disabled}>
-        [{item.duration.toFixed(2)}] {item.text}
         <SnapshotPreview>
             <div>
                 <img
@@ -28,7 +31,6 @@ export const CollectionItemElement: FC<HTMLProps<HTMLDivElement> & Props> = ({it
             </div>
         </SnapshotPreview>
         <ScenarioItemClipTitle>
-            <label>clip</label>
             {item.text}
         </ScenarioItemClipTitle>
     </CollectionItemElementWrapper>

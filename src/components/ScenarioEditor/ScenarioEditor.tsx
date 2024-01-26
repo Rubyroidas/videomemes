@@ -76,6 +76,11 @@ export const ScenarioEditor = observer(() => {
                     Edit phrases
                 </Button>
             )}
+            <div>
+                <Button onClick={toggleAddClip}>
+                    {isAddingVisible ? 'Back to phrases list' : 'Add clip'}
+                </Button>
+            </div>
             {isAddingVisible ? (
                 <AddPhrase onSelect={handleAddItem}/>
             ) : (
@@ -90,9 +95,11 @@ export const ScenarioEditor = observer(() => {
                     <ScenarioList/>
                 </>
             )}
-            <Button onClick={toggleAddClip}>
-                {isAddingVisible ? 'Back to phrases list' : 'Add clip'}
-            </Button>
+            <div>
+                <Button onClick={toggleAddClip}>
+                    {isAddingVisible ? 'Back to phrases list' : 'Add clip'}
+                </Button>
+            </div>
         </div>
     )
 });

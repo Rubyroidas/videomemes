@@ -9,6 +9,7 @@ import {Icon} from './PhraseEditor.styles';
 import {PlayIcon} from '../../icons/PlayIcon';
 import {EditListIcon} from '../../icons/EditListIcon';
 import {useStore} from '../../store';
+import {ProgressCurtain} from './ProgressCurtain';
 
 export const VideoEditor: FC = () => {
     const store = useStore();
@@ -75,6 +76,9 @@ export const VideoEditor: FC = () => {
                 format={format}
                 onChange={setUserPhrases}
             />
+            {isEncoding && (
+                <ProgressCurtain/>
+            )}
         </>
     );
 }

@@ -7,6 +7,7 @@ export class Store {
     collections: Collection[] | undefined;
     presets: ScenarioPreset[] | undefined;
     scenario: UserScenario | undefined;
+    generatedVideo: Blob | undefined;
 
     ffmpeg: FFmpeg | undefined;
 

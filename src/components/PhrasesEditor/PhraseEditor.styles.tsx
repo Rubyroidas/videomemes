@@ -64,7 +64,7 @@ export const TextAreaClass = (fontSizeDesktop: number, fontSizeMobile: number, p
         color: gray;
     }
 `;
-export const Video = styled.video`
+export const EditingVideo = styled.video`
     width: 100%;
 `;
 export const NavigateCaption = styled.div`
@@ -115,4 +115,7 @@ export const PlayButton = styled.div<PlayButtonProps>`
         fill: #fff;
         opacity: 0.5;
     }
+`;
+export const ResultVideo = styled.video`
+    width: 100%;
 `;

@@ -1,7 +1,7 @@
 import {FC, PropsWithChildren} from 'react';
 
 import {Button} from '../App.styles';
-import {downloadBlob} from '../../utils.ts';
+import {downloadBlob} from '../../utils';
 
 type Props = PropsWithChildren & {
     data: Blob;

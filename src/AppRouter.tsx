@@ -7,6 +7,7 @@ import {AboutPage} from './pages/AboutPage';
 import {ContactUsPage} from './pages/ContactUsPage';
 import {DonatePage} from './pages/DonatePage';
 import {PickPresetScenarioPage} from './pages/PickPresetScenarioPage';
+import {DownloadResultPage} from './pages/DownloadResultPage';
 
 const router = createBrowserRouter([
     {
@@ -24,6 +25,10 @@ const router = createBrowserRouter([
     {
         path: '/edit-phrases',
         element: <EditPhrasesPage/>,
+    },
+    {
+        path: '/download-result',
+        element: <DownloadResultPage/>,
     },
     {
         path: '/about',

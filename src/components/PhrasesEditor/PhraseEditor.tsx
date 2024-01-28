@@ -5,7 +5,13 @@ import {FileUploader} from 'react-drag-drop-files';
 import {PlayIcon} from '../../icons/PlayIcon';
 import {Format, Point, Rect, TextSize, UserPhrase} from '../../types';
 import {FONT_SIZE, TEXT_PADDING} from '../../config';
-import {EditingAreaContainer, InputBackground, PlayButton, TextAreaClass, Video} from './PhraseEditor.styles';
+import {
+    EditingAreaContainer,
+    EditingVideo,
+    InputBackground,
+    PlayButton,
+    TextAreaClass,
+} from './PhraseEditor.styles';
 import {useStore} from '../../store';
 import {Button, ButtonSelector} from '../App.styles';
 import {DebugImage} from '../DebugImage';
@@ -176,7 +182,7 @@ export const PhraseEditor: FC<PhraseEditorProps> = (props) => {
                         />
                     )}
                 </InputBackground>
-                <Video
+                <EditingVideo
                     ref={videoRef}
                     onClick={handleVideoClick}
                     controls={false}

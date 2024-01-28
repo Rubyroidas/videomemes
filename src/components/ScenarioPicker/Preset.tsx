@@ -4,7 +4,7 @@ import shortUuid from 'short-uuid';
 
 import {Format, ScenarioPreset, TextSize} from '../../types';
 import {useStore} from '../../store';
-import {PresetWrapper} from './ScenarioPicker.styles.ts';
+import {PresetWrapper} from './ScenarioPicker.styles';
 
 export const Preset: FC<{ preset: ScenarioPreset }> = ({preset}) => {
     const store = useStore();

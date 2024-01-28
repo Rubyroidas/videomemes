@@ -1,26 +1,21 @@
-import {FC, useCallback, useEffect, useRef, useState} from 'react';
-
-import {PhrasesEditor} from './PhrasesEditor';
-import {DownloadVideoButton} from './DownloadVideoButton';
+import {FC, useCallback, useState} from 'react';
+import {useNavigate} from 'react-router-dom';
 
 import {Button} from '../App.styles';
+import {PhrasesEditor} from './PhrasesEditor';
 import {Format, UserPhrase} from '../../types';
 import {generateVideo} from '../../generate';
 import {Icon} from './PhraseEditor.styles';
 import {PlayIcon} from '../../icons/PlayIcon';
 import {EditListIcon} from '../../icons/EditListIcon';
-import {DownloadIcon} from '../../icons/DownloadIcon';
 import {useStore} from '../../store';
-import {useNavigate} from 'react-router-dom';
 
 export const VideoEditor: FC = () => {
     const store = useStore();
     const navigate = useNavigate();
-    const videoRef = useRef<HTMLVideoElement>(null);
 
     const userPhrases = store.scenario?.phrases;
     const [isEncoding, setIsEncoding] = useState(false);
-    const [generatedVideo, setGeneratedVideo] = useState<Blob | null>(null);
     const format = store.scenario?.format ?? Format.InstagramStory;
 
     const setUserPhrases = useCallback((value: UserPhrase[]) => {
@@ -30,7 +25,7 @@ export const VideoEditor: FC = () => {
     }, []);
     const handleGenerateClick = useCallback(() => {
         (async () => {
-            if (isEncoding || !videoRef.current || !userPhrases) {
+            if (isEncoding || !userPhrases) {
                 return;
             }
 
@@ -42,22 +37,15 @@ export const VideoEditor: FC = () => {
                 store.collections!,
                 format
             );
-            setGeneratedVideo(vid);
+            store.generatedVideo = vid;
             console.log('end generate');
             setIsEncoding(false);
+            navigate('/download-result');
         })();
     }, []);
     const handleEditScenario = useCallback(() => {
         navigate('/edit-scenario');
     }, []);
-
-    useEffect(() => {
-        if (!videoRef.current || !generatedVideo) {
-            return;
-        }
-
-        videoRef.current.src = URL.createObjectURL(generatedVideo);
-    }, [generatedVideo]);
 
     if (!userPhrases) {
         return null;
@@ -80,14 +68,6 @@ export const VideoEditor: FC = () => {
                         Generate
                     </Button>
                 )}
-                {generatedVideo && !isEncoding && (
-                    <DownloadVideoButton data={generatedVideo}>
-                        <Icon>
-                            <DownloadIcon/>
-                        </Icon>
-                        Download
-                    </DownloadVideoButton>
-                )}
             </div>
             <PhrasesEditor
                 disabled={isEncoding}
@@ -95,9 +75,6 @@ export const VideoEditor: FC = () => {
                 format={format}
                 onChange={setUserPhrases}
             />
-            <video controls={true} ref={videoRef} style={{
-                display: !generatedVideo || isEncoding ? 'none' : ''
-            }}></video>
         </>
     );
 }

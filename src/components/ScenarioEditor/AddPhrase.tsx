@@ -2,9 +2,9 @@ import {FC, useState} from 'react';
 
 import {useStore} from '../../store';
 import {Collection, CollectionItem} from '../../types';
-import {CollectionItemElement} from './CollectionItemElement.tsx';
-import {MAX_VIDEO_LENGTH_SECONDS} from '../../config.ts';
-import {AddPhraseCollectionItemList, AddPhraseCollectionList, CollectionElement} from './ScenarioEditor.styles.ts';
+import {CollectionItemElement} from './CollectionItemElement';
+import {MAX_VIDEO_LENGTH_SECONDS} from '../../config';
+import {AddPhraseCollectionItemList, AddPhraseCollectionList, CollectionElement} from './ScenarioEditor.styles';
 
 type Props = {
     onSelect: (collection: Collection, item: CollectionItem) => void;

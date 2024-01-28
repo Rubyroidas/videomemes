@@ -63,10 +63,11 @@ const Wrapper = styled.div`
 
 const SpinnerText = styled.div`
     text-align: center;
-    width: 200px;
+    width: 300px;
+    line-height: 160%;
 
     @media (max-width: 480px) {
-        width: 46vw;
+        width: 60vw;
     }
 `;
 
@@ -74,7 +75,9 @@ export const ProgressCurtain = () => (
     <Wrapper>
         <LoadingSpinner/>
         <SpinnerText>
-            Generating your video... That can take up to several minutes
+            <div>Generating your video...</div>
+            <div>That can take up to several minutes</div>
+            <div>Don't close this tab</div>
         </SpinnerText>
     </Wrapper>
 );

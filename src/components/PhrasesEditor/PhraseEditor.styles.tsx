@@ -117,5 +117,7 @@ export const PlayButton = styled.div<PlayButtonProps>`
     }
 `;
 export const ResultVideo = styled.video`
-    width: 100%;
+    @media (max-width: 480px) {
+        width: 100vw;
+    }
 `;

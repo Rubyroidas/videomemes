@@ -1,13 +1,21 @@
 import {useCallback, useEffect, useRef} from 'react';
 import {useNavigate} from 'react-router-dom';
 import {observer} from 'mobx-react';
+import styled from '@emotion/styled';
 
 import {DownloadVideoButton} from '../components/PhrasesEditor/DownloadVideoButton';
-import {Icon, ResultVideo} from '../components/PhrasesEditor/PhraseEditor.styles';
+import {Header, Icon, ResultVideo} from '../components/PhrasesEditor/PhraseEditor.styles';
 import {DownloadIcon} from '../icons/DownloadIcon';
 import {useStore} from '../store';
 import {Button} from '../components/App.styles';
 import {RedoIcon} from '../icons/RedoIcon';
+
+const Wrapper = styled.div`
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+`;
 
 export const DownloadResultPage = observer(() => {
     const store = useStore();
@@ -38,19 +46,21 @@ export const DownloadResultPage = observer(() => {
     }
 
     return (
-        <div>
-            <Button onClick={handleEditPhrases}>
-                <Icon>
-                    <RedoIcon/>
-                </Icon>
-                Edit
-            </Button>
-            <DownloadVideoButton data={store.generatedVideo}>
-                <Icon>
-                    <DownloadIcon/>
-                </Icon>
-                Download
-            </DownloadVideoButton>
+        <Wrapper>
+            <Header>
+                <Button onClick={handleEditPhrases}>
+                    <Icon>
+                        <RedoIcon/>
+                    </Icon>
+                    Edit
+                </Button>
+                <DownloadVideoButton data={store.generatedVideo}>
+                    <Icon>
+                        <DownloadIcon/>
+                    </Icon>
+                    Download
+                </DownloadVideoButton>
+            </Header>
             <ResultVideo
                 ref={videoRef}
                 controls={true}
@@ -62,6 +72,6 @@ export const DownloadResultPage = observer(() => {
                 preload="auto"
                 crossOrigin="anonymous"
             />
-        </div>
+        </Wrapper>
     );
 });

@@ -3,10 +3,10 @@ import {useNavigate} from 'react-router-dom';
 import shortUuid from 'short-uuid';
 
 import {Format, ScenarioPreset, TextSize} from '../../types';
-import {Button} from '../App.styles';
 import {useStore} from '../../store';
+import {PresetWrapper} from './ScenarioPicker.styles.ts';
 
-export const Preset: FC<{preset: ScenarioPreset}> = ({preset}) => {
+export const Preset: FC<{ preset: ScenarioPreset }> = ({preset}) => {
     const store = useStore();
     const navigate = useNavigate();
     const handleClick = () => {
@@ -25,9 +25,8 @@ export const Preset: FC<{preset: ScenarioPreset}> = ({preset}) => {
     };
 
     return (
-        <div>
-            <div>{preset.name}</div>
-            <Button onClick={handleClick}>Choose</Button>
-        </div>
+        <PresetWrapper onClick={handleClick}>
+            {preset.name}
+        </PresetWrapper>
     );
 }

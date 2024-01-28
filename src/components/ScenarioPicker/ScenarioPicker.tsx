@@ -1,5 +1,5 @@
 import {useStore} from '../../store';
-import {Wrapper} from './ScenarioPicker.styles';
+import {ScenarioPickerWrapper} from './ScenarioPicker.styles';
 import {Preset} from './Preset';
 
 export const ScenarioPicker = () => {
@@ -11,10 +11,10 @@ export const ScenarioPicker = () => {
     }
 
     return (
-        <Wrapper>
+        <ScenarioPickerWrapper>
             {presets.map(preset => (
                 <Preset preset={preset} key={preset.id}/>
             ))}
-        </Wrapper>
+        </ScenarioPickerWrapper>
     );
 };

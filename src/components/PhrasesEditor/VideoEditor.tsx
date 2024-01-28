@@ -3,7 +3,6 @@ import {useNavigate} from 'react-router-dom';
 
 import {Button} from '../App.styles';
 import {PhrasesEditor} from './PhrasesEditor';
-import {Format, UserPhrase} from '../../types';
 import {generateVideo} from '../../generate';
 import {Icon} from './PhraseEditor.styles';
 import {PlayIcon} from '../../icons/PlayIcon';
@@ -15,18 +14,11 @@ export const VideoEditor: FC = () => {
     const store = useStore();
     const navigate = useNavigate();
 
-    const userPhrases = store.scenario?.phrases;
     const [isEncoding, setIsEncoding] = useState(false);
-    const format = store.scenario?.format ?? Format.InstagramStory;
 
-    const setUserPhrases = useCallback((value: UserPhrase[]) => {
-        if (store.scenario) {
-            store.scenario.phrases = value;
-        }
-    }, []);
     const handleGenerateClick = useCallback(() => {
         (async () => {
-            if (isEncoding || !userPhrases) {
+            if (isEncoding || !store.scenario?.phrases || !store.scenario?.format || !store.collections) {
                 return;
             }
 
@@ -34,9 +26,9 @@ export const VideoEditor: FC = () => {
             console.log('start generate');
             const vid = await generateVideo(
                 store.ffmpeg!,
-                userPhrases,
-                store.collections!,
-                format
+                store.scenario.phrases,
+                store.collections,
+                store.scenario.format
             );
             store.generatedVideo = vid;
             console.log('end generate');
@@ -48,7 +40,7 @@ export const VideoEditor: FC = () => {
         navigate('/edit-scenario');
     }, []);
 
-    if (!userPhrases) {
+    if (!store.scenario?.phrases) {
         return null;
     }
 
@@ -72,9 +64,6 @@ export const VideoEditor: FC = () => {
             </div>
             <PhrasesEditor
                 disabled={isEncoding}
-                userPhrases={userPhrases}
-                format={format}
-                onChange={setUserPhrases}
             />
             {isEncoding && (
                 <ProgressCurtain/>

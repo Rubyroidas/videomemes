@@ -3,7 +3,7 @@ import ContentEditable, {ContentEditableEvent} from 'react-contenteditable';
 import {FileUploader} from 'react-drag-drop-files';
 
 import {PlayIcon} from '../../icons/PlayIcon';
-import {Format, Point, Rect, TextSize, UserPhrase} from '../../types';
+import {Point, Rect, TextSize, UserPhrase} from '../../types';
 import {FONT_SIZE, TEXT_PADDING} from '../../config';
 import {
     EditingAreaContainer,
@@ -19,7 +19,6 @@ import {formatSizes} from '../../statics';
 
 type PhraseEditorProps = {
     disabled: boolean;
-    format: Format;
     userPhrase: UserPhrase;
     onChange: (phrases: UserPhrase) => void;
 }
@@ -47,7 +46,7 @@ const imageSizeValues = [{
 }];
 
 export const PhraseEditor: FC<PhraseEditorProps> = (props) => {
-    const {disabled, userPhrase, format, onChange} = props;
+    const {disabled, userPhrase, onChange} = props;
     const store = useStore();
     const videoRef = useRef<HTMLVideoElement | null>(null);
     const [isVideoPlaying, setIsVideoPlaying] = useState(false);
@@ -99,9 +98,15 @@ export const PhraseEditor: FC<PhraseEditorProps> = (props) => {
         });
     };
 
+    if (!store.scenario) {
+        return null;
+    }
+
+    const format = store.scenario.format;
+
     const collection = store.collections!.find(c => c.id === userPhrase.collectionId)!;
     const item = collection.items.find(item => item.id === userPhrase.phraseId)!;
-    const collectionSize = formatSizes[format];
+    const collectionSize = formatSizes[store.scenario.format];
     const textAreaRect = collection.textArea[format];
 
     const virtualRect: Rect = {

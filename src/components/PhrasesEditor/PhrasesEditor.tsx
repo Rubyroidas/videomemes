@@ -1,7 +1,7 @@
 import {FC, useState} from 'react';
 
 import {useStore} from '../../store';
-import {Format, UserPhrase} from '../../types';
+import {UserPhrase} from '../../types';
 import {escapeHTML, html2text} from '../../utils';
 import {Header, NavigateCaption} from './PhraseEditor.styles';
 import {NavigationBar} from './NavigationBar';
@@ -9,27 +9,24 @@ import {PhraseEditor} from './PhraseEditor';
 
 type PhrasesEditorProps = {
     disabled: boolean;
-    userPhrases: UserPhrase[];
-    format: Format;
-    onChange: (phrases: UserPhrase[]) => void;
 }
 
 export const PhrasesEditor: FC<PhrasesEditorProps> = (props) => {
-    const {disabled, userPhrases, onChange} = props;
-    const [phraseIndex, setPhraseIndex] = useState(0);
     const store = useStore();
+    const {disabled} = props;
+    const [phraseIndex, setPhraseIndex] = useState(0);
+    if (!store.scenario?.phrases) {
+        return null;
+    }
+    const userPhrases = store.scenario.phrases;
 
     const onProxyChange = (phrase: UserPhrase) => {
-        const result = [...userPhrases];
-        const escapedPhrase: UserPhrase = {
-            ...phrase,
-            text: phrase.text
-                ? html2text(phrase.text)
-                : phrase.text,
-        };
-        result[phraseIndex] = escapedPhrase;
-
-        onChange(result);
+        if (!store.scenario?.phrases) {
+            return;
+        }
+        store.scenario.phrases[phraseIndex].text = phrase.text
+            ? html2text(phrase.text)
+            : phrase.text;
     };
 
     const userPhrase = userPhrases[phraseIndex];
@@ -62,7 +59,6 @@ export const PhrasesEditor: FC<PhrasesEditorProps> = (props) => {
             </Header>
             <PhraseEditor
                 userPhrase={preparedUserPhrase}
-                format={props.format}
                 disabled={disabled}
                 onChange={onProxyChange}
             />

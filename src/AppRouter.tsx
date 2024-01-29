@@ -8,6 +8,7 @@ import {ContactUsPage} from './pages/ContactUsPage';
 import {DonatePage} from './pages/DonatePage';
 import {PickPresetScenarioPage} from './pages/PickPresetScenarioPage';
 import {DownloadResultPage} from './pages/DownloadResultPage';
+import {FeedPage} from './pages/FeedPage';
 
 const router = createBrowserRouter([
     {
@@ -29,6 +30,10 @@ const router = createBrowserRouter([
     {
         path: '/download-result',
         element: <DownloadResultPage/>,
+    },
+    {
+        path: '/feed',
+        element: <FeedPage/>,
     },
     {
         path: '/about',

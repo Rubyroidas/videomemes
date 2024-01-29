@@ -11,6 +11,7 @@ export const HomePage = () => (
         <LinksList>
             <Button to="/pick-preset-scenario">Choose preset scenario</Button>
             <Button to="/edit-scenario">Create your scenario</Button>
+            <Button to="/feed">See what people posted</Button>
         </LinksList>
         <LinksList>
             <MinorLink to="/about">About the project</MinorLink>

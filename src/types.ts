@@ -60,3 +60,8 @@ export type UserPhrase = {
     imageSize: number;
     image?: Blob;
 }
+
+export type FeedItem = {
+    url: string;
+    created_at: string;
+}

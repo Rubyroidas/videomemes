@@ -65,6 +65,7 @@ const SpinnerText = styled.div`
     text-align: center;
     width: 300px;
     line-height: 160%;
+    color: #fff;
 
     @media (max-width: 480px) {
         width: 60vw;

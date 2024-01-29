@@ -1,4 +1,5 @@
 import {FC, useState} from 'react';
+import {observer} from 'mobx-react';
 
 import {useStore} from '../../store';
 import {UserPhrase} from '../../types';
@@ -11,7 +12,7 @@ type PhrasesEditorProps = {
     disabled: boolean;
 }
 
-export const PhrasesEditor: FC<PhrasesEditorProps> = (props) => {
+export const PhrasesEditor: FC<PhrasesEditorProps> = observer((props) => {
     const store = useStore();
     const {disabled} = props;
     const [phraseIndex, setPhraseIndex] = useState(0);
@@ -24,9 +25,11 @@ export const PhrasesEditor: FC<PhrasesEditorProps> = (props) => {
         if (!store.scenario?.phrases) {
             return;
         }
+
         store.scenario.phrases[phraseIndex].text = phrase.text
             ? html2text(phrase.text)
             : phrase.text;
+        store.scenario.phrases[phraseIndex].image = phrase.image;
     };
 
     const userPhrase = userPhrases[phraseIndex];
@@ -64,4 +67,4 @@ export const PhrasesEditor: FC<PhrasesEditorProps> = (props) => {
             />
         </div>
     );
-};
+});

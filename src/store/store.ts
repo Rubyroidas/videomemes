@@ -1,4 +1,8 @@
-import {makeAutoObservable} from 'mobx';
+import {configure, makeAutoObservable} from 'mobx';
+
+configure({
+    enforceActions: 'never',
+});
 
 import {Collection, ScenarioPreset, UserScenario} from '../types';
 import {FFmpeg} from '@ffmpeg/ffmpeg';

@@ -26,10 +26,12 @@ export const PhrasesEditor: FC<PhrasesEditorProps> = observer((props) => {
             return;
         }
 
-        store.scenario.phrases[phraseIndex].text = phrase.text
-            ? html2text(phrase.text)
-            : phrase.text;
-        store.scenario.phrases[phraseIndex].image = phrase.image;
+        store.scenario.phrases[phraseIndex] = {
+            ...phrase,
+            text: phrase.text
+                ? html2text(phrase.text)
+                : phrase.text
+        };
     };
 
     const userPhrase = userPhrases[phraseIndex];

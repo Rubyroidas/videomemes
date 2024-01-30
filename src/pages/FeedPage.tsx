@@ -1,5 +1,5 @@
 import {Feed} from '../components/Feed';
-import {AppTitle, BasicLink} from '../components/App.styles.tsx';
+import {AppTitle, BasicLink} from '../components/App.styles';
 
 export const FeedPage = () => (
     <div>

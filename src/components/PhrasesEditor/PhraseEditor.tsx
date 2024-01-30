@@ -1,5 +1,6 @@
 import {ClipboardEventHandler, FC, MouseEventHandler, useRef, useState} from 'react';
 import ContentEditable, {ContentEditableEvent} from 'react-contenteditable';
+import {Box, Slider, Typography} from '@mui/material';
 import {FileUploader} from 'react-drag-drop-files';
 
 import {PlayIcon} from '../../icons/PlayIcon';
@@ -32,17 +33,6 @@ const textSizeValues = [{
 }, {
     value: TextSize.Big,
     text: 'big',
-}];
-
-const imageSizeValues = [{
-    value: 0.5,
-    text: 'half',
-}, {
-    value: 0.75,
-    text: '3/4',
-}, {
-    value: 1,
-    text: 'full',
 }];
 
 export const PhraseEditor: FC<PhraseEditorProps> = (props) => {
@@ -153,12 +143,19 @@ export const PhraseEditor: FC<PhraseEditorProps> = (props) => {
                 </>
             ) : (
                 <>
-                    <ButtonSelector
-                        caption="Image size"
-                        value={userPhrase.imageSize}
-                        values={imageSizeValues}
-                        onChange={handleChangeImageSize}
-                    />
+                    <Box>
+                        <Typography>Image size</Typography>
+                        <Slider
+                            aria-label="Image size"
+                            min={0.25}
+                            step={0.25}
+                            marks
+                            max={3}
+                            valueLabelDisplay="auto"
+                            value={userPhrase.imageSize}
+                            onChange={(_, value) => handleChangeImageSize(value as number)}
+                        />
+                    </Box>
                     <Button onClick={handleClickSwitchToTextMode}>
                         switch to text mode
                     </Button>

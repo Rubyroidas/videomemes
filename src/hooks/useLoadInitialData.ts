@@ -17,12 +17,18 @@ export const useLoadInitialData = () => {
         const initFfmpeg = async () => {
             const ffmpeg = new FFmpeg();
             try {
-                console.log('ffmpeg: start loading...');
+                if (__DEV__) {
+                    console.log('ffmpeg: start loading...');
+                }
                 await loadFFMpeg(ffmpeg);
-                console.log('ffmpeg: loaded');
+                if (__DEV__) {
+                    console.log('ffmpeg: loaded');
+                }
             } catch (e) {
                 setFailedBrowser(true);
-                console.error('ffmpeg: not loaded', e);
+                if (__DEV__) {
+                    console.error('ffmpeg: not loaded', e);
+                }
             }
             store.ffmpeg = ffmpeg;
         };

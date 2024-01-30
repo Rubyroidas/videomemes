@@ -133,8 +133,9 @@ export const generateVideo = async (
 ): Promise<Blob> => {
     // info
     const videoProperties = await getVideoProperties(ffmpeg, 'input.mp4');
-    console.log('infoResult', videoProperties);
-
+    if (__DEV__) {
+        console.log('infoResult', videoProperties);
+    }
     // captions
     await ffmpeg.createDir('captions');
     await ffmpeg.createDir('videos');
@@ -171,8 +172,9 @@ export const generateVideo = async (
         await (new Blob([concatBody], {type: 'text/plain'}).arrayBuffer())
     ));
 
-    console.log('dir [.]', await ffmpegListFiles(ffmpeg, '.'));
-
+    if (__DEV__) {
+        console.log('dir [.]', await ffmpegListFiles(ffmpeg, '.'));
+    }
     const compileCommandArgs: string[] = ['-f', 'concat', '-i', 'concat.txt'];
 
     for (let i = 0; i < imageTimePairs.length; i++) {
@@ -194,7 +196,6 @@ export const generateVideo = async (
     }
 
     // watermark
-    console.log('waternark >>>');
     const collection = collections.find(c => c.id === userPhrases[0].collectionId)!;
     const watermarkArea = collection.watermarkArea[format];
 
@@ -239,7 +240,9 @@ export const generateVideo = async (
         'output.mp4'
     );
 
-    console.log(compileCommandArgs.join(' '));
+    if (__DEV__) {
+        console.log(compileCommandArgs.join(' '));
+    }
 
     // montage
     await ffmpegExec(ffmpeg, compileCommandArgs, () => {});
@@ -257,7 +260,9 @@ export const generateVideo = async (
     await ffmpeg.deleteFile('output.mp4');
     await ffmpeg.deleteFile('concat.txt');
     await ffmpeg.deleteFile('watermark.png');
-    console.log('dir [.]', await ffmpegListFiles(ffmpeg, '.'));
+    if (__DEV__) {
+        console.log('dir [.]', await ffmpegListFiles(ffmpeg, '.'));
+    }
 
     return result;
 };

@@ -23,7 +23,9 @@ export const VideoEditor: FC = () => {
             }
 
             setIsEncoding(true);
-            console.log('start generate');
+            if (__DEV__) {
+                console.log('start generate');
+            }
             const vid = await generateVideo(
                 store.ffmpeg!,
                 store.scenario.phrases,
@@ -31,7 +33,9 @@ export const VideoEditor: FC = () => {
                 store.scenario.format
             );
             store.generatedVideo = vid;
-            console.log('end generate');
+            if (__DEV__) {
+                console.log('end generate');
+            }
             setIsEncoding(false);
             navigate('/download-result');
         })();

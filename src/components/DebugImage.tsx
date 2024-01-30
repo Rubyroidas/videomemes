@@ -36,7 +36,12 @@ export const DebugImage: FC<Props> = ({background, collection, format, text, tex
             }
 
             const img = debugImage.current!;
+            const clear = () => {
+                URL.revokeObjectURL(img.src);
+                img.removeEventListener('load', clear);
+            };
             img.src = URL.createObjectURL(blob);
+            img.addEventListener('load', clear);
         };
         render();
     }, [text, textSize, image, imageSize]);

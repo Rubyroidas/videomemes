@@ -46,6 +46,7 @@ export enum Format {
 }
 
 export type UserScenario = {
+    uuid: string;
     format: Format;
     title?: string;
     phrases: UserPhrase[];

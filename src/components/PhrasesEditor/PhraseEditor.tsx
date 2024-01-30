@@ -147,8 +147,8 @@ export const PhraseEditor: FC<PhraseEditorProps> = (props) => {
                         <Typography>Image size</Typography>
                         <Slider
                             aria-label="Image size"
-                            min={0.25}
-                            step={0.25}
+                            min={0.5}
+                            step={0.1}
                             marks
                             max={3}
                             valueLabelDisplay="auto"

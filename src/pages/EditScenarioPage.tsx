@@ -1,5 +1,6 @@
 import {useEffect} from 'react';
 import {observer} from 'mobx-react';
+import shortUuid from 'short-uuid';
 
 import {AppTitle, BasicLink} from '../components/App.styles';
 import {ScenarioEditor} from '../components/ScenarioEditor/ScenarioEditor';
@@ -11,6 +12,7 @@ export const EditScenarioPage = observer(() => {
     useEffect(() => {
         if (!store.scenario) {
             store.scenario = {
+                uuid: shortUuid().uuid(),
                 format: Format.InstagramStory,
                 phrases: [],
             };

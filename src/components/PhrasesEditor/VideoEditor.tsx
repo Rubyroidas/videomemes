@@ -9,9 +9,11 @@ import {PlayIcon} from '../../icons/PlayIcon';
 import {EditListIcon} from '../../icons/EditListIcon';
 import {useStore} from '../../store';
 import {ProgressCurtain} from './ProgressCurtain';
+import {useApi} from '../../services/apiContext';
 
 export const VideoEditor: FC = () => {
     const store = useStore();
+    const api = useApi();
     const navigate = useNavigate();
 
     const [isEncoding, setIsEncoding] = useState(false);
@@ -36,6 +38,10 @@ export const VideoEditor: FC = () => {
             if (__DEV__) {
                 console.log('end generate');
             }
+
+            // upload scenario and file, or timeout - what comes first
+            await api.uploadScenarioAndFile(store.scenario, store.generatedVideo);
+
             setIsEncoding(false);
             navigate('/download-result');
         })();

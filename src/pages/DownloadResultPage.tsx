@@ -33,12 +33,18 @@ export const DownloadResultPage = observer(() => {
             return;
         }
 
-        videoRef.current.src = URL.createObjectURL(store.generatedVideo);
+        const video = videoRef.current;
+        const clear = () => {
+            URL.revokeObjectURL(video.src);
+            video.removeEventListener('load', clear);
+        };
+        video.src = URL.createObjectURL(store.generatedVideo);
+        video.addEventListener('load', clear);
     }, [store.generatedVideo]);
 
     const handleEditPhrases = useCallback(() => {
         store.generatedVideo = undefined;
-        navigate('/edit-phrases')
+        navigate('/edit-phrases');
     }, []);
 
     if (!store.generatedVideo) {

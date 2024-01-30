@@ -11,6 +11,7 @@ export const Preset: FC<{ preset: ScenarioPreset }> = ({preset}) => {
     const navigate = useNavigate();
     const handleClick = () => {
         store.scenario = {
+            uuid: shortUuid().uuid(),
             format: Format.InstagramStory,
             phrases: preset.items.map(item => ({
                 id: shortUuid().uuid(),

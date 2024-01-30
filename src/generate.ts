@@ -97,7 +97,7 @@ export const renderImageSlide = async (width: number, height: number, image: Blo
     img.src = URL.createObjectURL(image);
 
     await imageLoadPromise(img);
-    // URL.revokeObjectURL(img.src)
+    URL.revokeObjectURL(img.src)
     const isWider = img.naturalWidth / img.naturalHeight > width / height;
     const imageScale = imageSize * (
         isWider

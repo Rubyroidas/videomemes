@@ -173,4 +173,8 @@ export const downloadBlob = (data: Blob, filename: string) => {
     a.download = filename;
     a.click();
     window.URL.revokeObjectURL(url);
-}
+};
+
+export const wait = (ms: number) => new Promise(resolve => {
+    setTimeout(resolve, ms);
+});

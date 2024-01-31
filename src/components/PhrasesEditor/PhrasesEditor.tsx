@@ -28,7 +28,7 @@ export const PhrasesEditor: FC<PhrasesEditorProps> = observer((props) => {
 
         store.scenario.phrases[phraseIndex] = {
             ...phrase,
-            text: phrase.text
+            text: phrase.text !== undefined
                 ? html2text(phrase.text)
                 : phrase.text
         };
@@ -37,7 +37,7 @@ export const PhrasesEditor: FC<PhrasesEditorProps> = observer((props) => {
     const userPhrase = userPhrases[phraseIndex];
     const preparedUserPhrase = {
         ...userPhrase,
-        text: userPhrase.text
+        text: userPhrase.text !== undefined
             ? userPhrase.text.split('\n')
                 .map((line) => `<div>${escapeHTML(line)}</div>`)
                 .join('')

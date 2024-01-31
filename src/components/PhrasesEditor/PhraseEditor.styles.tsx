@@ -52,6 +52,16 @@ export const TextAreaClass = (fontSizeDesktop: number, fontSizeMobile: number, p
     outline: none;
     overflow: hidden;
     resize: none;
+    
+    & div::before {
+        content: "";
+        color: ${TEXT_COLOR};
+        line-height: ${LINE_HEIGHT * 100}%;
+        font-weight: bold;
+        display: block;
+        width: 1px;
+        height: 1px;
+    }
 
     @media (max-width: 480px) {
         font-size: ${fontSizeMobile}vw;

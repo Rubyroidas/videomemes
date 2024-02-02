@@ -1,14 +1,14 @@
 import {FC} from 'react';
 
-import {UserPhrase} from '../../types';
+import {UserPhrase, UserPhraseType} from '../../types';
 import {useStore} from '../../store';
 import {
-    ScenarioItemWrapper,
     ScenarioItemButton,
-    SnapshotPreview,
-    ScenarioItemUserText,
     ScenarioItemClipTitle,
-    ScenarioItemCollectionName
+    ScenarioItemCollectionName,
+    ScenarioItemUserText,
+    ScenarioItemWrapper,
+    SnapshotPreview
 } from './ScenarioEditor.styles';
 
 type ScenarioItemProps = {
@@ -65,7 +65,7 @@ export const ScenarioItem: FC<ScenarioItemProps> = (props) => {
                 {collectionItem.text}</ScenarioItemClipTitle>
             <ScenarioItemUserText>
                 <label>your text</label>
-                {phrase.text ?? (<i>image was specified</i>)}
+                {phrase.type === UserPhraseType.PlainText ? phrase.text : (<i>image</i>)}
             </ScenarioItemUserText>
         </ScenarioItemWrapper>
     );

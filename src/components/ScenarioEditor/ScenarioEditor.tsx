@@ -7,7 +7,7 @@ import {Icon} from '../PhrasesEditor/PhraseEditor.styles';
 import {EditListIcon} from '../../icons/EditListIcon';
 import {ScenarioList} from './ScenarioList';
 import {AddPhrase} from './AddPhrase';
-import {Collection, CollectionItem, Format, TextSize} from '../../types';
+import {Collection, CollectionItem, Format, TextSize, UserPhraseType} from '../../types';
 import {useStore} from '../../store';
 import {observer} from 'mobx-react';
 
@@ -45,6 +45,7 @@ export const ScenarioEditor = observer(() => {
         }
         store.scenario.phrases.push({
             id: shortUuid().uuid(),
+            type: UserPhraseType.PlainText,
             collectionId: collection.id,
             phraseId: item.id,
             text: item.text,

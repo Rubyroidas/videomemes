@@ -33,6 +33,11 @@ export type ScenarioPreset = {
     items: ScenarioPresetItem[];
 }
 
+export enum UserPhraseType {
+    PlainText = 'plainText',
+    PlainImage = 'plainImage',
+}
+
 export enum TextSize {
     Small = 'small',
     Normal = 'normal',
@@ -54,9 +59,10 @@ export type UserScenario = {
 
 export type UserPhrase = {
     id: string;
+    type: UserPhraseType;
     collectionId: string;
     phraseId: number;
-    text?: string;
+    text: string;
     textSize: TextSize;
     imageSize: number;
     image?: Blob;

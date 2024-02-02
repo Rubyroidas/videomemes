@@ -1,5 +1,6 @@
 import {FC, useCallback, useState} from 'react';
 import {useNavigate} from 'react-router-dom';
+import {observer} from 'mobx-react';
 
 import {Button} from '../App.styles';
 import {PhrasesEditor} from './PhrasesEditor';
@@ -10,8 +11,9 @@ import {EditListIcon} from '../../icons/EditListIcon';
 import {useStore} from '../../store';
 import {ProgressCurtain} from './ProgressCurtain';
 import {useApi} from '../../services/apiContext';
+import {UserPhraseType} from '../../types';
 
-export const VideoEditor: FC = () => {
+export const VideoEditor: FC = observer(() => {
     const store = useStore();
     const api = useApi();
     const navigate = useNavigate();
@@ -54,6 +56,12 @@ export const VideoEditor: FC = () => {
         return null;
     }
 
+    const canGenerate = store.scenario.phrases.every(
+        phrase =>
+            phrase.type === UserPhraseType.PlainText
+            || phrase.type === UserPhraseType.PlainImage && phrase.image !== undefined
+    );
+
     return (
         <>
             <div className="buttons">
@@ -64,7 +72,7 @@ export const VideoEditor: FC = () => {
                     Edit scenario
                 </Button>
                 {!isEncoding && (
-                    <Button onClick={handleGenerateClick}>
+                    <Button onClick={handleGenerateClick} disabled={!canGenerate}>
                         <Icon>
                             <PlayIcon/>
                         </Icon>
@@ -80,4 +88,4 @@ export const VideoEditor: FC = () => {
             )}
         </>
     );
-};
+});

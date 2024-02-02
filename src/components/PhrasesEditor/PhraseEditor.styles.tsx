@@ -6,6 +6,16 @@ import {LINE_HEIGHT, TEXT_COLOR} from '../../config';
 
 export const Header = styled.div`
 `;
+export const PhraserEditorWrapper = styled.div<Size>`
+    width: ${props => props.width}px;
+    height: ${props => props.height}px;
+    position: relative;
+
+    @media (max-width: 480px) {
+        width: 100vw;
+        height: ${props => props.height / props.width * 100}vw;
+    }
+`;
 export const EditingAreaContainer = styled.div<Size>`
     width: ${props => props.width}px;
     height: ${props => props.height}px;
@@ -28,7 +38,7 @@ export const InputBackground = styled.div<Rect>`
     background-repeat: no-repeat;
     background-position: center center;
 `;
-export const TextAreaClass = (fontSizeDesktop: number, fontSizeMobile: number, paddingDesktop: number, paddingMobile: number, placeHolder: string) => css`
+export const TextAreaClass = (fontSizeDesktop: number, fontSizeMobile: number, paddingDesktop: number, paddingMobile: number) => css`
     position: absolute;
     width: 100%;
     height: 100%;
@@ -67,11 +77,36 @@ export const TextAreaClass = (fontSizeDesktop: number, fontSizeMobile: number, p
         font-size: ${fontSizeMobile}vw;
         padding: ${paddingMobile}vw;
     }
+`;
+export const FileDropArea = styled.div`
+    position: absolute;
+    box-sizing: border-box;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-end;
+    
+    & > div {
+        box-sizing: border-box;
+        background-color: rgba(0, 0, 0, 0.75);
+        color: #fff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 8px;
+        border-radius: 0 0 0 12px;
+    }
 
-    &:empty::before {
-        content: "${placeHolder}";
-        font-style: italic;
-        color: gray;
+    &.big {
+        align-items: center;
+        justify-content: center;
+        background-color: rgba(0, 0, 0, 0.75);
+    }
+    &.big > div {
+        width: 100%;
+        height: 100%;
+        background-color: transparent;
     }
 `;
 export const EditingVideo = styled.video`

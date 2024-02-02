@@ -28,20 +28,16 @@ export const PhrasesEditor: FC<PhrasesEditorProps> = observer((props) => {
 
         store.scenario.phrases[phraseIndex] = {
             ...phrase,
-            text: phrase.text !== undefined
-                ? html2text(phrase.text)
-                : phrase.text
+            text: html2text(phrase.text),
         };
     };
 
     const userPhrase = userPhrases[phraseIndex];
     const preparedUserPhrase = {
         ...userPhrase,
-        text: userPhrase.text !== undefined
-            ? userPhrase.text.split('\n')
+        text: userPhrase.text.split('\n')
                 .map((line) => `<div>${escapeHTML(line)}</div>`)
-                .join('')
-            : undefined
+                .join(''),
     };
     const canGoLeft = phraseIndex > 0;
     const canGoRight = phraseIndex < userPhrases.length - 1;

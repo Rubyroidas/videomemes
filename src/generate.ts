@@ -1,14 +1,8 @@
 import {FFmpeg} from '@ffmpeg/ffmpeg';
 import {fetchFile} from '@ffmpeg/util';
 
-import {Collection, Format, Rect, Size, TextSize, UserPhrase} from './types';
-import {
-    ffmpegExec,
-    ffmpegListFiles,
-    getVideoProperties,
-    imageLoadPromise,
-    reduceWideLines
-} from './utils';
+import {Collection, Format, Rect, Size, TextSize, UserPhrase, UserPhraseType} from './types';
+import {ffmpegExec, ffmpegListFiles, getVideoProperties, imageLoadPromise, reduceWideLines} from './utils';
 import {FONT_SIZE, LINE_HEIGHT, TEXT_COLOR, TEXT_PADDING} from './config';
 import watermarkRaw2 from './icons/watermark.svg?raw';
 import {formatSizes} from './statics';
@@ -155,7 +149,7 @@ export const generateVideo = async (
 
         const {x, y, width, height} = collection.textArea[format];
         const collectionSize = formatSizes[format];
-        const blob = userPhrase.text
+        const blob = userPhrase.type === UserPhraseType.PlainText
             ? await renderTextSlide(collectionSize, width, height, userPhrase.text, userPhrase.textSize)
             : await renderImageSlide(width, height, userPhrase.image!, userPhrase.imageSize, '#fff');
         const imageFileName = `captions/${fileNumberSuffix}.png`;

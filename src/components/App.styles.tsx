@@ -10,7 +10,7 @@ export const BasicLink = styled(Link)`
     text-decoration: underline;
 `;
 
-export const Button = styled.div`
+export const Button = styled.div<{disabled?: boolean}>`
     display: inline-flex;
     align-items: center;
     background-color: var(--button-bg-color);
@@ -20,6 +20,8 @@ export const Button = styled.div`
     font-family: sans-serif;
     font-size: 24px;
     cursor: pointer;
+    opacity: ${props => props.disabled ? '0.5' : '1'};
+    user-select: none;
 
     & > div {
         margin-right: 12px;

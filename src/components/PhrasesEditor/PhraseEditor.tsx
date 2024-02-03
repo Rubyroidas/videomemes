@@ -1,4 +1,4 @@
-import {ClipboardEventHandler, FC, MouseEventHandler, useRef, useState} from 'react';
+import {ClipboardEventHandler, FC, MouseEventHandler, TouchEventHandler, useRef, useState} from 'react';
 import ContentEditable, {ContentEditableEvent} from 'react-contenteditable';
 import {Box, Slider, Typography} from '@mui/material';
 import {useDropzone} from 'react-dropzone';
@@ -128,6 +128,8 @@ export const PhraseEditor: FC<PhraseEditorProps> = (props) => {
         x: collection.playButton[format].x / collectionSize.width * 100,
         y: collection.playButton[format].y / collectionSize.height * 100,
     };
+    const dropZoneProps = getRootProps();
+    dropZoneProps.onTouchStart = (dropZoneProps.onClick as unknown) as TouchEventHandler;
 
     return (
         <PhraserEditorWrapper {...collectionSize}>
@@ -179,7 +181,7 @@ export const PhraseEditor: FC<PhraseEditorProps> = (props) => {
                                 />
                             ) }
                             <FileDropArea
-                                {...getRootProps()}
+                                {...dropZoneProps}
                                 className={clsx({big: isDragActive || !userPhrase.image})}
                             >
                                 <div>Drop image here ...</div>

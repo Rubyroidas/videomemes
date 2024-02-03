@@ -86,6 +86,7 @@ export const FileDropArea = styled.div`
     display: flex;
     align-items: flex-start;
     justify-content: flex-end;
+    cursor: pointer;
     
     & > div {
         box-sizing: border-box;
@@ -98,12 +99,12 @@ export const FileDropArea = styled.div`
         border-radius: 0 0 0 12px;
     }
 
-    &.big {
+    &.big, &:hover {
         align-items: center;
         justify-content: center;
         background-color: rgba(0, 0, 0, 0.75);
     }
-    &.big > div {
+    &.big > div, , &:hover > div {
         width: 100%;
         height: 100%;
         background-color: transparent;

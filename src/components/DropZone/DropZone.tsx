@@ -58,6 +58,7 @@ export const useDropZone = (options: Options) => {
         if (!inputRef.current) {
             const input = document.createElement('input')!;
             input.type = 'file';
+            input.accept = '.jpg,.jpeg,.png';
             inputRef.current = input;
             input.addEventListener('change', _ => {
                 // you can use this method to get file and perform respective operations

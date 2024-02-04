@@ -9,8 +9,8 @@ export const HomePage = () => (
             Free service for short funny videos creation
         </Paragraph>
         <LinksList>
-            <Button to="/pick-preset-scenario">Choose preset scenario</Button>
-            <Button to="/edit-scenario">Create your scenario</Button>
+            <Button to="/new-scenario?from=preset">Choose preset scenario</Button>
+            <Button to="/new-scenario">Create your scenario</Button>
             <Button to="/feed">See what people posted</Button>
         </LinksList>
         <LinksList>

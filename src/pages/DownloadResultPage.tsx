@@ -24,7 +24,7 @@ export const DownloadResultPage = observer(() => {
 
     useEffect(() => {
         if (!store.generatedVideo) {
-            navigate('/edit-phrases');
+            navigate('/');
         }
     });
 

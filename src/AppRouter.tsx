@@ -2,11 +2,12 @@ import {createBrowserRouter, RouterProvider} from 'react-router-dom';
 
 import {HomePage} from './pages/HomePage';
 import {EditPhrasesPage} from './pages/EditPhrasesPage';
-import {EditScenarioPage} from './pages/EditScenarioPage';
 import {AboutPage} from './pages/AboutPage';
 import {ContactUsPage} from './pages/ContactUsPage';
 import {DonatePage} from './pages/DonatePage';
+import {NewScenarioPage} from './pages/NewScenarioPage';
 import {PickPresetScenarioPage} from './pages/PickPresetScenarioPage';
+import {EditScenarioPage} from './pages/EditScenarioPage';
 import {DownloadResultPage} from './pages/DownloadResultPage';
 import {FeedPage} from './pages/FeedPage';
 
@@ -14,6 +15,10 @@ const router = createBrowserRouter([
     {
         path: '/',
         element: <HomePage/>,
+    },
+    {
+        path: '/new-scenario',
+        element: <NewScenarioPage/>,
     },
     {
         path: '/pick-preset-scenario',

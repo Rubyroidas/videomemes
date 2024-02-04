@@ -99,15 +99,29 @@ export const FileDropArea = styled.div`
         border-radius: 0 0 0 12px;
     }
 
-    &.big, &:hover {
+    &.big {
         align-items: center;
         justify-content: center;
         background-color: rgba(0, 0, 0, 0.75);
     }
-    &.big > div, , &:hover > div {
+    &.big > div {
         width: 100%;
         height: 100%;
         background-color: transparent;
+    }
+
+    /* duplicating for non-mobile to appear on hover */
+    @media (hover: hover) {
+        &:hover {
+            align-items: center;
+            justify-content: center;
+            background-color: rgba(0, 0, 0, 0.75);
+        }
+        &:hover > div {
+            width: 100%;
+            height: 100%;
+            background-color: transparent;
+        }
     }
 `;
 export const EditingVideo = styled.video`

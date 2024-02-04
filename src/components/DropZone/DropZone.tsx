@@ -47,10 +47,12 @@ export const useDropZone = (options: Options) => {
         setIsManualSelecting(true);
         inputRef.current.click();
     }, []);
-    const onClick: MouseEventHandler = useCallback((_) => {
+    const onClick: MouseEventHandler = useCallback((e) => {
+        e.preventDefault();
         handleManualSelect();
     }, []);
-    const onTouchEnd: TouchEventHandler = useCallback((_) => {
+    const onTouchEnd: TouchEventHandler = useCallback((e) => {
+        e.preventDefault();
         handleManualSelect();
     }, []);
 

@@ -1,7 +1,6 @@
-import {ClipboardEventHandler, FC, MouseEventHandler, TouchEventHandler, useRef, useState} from 'react';
+import {ClipboardEventHandler, FC, MouseEventHandler, useRef, useState} from 'react';
 import ContentEditable, {ContentEditableEvent} from 'react-contenteditable';
 import {Box, Slider, Typography} from '@mui/material';
-import {useDropzone} from 'react-dropzone';
 import clsx from 'clsx';
 
 import {PlayIcon} from '../../icons/PlayIcon';
@@ -9,16 +8,18 @@ import {Point, Rect, TextSize, UserPhrase, UserPhraseType} from '../../types';
 import {FONT_SIZE, TEXT_PADDING} from '../../config';
 import {
     EditingAreaContainer,
-    EditingVideo, FileDropArea,
+    EditingVideo,
+    FileDropArea,
     InputBackground,
+    PhraserEditorWrapper,
     PlayButton,
     TextAreaClass,
-    PhraserEditorWrapper,
 } from './PhraseEditor.styles';
 import {useStore} from '../../store';
 import {Button, ButtonSelector} from '../App.styles';
 import {DebugImage} from '../DebugImage';
 import {formatSizes} from '../../statics';
+import {useDropZone} from '../DropZone/DropZone';
 
 type PhraseEditorProps = {
     disabled: boolean;
@@ -49,15 +50,14 @@ export const PhraseEditor: FC<PhraseEditorProps> = (props) => {
             text: e.target.value,
         });
     };
-    const handleDrop = (files: File[]) => {
-        console.log('handleDrop');
-        const file = files[0];
+    const handleDrop = (file: File) => {
         onChange({
             ...userPhrase,
+            type: UserPhraseType.PlainImage,
             image: file,
         });
     };
-    const {getRootProps, isDragActive} = useDropzone({onDrop: handleDrop});
+    const {isDraggingOver, ...dropZoneProps} = useDropZone({onDrop: handleDrop});
     const handlePaste: ClipboardEventHandler = (e) => {
         e.preventDefault();
         document.execCommand('inserttext', false, e.clipboardData.getData('text/plain'));
@@ -128,8 +128,6 @@ export const PhraseEditor: FC<PhraseEditorProps> = (props) => {
         x: collection.playButton[format].x / collectionSize.width * 100,
         y: collection.playButton[format].y / collectionSize.height * 100,
     };
-    const dropZoneProps = getRootProps();
-    dropZoneProps.onTouchStart = (dropZoneProps.onClick as unknown) as TouchEventHandler;
 
     return (
         <PhraserEditorWrapper {...collectionSize}>
@@ -182,7 +180,7 @@ export const PhraseEditor: FC<PhraseEditorProps> = (props) => {
                             ) }
                             <FileDropArea
                                 {...dropZoneProps}
-                                className={clsx({big: isDragActive || !userPhrase.image})}
+                                className={clsx({big: isDraggingOver || !userPhrase.image})}
                             >
                                 <div>Drop image here ...</div>
                             </FileDropArea>

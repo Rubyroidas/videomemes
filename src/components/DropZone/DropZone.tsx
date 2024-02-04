@@ -50,7 +50,7 @@ export const useDropZone = (options: Options) => {
     const onClick: MouseEventHandler = useCallback((_) => {
         handleManualSelect();
     }, []);
-    const onTouchStart: TouchEventHandler = useCallback((_) => {
+    const onTouchEnd: TouchEventHandler = useCallback((_) => {
         handleManualSelect();
     }, []);
 
@@ -81,6 +81,6 @@ export const useDropZone = (options: Options) => {
         onDragLeave,
         onDrop,
         onClick,
-        onTouchStart,
+        onTouchEnd,
     };
 };

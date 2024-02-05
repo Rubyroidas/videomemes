@@ -22,21 +22,21 @@ type Props = {
 
 export const DebugImage: FC<Props> = ({background, collection, format, userPhrase}) => {
     const {type, text, textSize, image, imageSize} = userPhrase;
-    const debugImage = useRef<HTMLCanvasElement>(null);
+    const canvasRef = useRef<HTMLCanvasElement>(null);
 
     useEffect(() => {
         const render = async () => {
-            if (!debugImage.current) {
+            if (!canvasRef.current) {
                 return;
             }
 
-            const ctx = debugImage.current.getContext('2d')!;
+            const ctx = canvasRef.current.getContext('2d')!;
             const {width, height} = collection.textArea[format];
             const collectionSize = formatSizes[format];
             let canvas: HTMLCanvasElement;
 
-            debugImage.current.width = width;
-            debugImage.current.height = height;
+            canvasRef.current.width = width;
+            canvasRef.current.height = height;
 
             if (type === UserPhraseType.PlainText) {
                 canvas = await renderTextSlide(collectionSize, width, height, html2text(text), textSize);
@@ -51,6 +51,6 @@ export const DebugImage: FC<Props> = ({background, collection, format, userPhras
     }, [text, textSize, image, imageSize]);
 
     return (
-        <Wrapper ref={debugImage}/>
+        <Wrapper ref={canvasRef}/>
     );
 };

@@ -65,7 +65,7 @@ export type UserPhrase = {
     text: string;
     textSize: TextSize;
     imageSize: number;
-    image?: Blob;
+    image?: HTMLCanvasElement;
 }
 
 export type FeedItem = {

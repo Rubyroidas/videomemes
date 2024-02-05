@@ -63,6 +63,26 @@ export const renderTextSlide = async (videoSize: Size, width: number, height: nu
         y += lineHeight;
     }
 
+    return canvas;
+};
+
+export const blobToCanvas = async (blob: Blob): Promise<HTMLCanvasElement> => {
+    const canvas = document.createElement('canvas');
+    const ctx = canvas.getContext('2d')!;
+    const img = document.createElement('img');
+
+    img.src = URL.createObjectURL(blob);
+    await imageLoadPromise(img);
+    URL.revokeObjectURL(img.src);
+
+    canvas.width = img.naturalWidth;
+    canvas.height = img.naturalHeight;
+    ctx.drawImage(img, 0, 0);
+
+    return canvas;
+};
+
+export const canvasToBlob = async (canvas: HTMLCanvasElement, mimeType: string = 'image/png'): Promise<Blob> => {
     return await new Promise<Blob>((resolve, reject) => {
         canvas.toBlob(blob => {
             if (blob) {
@@ -70,11 +90,11 @@ export const renderTextSlide = async (videoSize: Size, width: number, height: nu
             } else {
                 reject();
             }
-        }, 'image/png');
+        }, mimeType);
     });
 };
 
-export const renderImageSlide = async (width: number, height: number, image: Blob, imageSize: number, background?: string) => {
+export const renderImageSlide = async (width: number, height: number, blob: Blob | HTMLCanvasElement, imageSize: number, background?: string) => {
     const canvas = document.createElement('canvas');
     canvas.width = width;
     canvas.height = height;
@@ -87,36 +107,26 @@ export const renderImageSlide = async (width: number, height: number, image: Blo
         ctx.fillRect(0, 0, width, height);
     }
 
-    const img = document.createElement('img');
-    img.src = URL.createObjectURL(image);
-
-    await imageLoadPromise(img);
-    URL.revokeObjectURL(img.src)
-    const isWider = img.naturalWidth / img.naturalHeight > width / height;
+    const image = blob.constructor === Blob
+        ? await blobToCanvas(blob)
+        : blob as HTMLCanvasElement;
+    const isWider = image.width / image.height > width / height;
     const imageScale = imageSize * (
         isWider
-            ? width / img.naturalWidth
-            : height / img.naturalHeight
+            ? width / image.width
+            : height / image.height
     );
     const scaledSize: Size = {
-        width: img.naturalWidth * imageScale,
-        height: img.naturalHeight * imageScale,
+        width: image.width * imageScale,
+        height: image.height * imageScale,
     };
-    ctx.drawImage(img,
+    ctx.drawImage(image,
         width / 2 - scaledSize.width / 2,
         height / 2 - scaledSize.height / 2,
         scaledSize.width, scaledSize.height
     );
 
-    return await new Promise<Blob>((resolve, reject) => {
-        canvas.toBlob(blob => {
-            if (blob) {
-                resolve(blob);
-            } else {
-                reject();
-            }
-        }, 'image/png');
-    });
+    return canvas;
 };
 
 export const generateVideo = async (
@@ -153,7 +163,7 @@ export const generateVideo = async (
             ? await renderTextSlide(collectionSize, width, height, userPhrase.text, userPhrase.textSize)
             : await renderImageSlide(width, height, userPhrase.image!, userPhrase.imageSize, '#fff');
         const imageFileName = `captions/${fileNumberSuffix}.png`;
-        await ffmpeg.writeFile(imageFileName, new Uint8Array(await blob.arrayBuffer()));
+        await ffmpeg.writeFile(imageFileName, new Uint8Array(await (await canvasToBlob(blob)).arrayBuffer()));
 
         imageTimePairs.push({timecode: timeShift, imageFileName, x, y, videoFileName});
         timeShift += item.duration;
@@ -195,11 +205,13 @@ export const generateVideo = async (
 
     const watermarkFile = new Uint8Array(
         await (
-            await renderImageSlide(
-                watermarkArea.width,
-                watermarkArea.height,
-                new Blob([watermarkRaw2], {type: 'image/svg+xml'}),
-                1)
+            (await canvasToBlob(
+                await renderImageSlide(
+                    watermarkArea.width,
+                    watermarkArea.height,
+                    new Blob([watermarkRaw2], {type: 'image/svg+xml'}),
+                    1)
+            ))
         ).arrayBuffer()
     );
     await ffmpeg.writeFile('watermark.png', watermarkFile);

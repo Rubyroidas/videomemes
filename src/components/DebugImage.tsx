@@ -6,7 +6,7 @@ import {html2text} from '../utils';
 import {Collection, Format, UserPhrase, UserPhraseType} from '../types';
 import {formatSizes} from '../statics';
 
-const Wrapper = styled.img`
+const Wrapper = styled.canvas`
     position: absolute;
     width: 100%;
     height: 100%;
@@ -22,35 +22,32 @@ type Props = {
 
 export const DebugImage: FC<Props> = ({background, collection, format, userPhrase}) => {
     const {type, text, textSize, image, imageSize} = userPhrase;
-    const debugImage = useRef<HTMLImageElement>(null);
+    const debugImage = useRef<HTMLCanvasElement>(null);
 
     useEffect(() => {
-        let disposed = false;
         const render = async () => {
-            const {width, height} = collection.textArea[format];
-            const collectionSize = formatSizes[format];
-            let blob;
-            if (type === UserPhraseType.PlainText) {
-                blob = await renderTextSlide(collectionSize, width, height, html2text(text), textSize);
-            } else {
-                blob = await renderImageSlide(width, height, image!, imageSize, background);
-            }
-
-            if (disposed) {
+            if (!debugImage.current) {
                 return;
             }
-            const img = debugImage.current!;
-            const clear = () => {
-                URL.revokeObjectURL(img.src);
-                img.removeEventListener('load', clear);
-            };
-            img.src = URL.createObjectURL(blob);
-            img.addEventListener('load', clear);
+
+            const ctx = debugImage.current.getContext('2d')!;
+            const {width, height} = collection.textArea[format];
+            const collectionSize = formatSizes[format];
+            let canvas: HTMLCanvasElement;
+
+            debugImage.current.width = width;
+            debugImage.current.height = height;
+
+            if (type === UserPhraseType.PlainText) {
+                canvas = await renderTextSlide(collectionSize, width, height, html2text(text), textSize);
+            } else {
+                canvas = await renderImageSlide(width, height, image!, imageSize, background);
+            }
+
+            ctx.clearRect(0, 0, width, height);
+            ctx.drawImage(canvas, 0, 0);
         };
         render();
-        return () => {
-            disposed = true;
-        }
     }, [text, textSize, image, imageSize]);
 
     return (

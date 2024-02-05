@@ -20,6 +20,7 @@ import {Button, ButtonSelector} from '../App.styles';
 import {DebugImage} from '../DebugImage';
 import {formatSizes} from '../../statics';
 import {useDropZone} from '../DropZone/DropZone';
+import {blobToCanvas} from '../../generate';
 
 type PhraseEditorProps = {
     disabled: boolean;
@@ -50,11 +51,11 @@ export const PhraseEditor: FC<PhraseEditorProps> = (props) => {
             text: e.target.value,
         });
     };
-    const handleDrop = (file: File) => {
+    const handleDrop = async (file: File) => {
         onChange({
             ...userPhrase,
             type: UserPhraseType.PlainImage,
-            image: file,
+            image: await blobToCanvas(file),
         });
     };
     const {isDraggingOver, ...dropZoneProps} = useDropZone({onDrop: handleDrop});

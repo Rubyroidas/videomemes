@@ -1,4 +1,9 @@
 [[redirects]]
+  from = "/new-scenario"
+  to = "/index.html"
+  status = 200
+  force = true
+[[redirects]]
   from = "/pick-preset-scenario"
   to = "/index.html"
   status = 200

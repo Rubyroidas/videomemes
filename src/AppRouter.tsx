@@ -10,6 +10,7 @@ import {PickPresetScenarioPage} from './pages/PickPresetScenarioPage';
 import {EditScenarioPage} from './pages/EditScenarioPage';
 import {DownloadResultPage} from './pages/DownloadResultPage';
 import {FeedPage} from './pages/FeedPage';
+import {TitleSetupPage} from './pages/TitleSetupPage';
 
 const router = createBrowserRouter([
     {
@@ -19,6 +20,10 @@ const router = createBrowserRouter([
     {
         path: '/new-scenario',
         element: <NewScenarioPage/>,
+    },
+    {
+        path: '/title-setup',
+        element: <TitleSetupPage/>,
     },
     {
         path: '/pick-preset-scenario',

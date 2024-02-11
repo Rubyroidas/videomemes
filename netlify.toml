@@ -1,4 +1,9 @@
 [[redirects]]
+  from = "/title-setup"
+  to = "/index.html"
+  status = 200
+  force = true
+[[redirects]]
   from = "/new-scenario"
   to = "/index.html"
   status = 200

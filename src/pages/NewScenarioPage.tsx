@@ -20,7 +20,7 @@ export const NewScenarioPage = () => {
         if (isFromPreset) {
             navigate('/pick-preset-scenario');
         } else {
-            navigate('/edit-scenario');
+            navigate('/title-setup');
         }
     }, []);
 

@@ -19,9 +19,15 @@ export const TitleSetup = () => {
 
     return (
         <div>
-            <input value={title} onChange={e => setTitle(e.target.value)} />
-            <button onClick={handleConfirm}>confirm</button>
-            <button onClick={handleSkip}>skip</button>
+            <textarea
+                rows={5}
+                cols={40}
+                value={title} onChange={e => setTitle(e.target.value)}
+            />
+            <div>
+                <button onClick={handleConfirm}>confirm</button>
+                <button onClick={handleSkip}>skip</button>
+            </div>
         </div>
     );
 };

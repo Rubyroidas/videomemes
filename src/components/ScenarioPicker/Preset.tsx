@@ -5,6 +5,7 @@ import shortUuid from 'short-uuid';
 import {ScenarioPreset, TextSize, UserPhraseType} from '../../types';
 import {useStore} from '../../store';
 import {PresetWrapper} from './ScenarioPicker.styles';
+import {VIDEO_TITLE_ENABLED} from '../../config';
 
 export const Preset: FC<{ preset: ScenarioPreset }> = ({preset}) => {
     const store = useStore();
@@ -19,7 +20,7 @@ export const Preset: FC<{ preset: ScenarioPreset }> = ({preset}) => {
             textSize: TextSize.Normal,
             imageSize: 1,
         }));
-        navigate('/title-setup');
+        navigate(VIDEO_TITLE_ENABLED ? '/title-setup' : '/edit-scenario');
     };
 
     return (

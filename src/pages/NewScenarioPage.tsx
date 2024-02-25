@@ -4,6 +4,7 @@ import {useNavigate, useSearchParams} from 'react-router-dom';
 import shortUuid from 'short-uuid';
 import {Format} from '../types';
 import {useStore} from '../store';
+import {VIDEO_TITLE_ENABLED} from '../config';
 
 export const NewScenarioPage = () => {
     const store = useStore();
@@ -20,7 +21,7 @@ export const NewScenarioPage = () => {
         if (isFromPreset) {
             navigate('/pick-preset-scenario');
         } else {
-            navigate('/title-setup');
+            navigate(VIDEO_TITLE_ENABLED ? '/title-setup' : '/edit-scenario');
         }
     }, []);
 

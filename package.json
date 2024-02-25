@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "vite --open",
+    "start:dev": "vite --open index-dev.html",
     "build": "tsc && vite build",
     "test": "jest"
   },

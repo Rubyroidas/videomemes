@@ -2,6 +2,7 @@ import {useState} from 'react';
 import {useNavigate} from 'react-router-dom';
 
 import {useStore} from '../store';
+import {consoleLog} from '../utils';
 
 export const TitleSetup = () => {
     const store = useStore();
@@ -13,7 +14,11 @@ export const TitleSetup = () => {
     };
 
     const handleConfirm = () => {
-        store.scenario!.title = title;
+        if (!store.scenario) {
+            return;
+        }
+        store.scenario.title = title;
+        consoleLog('setting title', title);
         navigate('/edit-scenario');
     };
 

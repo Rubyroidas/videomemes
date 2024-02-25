@@ -24,7 +24,11 @@ export const ffmpegExec = async (ffmpeg: FFmpeg, args: string[], progressCallbac
     if (progressCallback) {
         ffmpeg.on('progress', progressCallback);
     }
-    await ffmpeg.exec(args);
+    try {
+        await ffmpeg.exec(args);
+    } catch (e) {
+        consoleError('ffmpegExec err', e);
+    }
     if (progressCallback) {
         ffmpeg.off('progress', progressCallback);
     }
@@ -48,12 +52,14 @@ export const getVideoProperties = async (ffmpeg: FFmpeg, fileName: string): Prom
 
 export const ffmpegListFiles = async (ffmpeg: FFmpeg, path: string)=>
     (await ffmpeg.listDir(path)).filter(p => !(['.', '..'].includes(p.name) && p.isDir));
+export const ffmpegListFilesRaw = async (ffmpeg: FFmpeg, path: string)=>
+    (await ffmpegListFiles(ffmpeg, path)).map(item => item.name);
 
 export const debugCanvas = (canvas: HTMLCanvasElement) => {
     const {width, height} = canvas;
     const img = canvas.toDataURL('image/png');
-    console.log(img);
-    console.log('%c ', `color: transparent;font-size:1px;width:${width}px;height:${height}px;background:transparent url('${img}') no-repeat 0 0;background-zie: ${width}px ${height}px;`);
+    consoleLog(img);
+    consoleLog('%c ', `color: transparent;font-size:1px;width:${width}px;height:${height}px;background:transparent url('${img}') no-repeat 0 0;background-zie: ${width}px ${height}px;`);
 };
 
 const _escape = document.createElement('textarea');
@@ -178,3 +184,11 @@ export const downloadBlob = (data: Blob, filename: string) => {
 export const wait = (ms: number) => new Promise(resolve => {
     setTimeout(resolve, ms);
 });
+
+export const consoleLog = __DEV__
+    ? (...args: any[]) => console.log(...args)
+    : () => {};
+
+export const consoleError = __DEV__
+    ? (...args: any[]) => console.error(...args)
+    : () => {};

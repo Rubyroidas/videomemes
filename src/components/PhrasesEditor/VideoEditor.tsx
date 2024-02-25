@@ -12,6 +12,7 @@ import {useStore} from '../../store';
 import {ProgressCurtain} from './ProgressCurtain';
 import {useApi} from '../../services/apiContext';
 import {UserPhraseType} from '../../types';
+import {consoleLog} from '../../utils';
 
 export const VideoEditor: FC = observer(() => {
     const store = useStore();
@@ -19,34 +20,34 @@ export const VideoEditor: FC = observer(() => {
     const navigate = useNavigate();
 
     const [isEncoding, setIsEncoding] = useState(false);
+    consoleLog('store.scenario.title', store.scenario?.title);
 
     const handleGenerateClick = useCallback(() => {
-        (async () => {
-            if (isEncoding || !store.scenario?.phrases || !store.scenario?.format || !store.collections) {
+        const doGenerate = async () => {
+            if (isEncoding || !store.scenario || !store.collections) {
                 return;
             }
 
             setIsEncoding(true);
-            if (__DEV__) {
-                console.log('start generate');
-            }
+            consoleLog('start generate');
             const vid = await generateVideo(
                 store.ffmpeg!,
+                store.scenario.title,
                 store.scenario.phrases,
                 store.collections,
                 store.scenario.format
             );
             store.generatedVideo = vid;
-            if (__DEV__) {
-                console.log('end generate');
-            }
+            consoleLog('end generate', vid);
 
             // upload scenario and file, or timeout - what comes first
             await api.uploadScenarioAndFile(store.scenario, store.generatedVideo);
 
             setIsEncoding(false);
             navigate('/download-result');
-        })();
+        };
+
+        doGenerate();
     }, []);
     const handleEditScenario = useCallback(() => {
         navigate('/edit-scenario');

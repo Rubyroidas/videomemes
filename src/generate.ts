@@ -2,10 +2,19 @@ import {FFmpeg} from '@ffmpeg/ffmpeg';
 import {fetchFile} from '@ffmpeg/util';
 
 import {Collection, Format, Rect, Size, TextSize, UserPhrase, UserPhraseType} from './types';
-import {ffmpegExec, ffmpegListFiles, getVideoProperties, imageLoadPromise, reduceWideLines} from './utils';
+import {
+    consoleLog,
+    ffmpegExec,
+    ffmpegListFilesRaw,
+    hexToUint8Array,
+    imageLoadPromise,
+    reduceWideLines,
+    ProgressEvent,
+} from './utils';
 import {FONT_SIZE, LINE_HEIGHT, TEXT_COLOR, TEXT_PADDING} from './config';
 import watermarkRaw2 from './icons/watermark.svg?raw';
 import {formatSizes} from './statics';
+import silence from './500ms-silence.mp3?raw-hex';
 
 export const renderTextSlide = async (videoSize: Size, width: number, height: number, text: string, textSize: TextSize) => {
     text = (text ?? '').trim();
@@ -129,24 +138,112 @@ export const renderImageSlide = async (width: number, height: number, blob: Blob
     return canvas;
 };
 
+const codecsParams: Record<string, string[]> = {
+    video: [
+        '-c:v', 'libx264',
+        '-profile:v', 'high',
+        '-level:v', '4.0',
+        '-pix_fmt', 'yuv420p',
+        '-colorspace:v', 'bt709',
+        '-color_primaries:v', 'bt709', '-color_trc:v', 'bt709', '-color_range:v', 'tv', '-bsf:v',
+        'h264_metadata=chroma_sample_loc_type=0',
+    ],
+    audio: [
+        '-c:a', 'aac', '-b:a', '128k', '-ar', '44100',
+    ],
+    common: [
+        '-x264opts', 'opencl', // slight boost
+        '-brand', 'mp42', // brand compat
+        '-preset', 'ultrafast', // super fast preset
+        '-movflags', '+faststart', // ability to start video earlier (streaming?)
+    ],
+};
+
+const createWaterMarkData = async (size: Size) => new Uint8Array(
+    await (
+        (await canvasToBlob(
+            await renderImageSlide(
+                size.width,
+                size.height,
+                new Blob([watermarkRaw2], {type: 'image/svg+xml'}),
+                1)
+        ))
+    ).arrayBuffer()
+);
+
+export const generateVideoTitleImage = async (text: string, format: Format): Promise<HTMLCanvasElement> => {
+    const size = formatSizes[format];
+    return await renderTextSlide(
+        size,
+        size.width, size.height,
+        text, TextSize.Normal
+    );
+};
+
+export const generateVideoTitleVideo = async (ffmpeg: FFmpeg, text: string, format: Format, fileName: string, duration: number) => {
+    consoleLog('producing title: start');
+    const canvas = await generateVideoTitleImage(text, format);
+    const imageFileName = 'caption_title.png';
+    const silenceFileName = 'silence.mp3';
+    await ffmpeg.writeFile(imageFileName, new Uint8Array(await (await canvasToBlob(canvas)).arrayBuffer()));
+    await ffmpeg.writeFile(silenceFileName, hexToUint8Array(silence));
+
+    // montage
+    await ffmpegExec(ffmpeg, [
+        '-t', duration.toString(),
+        '-loop', '1',
+        '-i', imageFileName,
+        '-i', silenceFileName,
+
+        ...codecsParams.audio, '-shortest',
+        ...codecsParams.video,
+        ...codecsParams.common,
+
+        // output file
+        fileName
+    ], () => {});
+    await ffmpeg.deleteFile(imageFileName);
+    await ffmpeg.deleteFile(silenceFileName);
+    consoleLog('producing title: done');
+};
+
+type ImageTimePair = {
+    timecode: number;
+    imageFileName: string;
+    x: number;
+    y: number;
+    videoFileName: string;
+};
+
+const TITLE_LENGTH = 2; // seconds
+const TITLE_FILE = 'title.mp4';
+
 export const generateVideo = async (
     ffmpeg: FFmpeg,
+    videoTitle: string | undefined,
     userPhrases: UserPhrase[],
     collections: Collection[],
-    format: Format
+    format: Format,
+    setEncodingProgress?: ((progress: number) => void),
 ): Promise<Blob> => {
-    // info
-    const videoProperties = await getVideoProperties(ffmpeg, 'input.mp4');
-    if (__DEV__) {
-        console.log('infoResult', videoProperties);
-    }
-    // captions
+    const updateEncodingStatus = ({progress}: ProgressEvent) => {
+        setEncodingProgress?.(progress);
+    };
+    // create dirs
     await ffmpeg.createDir('captions');
     await ffmpeg.createDir('videos');
 
-    const imageTimePairs: {timecode: number, imageFileName: string, x: number, y: number, videoFileName: string}[] = [];
+    const imageTimePairs: ImageTimePair[] = [];
     let imageNumber = 0;
     let timeShift = 0;
+    const collectionSize = formatSizes[format];
+
+    consoleLog('videoTitle', videoTitle);
+    if (videoTitle) {
+        await generateVideoTitleVideo(ffmpeg, videoTitle, format, TITLE_FILE, TITLE_LENGTH);
+        timeShift += TITLE_LENGTH;
+    }
+
     for (const userPhrase of userPhrases) {
         const collection = collections.find(c => c.id === userPhrase.collectionId)!;
         const itemIndex = collection.items.findIndex(item => item.id === userPhrase.phraseId);
@@ -158,117 +255,117 @@ export const generateVideo = async (
         await ffmpeg.writeFile(videoFileName, fetchedFile);
 
         const {x, y, width, height} = collection.textArea[format];
-        const collectionSize = formatSizes[format];
         const blob = userPhrase.type === UserPhraseType.PlainText
             ? await renderTextSlide(collectionSize, width, height, userPhrase.text, userPhrase.textSize)
             : await renderImageSlide(width, height, userPhrase.image!, userPhrase.imageSize, '#fff');
         const imageFileName = `captions/${fileNumberSuffix}.png`;
-        await ffmpeg.writeFile(imageFileName, new Uint8Array(await (await canvasToBlob(blob)).arrayBuffer()));
+        const imageBlob = await canvasToBlob(blob);
+        await ffmpeg.writeFile(imageFileName, new Uint8Array(await imageBlob.arrayBuffer()));
 
-        imageTimePairs.push({timecode: timeShift, imageFileName, x, y, videoFileName});
+        imageTimePairs.push({
+            timecode: timeShift,
+            imageFileName,
+            x,
+            y,
+            videoFileName
+        });
         timeShift += item.duration;
         imageNumber++;
     }
 
-    const concatBody = imageTimePairs.map(f => `file '${f.videoFileName}'`).join('\n');
-
-    await ffmpeg.writeFile('concat.txt', new Uint8Array(
-        await (new Blob([concatBody], {type: 'text/plain'}).arrayBuffer())
-    ));
-
-    if (__DEV__) {
-        console.log('dir [.]', await ffmpegListFiles(ffmpeg, '.'));
+    const compileCommandArgs: string[] = [];
+    if (videoTitle) {
+        compileCommandArgs.push('-i', TITLE_FILE);
     }
-    const compileCommandArgs: string[] = ['-f', 'concat', '-i', 'concat.txt'];
-
+    for (let i = 0; i < imageTimePairs.length; i++) {
+        const {videoFileName} = imageTimePairs[i];
+        compileCommandArgs.push('-i', videoFileName);
+    }
     for (let i = 0; i < imageTimePairs.length; i++) {
         const {imageFileName} = imageTimePairs[i];
         compileCommandArgs.push('-i', imageFileName);
     }
+    compileCommandArgs.push('-i', 'watermark.png');
+    consoleLog('input files', compileCommandArgs);
 
     const complexFilter: string[] = [];
+    const fileIndexOffset = videoTitle ? 1 : 0;
+    const concatFilter: string[] = [];
+    if (videoTitle) {
+        concatFilter.push(`[0:v][0:a]`);
+    }
+    for (let i = 0; i < imageTimePairs.length; i++) {
+        const videoIndex = fileIndexOffset + i;
+        concatFilter.push(`[${videoIndex}:v][${videoIndex}:a]`);
+    }
+    concatFilter.push(`concat=n=${fileIndexOffset + imageTimePairs.length}:v=1:a=1[vraw][araw]`);
+    complexFilter.push(concatFilter.join(''));
+
     for (let i = 0; i < imageTimePairs.length; i++) {
         const {timecode, x, y } = imageTimePairs[i];
+        const imageIndex = fileIndexOffset + imageTimePairs.length + i;
         const startTag = i === 0
-            ? '[0:v]'
-            : `[v${i}]`;
+            ? '[vraw]'
+            : `[cap${i}]`;
+        const endTag = `[cap${i + 1}]`;
         const startTime = `${timecode.toFixed(3)}`;
         const endTime = i === imageTimePairs.length - 1
             ? 'inf'
             : `${imageTimePairs[i + 1].timecode.toFixed(3)}`;
-        complexFilter.push(`${startTag}[${i + 1}:v]overlay=${x}:${y}:enable='between(t,${startTime},${endTime})'[v${i + 1}]`);
+        complexFilter.push(`${startTag}[${imageIndex}:v]overlay=${x}:${y}:enable='between(t,${startTime},${endTime})'${endTag}`);
     }
 
     // watermark
     const collection = collections.find(c => c.id === userPhrases[0].collectionId)!;
     const watermarkArea = collection.watermarkArea[format];
 
-    const watermarkFile = new Uint8Array(
-        await (
-            (await canvasToBlob(
-                await renderImageSlide(
-                    watermarkArea.width,
-                    watermarkArea.height,
-                    new Blob([watermarkRaw2], {type: 'image/svg+xml'}),
-                    1)
-            ))
-        ).arrayBuffer()
-    );
+    const watermarkFile = await createWaterMarkData(watermarkArea);
     await ffmpeg.writeFile('watermark.png', watermarkFile);
 
-    complexFilter.push(`[v${imageTimePairs.length}][${imageTimePairs.length + 1}:v]overlay=${watermarkArea.x}:${watermarkArea.y}[v${imageTimePairs.length + 1}]`)
+    const watermarkIndex = fileIndexOffset + imageTimePairs.length * 2;
+    complexFilter.push(`[cap${imageTimePairs.length}][${watermarkIndex}:v]overlay=${watermarkArea.x}:${watermarkArea.y}[watermark]`)
 
     compileCommandArgs.push(
-        '-i', 'watermark.png',
         '-filter_complex', complexFilter.join(';'),
-        '-map', `[v${complexFilter.length}]`,
-        '-map', '0:a',
+        '-map', `[watermark]`,
+        '-map', '[araw]',
 
-        // video
-        '-c:v', 'libx264',
-        '-profile:v', 'high',
-        '-level:v', '4.0',
-        '-pix_fmt', 'yuv420p',
-        '-colorspace:v', 'bt709',
-        '-color_primaries:v', 'bt709', '-color_trc:v', 'bt709', '-color_range:v', 'tv', '-bsf:v',
-        'h264_metadata=chroma_sample_loc_type=0',
-
-        // audio
-        '-c:a', 'aac', '-b:a', '128k',
-
-        // common
-        '-x264opts', 'opencl', // slight boost
-        '-brand', 'mp42', // brand compat
-        '-preset', 'ultrafast', // super fast preset
-        '-movflags', '+faststart', // ability to start video earlier (streaming?)
+        ...codecsParams.video,
+        ...codecsParams.audio,
+        ...codecsParams.common,
 
         // output file
         'output.mp4'
     );
 
-    if (__DEV__) {
-        console.log(compileCommandArgs.join(' '));
-    }
+    consoleLog('dir [.]', await ffmpegListFilesRaw(ffmpeg, '.'));
+    consoleLog('dir [videos]', await ffmpegListFilesRaw(ffmpeg, './videos'));
+    consoleLog('dir [captions]', await ffmpegListFilesRaw(ffmpeg, './captions'));
+    consoleLog(compileCommandArgs.join(' '));
 
     // montage
-    await ffmpegExec(ffmpeg, compileCommandArgs, () => {});
+    const output = await ffmpegExec(ffmpeg, compileCommandArgs, updateEncodingStatus);
+    consoleLog(output.stderr);
+    consoleLog('AFTER >>> dir [.]', await ffmpegListFilesRaw(ffmpeg, '.'));
 
     const data = await ffmpeg.readFile('output.mp4') as Uint8Array;
     const result = new Blob([data.buffer], {type: 'video/mp4'});
+    consoleLog('generate result (blob)', result);
 
     // cleanup
     for (const {imageFileName, videoFileName} of imageTimePairs) {
+        consoleLog('remove files', imageFileName, videoFileName);
         await ffmpeg.deleteFile(imageFileName);
         await ffmpeg.deleteFile(videoFileName);
+    }
+    if (videoTitle) {
+        await ffmpeg.deleteFile(TITLE_FILE);
     }
     await ffmpeg.deleteDir('captions');
     await ffmpeg.deleteDir('videos');
     await ffmpeg.deleteFile('output.mp4');
-    await ffmpeg.deleteFile('concat.txt');
     await ffmpeg.deleteFile('watermark.png');
-    if (__DEV__) {
-        console.log('dir [.]', await ffmpegListFiles(ffmpeg, '.'));
-    }
+    consoleLog('dir [.]', await ffmpegListFilesRaw(ffmpeg, '.'));
 
     return result;
 };

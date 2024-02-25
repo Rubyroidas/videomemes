@@ -1,7 +1,7 @@
 import {useEffect, useState} from 'react';
 import {FFmpeg} from '@ffmpeg/ffmpeg';
 
-import {loadCollections, loadFFMpeg, loadScenarioPresets} from '../utils';
+import {consoleError, consoleLog, loadCollections, loadFFMpeg, loadScenarioPresets} from '../utils';
 import {useStore} from '../store';
 
 export const useLoadInitialData = () => {
@@ -17,18 +17,12 @@ export const useLoadInitialData = () => {
         const initFfmpeg = async () => {
             const ffmpeg = new FFmpeg();
             try {
-                if (__DEV__) {
-                    console.log('ffmpeg: start loading...');
-                }
+                consoleLog('ffmpeg: start loading...');
                 await loadFFMpeg(ffmpeg);
-                if (__DEV__) {
-                    console.log('ffmpeg: loaded');
-                }
+                consoleLog('ffmpeg: loaded');
             } catch (e) {
                 setFailedBrowser(true);
-                if (__DEV__) {
-                    console.error('ffmpeg: not loaded', e);
-                }
+                consoleError('ffmpeg: not loaded', e);
             }
             store.ffmpeg = ffmpeg;
         };

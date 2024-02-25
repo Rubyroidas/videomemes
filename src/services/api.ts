@@ -1,5 +1,5 @@
 import {UserScenario} from '../types';
-import {wait} from '../utils';
+import {consoleError, wait} from '../utils';
 
 export class Api {
     url: string;
@@ -51,7 +51,7 @@ export class Api {
                 timeoutPromise,
             ]);
         } catch (e) {
-            console.error('error during uploading config/file', e);
+            consoleError('error during uploading config/file', e);
         }
     }
 }

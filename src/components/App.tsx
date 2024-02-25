@@ -2,9 +2,9 @@ import {observer} from 'mobx-react';
 
 import {useStore} from '../store';
 import {useLoadInitialData} from '../hooks/useLoadInitialData';
-import {AppRouter} from '../AppRouter';
+import {FC, PropsWithChildren} from 'react';
 
-export const App = observer(() => {
+export const App: FC<PropsWithChildren> = observer(({children}) => {
     const store = useStore();
     const {failedBrowser} = useLoadInitialData();
     if (failedBrowser) {
@@ -16,6 +16,6 @@ export const App = observer(() => {
     return !store.ffmpeg || !store.collections || !store.presets ? (
         <div>Loading...</div>
     ) : (
-        <AppRouter/>
+        children
     )
 });

@@ -3,6 +3,7 @@ import {useEffect, useState} from 'react';
 import {useApi} from '../services/apiContext';
 import {FeedItem} from '../types';
 import {FeedItemEl} from './FeedItem';
+import {consoleLog} from '../utils';
 
 export const Feed = () => {
     const api = useApi();
@@ -10,7 +11,7 @@ export const Feed = () => {
 
     const load = async () => {
         const res = await api.getRequest<FeedItem[]>('/feed');
-        console.log(res);
+        consoleLog(res);
         setFeed(res);
     }
 

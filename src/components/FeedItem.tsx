@@ -1,4 +1,5 @@
 import {FC} from 'react';
+import {Link} from 'react-router-dom';
 
 import {FeedItem} from '../types';
 
@@ -7,6 +8,8 @@ type Props = {
 }
 export const FeedItemEl: FC<Props> = ({item}) => (
     <div>
-        <video src={item.url}/>
+        <Link to={`/feed/${item.id}`}>
+            <img src={item.snapshot} crossOrigin="anonymous" width={200}/>
+        </Link>
     </div>
 );

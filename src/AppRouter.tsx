@@ -11,6 +11,7 @@ import {EditScenarioPage} from './pages/EditScenarioPage';
 import {DownloadResultPage} from './pages/DownloadResultPage';
 import {FeedPage} from './pages/FeedPage';
 import {TitleSetupPage} from './pages/TitleSetupPage';
+import {FeedItemPage} from './pages/FeedItemPage';
 
 const router = createBrowserRouter([
     {
@@ -44,6 +45,10 @@ const router = createBrowserRouter([
     {
         path: '/feed',
         element: <FeedPage/>,
+    },
+    {
+        path: '/feed/:id',
+        element: <FeedItemPage/>,
     },
     {
         path: '/about',

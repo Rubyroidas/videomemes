@@ -158,9 +158,11 @@ export const Icon = styled.div`
 
 type PlayButtonProps = {
     position: Point;
+    visible: boolean;
 }
 export const PlayButton = styled.div<PlayButtonProps>`
     position: absolute;
+    background: rgba(0, 0, 0, 0.25);
     left: ${props => props.position.x}%;
     top: ${props => props.position.y}%;
     display: flex;
@@ -168,12 +170,20 @@ export const PlayButton = styled.div<PlayButtonProps>`
     justify-content: center;
     pointer-events: none;
     translate: -50% -50%;
+    --button-size: 100px;
+    border-radius: calc(var(--button-size) * 0.4);
+    padding: calc(var(--button-size) * 0.2);
+    opacity: ${props => props.visible ? '1' : '0'};
+    transition: opacity 150ms linear;
     
     & > svg {
-        width: 100px;
-        height: 100px;
+        width: var(--button-size);
+        height: var(--button-size);
         fill: #fff;
-        opacity: 0.5;
+    }
+
+    @media (max-width: 480px) {
+        --button-size: 20vw;
     }
 `;
 export const ResultVideo = styled.video`

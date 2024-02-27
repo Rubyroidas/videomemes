@@ -1,4 +1,4 @@
-import {ClipboardEventHandler, FC, MouseEventHandler, useRef, useState} from 'react';
+import {ClipboardEventHandler, FC, MouseEventHandler, useState} from 'react';
 import ContentEditable, {ContentEditableEvent} from 'react-contenteditable';
 import {Box, Slider, Typography} from '@mui/material';
 import clsx from 'clsx';
@@ -42,7 +42,6 @@ const textSizeValues = [{
 export const PhraseEditor: FC<PhraseEditorProps> = (props) => {
     const {disabled, userPhrase, onChange} = props;
     const store = useStore();
-    const videoRef = useRef<HTMLVideoElement | null>(null);
     const [isVideoPlaying, setIsVideoPlaying] = useState(false);
 
     const handlePhraseChange =  (e: ContentEditableEvent) => {
@@ -189,7 +188,6 @@ export const PhraseEditor: FC<PhraseEditorProps> = (props) => {
                     )}
                 </InputBackground>
                 <EditingVideo
-                    ref={videoRef}
                     onClick={handleVideoClick}
                     controls={false}
                     loop={false}
@@ -201,13 +199,12 @@ export const PhraseEditor: FC<PhraseEditorProps> = (props) => {
                     preload="auto"
                     crossOrigin="anonymous"
                 />
-                {!isVideoPlaying && (
-                    <PlayButton
-                        position={playButtonPosition}
-                    >
-                        <PlayIcon/>
-                    </PlayButton>
-                )}
+                <PlayButton
+                    position={playButtonPosition}
+                    visible={!isVideoPlaying}
+                >
+                    <PlayIcon/>
+                </PlayButton>
             </EditingAreaContainer>
         </PhraserEditorWrapper>
     );

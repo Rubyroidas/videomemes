@@ -1,4 +1,4 @@
-import {UserScenario} from '../types';
+import {FeedItem, UserScenario} from '../types';
 import {consoleError, wait} from '../utils';
 
 export class Api {
@@ -15,7 +15,7 @@ export class Api {
         }
         const res = await fetch(url);
         const json = await res.json();
-        return json.data as T;
+        return (json.data !== undefined ? json.data : json) as T;
     }
 
     async postRequest<T>(endpoint: string, params: Record<string, string> = {}, body: string | FormData): Promise<T> {
@@ -33,7 +33,7 @@ export class Api {
             }
         });
         const json = await res.json();
-        return json.data as T;
+        return (json.data !== undefined ? json.data : json) as T;
     }
 
     async uploadScenarioAndFile(scenario: UserScenario, file: Blob) {
@@ -53,5 +53,13 @@ export class Api {
         } catch (e) {
             consoleError('error during uploading config/file', e);
         }
+    }
+
+    async getFeed() {
+        return this.getRequest<FeedItem[]>('/feed');
+    }
+
+    async getFeedItem(id: number) {
+        return this.getRequest<FeedItem>(`/feed/${id}`);
     }
 }

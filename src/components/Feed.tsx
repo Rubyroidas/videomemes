@@ -10,7 +10,7 @@ export const Feed = () => {
     const [feed, setFeed] = useState<FeedItem[] | null>(null);
 
     const load = async () => {
-        const res = await api.getRequest<FeedItem[]>('/feed');
+        const res = await api.getFeed();
         consoleLog(res);
         setFeed(res);
     }
@@ -26,9 +26,9 @@ export const Feed = () => {
     return (
         <div>
             feed here
-            {feed.slice(1, 2).map(feedItem => (
+            {feed.map(feedItem => (
                 <FeedItemEl
-                    key={feedItem.url}
+                    key={feedItem.id}
                     item={feedItem}
                 />
             ))}

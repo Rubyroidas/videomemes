@@ -69,6 +69,8 @@ export type UserPhrase = {
 }
 
 export type FeedItem = {
+    id: number;
     url: string;
+    snapshot: string;
     created_at: string;
 }

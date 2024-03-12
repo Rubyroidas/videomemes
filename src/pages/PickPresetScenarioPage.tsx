@@ -25,7 +25,7 @@ export const PickPresetScenarioPage = () => {
             <AppTitle>Pick scenario</AppTitle>
             <ScenarioPicker/>
             <div>or</div>
-            <Button to="/edit-phrases">Edit from scratch</Button>
+            <Button to="/new-scenario">Edit from scratch</Button>
         </div>
     );
 };

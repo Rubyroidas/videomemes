@@ -72,5 +72,6 @@ export type FeedItem = {
     id: number;
     url: string;
     snapshot: string;
+    format: Format;
     created_at: string;
 }

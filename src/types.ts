@@ -16,6 +16,7 @@ export type CollectionItem = {
 }
 export type Collection = {
     id: string;
+    cover: string;
     name: string;
     textArea: Record<Format, Rect>;
     watermarkArea: Record<Format, Rect>;

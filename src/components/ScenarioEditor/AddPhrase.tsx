@@ -28,7 +28,8 @@ export const AddPhrase: FC<Props> = ({onSelect}) => {
                         key={collection.id}
                         onClick={() => setSelectedCollection(collection)}
                     >
-                        {collection.name}
+                        <img src={collection.cover} crossOrigin="anonymous" alt={collection.name}/>
+                        <div className="name">{collection.name}</div>
                     </CollectionElement>
                 ))}
             </AddPhraseCollectionList>

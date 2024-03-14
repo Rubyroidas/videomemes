@@ -105,5 +105,35 @@ export const AddPhraseCollectionItemList = styled.div`
 `;
 export const CollectionElement = styled.div`
     cursor: pointer;
-    padding: 16px;
+    background: transparent center/contain no-repeat;
+    position: relative;
+    
+    & > img {
+        width: 320px;
+        height: 180px;
+    }
+    
+    & > .name {
+        font-size: 1.5em;
+        font-weight: bold;
+        position: absolute;
+        left: 0;
+        top: 0;
+        display: inline-block;
+        background: rgba(0, 0, 0, 0.5);
+        padding: 4px 8px;
+    }
+
+    @media (max-width: 480px) {
+        width: 100vw;
+
+        & > img {
+            width: 100vw;
+            height: 56.25vw;
+        }
+
+        & > .name {
+            padding: 1vw 2vw;
+        }
+    }
 `;

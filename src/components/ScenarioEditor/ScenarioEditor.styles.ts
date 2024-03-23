@@ -1,92 +1,100 @@
 import styled from '@emotion/styled';
 
-export const ScenarioItemWrapper = styled.div<{isDragging: boolean}>`
+export const ScenarioItemWrapper = styled.div`
     display: grid;
-    background: ${props => props.isDragging ? 'rgba(0, 0, 0, 0.3)' : ''};
     grid-template-areas:
-"dragger snapshot collectionname"
-"dragger snapshot cliptitle"
-"dragger snapshot usertext"
-"dragger snapshot usertext";
-    grid-template-columns: 40px 200px 1fr;
+"index cliptitle close"
+"empty empty empty"
+"usertext usertext duration";
+    grid-template-columns: 52px 1fr 52px;
+    grid-template-rows: 34px 1fr 34px;
     user-select: none;
     width: 600px;
+    height: 337.5px;
     margin: 0 0 16px;
+    font-size: 17px;
+    cursor: pointer;
+    position: relative;
+    
+    &.isDragging {
+        background: rgba(0, 0, 0, 0.3);
+    }
+    
+    &.disabled {
+        opacity: 0.5;
+    }
 
     @media (max-width: 480px) {
-        grid-template-columns: 10vw 1fr;
-        grid-template-areas:
-"dragger snapshot"
-"dragger collectionname"
-"dragger cliptitle"
-"dragger usertext";
-        width: 100%;
+        grid-template-columns: 12vw 1fr 12vw;
+        grid-template-rows: 8vw 1fr 8vw;
+        font-size: 4vw;
+        line-height: 8vw;
+        width: 100vw;
+        height: 56.25vw;
         margin: 0 0 2vw;
     }
 `;
 
-export const ScenarioItemButton = styled.button`
+export const SnapshotPreview = styled.div`
+    grid-column: 1 / 4;
+    grid-row: 1 / 4;
+    position: absolute;
+    z-index: -1;
+    width: 100%;
+    height: 100%;
+    
+    & > img {
+        width: 100%;
+    }
+`;
+export const ScenarioItemIndexNumber = styled.div`
+    grid-area: index;
+    background: rgba(0, 0, 0, 0.75);
+    border-right: solid 1px #fff;
+    box-sizing: border-box;
+    text-align: center;
+`;
+export const ScenarioItemUserText = styled.div`
+    grid-area: usertext;
+    background: rgba(0, 0, 0, 0.75);
+    box-sizing: border-box;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    padding: 0 10px;
+
+    @media (max-width: 480px) {
+        padding: 0 2.5vw;
+    }
+`;
+export const ScenarioItemClipTitle = styled.div`
+    grid-area: cliptitle;
+    background: linear-gradient(to right, rgba(0, 0, 0, 0.75), transparent);
+    box-sizing: border-box;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    padding: 0 10px;
+
+    @media (max-width: 480px) {
+        padding: 0 2.5vw;
+    }
+`;
+export const ScenarioItemDeleteButton = styled.button`
     background: none;
     border: none;
     cursor: pointer;
 `;
-
-export const SnapshotPreview = styled.div`
-    grid-area: snapshot;
-    
-    & > div {
-        position: relative;
-        & > img {
-            width: 100%;
-        }
-
-        & > label {
-            position: absolute;
-            right: 8px;
-            bottom: 8px;
-            padding: 4px 6px;
-            background: rgba(0, 0, 0, 0.75);
-            color: #fff;
-
-            @media (max-width: 480px) {
-                right: 2vw;
-                bottom: 2vw;
-                padding: 2vw 1.5vw;
-            }
-        }
-    }
-`;
-
-export const ScenarioItem = styled.div`
-    margin: 0 0 8px 0;
-
-    & > label {
-        background: #cece7e;
-        color: #113b62;
-        display: inline-block;
-        padding: 4px;
-        margin-right: 8px;
-        font-weight: bold;
-    }
+export const ScenarioItemDuration = styled.div`
+    grid-area: duration;
+    background: rgba(0, 0, 0, 0.75);
+    color: #fff;
+    text-align: center;
 
     @media (max-width: 480px) {
-        margin: 0 0 2vw 0;
-
-        & > label {
-            padding: 1vw;
-            margin-right: 2vw;
-        }
+        right: 2vw;
+        bottom: 2vw;
     }
-`;
-
-export const ScenarioItemCollectionName = styled(ScenarioItem)`
-    grid-area: collectionname;
-`;
-export const ScenarioItemClipTitle = styled(ScenarioItem)`
-    grid-area: cliptitle;
-`;
-export const ScenarioItemUserText = styled(ScenarioItem)`
-    grid-area: usertext;
 `;
 
 export const AddPhraseCollectionList = styled.div`

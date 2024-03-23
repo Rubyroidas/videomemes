@@ -1,15 +1,15 @@
 import {useCallback, useState} from 'react';
 import {useNavigate} from 'react-router-dom';
+import {observer} from 'mobx-react';
 import shortUuid from 'short-uuid';
 
-import {Button, ButtonSelector} from '../App.styles';
+import {Button, ButtonSelector, ListTitle} from '../App.styles';
 import {Icon} from '../PhrasesEditor/PhraseEditor.styles';
 import {EditListIcon} from '../../icons/EditListIcon';
 import {ScenarioList} from './ScenarioList';
 import {AddPhrase} from './AddPhrase';
 import {Collection, CollectionItem, Format, TextSize, UserPhraseType} from '../../types';
 import {useStore} from '../../store';
-import {observer} from 'mobx-react';
 
 const formatSelectorValues: {
     value: Format,
@@ -92,7 +92,7 @@ export const ScenarioEditor = observer(() => {
                         values={formatSelectorValues}
                         onChange={handleChangeFormat}
                     />
-                    <div>Scenario total duration: {scenarioTotalDuration}s</div>
+                    <ListTitle>Scenario total duration: {scenarioTotalDuration}s</ListTitle>
                     <ScenarioList/>
                 </>
             )}

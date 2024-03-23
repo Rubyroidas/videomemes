@@ -46,6 +46,9 @@ export const ButtonSelectorItem = styled.div<{selected: boolean}>`
     margin: 0 4px;
     cursor: pointer;
 `;
+export const ListTitle = styled.div`
+    margin: 32px 0;
+`;
 type ButtonSelectorProps<T> = {
     caption: string;
     value: T;
@@ -68,4 +71,4 @@ export const ButtonSelector = <T extends string | number>({caption, value, value
             </ButtonSelectorItem>
         ))}
     </ButtonSelectorWrapper>
-)
+);

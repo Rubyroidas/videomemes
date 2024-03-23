@@ -1,18 +1,13 @@
 import {FC, HTMLProps} from 'react';
-import styled from '@emotion/styled';
+import clsx from 'clsx';
 
 import {CollectionItem} from '../../types';
-import {ScenarioItemClipTitle, SnapshotPreview} from './ScenarioEditor.styles';
-
-const CollectionItemElementWrapper = styled.div<{ disabled: boolean }>`
-    cursor: pointer;
-    opacity: ${props => props.disabled ? '0.5' : '1'};
-    margin: 0 0 24px 0;
-
-    @media (max-width: 480px) {
-        margin: 0 0 6vw 0;
-    }
-`;
+import {
+    ScenarioItemClipTitle, ScenarioItemDuration,
+    ScenarioItemIndexNumber,
+    ScenarioItemWrapper,
+    SnapshotPreview
+} from './ScenarioEditor.styles';
 
 type Props = {
     index: number;
@@ -20,19 +15,22 @@ type Props = {
     item: CollectionItem;
 }
 export const CollectionItemElement: FC<HTMLProps<HTMLDivElement> & Props> = ({index, item, disabled, onClick}) => (
-    <CollectionItemElementWrapper onClick={disabled ? undefined : onClick} disabled={disabled}>
+    <ScenarioItemWrapper onClick={disabled ? undefined : onClick} className={clsx({disabled})}>
         <SnapshotPreview>
-            <div>
-                <img
-                    alt={item.text}
-                    src={item.snapshot}
-                    crossOrigin="anonymous"
-                />
-                <label>{item.duration.toFixed(2)}</label>
-            </div>
+            <img
+                alt={item.text}
+                src={item.snapshot}
+                crossOrigin="anonymous"
+            />
         </SnapshotPreview>
+        <ScenarioItemIndexNumber>
+            #{index}
+        </ScenarioItemIndexNumber>
         <ScenarioItemClipTitle>
-            <b>{index}</b> {item.text}
+            {item.text}
         </ScenarioItemClipTitle>
-    </CollectionItemElementWrapper>
+        <ScenarioItemDuration>
+            {item.duration.toFixed(1)}s
+        </ScenarioItemDuration>
+    </ScenarioItemWrapper>
 );

@@ -1,13 +1,12 @@
 import {FC} from 'react';
+import clsx from 'clsx';
 
 import {UserPhrase, UserPhraseType} from '../../types';
 import {useStore} from '../../store';
 import {
-    ScenarioItemButton,
-    ScenarioItemClipTitle,
-    ScenarioItemCollectionName,
-    ScenarioItemUserText,
-    ScenarioItemWrapper,
+    ScenarioItemClipTitle, ScenarioItemDeleteButton,
+    ScenarioItemDuration, ScenarioItemIndexNumber,
+    ScenarioItemUserText, ScenarioItemWrapper,
     SnapshotPreview
 } from './ScenarioEditor.styles';
 
@@ -35,38 +34,32 @@ export const ScenarioItem: FC<ScenarioItemProps> = (props) => {
         return null;
     }
 
-    const durationText = (Math.round(collectionItem.duration * 10) / 10).toFixed(1);
-
     return (
-        <ScenarioItemWrapper isDragging={isDragging}>
-            <div style={{gridArea: 'dragger'}}>
-                #{index}
-                <ScenarioItemButton
-                    title="delete"
-                    onClick={onDelete}
-                    disabled={disabled}
-                >❌</ScenarioItemButton>
-            </div>
+        <ScenarioItemWrapper className={clsx({isDragging})}>
             <SnapshotPreview>
-                <div>
-                    <img
-                        alt={collection.name}
-                        src={collectionItem.snapshot}
-                        crossOrigin="anonymous"
-                    />
-                    <label>{durationText}</label>
-                </div>
+                <img
+                    alt={collection.name}
+                    src={collectionItem.snapshot}
+                    crossOrigin="anonymous"
+                />
             </SnapshotPreview>
-            <ScenarioItemCollectionName>
-                <label>collection</label>
-                {collection.name}</ScenarioItemCollectionName>
-            <ScenarioItemClipTitle>
-                <label>clip</label>
-                {collectionItem.text}</ScenarioItemClipTitle>
+            <ScenarioItemIndexNumber>
+                #{index}
+            </ScenarioItemIndexNumber>
             <ScenarioItemUserText>
-                <label>your text</label>
                 {phrase.type === UserPhraseType.PlainText ? phrase.text : (<i>image</i>)}
             </ScenarioItemUserText>
+            <ScenarioItemDeleteButton
+                title="delete"
+                onClick={onDelete}
+                disabled={disabled}
+            >❌</ScenarioItemDeleteButton>
+            <ScenarioItemClipTitle>
+                {collectionItem.text}
+            </ScenarioItemClipTitle>
+            <ScenarioItemDuration>
+                {collectionItem.duration.toFixed(1)}s
+            </ScenarioItemDuration>
         </ScenarioItemWrapper>
     );
 };

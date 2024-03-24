@@ -23,13 +23,14 @@ export class Api {
         for (const [key, value] of Object.entries(params)) {
             url.searchParams.set(key, value);
         }
+        const contentTypeFormData = ((window as any).VIDEO_UPLOAD_CONTENT_TYPE ?? 'application/form-data') as string;
         const res = await fetch(url, {
             method: 'POST',
             body,
             headers: {
                 'Content-Type': typeof body === 'string'
                     ? 'application/json'
-                    : 'application/x-www-form-urlencoded'
+                    : contentTypeFormData
             }
         });
         const json = await res.json();

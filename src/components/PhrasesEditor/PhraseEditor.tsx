@@ -21,6 +21,8 @@ import {DebugImage} from '../DebugImage';
 import {formatSizes} from '../../statics';
 import {useDropZone} from '../DropZone/DropZone';
 import {blobToCanvas} from '../../generate';
+import {TextIcon} from '../../icons/TextIcon';
+import {ImageIcon} from '../../icons/ImageIcon';
 
 type PhraseEditorProps = {
     disabled: boolean;
@@ -132,7 +134,19 @@ export const PhraseEditor: FC<PhraseEditorProps> = (props) => {
     return (
         <PhraserEditorWrapper {...collectionSize}>
             <Button onClick={handleSwitchMode}>
-                Switch to {userPhrase.type === UserPhraseType.PlainImage ? 'text' : 'image'}
+                Switch to &nbsp;{userPhrase.type === UserPhraseType.PlainImage ? (
+                    <>
+                        <TextIcon/>
+                        &nbsp;
+                        text
+                    </>
+            ) : (
+                <>
+                    <ImageIcon/>
+                    &nbsp;
+                    image
+                </>
+            )}
             </Button>
             {userPhrase.type === UserPhraseType.PlainText && (
                 <ButtonSelector

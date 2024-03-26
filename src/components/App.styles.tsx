@@ -22,9 +22,20 @@ export const Button = styled.div<{disabled?: boolean}>`
     cursor: pointer;
     opacity: ${props => props.disabled ? '0.5' : '1'};
     user-select: none;
+    --button-size: 40px;
 
     & > div {
         margin-right: 12px;
+    }
+
+    & > svg {
+        width: var(--button-size);
+        height: var(--button-size);
+        fill: var(--button-text-color);
+    }
+
+    @media (max-width: 480px) {
+        --button-size: 8vw;
     }
 `;
 export const ButtonSelectorWrapper = styled.div`

@@ -1,3 +1,5 @@
+import axios from 'axios';
+
 import {FeedItem, UserScenario} from '../types';
 import {consoleError, wait} from '../utils';
 
@@ -23,18 +25,18 @@ export class Api {
         for (const [key, value] of Object.entries(params)) {
             url.searchParams.set(key, value);
         }
-        const contentTypeFormData = ((window as any).VIDEO_UPLOAD_CONTENT_TYPE ?? 'application/form-data') as string;
-        const res = await fetch(url, {
-            method: 'POST',
-            body,
-            headers: {
-                'Content-Type': typeof body === 'string'
-                    ? 'application/json'
-                    : contentTypeFormData
-            }
-        });
-        const json = await res.json();
-        return (json.data !== undefined ? json.data : json) as T;
+
+        if (body instanceof FormData) {
+            const ares = await axios.postForm<T>(url.toString(), body);
+            return ares.data;
+        } else {
+            const ares = await axios.post<T>(url.toString(), body, {
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            });
+            return ares.data;
+        }
     }
 
     async uploadScenarioAndFile(scenario: UserScenario, file: Blob) {
@@ -46,9 +48,11 @@ export class Api {
         const timeoutPromise = wait(30000);
 
         try {
-            await Promise.all([
-                configPromise,
-                filePromise,
+            await Promise.race([
+                Promise.all([
+                    configPromise,
+                    filePromise,
+                ]),
                 timeoutPromise,
             ]);
         } catch (e) {

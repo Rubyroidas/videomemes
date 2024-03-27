@@ -98,8 +98,8 @@ export const PhraseEditor: FC<PhraseEditorProps> = (props) => {
     }
 
     const format = store.scenario.format;
-    const collection = store.collections!.find(c => c.id === userPhrase.collectionId)!;
-    const item = collection.items.find(item => item.id === userPhrase.phraseId)!;
+    const collection = store.getCollection(userPhrase.collectionId)!;
+    const item = store.getCollectionItem(userPhrase.collectionId, userPhrase.phraseId)!;
     const collectionSize = formatSizes[store.scenario.format];
     const textAreaRect = collection.textArea[format];
 

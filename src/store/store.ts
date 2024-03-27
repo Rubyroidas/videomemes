@@ -30,4 +30,22 @@ export class Store {
             return acc + duration;
         }, 0);
     }
+
+    getCollection(id: string) {
+        return this.collections?.find(collection => collection.id === id);
+    }
+
+    getCollectionItem(collectionId: string, itemId: number) {
+        return this.getCollection(collectionId)?.items?.find(item => item.id === itemId);
+    }
+
+    getCollectionAndItem(collectionId: string, itemId: number) {
+        const collection = this.getCollection(collectionId);
+        const item = collection?.items?.find(item => item.id === itemId);
+
+        return {
+            collection,
+            item,
+        };
+    }
 }

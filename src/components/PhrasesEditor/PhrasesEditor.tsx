@@ -39,10 +39,12 @@ export const PhrasesEditor: FC<PhrasesEditorProps> = observer((props) => {
                 .map((line) => `<div>${escapeHTML(line)}</div>`)
                 .join(''),
     };
+
     const canGoLeft = phraseIndex > 0;
     const canGoRight = phraseIndex < userPhrases.length - 1;
-    const collection = store.collections!.find(c => c.id === userPhrase.collectionId)!;
-    const item = collection.items.find(item => item.id === userPhrase.phraseId)!;
+
+    const collection = store.getCollection(userPhrase.collectionId)!;
+    const item = store.getCollectionItem(userPhrase.collectionId, userPhrase.phraseId)!;
 
     return (
         <div>

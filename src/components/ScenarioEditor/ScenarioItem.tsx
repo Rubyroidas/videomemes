@@ -26,10 +26,7 @@ export const ScenarioItem: FC<ScenarioItemProps> = (props) => {
         onDelete,
     } = props;
     const store = useStore();
-    const collection = store.collections
-        ?.find(c => phrase.collectionId === c.id);
-    const collectionItem = collection?.items
-        ?.find(item => phrase.phraseId === item.id);
+    const {collection, item: collectionItem} = store.getCollectionAndItem(phrase.collectionId, phrase.phraseId);
     if (!collection || !collectionItem) {
         return null;
     }

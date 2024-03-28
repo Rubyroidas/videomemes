@@ -38,7 +38,7 @@ export const AddPhrase: FC<Props> = ({onSelect}) => {
         </div>
     ) : (
         <div>
-            <ListTitle>Pick a clip</ListTitle>
+            <ListTitle>Pick a fragment</ListTitle>
             <AddPhraseCollectionItemList>
                 {selectedCollection.items.map(((item, index) => (
                     <CollectionItemElement

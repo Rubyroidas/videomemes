@@ -1,9 +1,10 @@
 import {useCallback} from 'react';
 import {DragDropContext, Droppable, Draggable, OnDragEndResponder} from 'react-beautiful-dnd';
+import {observer} from 'mobx-react';
 
 import {useStore} from '../../store';
 import {ScenarioItem} from './ScenarioItem';
-import {observer} from 'mobx-react';
+import {ListDescription} from '../App.styles';
 
 const moveItem = <T extends object>(array: T[], fromIndex: number, toIndex: number) => {
     const minIndex = Math.min(fromIndex, toIndex);
@@ -51,9 +52,9 @@ export const ScenarioList = observer(() => {
 
     if (phrases.length === 0) {
         return (
-            <div>
-                There are no clips here yet. Use "plus" icon to add them to your scenario.
-            </div>
+            <ListDescription>
+                There are no fragments here yet. Use "plus" icon to add them to your scenario.
+            </ListDescription>
         );
     }
 

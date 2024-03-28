@@ -97,7 +97,7 @@ export const ScenarioEditor = observer(() => {
                         values={formatSelectorValues}
                         onChange={handleChangeFormat}
                     />
-                    <ListTitle>Scenario total duration: {scenarioTotalDuration}s</ListTitle>
+                    <ListTitle>Scenario total duration: {scenarioTotalDuration}s (max 60s)</ListTitle>
                     <ScenarioList/>
                 </>
             )}

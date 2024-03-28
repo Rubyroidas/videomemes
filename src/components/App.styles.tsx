@@ -127,6 +127,12 @@ export const ListTitle = styled.div`
         padding: 0 2vw;
     }
 `;
+export const ListDescription = styled.div`
+    padding: 0 8px;
+    @media (max-width: 480px) {
+        padding: 0 2vw;
+    }
+`;
 type ButtonSelectorProps<T> = {
     caption: string;
     value: T;

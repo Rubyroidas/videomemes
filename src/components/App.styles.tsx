@@ -44,6 +44,7 @@ export const Button = styled.div<{disabled?: boolean}>`
     opacity: ${props => props.disabled ? '0.5' : '1'};
     user-select: none;
     --button-size: 40px;
+    border-radius: 8px;
 
     & > div {
         margin-right: 12px;
@@ -57,6 +58,7 @@ export const Button = styled.div<{disabled?: boolean}>`
 
     @media (max-width: 480px) {
         --button-size: 8vw;
+        border-radius: 2vw;
     }
 `;
 export const FloatingButton = styled.div`

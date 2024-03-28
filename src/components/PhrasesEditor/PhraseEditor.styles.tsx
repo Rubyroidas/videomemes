@@ -154,6 +154,11 @@ export const Icon = styled.div`
         fill: none;
         stroke: var(--button-text-color);
     }
+
+    @media (max-width: 480px) {
+        width: 12vw;
+        height: 12vw;
+    }
 `;
 
 type PlayButtonProps = {

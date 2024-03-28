@@ -49,6 +49,14 @@ export const ScenarioList = observer(() => {
         store.scenario.phrases = moveItem(store.scenario.phrases, result.source.index, result.destination.index);
     }, []);
 
+    if (phrases.length === 0) {
+        return (
+            <div>
+                There are no clips here yet. Use "plus" icon to add them to your scenario.
+            </div>
+        );
+    }
+
     return (
         <DragDropContext onDragEnd={onDragEnd}>
             <Droppable droppableId="droppable">

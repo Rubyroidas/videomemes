@@ -76,14 +76,14 @@ export const ScenarioEditor = observer(() => {
                     <Icon>
                         <EditListIcon/>
                     </Icon>
-                    Edit phrases
+                    Edit fragments
                 </Button>
             )}
             <div>
                 {isAddingVisible && (
                     <Button onClick={toggleAddClip}>
                         <ArrowLeft/>
-                        Back to phrases list
+                        Back to fragments list
                     </Button>
                 )}
             </div>

@@ -101,16 +101,16 @@ export const ScenarioItemDeleteButton = styled.div`
     pointer-events: auto;
     
     & > svg {
-        width: 32px;
-        height: 32px;
+        width: 24px;
+        height: 24px;
         fill: #fff;
     }
 
     @media (max-width: 480px) {
         & > svg {
             display: inline-block;
-            width: 8vw;
-            height: 8vw;
+            width: 6vw;
+            height: 6vw;
         }
     }
 `;

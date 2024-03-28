@@ -108,8 +108,9 @@ export const ScenarioItemDeleteButton = styled.div`
 
     @media (max-width: 480px) {
         & > svg {
-            width: 6vw;
-            height: 6vw;
+            display: inline-block;
+            width: 8vw;
+            height: 8vw;
         }
     }
 `;

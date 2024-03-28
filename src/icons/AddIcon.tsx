@@ -1,5 +1,5 @@
 export const AddIcon = () => (
-    <svg width="800px" height="800px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <svg width="800px" height="800px" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
         <path
             fill="white"
             d="M 8,0.20285261 C 3.7115689,0.20285261 0.20285261,3.7115689 0.20285261,8 c 0,4.288431 3.50871629,7.797147 7.79714739,7.797147 4.288431,0 7.797147,-3.508716 7.797147,-7.797147 C 15.797147,3.7115689 12.288431,0.20285261 8,0.20285261 Z"

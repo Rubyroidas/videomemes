@@ -92,6 +92,10 @@ export const ButtonSelectorCaption = styled.div`
     flex-direction: row;
     font-weight: bold;
     margin: 8px 12px;
+
+    @media (max-width: 480px) {
+        margin: 2vw 3vw;
+    }
 `;
 export const ButtonSelectorItem = styled.div`
     display: inline-block;
@@ -107,9 +111,21 @@ export const ButtonSelectorItem = styled.div`
     &.selected {
         background-color: var(--switch-button-bg-color-selected);
     }
+
+    @media (max-width: 480px) {
+        padding: 2vw 3vw;
+    }
 `;
 export const ListTitle = styled.div`
-    margin: 32px 0;
+    margin: 16px 0;
+    padding: 0 8px;
+    font-weight: bold;
+    font-size: 1.25rem;
+
+    @media (max-width: 480px) {
+        margin: 4vw 0;
+        padding: 0 2vw;
+    }
 `;
 type ButtonSelectorProps<T> = {
     caption: string;

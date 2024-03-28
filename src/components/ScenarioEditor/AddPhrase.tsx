@@ -5,6 +5,7 @@ import {Collection, CollectionItem} from '../../types';
 import {CollectionItemElement} from './CollectionItemElement';
 import {MAX_VIDEO_LENGTH_SECONDS} from '../../config';
 import {AddPhraseCollectionItemList, AddPhraseCollectionList, CollectionElement} from './ScenarioEditor.styles';
+import {ListTitle} from '../App.styles.tsx';
 
 type Props = {
     onSelect: (collection: Collection, item: CollectionItem) => void;
@@ -21,7 +22,7 @@ export const AddPhrase: FC<Props> = ({onSelect}) => {
 
     return !selectedCollection ? (
         <div>
-            pick a collection:
+            <ListTitle>Pick a collection</ListTitle>
             <AddPhraseCollectionList>
                 {collections.map(collection => (
                     <CollectionElement
@@ -30,13 +31,14 @@ export const AddPhrase: FC<Props> = ({onSelect}) => {
                     >
                         <img src={collection.cover} crossOrigin="anonymous" alt={collection.name}/>
                         <div className="name">{collection.name}</div>
+                        <div className="videos-count">{collection.items.length} videos</div>
                     </CollectionElement>
                 ))}
             </AddPhraseCollectionList>
         </div>
     ) : (
         <div>
-            pick a clip:
+            <ListTitle>Pick a clip</ListTitle>
             <AddPhraseCollectionItemList>
                 {selectedCollection.items.map(((item, index) => (
                     <CollectionItemElement

@@ -145,10 +145,12 @@ export const CollectionElement = styled.div`
     cursor: pointer;
     background: transparent center/contain no-repeat;
     position: relative;
+    width: 600px;
+    height: 337.5px;
     
     & > img {
-        width: 320px;
-        height: 180px;
+        width: 100%;
+        height: 100%;
     }
     
     & > .name {
@@ -162,9 +164,21 @@ export const CollectionElement = styled.div`
         background: rgba(0, 0, 0, 0.5);
         padding: 4px 8px;
     }
+    
+    & > .videos-count {
+        color: #fff;
+        font-size: 1.25em;
+        position: absolute;
+        right: 0;
+        top: 0;
+        display: inline-block;
+        background: rgba(0, 0, 0, 0.5);
+        padding: 4px 8px;
+    }
 
     @media (max-width: 480px) {
         width: 100vw;
+        height: 56.25vw;
 
         & > img {
             width: 100vw;

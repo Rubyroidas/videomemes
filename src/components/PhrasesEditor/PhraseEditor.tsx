@@ -16,7 +16,8 @@ import {
     TextAreaClass,
 } from './PhraseEditor.styles';
 import {useStore} from '../../store';
-import {Button, ButtonSelector} from '../App.styles';
+import {Button} from '../App.styles';
+import {ButtonSelector} from '../ButtonSelector';
 import {DebugImage} from '../DebugImage';
 import {formatSizes} from '../../statics';
 import {useDropZone} from '../DropZone/DropZone';

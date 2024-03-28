@@ -3,7 +3,7 @@ import {useNavigate} from 'react-router-dom';
 import {observer} from 'mobx-react';
 import shortUuid from 'short-uuid';
 
-import {Button, ButtonSelector, FloatingButton, ListTitle} from '../App.styles';
+import {Button, FloatingButton, ListTitle} from '../App.styles';
 import {Icon} from '../PhrasesEditor/PhraseEditor.styles';
 import {EditListIcon} from '../../icons/EditListIcon';
 import {ScenarioList} from './ScenarioList';
@@ -12,6 +12,7 @@ import {Collection, CollectionItem, Format, TextSize, UserPhraseType} from '../.
 import {useStore} from '../../store';
 import {AddIcon} from '../../icons/AddIcon';
 import {ArrowLeft} from '../../icons/ArrowLeft';
+import {ButtonSelector} from '../ButtonSelector';
 
 const formatSelectorValues: {
     value: Format,

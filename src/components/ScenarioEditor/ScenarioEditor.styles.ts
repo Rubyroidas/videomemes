@@ -15,6 +15,7 @@ export const ScenarioItemWrapper = styled.div`
     font-size: 17px;
     cursor: pointer;
     position: relative;
+    color: #fff;
     
     &.isDragging {
         background: rgba(0, 0, 0, 0.3);
@@ -102,7 +103,7 @@ export const ScenarioItemDeleteButton = styled.div`
     & > svg {
         width: 32px;
         height: 32px;
-        fill: var(--button-text-color);
+        fill: #fff;
     }
 
     @media (max-width: 480px) {
@@ -115,7 +116,6 @@ export const ScenarioItemDeleteButton = styled.div`
 export const ScenarioItemDuration = styled.div`
     grid-area: duration;
     background: rgba(0, 0, 0, 0.75);
-    color: #fff;
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -152,6 +152,7 @@ export const CollectionElement = styled.div`
     }
     
     & > .name {
+        color: #fff;
         font-size: 1.5em;
         font-weight: bold;
         position: absolute;

@@ -11,7 +11,7 @@ import {AddPhrase} from './AddPhrase';
 import {Collection, CollectionItem, Format, TextSize, UserPhraseType} from '../../types';
 import {useStore} from '../../store';
 import {AddIcon} from '../../icons/AddIcon';
-import {ArrowLeft} from '../../icons/ArrowLeft.tsx';
+import {ArrowLeft} from '../../icons/ArrowLeft';
 
 const formatSelectorValues: {
     value: Format,

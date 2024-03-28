@@ -9,7 +9,7 @@ import {
     ScenarioItemUserText, ScenarioItemWrapper,
     SnapshotPreview
 } from './ScenarioEditor.styles';
-import {DeleteIcon} from '../../icons/DeleteIcon.tsx';
+import {DeleteIcon} from '../../icons/DeleteIcon';
 
 type ScenarioItemProps = {
     index: number;

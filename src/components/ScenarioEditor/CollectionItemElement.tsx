@@ -8,7 +8,7 @@ import {
     ScenarioItemWrapper,
     SnapshotPreview
 } from './ScenarioEditor.styles';
-import {AddIcon} from '../../icons/AddIcon.tsx';
+import {AddIcon} from '../../icons/AddIcon';
 
 type Props = {
     index: number;

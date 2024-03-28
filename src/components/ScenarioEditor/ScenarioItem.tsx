@@ -6,10 +6,10 @@ import {useStore} from '../../store';
 import {
     ScenarioItemClipTitle, ScenarioItemDeleteButton,
     ScenarioItemDuration, ScenarioItemIndexNumber,
-    ScenarioItemUserText, ScenarioItemWrapper,
-    SnapshotPreview
+    ScenarioItemUserText, ScenarioItemWrapper, ScenarioItemWrapperGrid,
 } from './ScenarioEditor.styles';
 import {DeleteIcon} from '../../icons/DeleteIcon';
+import {SnapshotPreview} from './SnapshotPreview';
 
 type ScenarioItemProps = {
     index: number;
@@ -34,33 +34,31 @@ export const ScenarioItem: FC<ScenarioItemProps> = (props) => {
 
     return (
         <ScenarioItemWrapper className={clsx({isDragging})}>
-            <SnapshotPreview>
-                <img
-                    alt={collection.name}
-                    src={collectionItem.snapshot}
-                    crossOrigin="anonymous"
-                />
-            </SnapshotPreview>
-            <ScenarioItemIndexNumber>
-                #{index}
-            </ScenarioItemIndexNumber>
-            <ScenarioItemUserText>
-                {phrase.type === UserPhraseType.PlainText ? phrase.text : (<i>image</i>)}
-            </ScenarioItemUserText>
-            {!isDragging && (
-                <ScenarioItemDeleteButton
-                    title="delete"
-                    onClick={disabled ? undefined : onDelete}
-                >
-                    <DeleteIcon/>
-                </ScenarioItemDeleteButton>
-            )}
-            <ScenarioItemClipTitle>
-                {collectionItem.text}
-            </ScenarioItemClipTitle>
-            <ScenarioItemDuration>
-                {collectionItem.duration.toFixed(1)}s
-            </ScenarioItemDuration>
+            <SnapshotPreview
+                collectionItem={collectionItem}
+            />
+            <ScenarioItemWrapperGrid>
+                <ScenarioItemIndexNumber>
+                    #{index}
+                </ScenarioItemIndexNumber>
+                <ScenarioItemUserText>
+                    {phrase.type === UserPhraseType.PlainText ? phrase.text : (<i>image</i>)}
+                </ScenarioItemUserText>
+                {!isDragging && (
+                    <ScenarioItemDeleteButton
+                        title="delete"
+                        onClick={disabled ? undefined : onDelete}
+                    >
+                        <DeleteIcon/>
+                    </ScenarioItemDeleteButton>
+                )}
+                <ScenarioItemClipTitle>
+                    {collectionItem.text}
+                </ScenarioItemClipTitle>
+                <ScenarioItemDuration>
+                    {collectionItem.duration.toFixed(1)}s
+                </ScenarioItemDuration>
+            </ScenarioItemWrapperGrid>
         </ScenarioItemWrapper>
     );
 };

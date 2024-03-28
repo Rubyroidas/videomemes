@@ -12,6 +12,7 @@ export type CollectionItem = {
     text: string;
     snapshot: string;
     duration: number;
+    preview: string;
     templates: Record<Format, string>;
 }
 export type Collection = {

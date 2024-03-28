@@ -5,10 +5,10 @@ import {CollectionItem} from '../../types';
 import {
     ScenarioItemClipTitle, ScenarioItemDeleteButton, ScenarioItemDuration,
     ScenarioItemIndexNumber,
-    ScenarioItemWrapper,
-    SnapshotPreview
+    ScenarioItemWrapper, ScenarioItemWrapperGrid,
 } from './ScenarioEditor.styles';
 import {AddIcon} from '../../icons/AddIcon';
+import {SnapshotPreview} from './SnapshotPreview';
 
 type Props = {
     index: number;
@@ -17,27 +17,25 @@ type Props = {
 }
 export const CollectionItemElement: FC<HTMLProps<HTMLDivElement> & Props> = ({index, item, disabled, onClick}) => (
     <ScenarioItemWrapper className={clsx({disabled})}>
-        <SnapshotPreview>
-            <img
-                alt={item.text}
-                src={item.snapshot}
-                crossOrigin="anonymous"
-            />
-        </SnapshotPreview>
-        <ScenarioItemIndexNumber>
-            #{index}
-        </ScenarioItemIndexNumber>
-        <ScenarioItemClipTitle>
-            {item.text}
-        </ScenarioItemClipTitle>
-        <ScenarioItemDeleteButton
-            title="add"
-            onClick={disabled ? undefined : onClick}
-        >
-            <AddIcon/>
-        </ScenarioItemDeleteButton>
-        <ScenarioItemDuration>
-            {item.duration.toFixed(1)}s
-        </ScenarioItemDuration>
+        <SnapshotPreview
+            collectionItem={item}
+        />
+        <ScenarioItemWrapperGrid>
+            <ScenarioItemIndexNumber>
+                #{index}
+            </ScenarioItemIndexNumber>
+            <ScenarioItemClipTitle>
+                {item.text}
+            </ScenarioItemClipTitle>
+            <ScenarioItemDeleteButton
+                title="add"
+                onClick={disabled ? undefined : onClick}
+            >
+                <AddIcon/>
+            </ScenarioItemDeleteButton>
+            <ScenarioItemDuration>
+                {item.duration.toFixed(1)}s
+            </ScenarioItemDuration>
+        </ScenarioItemWrapperGrid>
     </ScenarioItemWrapper>
 );

@@ -53,6 +53,10 @@ export const ScenarioItemIndexNumber = styled.div`
     border-right: solid 1px #fff;
     box-sizing: border-box;
     text-align: center;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
 `;
 export const ScenarioItemUserText = styled.div`
     grid-area: usertext;
@@ -62,6 +66,9 @@ export const ScenarioItemUserText = styled.div`
     white-space: nowrap;
     text-overflow: ellipsis;
     padding: 0 10px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
 
     @media (max-width: 480px) {
         padding: 0 2.5vw;
@@ -75,21 +82,44 @@ export const ScenarioItemClipTitle = styled.div`
     white-space: nowrap;
     text-overflow: ellipsis;
     padding: 0 10px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
 
     @media (max-width: 480px) {
         padding: 0 2.5vw;
     }
 `;
-export const ScenarioItemDeleteButton = styled.button`
+export const ScenarioItemDeleteButton = styled.div`
     background: none;
     border: none;
     cursor: pointer;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    
+    & > svg {
+        width: 32px;
+        height: 32px;
+        fill: var(--button-text-color);
+    }
+
+    @media (max-width: 480px) {
+        & > svg {
+            width: 6vw;
+            height: 6vw;
+        }
+    }
 `;
 export const ScenarioItemDuration = styled.div`
     grid-area: duration;
     background: rgba(0, 0, 0, 0.75);
     color: #fff;
-    text-align: center;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
 
     @media (max-width: 480px) {
         right: 2vw;

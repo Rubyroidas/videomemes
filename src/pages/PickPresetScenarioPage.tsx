@@ -1,9 +1,11 @@
-import {AppTitle, BasicLink} from '../components/App.styles';
+import {Link, useNavigate} from 'react-router-dom';
+
+import {AppTitle} from '../components/App.styles';
 import {ScenarioPicker} from '../components/ScenarioPicker/ScenarioPicker';
 import {Button} from './HomePage.styles';
 import {useEffect} from 'react';
 import {useStore} from '../store';
-import {useNavigate} from 'react-router-dom';
+import {HomeIcon} from '../icons/HomeIcon';
 
 export const PickPresetScenarioPage = () => {
     const store = useStore();
@@ -21,8 +23,12 @@ export const PickPresetScenarioPage = () => {
 
     return (
         <div>
-            <BasicLink to="/">go home</BasicLink>
-            <AppTitle>Pick scenario</AppTitle>
+            <AppTitle>
+                <Link to="/">
+                    <HomeIcon/>
+                </Link>
+                Pick scenario
+            </AppTitle>
             <ScenarioPicker/>
             <div>or</div>
             <Button to="/new-scenario">Edit from scratch</Button>

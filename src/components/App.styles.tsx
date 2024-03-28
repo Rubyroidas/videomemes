@@ -1,8 +1,29 @@
 import styled from '@emotion/styled';
 import {Link} from 'react-router-dom';
+import clsx from 'clsx';
 
 export const AppTitle = styled.div`
-    font-size: 2rem;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    font-size: 1.5rem;
+    color: #DEDEDE;
+    background-color: #343434;
+    --button-size: 34px;
+
+    & > a > svg {
+        width: var(--button-size);
+        height: var(--button-size);
+        fill: #DEDEDE;
+        margin: 2px 8px;
+    }
+
+    @media (max-width: 480px) {
+        --button-size: 8vw;
+        & > a > svg {
+            margin: 0.25vw 1vw;
+        }
+    }
 `;
 
 export const BasicLink = styled(Link)`
@@ -38,6 +59,27 @@ export const Button = styled.div<{disabled?: boolean}>`
         --button-size: 8vw;
     }
 `;
+export const FloatingButton = styled.div`
+    position: fixed;
+    right: 16px;
+    bottom: 16px;
+    
+    & > svg {
+        width: 60px;
+        height: 60px;
+        fill: var(--text-color);
+    }
+
+    @media (max-width: 480px) {
+        right: 4vw;
+        bottom: 4vw;
+
+        & > svg {
+            width: 14vw;
+            height: 14vw;
+        }
+    }
+`;
 export const ButtonSelectorWrapper = styled.div`
     display: flex;
     flex-direction: row;
@@ -49,13 +91,20 @@ export const ButtonSelectorCaption = styled.div`
     font-weight: bold;
     margin: 8px 12px;
 `;
-export const ButtonSelectorItem = styled.div<{selected: boolean}>`
+export const ButtonSelectorItem = styled.div`
     display: inline-block;
-    background-color: ${props => props.selected ? '#888' : '#444'};
+    background-color: var(--switch-button-bg-color);
     color: #fff;
     padding: 8px 12px;
-    margin: 0 4px;
+    margin: 0;
     cursor: pointer;
+    user-select: none;
+    outline: none;
+    text-align: center;
+
+    &.selected {
+        background-color: var(--switch-button-bg-color-selected);
+    }
 `;
 export const ListTitle = styled.div`
     margin: 32px 0;
@@ -75,7 +124,7 @@ export const ButtonSelector = <T extends string | number>({caption, value, value
         {values.map(item => (
             <ButtonSelectorItem
                 key={item.value}
-                selected={item.value === value}
+                className={clsx({selected: item.value === value})}
                 onClick={() => onChange(item.value)}
             >
                 {item.text}

@@ -1,7 +1,7 @@
 import {MouseEventHandler, TouchEventHandler, useEffect, useState} from 'react';
-import {useNavigate, useParams} from 'react-router-dom';
+import {Link, useNavigate, useParams} from 'react-router-dom';
 
-import {AppTitle, BasicLink} from '../components/App.styles';
+import {AppTitle} from '../components/App.styles';
 import {consoleLog} from '../utils';
 import {useApi} from '../services/apiContext';
 import {FeedItem, Point, Size} from '../types';
@@ -9,6 +9,7 @@ import {PlayButton} from '../components/PhrasesEditor/PhraseEditor.styles';
 import {PlayIcon} from '../icons/PlayIcon';
 import styled from '@emotion/styled';
 import {formatSizes} from '../statics';
+import {HomeIcon} from '../icons/HomeIcon';
 
 const VideoContainer = styled.div<Size>`
     width: ${props => props.width}px;
@@ -74,8 +75,12 @@ export const FeedItemPage = () => {
 
     return (
         <div>
-            <BasicLink to="/">go home</BasicLink>
-            <AppTitle>Video</AppTitle>
+            <AppTitle>
+                <Link to="/">
+                    <HomeIcon/>
+                </Link>
+                Video
+            </AppTitle>
             <VideoContainer {...size}>
                 <Video
                     onClick={handleVideoClick}

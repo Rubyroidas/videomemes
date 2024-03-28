@@ -3,11 +3,12 @@ import clsx from 'clsx';
 
 import {CollectionItem} from '../../types';
 import {
-    ScenarioItemClipTitle, ScenarioItemDuration,
+    ScenarioItemClipTitle, ScenarioItemDeleteButton, ScenarioItemDuration,
     ScenarioItemIndexNumber,
     ScenarioItemWrapper,
     SnapshotPreview
 } from './ScenarioEditor.styles';
+import {AddIcon} from '../../icons/AddIcon.tsx';
 
 type Props = {
     index: number;
@@ -15,7 +16,7 @@ type Props = {
     item: CollectionItem;
 }
 export const CollectionItemElement: FC<HTMLProps<HTMLDivElement> & Props> = ({index, item, disabled, onClick}) => (
-    <ScenarioItemWrapper onClick={disabled ? undefined : onClick} className={clsx({disabled})}>
+    <ScenarioItemWrapper className={clsx({disabled})}>
         <SnapshotPreview>
             <img
                 alt={item.text}
@@ -29,6 +30,12 @@ export const CollectionItemElement: FC<HTMLProps<HTMLDivElement> & Props> = ({in
         <ScenarioItemClipTitle>
             {item.text}
         </ScenarioItemClipTitle>
+        <ScenarioItemDeleteButton
+            title="add"
+            onClick={disabled ? undefined : onClick}
+        >
+            <AddIcon/>
+        </ScenarioItemDeleteButton>
         <ScenarioItemDuration>
             {item.duration.toFixed(1)}s
         </ScenarioItemDuration>

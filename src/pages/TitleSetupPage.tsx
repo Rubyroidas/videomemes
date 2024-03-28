@@ -1,10 +1,11 @@
 import {useEffect} from 'react';
 import {observer} from 'mobx-react';
-import {useNavigate} from 'react-router-dom';
+import {Link, useNavigate} from 'react-router-dom';
 
-import {AppTitle, BasicLink} from '../components/App.styles';
+import {AppTitle} from '../components/App.styles';
 import {TitleSetup} from '../components/TitleSetup';
 import {useStore} from '../store';
+import {HomeIcon} from '../icons/HomeIcon';
 
 export const TitleSetupPage = observer(() => {
     const store = useStore();
@@ -22,8 +23,12 @@ export const TitleSetupPage = observer(() => {
 
     return (
         <div>
-            <BasicLink to="/">go home</BasicLink>
-            <AppTitle>Do you want video to have a title?</AppTitle>
+            <AppTitle>
+                <Link to="/">
+                    <HomeIcon/>
+                </Link>
+                Do you want video to have a title?
+            </AppTitle>
             <TitleSetup/>
         </div>
     );

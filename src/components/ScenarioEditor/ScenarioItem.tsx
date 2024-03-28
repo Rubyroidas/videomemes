@@ -9,6 +9,7 @@ import {
     ScenarioItemUserText, ScenarioItemWrapper,
     SnapshotPreview
 } from './ScenarioEditor.styles';
+import {DeleteIcon} from '../../icons/DeleteIcon.tsx';
 
 type ScenarioItemProps = {
     index: number;
@@ -48,9 +49,10 @@ export const ScenarioItem: FC<ScenarioItemProps> = (props) => {
             </ScenarioItemUserText>
             <ScenarioItemDeleteButton
                 title="delete"
-                onClick={onDelete}
-                disabled={disabled}
-            >❌</ScenarioItemDeleteButton>
+                onClick={disabled ? undefined : onDelete}
+            >
+                <DeleteIcon/>
+            </ScenarioItemDeleteButton>
             <ScenarioItemClipTitle>
                 {collectionItem.text}
             </ScenarioItemClipTitle>

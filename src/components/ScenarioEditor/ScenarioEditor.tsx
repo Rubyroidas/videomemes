@@ -3,13 +3,15 @@ import {useNavigate} from 'react-router-dom';
 import {observer} from 'mobx-react';
 import shortUuid from 'short-uuid';
 
-import {Button, ButtonSelector, ListTitle} from '../App.styles';
+import {Button, ButtonSelector, FloatingButton, ListTitle} from '../App.styles';
 import {Icon} from '../PhrasesEditor/PhraseEditor.styles';
 import {EditListIcon} from '../../icons/EditListIcon';
 import {ScenarioList} from './ScenarioList';
 import {AddPhrase} from './AddPhrase';
 import {Collection, CollectionItem, Format, TextSize, UserPhraseType} from '../../types';
 import {useStore} from '../../store';
+import {AddIcon} from '../../icons/AddIcon';
+import {ArrowLeft} from '../../icons/ArrowLeft.tsx';
 
 const formatSelectorValues: {
     value: Format,
@@ -78,9 +80,12 @@ export const ScenarioEditor = observer(() => {
                 </Button>
             )}
             <div>
-                <Button onClick={toggleAddClip}>
-                    {isAddingVisible ? 'Back to phrases list' : 'Add clip'}
-                </Button>
+                {isAddingVisible && (
+                    <Button onClick={toggleAddClip}>
+                        <ArrowLeft/>
+                        Back to phrases list
+                    </Button>
+                )}
             </div>
             {isAddingVisible ? (
                 <AddPhrase onSelect={handleAddItem}/>
@@ -96,11 +101,11 @@ export const ScenarioEditor = observer(() => {
                     <ScenarioList/>
                 </>
             )}
-            <div>
-                <Button onClick={toggleAddClip}>
-                    {isAddingVisible ? 'Back to phrases list' : 'Add clip'}
-                </Button>
-            </div>
+            {!isAddingVisible && (
+                <FloatingButton onClick={toggleAddClip}>
+                    <AddIcon/>
+                </FloatingButton>
+            )}
         </div>
     )
 });

@@ -63,7 +63,7 @@ export const Button = styled.div<{disabled?: boolean}>`
 `;
 export const FloatingButton = styled.div`
     position: fixed;
-    right: 16px;
+    left: 530px;
     bottom: 16px;
     
     & > svg {
@@ -73,6 +73,7 @@ export const FloatingButton = styled.div`
     }
 
     @media (max-width: 480px) {
+        left: auto;
         right: 4vw;
         bottom: 4vw;
 

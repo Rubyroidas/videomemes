@@ -18,7 +18,7 @@ export const ScenarioItemWrapper = styled.div`
     color: #fff;
     
     &.isDragging {
-        background: rgba(0, 0, 0, 0.3);
+        background: rgba(0, 0, 255, 0.3);
     }
     
     &.disabled {

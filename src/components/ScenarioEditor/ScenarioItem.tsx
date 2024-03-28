@@ -47,12 +47,14 @@ export const ScenarioItem: FC<ScenarioItemProps> = (props) => {
             <ScenarioItemUserText>
                 {phrase.type === UserPhraseType.PlainText ? phrase.text : (<i>image</i>)}
             </ScenarioItemUserText>
-            <ScenarioItemDeleteButton
-                title="delete"
-                onClick={disabled ? undefined : onDelete}
-            >
-                <DeleteIcon/>
-            </ScenarioItemDeleteButton>
+            {!isDragging && (
+                <ScenarioItemDeleteButton
+                    title="delete"
+                    onClick={disabled ? undefined : onDelete}
+                >
+                    <DeleteIcon/>
+                </ScenarioItemDeleteButton>
+            )}
             <ScenarioItemClipTitle>
                 {collectionItem.text}
             </ScenarioItemClipTitle>

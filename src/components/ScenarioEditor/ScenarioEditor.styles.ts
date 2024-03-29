@@ -103,15 +103,15 @@ export const ScenarioItemDeleteButton = styled.div`
     & > svg {
         display: inline-block;
         flex: 1 1 auto;
-        width: 24px;
-        height: 24px;
+        width: 32px;
+        height: 32px;
         fill: #fff;
     }
 
     @media (max-width: 480px) {
         & > svg {
-            width: 6vw;
-            height: 6vw;
+            width: 10vw;
+            height: 10vw;
         }
     }
 `;

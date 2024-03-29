@@ -12,7 +12,7 @@ export const Wrapper = styled.div`
     width: 100%;
     height: 100%;
     pointer-events: auto;
-    
+
     & > img {
         width: 100%;
     }
@@ -51,31 +51,31 @@ export const SnapshotPreview = (props: Props) => {
         <Wrapper
             onClick={handleClick}
         >
-            {!startedPlaying ? (
+            {!startedPlaying && (
                 <img
                     alt={collectionItem.text}
                     src={collectionItem.snapshot}
                     crossOrigin="anonymous"
                 />
-            ) : (
-                <video
-                    ref={videoRef}
-                    style={{
-                        width: '100%',
-                        height: '100%',
-                    }}
-                    controls={false}
-                    loop={false}
-                    autoPlay={true}
-                    src={`${collectionItem.preview}#t=0.01`}
-                    disablePictureInPicture={true}
-                    disableRemotePlayback={true}
-                    controlsList="nofullscreen"
-                    playsInline={true}
-                    preload="auto"
-                    crossOrigin="anonymous"
-                />
             )}
+            <video
+                ref={videoRef}
+                style={{
+                    width: '100%',
+                    height: '100%',
+                    display: startedPlaying ? '' : 'none'
+                }}
+                controls={false}
+                loop={false}
+                autoPlay={false}
+                src={`${collectionItem.preview}#t=0.01`}
+                disablePictureInPicture={true}
+                disableRemotePlayback={true}
+                controlsList="nofullscreen"
+                playsInline={true}
+                preload="auto"
+                crossOrigin="anonymous"
+            />
             <PlayButton
                 position={playButtonPosition}
                 visible={!isVideoPlaying}

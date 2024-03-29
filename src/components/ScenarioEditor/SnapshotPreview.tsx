@@ -28,10 +28,8 @@ export const SnapshotPreview = (props: Props) => {
     const {collectionItem} = props;
 
     const handleClick = () => {
-        console.log('click');
         setStartedPlaying(true);
         if (!videoRef.current) {
-            console.log('no video');
             return;
         }
 
@@ -48,8 +46,6 @@ export const SnapshotPreview = (props: Props) => {
         x: 50,
         y: 50,
     };
-
-    console.log(`${collectionItem.id}: isVideoPlaying`, isVideoPlaying);
 
     return (
         <Wrapper

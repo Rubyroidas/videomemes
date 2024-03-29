@@ -5,7 +5,7 @@ import {Collection, CollectionItem} from '../../types';
 import {CollectionItemElement} from './CollectionItemElement';
 import {MAX_VIDEO_LENGTH_SECONDS} from '../../config';
 import {AddPhraseCollectionItemList, AddPhraseCollectionList, CollectionElement} from './ScenarioEditor.styles';
-import {ListTitle} from '../App.styles.tsx';
+import {ListTitle} from '../App.styles';
 
 type Props = {
     onSelect: (collection: Collection, item: CollectionItem) => void;

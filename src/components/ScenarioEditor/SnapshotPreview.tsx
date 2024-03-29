@@ -1,7 +1,9 @@
 import styled from '@emotion/styled';
 import {useRef, useState} from 'react';
 
-import {CollectionItem} from '../../types';
+import {CollectionItem, Point} from '../../types';
+import {PlayButton} from '../PhrasesEditor/PhraseEditor.styles';
+import {PlayIcon} from '../../icons/PlayIcon';
 
 export const Wrapper = styled.div`
     grid-column: 1 / 4;
@@ -22,6 +24,7 @@ type Props = {
 export const SnapshotPreview = (props: Props) => {
     const videoRef = useRef<HTMLVideoElement>(null);
     const [startedPlaying, setStartedPlaying] = useState(false);
+    const [isVideoPlaying, setIsVideoPlaying] = useState(false);
     const {collectionItem} = props;
 
     const handleClick = () => {
@@ -34,10 +37,19 @@ export const SnapshotPreview = (props: Props) => {
 
         if (videoRef.current.paused) {
             videoRef.current.play();
+            setIsVideoPlaying(true);
         } else {
             videoRef.current.pause();
+            setIsVideoPlaying(false);
         }
     };
+
+    const playButtonPosition: Point = {
+        x: 50,
+        y: 50,
+    };
+
+    console.log(`${collectionItem.id}: isVideoPlaying`, isVideoPlaying);
 
     return (
         <Wrapper
@@ -68,6 +80,12 @@ export const SnapshotPreview = (props: Props) => {
                     crossOrigin="anonymous"
                 />
             )}
+            <PlayButton
+                position={playButtonPosition}
+                visible={!isVideoPlaying}
+            >
+                <PlayIcon/>
+            </PlayButton>
         </Wrapper>
     )
 };

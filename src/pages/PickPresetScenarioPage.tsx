@@ -1,6 +1,6 @@
 import {Link, useNavigate} from 'react-router-dom';
 
-import {AppTitle} from '../components/App.styles';
+import {AppTitle, ListTitle} from '../components/App.styles';
 import {ScenarioPicker} from '../components/ScenarioPicker/ScenarioPicker';
 import {Button} from './HomePage.styles';
 import {useEffect} from 'react';
@@ -29,8 +29,9 @@ export const PickPresetScenarioPage = () => {
                 </Link>
                 Pick scenario
             </AppTitle>
+            <ListTitle>Pick a preset</ListTitle>
             <ScenarioPicker/>
-            <div>or</div>
+            <ListTitle>or</ListTitle>
             <Button to="/new-scenario">Edit from scratch</Button>
         </div>
     );

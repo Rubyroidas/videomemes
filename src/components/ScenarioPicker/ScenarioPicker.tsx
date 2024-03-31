@@ -12,8 +12,8 @@ export const ScenarioPicker = () => {
 
     return (
         <ScenarioPickerWrapper>
-            {presets.map(preset => (
-                <Preset preset={preset} key={preset.id}/>
+            {presets.map((preset, index) => (
+                <Preset preset={preset} key={preset.id} index={index + 1}/>
             ))}
         </ScenarioPickerWrapper>
     );

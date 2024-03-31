@@ -40,7 +40,7 @@ export const ScenarioEditor = observer(() => {
         setIsAddingVisible(v => !v);
     }, []);
     const handleEditPhrases = useCallback(() => {
-        navigate('/edit-phrases')
+        navigate('/edit-fragments');
     }, []);
     const handleAddItem = useCallback((collection: Collection, item: CollectionItem) => {
         if (!store.scenario) {

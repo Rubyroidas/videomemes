@@ -6,7 +6,7 @@ import {useEffect} from 'react';
 import {useStore} from '../store';
 import {HomeIcon} from '../icons/HomeIcon';
 
-export const EditPhrasesPage = () => {
+export const EditFragmentsPage = () => {
     const store = useStore();
     const navigate = useNavigate();
     useEffect(() => {

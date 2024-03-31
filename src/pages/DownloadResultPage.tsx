@@ -44,7 +44,7 @@ export const DownloadResultPage = observer(() => {
 
     const handleEditPhrases = useCallback(() => {
         store.generatedVideo = undefined;
-        navigate('/edit-phrases');
+        navigate('/edit-fragments');
     }, []);
 
     if (!store.generatedVideo) {

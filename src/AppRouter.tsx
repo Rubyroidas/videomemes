@@ -1,7 +1,7 @@
 import {createBrowserRouter, RouterProvider} from 'react-router-dom';
 
 import {HomePage} from './pages/HomePage';
-import {EditPhrasesPage} from './pages/EditPhrasesPage';
+import {EditFragmentsPage} from './pages/EditFragmentsPage';
 import {AboutPage} from './pages/AboutPage';
 import {ContactUsPage} from './pages/ContactUsPage';
 import {DonatePage} from './pages/DonatePage';
@@ -35,8 +35,8 @@ const router = createBrowserRouter([
         element: <EditScenarioPage/>,
     },
     {
-        path: '/edit-phrases',
-        element: <EditPhrasesPage/>,
+        path: '/edit-fragments',
+        element: <EditFragmentsPage/>,
     },
     {
         path: '/download-result',

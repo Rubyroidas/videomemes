@@ -14,9 +14,9 @@ export const useLoadInitialData = () => {
     const [failedBrowser, setFailedBrowser] = useState(false);
     useEffect(() => {
         const loadContentData = async () => {
-            const {collections, scenarios} = await loadCollectionsAndScenarioPresets();
+            const {collections, scenarioTemplates} = await loadCollectionsAndScenarioPresets();
             store.collections = collections;
-            store.presets = scenarios.flat();
+            store.presets = scenarioTemplates;
         };
         const initFfmpeg = async () => {
             const ffmpeg = new FFmpeg();

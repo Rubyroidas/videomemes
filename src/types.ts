@@ -37,7 +37,7 @@ export type ScenarioPreset = {
 
 export type GlobalContentConfig = {
     collections: Collection[];
-    scenarios: ScenarioPreset[][];
+    scenarioTemplates: ScenarioPreset[];
 }
 
 export enum UserPhraseType {

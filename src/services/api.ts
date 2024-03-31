@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 import {FeedItem, TextSize, UserScenario} from '../types';
-import {consoleError, wait} from '../utils';
+import {consoleError, consoleLog, wait} from '../utils';
 
 export class Api {
     url: string;
@@ -17,7 +17,11 @@ export class Api {
         }
         const res = await fetch(url);
         const json = await res.json();
-        return (json.data !== undefined ? json.data : json) as T;
+        consoleLog(`API ${endpoint} RESPONSE`, json);
+        if (json.status === false || json.data === undefined) {
+            throw new Error('bad data');
+        }
+        return json.data as T;
     }
 
     async postRequest<T>(endpoint: string, params: Record<string, string> = {}, body: string | FormData): Promise<T> {

@@ -12,7 +12,7 @@ export const Feed = () => {
 
     const load = async () => {
         const res = await api.getFeed();
-        consoleLog(res);
+        consoleLog('FEED', res);
         setFeed(res);
     }
 

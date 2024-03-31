@@ -2,7 +2,7 @@ import {MouseEventHandler, TouchEventHandler, useEffect, useState} from 'react';
 import {Link, useNavigate, useParams} from 'react-router-dom';
 
 import {AppTitle} from '../components/App.styles';
-import {consoleLog} from '../utils';
+import {consoleError, consoleLog} from '../utils';
 import {useApi} from '../services/apiContext';
 import {FeedItem, Point, Size} from '../types';
 import {PlayButton} from '../components/PhrasesEditor/PhraseEditor.styles';
@@ -57,10 +57,15 @@ export const FeedItemPage = () => {
 
         const load = async() => {
             const data = await api.getFeedItem(parsedId);
-            consoleLog('item data', data);
+            consoleLog('FEED ITEM', data);
             setItem(data);
         };
-        load();
+        load()
+            .then(() => {})
+            .catch((e) => {
+                consoleError(e);
+                navigate('/feed');
+            });
     }, [params.id]);
 
     if (!item) {

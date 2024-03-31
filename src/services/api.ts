@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-import {FeedItem, UserScenario} from '../types';
+import {FeedItem, TextSize, UserScenario} from '../types';
 import {consoleError, wait} from '../utils';
 
 export class Api {
@@ -39,8 +39,32 @@ export class Api {
         }
     }
 
+    serializeScenario(scenario: UserScenario) {
+        const {uuid, format, title, phrases} = scenario;
+        return {
+            uuid,
+            format,
+            title,
+            fragments: phrases.map(p => {
+                let textSizeCoeff = 1;
+                switch (p.textSize) {
+                    case TextSize.Small:
+                        textSizeCoeff = 0.5;
+                        break;
+                    case TextSize.Big:
+                        textSizeCoeff = 1.5;
+                        break;
+                }
+                return {
+                    ...p,
+                    textSize: textSizeCoeff,
+                }
+            }),
+        }
+    }
+
     async uploadScenarioAndFile(scenario: UserScenario, file: Blob) {
-        const scenarioSerialized = JSON.stringify(scenario);
+        const scenarioSerialized = JSON.stringify(this.serializeScenario(scenario));
         const configPromise = this.postRequest('/upload/config', {}, scenarioSerialized);
         const formData = new FormData();
         formData.set('uuid', scenario.uuid);

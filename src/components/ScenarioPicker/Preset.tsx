@@ -9,6 +9,7 @@ import {
     ScenarioItemClipTitle,
     ScenarioItemDuration,
     ScenarioItemIndexNumber,
+    ScenarioItemUserText,
     ScenarioItemWrapper,
     ScenarioItemWrapperGrid
 } from '../ScenarioEditor/ScenarioEditor.styles';
@@ -55,6 +56,9 @@ export const Preset = ({preset, index}: Props) => {
                     <ScenarioItemIndexNumber>
                         #{index}
                     </ScenarioItemIndexNumber>
+                    <ScenarioItemUserText>
+                        {preset.items.length} videos
+                    </ScenarioItemUserText>
                     <ScenarioItemClipTitle>
                         {preset.name}
                     </ScenarioItemClipTitle>

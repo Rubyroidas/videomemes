@@ -1,18 +1,22 @@
 import {useEffect, useState} from 'react';
 import {FFmpeg} from '@ffmpeg/ffmpeg';
 
-import {consoleError, consoleLog, loadCollections, loadFFMpeg, loadScenarioPresets} from '../utils';
+import {
+    consoleError,
+    consoleLog,
+    loadCollectionsAndScenarioPresets,
+    loadFFMpeg,
+} from '../utils';
 import {useStore} from '../store';
 
 export const useLoadInitialData = () => {
     const store = useStore();
     const [failedBrowser, setFailedBrowser] = useState(false);
     useEffect(() => {
-        const loadCollectionsData = async () => {
-            store.collections = await loadCollections();
-        };
-        const loadPresetsData = async () => {
-            store.presets = await loadScenarioPresets();
+        const loadContentData = async () => {
+            const {collections, scenarios} = await loadCollectionsAndScenarioPresets();
+            store.collections = collections;
+            store.presets = scenarios.flat();
         };
         const initFfmpeg = async () => {
             const ffmpeg = new FFmpeg();
@@ -27,8 +31,7 @@ export const useLoadInitialData = () => {
             store.ffmpeg = ffmpeg;
         };
         Promise.all([
-            loadCollectionsData(),
-            loadPresetsData(),
+            loadContentData(),
             initFfmpeg(),
         ]);
     }, []);

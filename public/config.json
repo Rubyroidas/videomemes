@@ -1,0 +1,1452 @@
+{
+    "collections": [
+        {
+            "id": "tinkoff",
+            "name": "Tinkoff",
+            "cover": "https://cdn.memely.net/templates/tinkoff/cover.jpg",
+            "textArea": {
+                "ig_story": {
+                    "x": 0,
+                    "y": 0,
+                    "width": 1080,
+                    "height": 1200
+                },
+                "ig_post": {
+                    "x": 0,
+                    "y": 0,
+                    "width": 1080,
+                    "height": 540
+                },
+                "yt_video": {
+                    "x": 640,
+                    "y": 0,
+                    "width": 640,
+                    "height": 720
+                }
+            },
+            "watermarkArea": {
+                "ig_story": {
+                    "x": 820,
+                    "y": 1240,
+                    "width": 200,
+                    "height": 40
+                },
+                "ig_post": {
+                    "x": 800,
+                    "y": 580,
+                    "width": 200,
+                    "height": 40
+                },
+                "yt_video": {
+                    "x": 380,
+                    "y": 40,
+                    "width": 200,
+                    "height": 40
+                }
+            },
+            "playButton": {
+                "ig_story": {
+                    "x": 540,
+                    "y": 1560
+                },
+                "ig_post": {
+                    "x": 540,
+                    "y": 810
+                },
+                "yt_video": {
+                    "x": 320,
+                    "y": 360
+                }
+            },
+            "items": [
+                {
+                    "id": 1,
+                    "duration": 3.95,
+                    "text": "Это было не просто смело, это было пиздец как смело.",
+                    "snapshot": "https://cdn.memely.net/templates/tinkoff/tinkoff.snapshot.01.jpg",
+                    "order": 1,
+                    "preview": "https://cdn.memely.net/templates/tinkoff/tinkoff.preview.01.mp4",
+                    "templates": {
+                        "ig_story": "https://cdn.memely.net/templates/tinkoff/tinkoff.story.01.mp4",
+                        "ig_post": "https://cdn.memely.net/templates/tinkoff/tinkoff.post.01.mp4",
+                        "yt_video": "https://cdn.memely.net/templates/tinkoff/tinkoff.youtube.01.mp4"
+                    }
+                },
+                {
+                    "id": 2,
+                    "duration": 1.3,
+                    "text": "Это был сарказм.",
+                    "snapshot": "https://cdn.memely.net/templates/tinkoff/tinkoff.snapshot.02.jpg",
+                    "order": 30,
+                    "preview": "https://cdn.memely.net/templates/tinkoff/tinkoff.preview.02.mp4",
+                    "templates": {
+                        "ig_story": "https://cdn.memely.net/templates/tinkoff/tinkoff.story.02.mp4",
+                        "ig_post": "https://cdn.memely.net/templates/tinkoff/tinkoff.post.02.mp4",
+                        "yt_video": "https://cdn.memely.net/templates/tinkoff/tinkoff.youtube.02.mp4"
+                    }
+                },
+                {
+                    "id": 3,
+                    "duration": 1.77,
+                    "text": "Я делал то, что я мог делать.",
+                    "snapshot": "https://cdn.memely.net/templates/tinkoff/tinkoff.snapshot.03.jpg",
+                    "order": 2,
+                    "preview": "https://cdn.memely.net/templates/tinkoff/tinkoff.preview.03.mp4",
+                    "templates": {
+                        "ig_story": "https://cdn.memely.net/templates/tinkoff/tinkoff.story.03.mp4",
+                        "ig_post": "https://cdn.memely.net/templates/tinkoff/tinkoff.post.03.mp4",
+                        "yt_video": "https://cdn.memely.net/templates/tinkoff/tinkoff.youtube.03.mp4"
+                    }
+                },
+                {
+                    "id": 4,
+                    "duration": 4.29,
+                    "text": "Ну это пиздец какой-то просто. Ну сколько можно?",
+                    "snapshot": "https://cdn.memely.net/templates/tinkoff/tinkoff.snapshot.04.jpg",
+                    "order": 3,
+                    "preview": "https://cdn.memely.net/templates/tinkoff/tinkoff.preview.04.mp4",
+                    "templates": {
+                        "ig_story": "https://cdn.memely.net/templates/tinkoff/tinkoff.story.04.mp4",
+                        "ig_post": "https://cdn.memely.net/templates/tinkoff/tinkoff.post.04.mp4",
+                        "yt_video": "https://cdn.memely.net/templates/tinkoff/tinkoff.youtube.04.mp4"
+                    }
+                },
+                {
+                    "id": 5,
+                    "duration": 1.24,
+                    "text": "Заебись.",
+                    "snapshot": "https://cdn.memely.net/templates/tinkoff/tinkoff.snapshot.05.jpg",
+                    "order": 31,
+                    "preview": "https://cdn.memely.net/templates/tinkoff/tinkoff.preview.05.mp4",
+                    "templates": {
+                        "ig_story": "https://cdn.memely.net/templates/tinkoff/tinkoff.story.05.mp4",
+                        "ig_post": "https://cdn.memely.net/templates/tinkoff/tinkoff.post.05.mp4",
+                        "yt_video": "https://cdn.memely.net/templates/tinkoff/tinkoff.youtube.05.mp4"
+                    }
+                },
+                {
+                    "id": 6,
+                    "duration": 3.52,
+                    "text": "Я ошибся. Я могу один раз ошибиться?",
+                    "snapshot": "https://cdn.memely.net/templates/tinkoff/tinkoff.snapshot.06.jpg",
+                    "order": 4,
+                    "preview": "https://cdn.memely.net/templates/tinkoff/tinkoff.preview.06.mp4",
+                    "templates": {
+                        "ig_story": "https://cdn.memely.net/templates/tinkoff/tinkoff.story.06.mp4",
+                        "ig_post": "https://cdn.memely.net/templates/tinkoff/tinkoff.post.06.mp4",
+                        "yt_video": "https://cdn.memely.net/templates/tinkoff/tinkoff.youtube.06.mp4"
+                    }
+                },
+                {
+                    "id": 7,
+                    "duration": 4.01,
+                    "text": "Ошибся, допустим. Давайте прошу у всех прощения за эту фразу.",
+                    "snapshot": "https://cdn.memely.net/templates/tinkoff/tinkoff.snapshot.07.jpg",
+                    "order": 32,
+                    "preview": "https://cdn.memely.net/templates/tinkoff/tinkoff.preview.07.mp4",
+                    "templates": {
+                        "ig_story": "https://cdn.memely.net/templates/tinkoff/tinkoff.story.07.mp4",
+                        "ig_post": "https://cdn.memely.net/templates/tinkoff/tinkoff.post.07.mp4",
+                        "yt_video": "https://cdn.memely.net/templates/tinkoff/tinkoff.youtube.07.mp4"
+                    }
+                },
+                {
+                    "id": 8,
+                    "duration": 6.72,
+                    "text": "В принципе, в моей фразе, в моей фразе есть много логики, если по ней хорошо подумать.",
+                    "snapshot": "https://cdn.memely.net/templates/tinkoff/tinkoff.snapshot.08.jpg",
+                    "order": 5,
+                    "preview": "https://cdn.memely.net/templates/tinkoff/tinkoff.preview.08.mp4",
+                    "templates": {
+                        "ig_story": "https://cdn.memely.net/templates/tinkoff/tinkoff.story.08.mp4",
+                        "ig_post": "https://cdn.memely.net/templates/tinkoff/tinkoff.post.08.mp4",
+                        "yt_video": "https://cdn.memely.net/templates/tinkoff/tinkoff.youtube.08.mp4"
+                    }
+                },
+                {
+                    "id": 9,
+                    "duration": 5.01,
+                    "text": "Ну, давайте мечтать. А можно быть реалистом. А реалистично это никогда не будет.",
+                    "snapshot": "https://cdn.memely.net/templates/tinkoff/tinkoff.snapshot.09.jpg",
+                    "order": 6,
+                    "preview": "https://cdn.memely.net/templates/tinkoff/tinkoff.preview.09.mp4",
+                    "templates": {
+                        "ig_story": "https://cdn.memely.net/templates/tinkoff/tinkoff.story.09.mp4",
+                        "ig_post": "https://cdn.memely.net/templates/tinkoff/tinkoff.post.09.mp4",
+                        "yt_video": "https://cdn.memely.net/templates/tinkoff/tinkoff.youtube.09.mp4"
+                    }
+                },
+                {
+                    "id": 10,
+                    "duration": 6.89,
+                    "text": "Ну ты понимаешь, я никого не хочу осуждать, потому что кто-то намеренно избегает, кому-то это неинтересно. Вот мне неинтересно.",
+                    "snapshot": "https://cdn.memely.net/templates/tinkoff/tinkoff.snapshot.10.jpg",
+                    "order": 7,
+                    "preview": "https://cdn.memely.net/templates/tinkoff/tinkoff.preview.10.mp4",
+                    "templates": {
+                        "ig_story": "https://cdn.memely.net/templates/tinkoff/tinkoff.story.10.mp4",
+                        "ig_post": "https://cdn.memely.net/templates/tinkoff/tinkoff.post.10.mp4",
+                        "yt_video": "https://cdn.memely.net/templates/tinkoff/tinkoff.youtube.10.mp4"
+                    }
+                },
+                {
+                    "id": 11,
+                    "duration": 6.12,
+                    "text": "Они все очень, на мой взгляд, тупые. Они все, так сказать, примитивные.",
+                    "snapshot": "https://cdn.memely.net/templates/tinkoff/tinkoff.snapshot.11.jpg",
+                    "order": 8,
+                    "preview": "https://cdn.memely.net/templates/tinkoff/tinkoff.preview.11.mp4",
+                    "templates": {
+                        "ig_story": "https://cdn.memely.net/templates/tinkoff/tinkoff.story.11.mp4",
+                        "ig_post": "https://cdn.memely.net/templates/tinkoff/tinkoff.post.11.mp4",
+                        "yt_video": "https://cdn.memely.net/templates/tinkoff/tinkoff.youtube.11.mp4"
+                    }
+                },
+                {
+                    "id": 12,
+                    "duration": 4.67,
+                    "text": "Какое-то величие, какая-то хуйня. Мне вообще они неинтересны, я не хочу с ними разговаривать.",
+                    "snapshot": "https://cdn.memely.net/templates/tinkoff/tinkoff.snapshot.12.jpg",
+                    "order": 9,
+                    "preview": "https://cdn.memely.net/templates/tinkoff/tinkoff.preview.12.mp4",
+                    "templates": {
+                        "ig_story": "https://cdn.memely.net/templates/tinkoff/tinkoff.story.12.mp4",
+                        "ig_post": "https://cdn.memely.net/templates/tinkoff/tinkoff.post.12.mp4",
+                        "yt_video": "https://cdn.memely.net/templates/tinkoff/tinkoff.youtube.12.mp4"
+                    }
+                },
+                {
+                    "id": 13,
+                    "duration": 5.06,
+                    "text": "Я это не понимаю. Мне это неинтересно. Вот мне лично это неинтересно, за других сказать не могу.",
+                    "snapshot": "https://cdn.memely.net/templates/tinkoff/tinkoff.snapshot.13.jpg",
+                    "order": 10,
+                    "preview": "https://cdn.memely.net/templates/tinkoff/tinkoff.preview.13.mp4",
+                    "templates": {
+                        "ig_story": "https://cdn.memely.net/templates/tinkoff/tinkoff.story.13.mp4",
+                        "ig_post": "https://cdn.memely.net/templates/tinkoff/tinkoff.post.13.mp4",
+                        "yt_video": "https://cdn.memely.net/templates/tinkoff/tinkoff.youtube.13.mp4"
+                    }
+                },
+                {
+                    "id": 14,
+                    "duration": 1.15,
+                    "text": "Круто!",
+                    "snapshot": "https://cdn.memely.net/templates/tinkoff/tinkoff.snapshot.14.jpg",
+                    "order": 33,
+                    "preview": "https://cdn.memely.net/templates/tinkoff/tinkoff.preview.14.mp4",
+                    "templates": {
+                        "ig_story": "https://cdn.memely.net/templates/tinkoff/tinkoff.story.14.mp4",
+                        "ig_post": "https://cdn.memely.net/templates/tinkoff/tinkoff.post.14.mp4",
+                        "yt_video": "https://cdn.memely.net/templates/tinkoff/tinkoff.youtube.14.mp4"
+                    }
+                },
+                {
+                    "id": 15,
+                    "duration": 1.39,
+                    "text": "Это же круто!",
+                    "snapshot": "https://cdn.memely.net/templates/tinkoff/tinkoff.snapshot.15.jpg",
+                    "order": 34,
+                    "preview": "https://cdn.memely.net/templates/tinkoff/tinkoff.preview.15.mp4",
+                    "templates": {
+                        "ig_story": "https://cdn.memely.net/templates/tinkoff/tinkoff.story.15.mp4",
+                        "ig_post": "https://cdn.memely.net/templates/tinkoff/tinkoff.post.15.mp4",
+                        "yt_video": "https://cdn.memely.net/templates/tinkoff/tinkoff.youtube.15.mp4"
+                    }
+                },
+                {
+                    "id": 16,
+                    "duration": 1.04,
+                    "text": "Да это ж круто!",
+                    "snapshot": "https://cdn.memely.net/templates/tinkoff/tinkoff.snapshot.16.jpg",
+                    "order": 35,
+                    "preview": "https://cdn.memely.net/templates/tinkoff/tinkoff.preview.16.mp4",
+                    "templates": {
+                        "ig_story": "https://cdn.memely.net/templates/tinkoff/tinkoff.story.16.mp4",
+                        "ig_post": "https://cdn.memely.net/templates/tinkoff/tinkoff.post.16.mp4",
+                        "yt_video": "https://cdn.memely.net/templates/tinkoff/tinkoff.youtube.16.mp4"
+                    }
+                },
+                {
+                    "id": 17,
+                    "duration": 8.02,
+                    "text": "Я уважаю, что они делают, но как бы я не понимаю. Я, во-первых, процессы эти многие не понимаю.",
+                    "snapshot": "https://cdn.memely.net/templates/tinkoff/tinkoff.snapshot.17.jpg",
+                    "order": 11,
+                    "preview": "https://cdn.memely.net/templates/tinkoff/tinkoff.preview.17.mp4",
+                    "templates": {
+                        "ig_story": "https://cdn.memely.net/templates/tinkoff/tinkoff.story.17.mp4",
+                        "ig_post": "https://cdn.memely.net/templates/tinkoff/tinkoff.post.17.mp4",
+                        "yt_video": "https://cdn.memely.net/templates/tinkoff/tinkoff.youtube.17.mp4"
+                    }
+                },
+                {
+                    "id": 18,
+                    "duration": 2.6,
+                    "text": "Виноваты ли мы? Да конечно, мы все виноваты в этом пиздеце.",
+                    "snapshot": "https://cdn.memely.net/templates/tinkoff/tinkoff.snapshot.18.jpg",
+                    "order": 12,
+                    "preview": "https://cdn.memely.net/templates/tinkoff/tinkoff.preview.18.mp4",
+                    "templates": {
+                        "ig_story": "https://cdn.memely.net/templates/tinkoff/tinkoff.story.18.mp4",
+                        "ig_post": "https://cdn.memely.net/templates/tinkoff/tinkoff.post.18.mp4",
+                        "yt_video": "https://cdn.memely.net/templates/tinkoff/tinkoff.youtube.18.mp4"
+                    }
+                },
+                {
+                    "id": 19,
+                    "duration": 3.46,
+                    "text": "Я реально прихерел.",
+                    "snapshot": "https://cdn.memely.net/templates/tinkoff/tinkoff.snapshot.19.jpg",
+                    "order": 13,
+                    "preview": "https://cdn.memely.net/templates/tinkoff/tinkoff.preview.19.mp4",
+                    "templates": {
+                        "ig_story": "https://cdn.memely.net/templates/tinkoff/tinkoff.story.19.mp4",
+                        "ig_post": "https://cdn.memely.net/templates/tinkoff/tinkoff.post.19.mp4",
+                        "yt_video": "https://cdn.memely.net/templates/tinkoff/tinkoff.youtube.19.mp4"
+                    }
+                },
+                {
+                    "id": 20,
+                    "duration": 3.71,
+                    "text": "Я проснулся утром. Если честно, я день первый ничего не понимал.",
+                    "snapshot": "https://cdn.memely.net/templates/tinkoff/tinkoff.snapshot.20.jpg",
+                    "order": 14,
+                    "preview": "https://cdn.memely.net/templates/tinkoff/tinkoff.preview.20.mp4",
+                    "templates": {
+                        "ig_story": "https://cdn.memely.net/templates/tinkoff/tinkoff.story.20.mp4",
+                        "ig_post": "https://cdn.memely.net/templates/tinkoff/tinkoff.post.20.mp4",
+                        "yt_video": "https://cdn.memely.net/templates/tinkoff/tinkoff.youtube.20.mp4"
+                    }
+                },
+                {
+                    "id": 21,
+                    "duration": 5.82,
+                    "text": "Я как бы не понимал весь масштаб этого пиздеца. Я думал это просто что-то какая-то там, ну знаешь.",
+                    "snapshot": "https://cdn.memely.net/templates/tinkoff/tinkoff.snapshot.21.jpg",
+                    "order": 15,
+                    "preview": "https://cdn.memely.net/templates/tinkoff/tinkoff.preview.21.mp4",
+                    "templates": {
+                        "ig_story": "https://cdn.memely.net/templates/tinkoff/tinkoff.story.21.mp4",
+                        "ig_post": "https://cdn.memely.net/templates/tinkoff/tinkoff.post.21.mp4",
+                        "yt_video": "https://cdn.memely.net/templates/tinkoff/tinkoff.youtube.21.mp4"
+                    }
+                },
+                {
+                    "id": 22,
+                    "duration": 3.65,
+                    "text": "Я не мог в это поверить. Это было невозможно. Я спорил со всеми.",
+                    "snapshot": "https://cdn.memely.net/templates/tinkoff/tinkoff.snapshot.22.jpg",
+                    "order": 16,
+                    "preview": "https://cdn.memely.net/templates/tinkoff/tinkoff.preview.22.mp4",
+                    "templates": {
+                        "ig_story": "https://cdn.memely.net/templates/tinkoff/tinkoff.story.22.mp4",
+                        "ig_post": "https://cdn.memely.net/templates/tinkoff/tinkoff.post.22.mp4",
+                        "yt_video": "https://cdn.memely.net/templates/tinkoff/tinkoff.youtube.22.mp4"
+                    }
+                },
+                {
+                    "id": 23,
+                    "duration": 2.11,
+                    "text": "Естественно, я в это поверить не мог.",
+                    "snapshot": "https://cdn.memely.net/templates/tinkoff/tinkoff.snapshot.23.jpg",
+                    "order": 36,
+                    "preview": "https://cdn.memely.net/templates/tinkoff/tinkoff.preview.23.mp4",
+                    "templates": {
+                        "ig_story": "https://cdn.memely.net/templates/tinkoff/tinkoff.story.23.mp4",
+                        "ig_post": "https://cdn.memely.net/templates/tinkoff/tinkoff.post.23.mp4",
+                        "yt_video": "https://cdn.memely.net/templates/tinkoff/tinkoff.youtube.23.mp4"
+                    }
+                },
+                {
+                    "id": 24,
+                    "duration": 4.46,
+                    "text": "Мне взяло где-то 48 часов как бы осознать вообще, что происходит.",
+                    "snapshot": "https://cdn.memely.net/templates/tinkoff/tinkoff.snapshot.24.jpg",
+                    "order": 17,
+                    "preview": "https://cdn.memely.net/templates/tinkoff/tinkoff.preview.24.mp4",
+                    "templates": {
+                        "ig_story": "https://cdn.memely.net/templates/tinkoff/tinkoff.story.24.mp4",
+                        "ig_post": "https://cdn.memely.net/templates/tinkoff/tinkoff.post.24.mp4",
+                        "yt_video": "https://cdn.memely.net/templates/tinkoff/tinkoff.youtube.24.mp4"
+                    }
+                },
+                {
+                    "id": 25,
+                    "duration": 2.84,
+                    "text": "Я, кстати, до сих пор как-то не очень в это верю, если честно.",
+                    "snapshot": "https://cdn.memely.net/templates/tinkoff/tinkoff.snapshot.25.jpg",
+                    "order": 37,
+                    "preview": "https://cdn.memely.net/templates/tinkoff/tinkoff.preview.25.mp4",
+                    "templates": {
+                        "ig_story": "https://cdn.memely.net/templates/tinkoff/tinkoff.story.25.mp4",
+                        "ig_post": "https://cdn.memely.net/templates/tinkoff/tinkoff.post.25.mp4",
+                        "yt_video": "https://cdn.memely.net/templates/tinkoff/tinkoff.youtube.25.mp4"
+                    }
+                },
+                {
+                    "id": 26,
+                    "duration": 4.29,
+                    "text": "Дай им бог здоровья, спасибо за то, что они меня спасали. Если бы не они, я бы, конечно, не выжил.",
+                    "snapshot": "https://cdn.memely.net/templates/tinkoff/tinkoff.snapshot.26.jpg",
+                    "order": 38,
+                    "preview": "https://cdn.memely.net/templates/tinkoff/tinkoff.preview.26.mp4",
+                    "templates": {
+                        "ig_story": "https://cdn.memely.net/templates/tinkoff/tinkoff.story.26.mp4",
+                        "ig_post": "https://cdn.memely.net/templates/tinkoff/tinkoff.post.26.mp4",
+                        "yt_video": "https://cdn.memely.net/templates/tinkoff/tinkoff.youtube.26.mp4"
+                    }
+                },
+                {
+                    "id": 27,
+                    "duration": 4.61,
+                    "text": "Ну что это за пиздец такой? Ну как это может быть в 21 веке?",
+                    "snapshot": "https://cdn.memely.net/templates/tinkoff/tinkoff.snapshot.27.jpg",
+                    "order": 18,
+                    "preview": "https://cdn.memely.net/templates/tinkoff/tinkoff.preview.27.mp4",
+                    "templates": {
+                        "ig_story": "https://cdn.memely.net/templates/tinkoff/tinkoff.story.27.mp4",
+                        "ig_post": "https://cdn.memely.net/templates/tinkoff/tinkoff.post.27.mp4",
+                        "yt_video": "https://cdn.memely.net/templates/tinkoff/tinkoff.youtube.27.mp4"
+                    }
+                },
+                {
+                    "id": 28,
+                    "duration": 3.41,
+                    "text": "Да, мне было страшно. Но я это сделал.",
+                    "snapshot": "https://cdn.memely.net/templates/tinkoff/tinkoff.snapshot.28.jpg",
+                    "order": 19,
+                    "preview": "https://cdn.memely.net/templates/tinkoff/tinkoff.preview.28.mp4",
+                    "templates": {
+                        "ig_story": "https://cdn.memely.net/templates/tinkoff/tinkoff.story.28.mp4",
+                        "ig_post": "https://cdn.memely.net/templates/tinkoff/tinkoff.post.28.mp4",
+                        "yt_video": "https://cdn.memely.net/templates/tinkoff/tinkoff.youtube.28.mp4"
+                    }
+                },
+                {
+                    "id": 29,
+                    "duration": 2.24,
+                    "text": "Они сделали  ошибку.",
+                    "snapshot": "https://cdn.memely.net/templates/tinkoff/tinkoff.snapshot.29.jpg",
+                    "order": 20,
+                    "preview": "https://cdn.memely.net/templates/tinkoff/tinkoff.preview.29.mp4",
+                    "templates": {
+                        "ig_story": "https://cdn.memely.net/templates/tinkoff/tinkoff.story.29.mp4",
+                        "ig_post": "https://cdn.memely.net/templates/tinkoff/tinkoff.post.29.mp4",
+                        "yt_video": "https://cdn.memely.net/templates/tinkoff/tinkoff.youtube.29.mp4"
+                    }
+                },
+                {
+                    "id": 30,
+                    "duration": 6.36,
+                    "text": "Ну, блин, да, конечно, мы ж знаем... Конечно, ну мы же знаем. Ну они знают. Они знают.",
+                    "snapshot": "https://cdn.memely.net/templates/tinkoff/tinkoff.snapshot.30.jpg",
+                    "order": 39,
+                    "preview": "https://cdn.memely.net/templates/tinkoff/tinkoff.preview.30.mp4",
+                    "templates": {
+                        "ig_story": "https://cdn.memely.net/templates/tinkoff/tinkoff.story.30.mp4",
+                        "ig_post": "https://cdn.memely.net/templates/tinkoff/tinkoff.post.30.mp4",
+                        "yt_video": "https://cdn.memely.net/templates/tinkoff/tinkoff.youtube.30.mp4"
+                    }
+                },
+                {
+                    "id": 31,
+                    "duration": 1.34,
+                    "text": "Это полный бред.",
+                    "snapshot": "https://cdn.memely.net/templates/tinkoff/tinkoff.snapshot.31.jpg",
+                    "order": 40,
+                    "preview": "https://cdn.memely.net/templates/tinkoff/tinkoff.preview.31.mp4",
+                    "templates": {
+                        "ig_story": "https://cdn.memely.net/templates/tinkoff/tinkoff.story.31.mp4",
+                        "ig_post": "https://cdn.memely.net/templates/tinkoff/tinkoff.post.31.mp4",
+                        "yt_video": "https://cdn.memely.net/templates/tinkoff/tinkoff.youtube.31.mp4"
+                    }
+                },
+                {
+                    "id": 32,
+                    "duration": 2.28,
+                    "text": "Молодцы. Посмотрим.",
+                    "snapshot": "https://cdn.memely.net/templates/tinkoff/tinkoff.snapshot.32.jpg",
+                    "order": 41,
+                    "preview": "https://cdn.memely.net/templates/tinkoff/tinkoff.preview.32.mp4",
+                    "templates": {
+                        "ig_story": "https://cdn.memely.net/templates/tinkoff/tinkoff.story.32.mp4",
+                        "ig_post": "https://cdn.memely.net/templates/tinkoff/tinkoff.post.32.mp4",
+                        "yt_video": "https://cdn.memely.net/templates/tinkoff/tinkoff.youtube.32.mp4"
+                    }
+                },
+                {
+                    "id": 33,
+                    "duration": 5.29,
+                    "text": "То есть, понимаешь, ты должен страдать, и тогда вроде как, ну понимаешь, да?",
+                    "snapshot": "https://cdn.memely.net/templates/tinkoff/tinkoff.snapshot.33.jpg",
+                    "order": 21,
+                    "preview": "https://cdn.memely.net/templates/tinkoff/tinkoff.preview.33.mp4",
+                    "templates": {
+                        "ig_story": "https://cdn.memely.net/templates/tinkoff/tinkoff.story.33.mp4",
+                        "ig_post": "https://cdn.memely.net/templates/tinkoff/tinkoff.post.33.mp4",
+                        "yt_video": "https://cdn.memely.net/templates/tinkoff/tinkoff.youtube.33.mp4"
+                    }
+                },
+                {
+                    "id": 34,
+                    "duration": 2.05,
+                    "text": "Это была моя идея.",
+                    "snapshot": "https://cdn.memely.net/templates/tinkoff/tinkoff.snapshot.34.jpg",
+                    "order": 42,
+                    "preview": "https://cdn.memely.net/templates/tinkoff/tinkoff.preview.34.mp4",
+                    "templates": {
+                        "ig_story": "https://cdn.memely.net/templates/tinkoff/tinkoff.story.34.mp4",
+                        "ig_post": "https://cdn.memely.net/templates/tinkoff/tinkoff.post.34.mp4",
+                        "yt_video": "https://cdn.memely.net/templates/tinkoff/tinkoff.youtube.34.mp4"
+                    }
+                },
+                {
+                    "id": 35,
+                    "duration": 2.92,
+                    "text": "Ну и я как бы не совсем понимаю, как это работает.",
+                    "snapshot": "https://cdn.memely.net/templates/tinkoff/tinkoff.snapshot.35.jpg",
+                    "order": 43,
+                    "preview": "https://cdn.memely.net/templates/tinkoff/tinkoff.preview.35.mp4",
+                    "templates": {
+                        "ig_story": "https://cdn.memely.net/templates/tinkoff/tinkoff.story.35.mp4",
+                        "ig_post": "https://cdn.memely.net/templates/tinkoff/tinkoff.post.35.mp4",
+                        "yt_video": "https://cdn.memely.net/templates/tinkoff/tinkoff.youtube.35.mp4"
+                    }
+                },
+                {
+                    "id": 36,
+                    "duration": 5.91,
+                    "text": "Что ты сейчас сказал? Тебе хорошо, а вот нам будет плохо. Окей, ребята, окей. Я молчу, я молчу.",
+                    "snapshot": "https://cdn.memely.net/templates/tinkoff/tinkoff.snapshot.36.jpg",
+                    "order": 44,
+                    "preview": "https://cdn.memely.net/templates/tinkoff/tinkoff.preview.36.mp4",
+                    "templates": {
+                        "ig_story": "https://cdn.memely.net/templates/tinkoff/tinkoff.story.36.mp4",
+                        "ig_post": "https://cdn.memely.net/templates/tinkoff/tinkoff.post.36.mp4",
+                        "yt_video": "https://cdn.memely.net/templates/tinkoff/tinkoff.youtube.36.mp4"
+                    }
+                },
+                {
+                    "id": 37,
+                    "duration": 3.11,
+                    "text": "Ну я ссыкло? Или я не ссыкло?",
+                    "snapshot": "https://cdn.memely.net/templates/tinkoff/tinkoff.snapshot.37.jpg",
+                    "order": 45,
+                    "preview": "https://cdn.memely.net/templates/tinkoff/tinkoff.preview.37.mp4",
+                    "templates": {
+                        "ig_story": "https://cdn.memely.net/templates/tinkoff/tinkoff.story.37.mp4",
+                        "ig_post": "https://cdn.memely.net/templates/tinkoff/tinkoff.post.37.mp4",
+                        "yt_video": "https://cdn.memely.net/templates/tinkoff/tinkoff.youtube.37.mp4"
+                    }
+                },
+                {
+                    "id": 38,
+                    "duration": 5.18,
+                    "text": "Я говорю, Миш, мне похуй. Я так чувствую. Я не могу молчать.",
+                    "snapshot": "https://cdn.memely.net/templates/tinkoff/tinkoff.snapshot.38.jpg",
+                    "order": 22,
+                    "preview": "https://cdn.memely.net/templates/tinkoff/tinkoff.preview.38.mp4",
+                    "templates": {
+                        "ig_story": "https://cdn.memely.net/templates/tinkoff/tinkoff.story.38.mp4",
+                        "ig_post": "https://cdn.memely.net/templates/tinkoff/tinkoff.post.38.mp4",
+                        "yt_video": "https://cdn.memely.net/templates/tinkoff/tinkoff.youtube.38.mp4"
+                    }
+                },
+                {
+                    "id": 39,
+                    "duration": 3.9,
+                    "text": "Ну, вот какая разница? Ну, вот какая разница?",
+                    "snapshot": "https://cdn.memely.net/templates/tinkoff/tinkoff.snapshot.39.jpg",
+                    "order": 23,
+                    "preview": "https://cdn.memely.net/templates/tinkoff/tinkoff.preview.39.mp4",
+                    "templates": {
+                        "ig_story": "https://cdn.memely.net/templates/tinkoff/tinkoff.story.39.mp4",
+                        "ig_post": "https://cdn.memely.net/templates/tinkoff/tinkoff.post.39.mp4",
+                        "yt_video": "https://cdn.memely.net/templates/tinkoff/tinkoff.youtube.39.mp4"
+                    }
+                },
+                {
+                    "id": 40,
+                    "duration": 6.95,
+                    "text": "Копейки. Совершенные копейки. Я сказал, окей, переводите. И они мне на следующий день оплатили. И все. Это все была сделка.",
+                    "snapshot": "https://cdn.memely.net/templates/tinkoff/tinkoff.snapshot.40.jpg",
+                    "order": 46,
+                    "preview": "https://cdn.memely.net/templates/tinkoff/tinkoff.preview.40.mp4",
+                    "templates": {
+                        "ig_story": "https://cdn.memely.net/templates/tinkoff/tinkoff.story.40.mp4",
+                        "ig_post": "https://cdn.memely.net/templates/tinkoff/tinkoff.post.40.mp4",
+                        "yt_video": "https://cdn.memely.net/templates/tinkoff/tinkoff.youtube.40.mp4"
+                    }
+                },
+                {
+                    "id": 41,
+                    "duration": 4.91,
+                    "text": "Хотя, кстати, я был не пьяный. Я был пьяный, кстати. Я выпил вина тогда. Я пост написал и сразу напился.",
+                    "snapshot": "https://cdn.memely.net/templates/tinkoff/tinkoff.snapshot.41.jpg",
+                    "order": 47,
+                    "preview": "https://cdn.memely.net/templates/tinkoff/tinkoff.preview.41.mp4",
+                    "templates": {
+                        "ig_story": "https://cdn.memely.net/templates/tinkoff/tinkoff.story.41.mp4",
+                        "ig_post": "https://cdn.memely.net/templates/tinkoff/tinkoff.post.41.mp4",
+                        "yt_video": "https://cdn.memely.net/templates/tinkoff/tinkoff.youtube.41.mp4"
+                    }
+                },
+                {
+                    "id": 42,
+                    "duration": 3.37,
+                    "text": "Но, всё-таки моё детище. 15 лет, их не выкинешь.",
+                    "snapshot": "https://cdn.memely.net/templates/tinkoff/tinkoff.snapshot.42.jpg",
+                    "order": 48,
+                    "preview": "https://cdn.memely.net/templates/tinkoff/tinkoff.preview.42.mp4",
+                    "templates": {
+                        "ig_story": "https://cdn.memely.net/templates/tinkoff/tinkoff.story.42.mp4",
+                        "ig_post": "https://cdn.memely.net/templates/tinkoff/tinkoff.post.42.mp4",
+                        "yt_video": "https://cdn.memely.net/templates/tinkoff/tinkoff.youtube.42.mp4"
+                    }
+                },
+                {
+                    "id": 43,
+                    "duration": 10.26,
+                    "text": "Но в контексте моего заявления похер. Я выбираю мое гражданское заявление.",
+                    "snapshot": "https://cdn.memely.net/templates/tinkoff/tinkoff.snapshot.43.jpg",
+                    "order": 49,
+                    "preview": "https://cdn.memely.net/templates/tinkoff/tinkoff.preview.43.mp4",
+                    "templates": {
+                        "ig_story": "https://cdn.memely.net/templates/tinkoff/tinkoff.story.43.mp4",
+                        "ig_post": "https://cdn.memely.net/templates/tinkoff/tinkoff.post.43.mp4",
+                        "yt_video": "https://cdn.memely.net/templates/tinkoff/tinkoff.youtube.43.mp4"
+                    }
+                },
+                {
+                    "id": 44,
+                    "duration": 1.71,
+                    "text": "На мой взгляд, не очень конструктивно.",
+                    "snapshot": "https://cdn.memely.net/templates/tinkoff/tinkoff.snapshot.44.jpg",
+                    "order": 50,
+                    "preview": "https://cdn.memely.net/templates/tinkoff/tinkoff.preview.44.mp4",
+                    "templates": {
+                        "ig_story": "https://cdn.memely.net/templates/tinkoff/tinkoff.story.44.mp4",
+                        "ig_post": "https://cdn.memely.net/templates/tinkoff/tinkoff.post.44.mp4",
+                        "yt_video": "https://cdn.memely.net/templates/tinkoff/tinkoff.youtube.44.mp4"
+                    }
+                },
+                {
+                    "id": 45,
+                    "duration": 3.24,
+                    "text": "Ну какая разница? Ну вот какая разница?",
+                    "snapshot": "https://cdn.memely.net/templates/tinkoff/tinkoff.snapshot.45.jpg",
+                    "order": 24,
+                    "preview": "https://cdn.memely.net/templates/tinkoff/tinkoff.preview.45.mp4",
+                    "templates": {
+                        "ig_story": "https://cdn.memely.net/templates/tinkoff/tinkoff.story.45.mp4",
+                        "ig_post": "https://cdn.memely.net/templates/tinkoff/tinkoff.post.45.mp4",
+                        "yt_video": "https://cdn.memely.net/templates/tinkoff/tinkoff.youtube.45.mp4"
+                    }
+                },
+                {
+                    "id": 46,
+                    "duration": 4.42,
+                    "text": "Вот нахуя тебе полтора миллиарда, если у тебя уже есть 20?",
+                    "snapshot": "https://cdn.memely.net/templates/tinkoff/tinkoff.snapshot.46.jpg",
+                    "order": 51,
+                    "preview": "https://cdn.memely.net/templates/tinkoff/tinkoff.preview.46.mp4",
+                    "templates": {
+                        "ig_story": "https://cdn.memely.net/templates/tinkoff/tinkoff.story.46.mp4",
+                        "ig_post": "https://cdn.memely.net/templates/tinkoff/tinkoff.post.46.mp4",
+                        "yt_video": "https://cdn.memely.net/templates/tinkoff/tinkoff.youtube.46.mp4"
+                    }
+                },
+                {
+                    "id": 47,
+                    "duration": 4.88,
+                    "text": "Чтобы что? Я этого не понимаю.",
+                    "snapshot": "https://cdn.memely.net/templates/tinkoff/tinkoff.snapshot.47.jpg",
+                    "order": 25,
+                    "preview": "https://cdn.memely.net/templates/tinkoff/tinkoff.preview.47.mp4",
+                    "templates": {
+                        "ig_story": "https://cdn.memely.net/templates/tinkoff/tinkoff.story.47.mp4",
+                        "ig_post": "https://cdn.memely.net/templates/tinkoff/tinkoff.post.47.mp4",
+                        "yt_video": "https://cdn.memely.net/templates/tinkoff/tinkoff.youtube.47.mp4"
+                    }
+                },
+                {
+                    "id": 48,
+                    "duration": 3.71,
+                    "text": "Сомнительно, ну... окей.",
+                    "snapshot": "https://cdn.memely.net/templates/tinkoff/tinkoff.snapshot.48.jpg",
+                    "order": 26,
+                    "preview": "https://cdn.memely.net/templates/tinkoff/tinkoff.preview.48.mp4",
+                    "templates": {
+                        "ig_story": "https://cdn.memely.net/templates/tinkoff/tinkoff.story.48.mp4",
+                        "ig_post": "https://cdn.memely.net/templates/tinkoff/tinkoff.post.48.mp4",
+                        "yt_video": "https://cdn.memely.net/templates/tinkoff/tinkoff.youtube.48.mp4"
+                    }
+                },
+                {
+                    "id": 49,
+                    "duration": 3.29,
+                    "text": "Это то, за что он будет гореть в аду.",
+                    "snapshot": "https://cdn.memely.net/templates/tinkoff/tinkoff.snapshot.49.jpg",
+                    "order": 52,
+                    "preview": "https://cdn.memely.net/templates/tinkoff/tinkoff.preview.49.mp4",
+                    "templates": {
+                        "ig_story": "https://cdn.memely.net/templates/tinkoff/tinkoff.story.49.mp4",
+                        "ig_post": "https://cdn.memely.net/templates/tinkoff/tinkoff.post.49.mp4",
+                        "yt_video": "https://cdn.memely.net/templates/tinkoff/tinkoff.youtube.49.mp4"
+                    }
+                },
+                {
+                    "id": 50,
+                    "duration": 1.75,
+                    "text": "It's ok.",
+                    "snapshot": "https://cdn.memely.net/templates/tinkoff/tinkoff.snapshot.50.jpg",
+                    "order": 27,
+                    "preview": "https://cdn.memely.net/templates/tinkoff/tinkoff.preview.50.mp4",
+                    "templates": {
+                        "ig_story": "https://cdn.memely.net/templates/tinkoff/tinkoff.story.50.mp4",
+                        "ig_post": "https://cdn.memely.net/templates/tinkoff/tinkoff.post.50.mp4",
+                        "yt_video": "https://cdn.memely.net/templates/tinkoff/tinkoff.youtube.50.mp4"
+                    }
+                },
+                {
+                    "id": 51,
+                    "duration": 6.19,
+                    "text": "Это их выбор. И я не могу на них... их осуждать.",
+                    "snapshot": "https://cdn.memely.net/templates/tinkoff/tinkoff.snapshot.51.jpg",
+                    "order": 53,
+                    "preview": "https://cdn.memely.net/templates/tinkoff/tinkoff.preview.51.mp4",
+                    "templates": {
+                        "ig_story": "https://cdn.memely.net/templates/tinkoff/tinkoff.story.51.mp4",
+                        "ig_post": "https://cdn.memely.net/templates/tinkoff/tinkoff.post.51.mp4",
+                        "yt_video": "https://cdn.memely.net/templates/tinkoff/tinkoff.youtube.51.mp4"
+                    }
+                },
+                {
+                    "id": 52,
+                    "duration": 2.77,
+                    "text": "Это было бы круто. Мне так кажется.",
+                    "snapshot": "https://cdn.memely.net/templates/tinkoff/tinkoff.snapshot.52.jpg",
+                    "order": 54,
+                    "preview": "https://cdn.memely.net/templates/tinkoff/tinkoff.preview.52.mp4",
+                    "templates": {
+                        "ig_story": "https://cdn.memely.net/templates/tinkoff/tinkoff.story.52.mp4",
+                        "ig_post": "https://cdn.memely.net/templates/tinkoff/tinkoff.post.52.mp4",
+                        "yt_video": "https://cdn.memely.net/templates/tinkoff/tinkoff.youtube.52.mp4"
+                    }
+                },
+                {
+                    "id": 53,
+                    "duration": 5.67,
+                    "text": "Харе. Ну вот харе. Не отсидишься, понимаешь? Не отмолчишься.",
+                    "snapshot": "https://cdn.memely.net/templates/tinkoff/tinkoff.snapshot.53.jpg",
+                    "order": 55,
+                    "preview": "https://cdn.memely.net/templates/tinkoff/tinkoff.preview.53.mp4",
+                    "templates": {
+                        "ig_story": "https://cdn.memely.net/templates/tinkoff/tinkoff.story.53.mp4",
+                        "ig_post": "https://cdn.memely.net/templates/tinkoff/tinkoff.post.53.mp4",
+                        "yt_video": "https://cdn.memely.net/templates/tinkoff/tinkoff.youtube.53.mp4"
+                    }
+                },
+                {
+                    "id": 54,
+                    "duration": 1.77,
+                    "text": "Он не мудак. Он хороший человек.",
+                    "snapshot": "https://cdn.memely.net/templates/tinkoff/tinkoff.snapshot.54.jpg",
+                    "order": 56,
+                    "preview": "https://cdn.memely.net/templates/tinkoff/tinkoff.preview.54.mp4",
+                    "templates": {
+                        "ig_story": "https://cdn.memely.net/templates/tinkoff/tinkoff.story.54.mp4",
+                        "ig_post": "https://cdn.memely.net/templates/tinkoff/tinkoff.post.54.mp4",
+                        "yt_video": "https://cdn.memely.net/templates/tinkoff/tinkoff.youtube.54.mp4"
+                    }
+                },
+                {
+                    "id": 55,
+                    "duration": 3.11,
+                    "text": "Мне сказать \"иди нахуй\"?.",
+                    "snapshot": "https://cdn.memely.net/templates/tinkoff/tinkoff.snapshot.55.jpg",
+                    "order": 57,
+                    "preview": "https://cdn.memely.net/templates/tinkoff/tinkoff.preview.55.mp4",
+                    "templates": {
+                        "ig_story": "https://cdn.memely.net/templates/tinkoff/tinkoff.story.55.mp4",
+                        "ig_post": "https://cdn.memely.net/templates/tinkoff/tinkoff.post.55.mp4",
+                        "yt_video": "https://cdn.memely.net/templates/tinkoff/tinkoff.youtube.55.mp4"
+                    }
+                },
+                {
+                    "id": 56,
+                    "duration": 1.77,
+                    "text": "Вот что, как мне с этим жить?",
+                    "snapshot": "https://cdn.memely.net/templates/tinkoff/tinkoff.snapshot.56.jpg",
+                    "order": 58,
+                    "preview": "https://cdn.memely.net/templates/tinkoff/tinkoff.preview.56.mp4",
+                    "templates": {
+                        "ig_story": "https://cdn.memely.net/templates/tinkoff/tinkoff.story.56.mp4",
+                        "ig_post": "https://cdn.memely.net/templates/tinkoff/tinkoff.post.56.mp4",
+                        "yt_video": "https://cdn.memely.net/templates/tinkoff/tinkoff.youtube.56.mp4"
+                    }
+                },
+                {
+                    "id": 57,
+                    "duration": 2.35,
+                    "text": "Ха-ха-ха-ха-ха!",
+                    "snapshot": "https://cdn.memely.net/templates/tinkoff/tinkoff.snapshot.57.jpg",
+                    "order": 28,
+                    "preview": "https://cdn.memely.net/templates/tinkoff/tinkoff.preview.57.mp4",
+                    "templates": {
+                        "ig_story": "https://cdn.memely.net/templates/tinkoff/tinkoff.story.57.mp4",
+                        "ig_post": "https://cdn.memely.net/templates/tinkoff/tinkoff.post.57.mp4",
+                        "yt_video": "https://cdn.memely.net/templates/tinkoff/tinkoff.youtube.57.mp4"
+                    }
+                },
+                {
+                    "id": 58,
+                    "duration": 4.59,
+                    "text": "Как воры? Жулики, скажем так.",
+                    "snapshot": "https://cdn.memely.net/templates/tinkoff/tinkoff.snapshot.58.jpg",
+                    "order": 59,
+                    "preview": "https://cdn.memely.net/templates/tinkoff/tinkoff.preview.58.mp4",
+                    "templates": {
+                        "ig_story": "https://cdn.memely.net/templates/tinkoff/tinkoff.story.58.mp4",
+                        "ig_post": "https://cdn.memely.net/templates/tinkoff/tinkoff.post.58.mp4",
+                        "yt_video": "https://cdn.memely.net/templates/tinkoff/tinkoff.youtube.58.mp4"
+                    }
+                },
+                {
+                    "id": 59,
+                    "duration": 4.99,
+                    "text": "Нету ни-ху-я. Вот просто ни-ху-я.",
+                    "snapshot": "https://cdn.memely.net/templates/tinkoff/tinkoff.snapshot.59.jpg",
+                    "order": 29,
+                    "preview": "https://cdn.memely.net/templates/tinkoff/tinkoff.preview.59.mp4",
+                    "templates": {
+                        "ig_story": "https://cdn.memely.net/templates/tinkoff/tinkoff.story.59.mp4",
+                        "ig_post": "https://cdn.memely.net/templates/tinkoff/tinkoff.post.59.mp4",
+                        "yt_video": "https://cdn.memely.net/templates/tinkoff/tinkoff.youtube.59.mp4"
+                    }
+                },
+                {
+                    "id": 60,
+                    "duration": 1.94,
+                    "text": "Я к этому никакого отношения не имею.",
+                    "snapshot": "https://cdn.memely.net/templates/tinkoff/tinkoff.snapshot.60.jpg",
+                    "order": 60,
+                    "preview": "https://cdn.memely.net/templates/tinkoff/tinkoff.preview.60.mp4",
+                    "templates": {
+                        "ig_story": "https://cdn.memely.net/templates/tinkoff/tinkoff.story.60.mp4",
+                        "ig_post": "https://cdn.memely.net/templates/tinkoff/tinkoff.post.60.mp4",
+                        "yt_video": "https://cdn.memely.net/templates/tinkoff/tinkoff.youtube.60.mp4"
+                    }
+                },
+                {
+                    "id": 61,
+                    "duration": 4.88,
+                    "text": "Я, если честно, я обрадовался. Я сказал \"вот же суки, вот получите!\".",
+                    "snapshot": "https://cdn.memely.net/templates/tinkoff/tinkoff.snapshot.61.jpg",
+                    "order": 61,
+                    "preview": "https://cdn.memely.net/templates/tinkoff/tinkoff.preview.61.mp4",
+                    "templates": {
+                        "ig_story": "https://cdn.memely.net/templates/tinkoff/tinkoff.story.61.mp4",
+                        "ig_post": "https://cdn.memely.net/templates/tinkoff/tinkoff.post.61.mp4",
+                        "yt_video": "https://cdn.memely.net/templates/tinkoff/tinkoff.youtube.61.mp4"
+                    }
+                },
+                {
+                    "id": 62,
+                    "duration": 4.88,
+                    "text": "Я что-то сделал подобное? Мне западло об это мораться даже.",
+                    "snapshot": "https://cdn.memely.net/templates/tinkoff/tinkoff.snapshot.62.jpg",
+                    "order": 62,
+                    "preview": "https://cdn.memely.net/templates/tinkoff/tinkoff.preview.62.mp4",
+                    "templates": {
+                        "ig_story": "https://cdn.memely.net/templates/tinkoff/tinkoff.story.62.mp4",
+                        "ig_post": "https://cdn.memely.net/templates/tinkoff/tinkoff.post.62.mp4",
+                        "yt_video": "https://cdn.memely.net/templates/tinkoff/tinkoff.youtube.62.mp4"
+                    }
+                },
+                {
+                    "id": 63,
+                    "duration": 4.82,
+                    "text": "Я великий грешник и у всех прошу прощения. Простите меня все.",
+                    "snapshot": "https://cdn.memely.net/templates/tinkoff/tinkoff.snapshot.63.jpg",
+                    "order": 63,
+                    "preview": "https://cdn.memely.net/templates/tinkoff/tinkoff.preview.63.mp4",
+                    "templates": {
+                        "ig_story": "https://cdn.memely.net/templates/tinkoff/tinkoff.story.63.mp4",
+                        "ig_post": "https://cdn.memely.net/templates/tinkoff/tinkoff.post.63.mp4",
+                        "yt_video": "https://cdn.memely.net/templates/tinkoff/tinkoff.youtube.63.mp4"
+                    }
+                },
+                {
+                    "id": 64,
+                    "duration": 3.07,
+                    "text": "Мне кажется, вот это очень круто, сказать, что ты думаешь.",
+                    "snapshot": "https://cdn.memely.net/templates/tinkoff/tinkoff.snapshot.64.jpg",
+                    "order": 64,
+                    "preview": "https://cdn.memely.net/templates/tinkoff/tinkoff.preview.64.mp4",
+                    "templates": {
+                        "ig_story": "https://cdn.memely.net/templates/tinkoff/tinkoff.story.64.mp4",
+                        "ig_post": "https://cdn.memely.net/templates/tinkoff/tinkoff.post.64.mp4",
+                        "yt_video": "https://cdn.memely.net/templates/tinkoff/tinkoff.youtube.64.mp4"
+                    }
+                }
+            ]
+        },
+        {
+            "id": "kirkorov",
+            "name": "Kirkorov",
+            "cover": "https://cdn.memely.net/templates/kirkorov/cover.jpg",
+            "textArea": {
+                "ig_story": {
+                    "x": 0,
+                    "y": 0,
+                    "width": 1080,
+                    "height": 1200
+                },
+                "ig_post": {
+                    "x": 0,
+                    "y": 0,
+                    "width": 1080,
+                    "height": 540
+                },
+                "yt_video": {
+                    "x": 640,
+                    "y": 0,
+                    "width": 640,
+                    "height": 720
+                }
+            },
+            "watermarkArea": {
+                "ig_story": {
+                    "x": 820,
+                    "y": 1240,
+                    "width": 200,
+                    "height": 40
+                },
+                "ig_post": {
+                    "x": 800,
+                    "y": 580,
+                    "width": 200,
+                    "height": 40
+                },
+                "yt_video": {
+                    "x": 380,
+                    "y": 40,
+                    "width": 200,
+                    "height": 40
+                }
+            },
+            "playButton": {
+                "ig_story": {
+                    "x": 540,
+                    "y": 1560
+                },
+                "ig_post": {
+                    "x": 540,
+                    "y": 810
+                },
+                "yt_video": {
+                    "x": 320,
+                    "y": 360
+                }
+            },
+            "items": [
+                {
+                    "id": 1,
+                    "duration": 9.96,
+                    "text": "Вот так заглянул на пять минут на мероприятие, и моё имя, как обычно, громче других гремит в одной небезызвестной всем истории.",
+                    "snapshot": "https://cdn.memely.net/templates/kirkorov/kirkorov.snapshot.01.jpg",
+                    "order": 5,
+                    "preview": "https://cdn.memely.net/templates/kirkorov/kirkorov.preview.01.mp4",
+                    "templates": {
+                        "ig_story": "https://cdn.memely.net/templates/kirkorov/kirkorov.story.01.mp4",
+                        "ig_post": "https://cdn.memely.net/templates/kirkorov/kirkorov.post.01.mp4",
+                        "yt_video": "https://cdn.memely.net/templates/kirkorov/kirkorov.youtube.01.mp4"
+                    }
+                },
+                {
+                    "id": 2,
+                    "duration": 5.84,
+                    "text": "Оправдываться не очень по-мужски, поэтому отвечу всем и сразу.",
+                    "snapshot": "https://cdn.memely.net/templates/kirkorov/kirkorov.snapshot.02.jpg",
+                    "order": 6,
+                    "preview": "https://cdn.memely.net/templates/kirkorov/kirkorov.preview.02.mp4",
+                    "templates": {
+                        "ig_story": "https://cdn.memely.net/templates/kirkorov/kirkorov.story.02.mp4",
+                        "ig_post": "https://cdn.memely.net/templates/kirkorov/kirkorov.post.02.mp4",
+                        "yt_video": "https://cdn.memely.net/templates/kirkorov/kirkorov.youtube.02.mp4"
+                    }
+                },
+                {
+                    "id": 3,
+                    "duration": 6.89,
+                    "text": "В жизни каждого человека бывают моменты, когда зашёл не в ту дверь.",
+                    "snapshot": "https://cdn.memely.net/templates/kirkorov/kirkorov.snapshot.03.jpg",
+                    "order": 1,
+                    "preview": "https://cdn.memely.net/templates/kirkorov/kirkorov.preview.03.mp4",
+                    "templates": {
+                        "ig_story": "https://cdn.memely.net/templates/kirkorov/kirkorov.story.03.mp4",
+                        "ig_post": "https://cdn.memely.net/templates/kirkorov/kirkorov.post.03.mp4",
+                        "yt_video": "https://cdn.memely.net/templates/kirkorov/kirkorov.youtube.03.mp4"
+                    }
+                },
+                {
+                    "id": 4,
+                    "duration": 8.81,
+                    "text": "Обещал прийти и пришёл, но не знал о характере событий, которые будут происходить за этими дверьми, и ушёл.",
+                    "snapshot": "https://cdn.memely.net/templates/kirkorov/kirkorov.snapshot.04.jpg",
+                    "order": 7,
+                    "preview": "https://cdn.memely.net/templates/kirkorov/kirkorov.preview.04.mp4",
+                    "templates": {
+                        "ig_story": "https://cdn.memely.net/templates/kirkorov/kirkorov.story.04.mp4",
+                        "ig_post": "https://cdn.memely.net/templates/kirkorov/kirkorov.post.04.mp4",
+                        "yt_video": "https://cdn.memely.net/templates/kirkorov/kirkorov.youtube.04.mp4"
+                    }
+                },
+                {
+                    "id": 5,
+                    "duration": 7.94,
+                    "text": "Я не собираюсь отрекаться, дистанцироваться или перекладывать ответственность на других.",
+                    "snapshot": "https://cdn.memely.net/templates/kirkorov/kirkorov.snapshot.05.jpg",
+                    "order": 2,
+                    "preview": "https://cdn.memely.net/templates/kirkorov/kirkorov.preview.05.mp4",
+                    "templates": {
+                        "ig_story": "https://cdn.memely.net/templates/kirkorov/kirkorov.story.05.mp4",
+                        "ig_post": "https://cdn.memely.net/templates/kirkorov/kirkorov.post.05.mp4",
+                        "yt_video": "https://cdn.memely.net/templates/kirkorov/kirkorov.youtube.05.mp4"
+                    }
+                },
+                {
+                    "id": 6,
+                    "duration": 12.1,
+                    "text": "Не может и не должен артист моего масштаба, народный артист, так безответственно относиться к участию в каких-либо мероприятиях.",
+                    "snapshot": "https://cdn.memely.net/templates/kirkorov/kirkorov.snapshot.06.jpg",
+                    "order": 8,
+                    "preview": "https://cdn.memely.net/templates/kirkorov/kirkorov.preview.06.mp4",
+                    "templates": {
+                        "ig_story": "https://cdn.memely.net/templates/kirkorov/kirkorov.story.06.mp4",
+                        "ig_post": "https://cdn.memely.net/templates/kirkorov/kirkorov.post.06.mp4",
+                        "yt_video": "https://cdn.memely.net/templates/kirkorov/kirkorov.youtube.06.mp4"
+                    }
+                },
+                {
+                    "id": 7,
+                    "duration": 5.84,
+                    "text": "Я артист только своей страны. Я патриот только своей страны.",
+                    "snapshot": "https://cdn.memely.net/templates/kirkorov/kirkorov.snapshot.07.jpg",
+                    "order": 9,
+                    "preview": "https://cdn.memely.net/templates/kirkorov/kirkorov.preview.07.mp4",
+                    "templates": {
+                        "ig_story": "https://cdn.memely.net/templates/kirkorov/kirkorov.story.07.mp4",
+                        "ig_post": "https://cdn.memely.net/templates/kirkorov/kirkorov.post.07.mp4",
+                        "yt_video": "https://cdn.memely.net/templates/kirkorov/kirkorov.youtube.07.mp4"
+                    }
+                },
+                {
+                    "id": 8,
+                    "duration": 3.41,
+                    "text": "Я никогда не пытался усидеть на двух стульях.",
+                    "snapshot": "https://cdn.memely.net/templates/kirkorov/kirkorov.snapshot.08.jpg",
+                    "order": 10,
+                    "preview": "https://cdn.memely.net/templates/kirkorov/kirkorov.preview.08.mp4",
+                    "templates": {
+                        "ig_story": "https://cdn.memely.net/templates/kirkorov/kirkorov.story.08.mp4",
+                        "ig_post": "https://cdn.memely.net/templates/kirkorov/kirkorov.post.08.mp4",
+                        "yt_video": "https://cdn.memely.net/templates/kirkorov/kirkorov.youtube.08.mp4"
+                    }
+                },
+                {
+                    "id": 9,
+                    "duration": 6.08,
+                    "text": "Я никуда не уезжал и не предавал. Я люблю только своего зрителя и служителя.",
+                    "snapshot": "https://cdn.memely.net/templates/kirkorov/kirkorov.snapshot.09.jpg",
+                    "order": 11,
+                    "preview": "https://cdn.memely.net/templates/kirkorov/kirkorov.preview.09.mp4",
+                    "templates": {
+                        "ig_story": "https://cdn.memely.net/templates/kirkorov/kirkorov.story.09.mp4",
+                        "ig_post": "https://cdn.memely.net/templates/kirkorov/kirkorov.post.09.mp4",
+                        "yt_video": "https://cdn.memely.net/templates/kirkorov/kirkorov.youtube.09.mp4"
+                    }
+                },
+                {
+                    "id": 10,
+                    "duration": 3.78,
+                    "text": "Я осознаю совершенную мной ошибку.",
+                    "snapshot": "https://cdn.memely.net/templates/kirkorov/kirkorov.snapshot.10.jpg",
+                    "order": 3,
+                    "preview": "https://cdn.memely.net/templates/kirkorov/kirkorov.preview.10.mp4",
+                    "templates": {
+                        "ig_story": "https://cdn.memely.net/templates/kirkorov/kirkorov.story.10.mp4",
+                        "ig_post": "https://cdn.memely.net/templates/kirkorov/kirkorov.post.10.mp4",
+                        "yt_video": "https://cdn.memely.net/templates/kirkorov/kirkorov.youtube.10.mp4"
+                    }
+                },
+                {
+                    "id": 11,
+                    "duration": 6.72,
+                    "text": "Народный артист России обязан тщательнее относиться к посещаемым мероприятиям.",
+                    "snapshot": "https://cdn.memely.net/templates/kirkorov/kirkorov.snapshot.11.jpg",
+                    "order": 12,
+                    "preview": "https://cdn.memely.net/templates/kirkorov/kirkorov.preview.11.mp4",
+                    "templates": {
+                        "ig_story": "https://cdn.memely.net/templates/kirkorov/kirkorov.story.11.mp4",
+                        "ig_post": "https://cdn.memely.net/templates/kirkorov/kirkorov.post.11.mp4",
+                        "yt_video": "https://cdn.memely.net/templates/kirkorov/kirkorov.youtube.11.mp4"
+                    }
+                },
+                {
+                    "id": 12,
+                    "duration": 10.22,
+                    "text": "Меньше всего я бы хотел, чтобы подобные события, оплошность с моей стороны, стали причиной ограничения.",
+                    "snapshot": "https://cdn.memely.net/templates/kirkorov/kirkorov.snapshot.12.jpg",
+                    "order": 13,
+                    "preview": "https://cdn.memely.net/templates/kirkorov/kirkorov.preview.12.mp4",
+                    "templates": {
+                        "ig_story": "https://cdn.memely.net/templates/kirkorov/kirkorov.story.12.mp4",
+                        "ig_post": "https://cdn.memely.net/templates/kirkorov/kirkorov.post.12.mp4",
+                        "yt_video": "https://cdn.memely.net/templates/kirkorov/kirkorov.youtube.12.mp4"
+                    }
+                },
+                {
+                    "id": 13,
+                    "duration": 2.45,
+                    "text": "Ваш Филипп Киркоров.",
+                    "snapshot": "https://cdn.memely.net/templates/kirkorov/kirkorov.snapshot.13.jpg",
+                    "order": 14,
+                    "preview": "https://cdn.memely.net/templates/kirkorov/kirkorov.preview.13.mp4",
+                    "templates": {
+                        "ig_story": "https://cdn.memely.net/templates/kirkorov/kirkorov.story.13.mp4",
+                        "ig_post": "https://cdn.memely.net/templates/kirkorov/kirkorov.post.13.mp4",
+                        "yt_video": "https://cdn.memely.net/templates/kirkorov/kirkorov.youtube.13.mp4"
+                    }
+                },
+                {
+                    "id": 14,
+                    "duration": 3.97,
+                    "text": "Никогда никого не боялся и не боюсь.",
+                    "snapshot": "https://cdn.memely.net/templates/kirkorov/kirkorov.snapshot.14.jpg",
+                    "order": 4,
+                    "preview": "https://cdn.memely.net/templates/kirkorov/kirkorov.preview.14.mp4",
+                    "templates": {
+                        "ig_story": "https://cdn.memely.net/templates/kirkorov/kirkorov.story.14.mp4",
+                        "ig_post": "https://cdn.memely.net/templates/kirkorov/kirkorov.post.14.mp4",
+                        "yt_video": "https://cdn.memely.net/templates/kirkorov/kirkorov.youtube.14.mp4"
+                    }
+                },
+                {
+                    "id": 15,
+                    "duration": 4.37,
+                    "text": "Родину люблю, и никто не запретит мне это делать.",
+                    "snapshot": "https://cdn.memely.net/templates/kirkorov/kirkorov.snapshot.15.jpg",
+                    "order": 15,
+                    "preview": "https://cdn.memely.net/templates/kirkorov/kirkorov.preview.15.mp4",
+                    "templates": {
+                        "ig_story": "https://cdn.memely.net/templates/kirkorov/kirkorov.story.15.mp4",
+                        "ig_post": "https://cdn.memely.net/templates/kirkorov/kirkorov.post.15.mp4",
+                        "yt_video": "https://cdn.memely.net/templates/kirkorov/kirkorov.youtube.15.mp4"
+                    }
+                },
+                {
+                    "id": 16,
+                    "duration": 2.13,
+                    "text": "Всем добра.",
+                    "snapshot": "https://cdn.memely.net/templates/kirkorov/kirkorov.snapshot.16.jpg",
+                    "order": 16,
+                    "preview": "https://cdn.memely.net/templates/kirkorov/kirkorov.preview.16.mp4",
+                    "templates": {
+                        "ig_story": "https://cdn.memely.net/templates/kirkorov/kirkorov.story.16.mp4",
+                        "ig_post": "https://cdn.memely.net/templates/kirkorov/kirkorov.post.16.mp4",
+                        "yt_video": "https://cdn.memely.net/templates/kirkorov/kirkorov.youtube.16.mp4"
+                    }
+                }
+            ]
+        }
+    ],
+    "scenarios": [
+        [
+            {
+                "id": "tinkoff-1",
+                "name": "Tinkoff-1",
+                "items": [
+                    {
+                        "collectionId": "tinkoff",
+                        "itemId": 1,
+                        "placeholder": "Sneak Peek Preview"
+                    },
+                    {
+                        "collectionId": "tinkoff",
+                        "itemId": 4,
+                        "placeholder": "Join Us for an Epic Journey"
+                    },
+                    {
+                        "collectionId": "tinkoff",
+                        "itemId": 6,
+                        "placeholder": "A Glimpse into Tomorrow"
+                    },
+                    {
+                        "collectionId": "tinkoff",
+                        "itemId": 12,
+                        "placeholder": "Discover the Essence"
+                    },
+                    {
+                        "collectionId": "tinkoff",
+                        "itemId": 13,
+                        "placeholder": "Express Yourself Creatively"
+                    },
+                    {
+                        "collectionId": "tinkoff",
+                        "itemId": 18,
+                        "placeholder": "Breaking News Update"
+                    },
+                    {
+                        "collectionId": "tinkoff",
+                        "itemId": 19,
+                        "placeholder": "Your Daily Dose of Inspiration"
+                    },
+                    {
+                        "collectionId": "tinkoff",
+                        "itemId": 21,
+                        "placeholder": "A Glimpse into Tomorrow"
+                    },
+                    {
+                        "collectionId": "tinkoff",
+                        "itemId": 27,
+                        "placeholder": "Discover Something New Today"
+                    },
+                    {
+                        "collectionId": "tinkoff",
+                        "itemId": 28,
+                        "placeholder": "Where Ideas Take Flight"
+                    },
+                    {
+                        "collectionId": "tinkoff",
+                        "itemId": 38,
+                        "placeholder": "Unveiling the Mystery"
+                    },
+                    {
+                        "collectionId": "tinkoff",
+                        "itemId": 48,
+                        "placeholder": "Captivating Creations Unfold"
+                    },
+                    {
+                        "collectionId": "tinkoff",
+                        "itemId": 57,
+                        "placeholder": "Unlock the Adventure"
+                    },
+                    {
+                        "collectionId": "tinkoff",
+                        "itemId": 59,
+                        "placeholder": "Discover the Essence"
+                    }
+                ]
+            },
+            {
+                "id": "tinkoff-2",
+                "name": "Tinkoff-2",
+                "items": [
+                    {
+                        "collectionId": "tinkoff",
+                        "itemId": 13,
+                        "placeholder": "Behind the Scenes Exclusive"
+                    },
+                    {
+                        "collectionId": "tinkoff",
+                        "itemId": 18,
+                        "placeholder": "Experience the Unseen"
+                    },
+                    {
+                        "collectionId": "tinkoff",
+                        "itemId": 19,
+                        "placeholder": "Journey to the Extraordinary"
+                    },
+                    {
+                        "collectionId": "tinkoff",
+                        "itemId": 21,
+                        "placeholder": "Breaking News Update"
+                    },
+                    {
+                        "collectionId": "tinkoff",
+                        "itemId": 27,
+                        "placeholder": "Elevate Your Senses"
+                    },
+                    {
+                        "collectionId": "tinkoff",
+                        "itemId": 28,
+                        "placeholder": "Boldly Go Beyond"
+                    },
+                    {
+                        "collectionId": "tinkoff",
+                        "itemId": 38,
+                        "placeholder": "Don't Miss Out – Limited Time Offer"
+                    },
+                    {
+                        "collectionId": "tinkoff",
+                        "itemId": 48,
+                        "placeholder": "Step into the Innovation Zone"
+                    },
+                    {
+                        "collectionId": "tinkoff",
+                        "itemId": 57,
+                        "placeholder": "Boldly Go Beyond"
+                    },
+                    {
+                        "collectionId": "tinkoff",
+                        "itemId": 59,
+                        "placeholder": "Sneak Peek Preview"
+                    },
+                    {
+                        "collectionId": "tinkoff",
+                        "itemId": 1,
+                        "placeholder": "Journey to the Extraordinary"
+                    },
+                    {
+                        "collectionId": "tinkoff",
+                        "itemId": 4,
+                        "placeholder": "Artistry in Motion"
+                    },
+                    {
+                        "collectionId": "tinkoff",
+                        "itemId": 6,
+                        "placeholder": "The Magic Begins Here"
+                    },
+                    {
+                        "collectionId": "tinkoff",
+                        "itemId": 12,
+                        "placeholder": "Epic Moments in Progress"
+                    }
+                ]
+            },
+            {
+                "id": "tinkoff-dev",
+                "name": "Tinkoff Dev",
+                "items": [
+                    {
+                        "collectionId": "tinkoff",
+                        "itemId": 12,
+                        "placeholder": "Artistry in Motion"
+                    },
+                    {
+                        "collectionId": "tinkoff",
+                        "itemId": 27,
+                        "placeholder": "A Symphony of Creativity"
+                    },
+                    {
+                        "collectionId": "tinkoff",
+                        "itemId": 57,
+                        "placeholder": "In the Heart of Innovation"
+                    }
+                ]
+            }
+        ],
+        [
+            {
+                "id": "kirkorov-full",
+                "name": "Kirkorov-1",
+                "items": [
+                    {
+                        "collectionId": "kirkorov",
+                        "itemId": 1,
+                        "placeholder": "Unveiling the Mystery"
+                    },
+                    {
+                        "collectionId": "kirkorov",
+                        "itemId": 2,
+                        "placeholder": "Discover the Essence"
+                    },
+                    {
+                        "collectionId": "kirkorov",
+                        "itemId": 3,
+                        "placeholder": "Epic Moments in Progress"
+                    },
+                    {
+                        "collectionId": "kirkorov",
+                        "itemId": 4,
+                        "placeholder": "Dive into the Extraordinary"
+                    },
+                    {
+                        "collectionId": "kirkorov",
+                        "itemId": 5,
+                        "placeholder": "Join Us for an Epic Journey"
+                    },
+                    {
+                        "collectionId": "kirkorov",
+                        "itemId": 6,
+                        "placeholder": "Behind the Scenes Exclusive"
+                    },
+                    {
+                        "collectionId": "kirkorov",
+                        "itemId": 7,
+                        "placeholder": "Special Announcement Inside"
+                    },
+                    {
+                        "collectionId": "kirkorov",
+                        "itemId": 8,
+                        "placeholder": "Incredible Moments Await"
+                    },
+                    {
+                        "collectionId": "kirkorov",
+                        "itemId": 9,
+                        "placeholder": "The Ultimate Revelation"
+                    },
+                    {
+                        "collectionId": "kirkorov",
+                        "itemId": 10,
+                        "placeholder": "A Symphony of Creativity"
+                    },
+                    {
+                        "collectionId": "kirkorov",
+                        "itemId": 11,
+                        "placeholder": "Sneak Peek Preview"
+                    },
+                    {
+                        "collectionId": "kirkorov",
+                        "itemId": 12,
+                        "placeholder": "Stay Tuned for Excitement"
+                    },
+                    {
+                        "collectionId": "kirkorov",
+                        "itemId": 13,
+                        "placeholder": "Elevate Your Senses"
+                    },
+                    {
+                        "collectionId": "kirkorov",
+                        "itemId": 14,
+                        "placeholder": "Don't Miss Out – Limited Time Offer"
+                    },
+                    {
+                        "collectionId": "kirkorov",
+                        "itemId": 15,
+                        "placeholder": "Special Announcement Inside"
+                    },
+                    {
+                        "collectionId": "kirkorov",
+                        "itemId": 16,
+                        "placeholder": "Crafting Unforgettable Memories"
+                    }
+                ]
+            },
+            {
+                "id": "kirkorov-dev",
+                "name": "Kirkorov Dev",
+                "items": [
+                    {
+                        "collectionId": "kirkorov",
+                        "itemId": 3,
+                        "placeholder": "Unleashing Limitless Potential"
+                    },
+                    {
+                        "collectionId": "kirkorov",
+                        "itemId": 10,
+                        "placeholder": "Transformative Discoveries Await"
+                    },
+                    {
+                        "collectionId": "kirkorov",
+                        "itemId": 14,
+                        "placeholder": "Unveiling the Mystery"
+                    }
+                ]
+            }
+        ]
+    ]
+}

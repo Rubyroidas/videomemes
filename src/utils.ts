@@ -1,7 +1,7 @@
 import {FFmpeg} from '@ffmpeg/ffmpeg';
 import {toBlobURL} from '@ffmpeg/util';
 
-import {Collection, Point, Rect, ScenarioPreset} from './types';
+import {Collection, GlobalContentConfig, Point, Rect, ScenarioPreset} from './types';
 
 export interface VideoProperties {
     fps: number;
@@ -166,6 +166,10 @@ export const loadCollections = async () => {
 export const loadScenarioPresets = async () => {
     const url = `https://cdn.memely.net/templates/tinkoff/scenarios.json?q=${Date.now()}`;
     return await loadJSON<ScenarioPreset[]>(url);
+};
+export const loadCollectionsAndScenarioPresets = async () => {
+    const url = `https://cdn.memely.net/config.json?q=${Date.now()}`;
+    return await loadJSON<GlobalContentConfig>(url);
 };
 
 export const imageLoadPromise = async (img: HTMLImageElement): Promise<void> => new Promise(resolve => {

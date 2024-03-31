@@ -35,6 +35,11 @@ export type ScenarioPreset = {
     items: ScenarioPresetItem[];
 }
 
+export type GlobalContentConfig = {
+    collections: Collection[];
+    scenarios: ScenarioPreset[][];
+}
+
 export enum UserPhraseType {
     PlainText = 'plainText',
     PlainImage = 'plainImage',

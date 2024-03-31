@@ -1,4 +1,4 @@
-import {useState, DragEventHandler, MouseEventHandler, TouchEventHandler, useRef, useEffect, useCallback} from 'react';
+import {useState, DragEventHandler, MouseEventHandler, TouchEventHandler, useRef, useEffect} from 'react';
 
 type Options = {
     onDrop: (f: File) => void;
@@ -19,17 +19,17 @@ export const useDropZone = (options: Options) => {
     const inputRef = useRef<HTMLInputElement | null>(null);
     const [isDraggingOver, setIsDraggingOver] = useState(false);
     const [isManualSelecting, setIsManualSelecting] = useState(false);
-    const onDragEnter: DragEventHandler = useCallback((_) => {
+    const onDragEnter: DragEventHandler = (_) => {
         setIsDraggingOver(true);
-    }, []);
-    const onDragLeave: DragEventHandler = useCallback((_) => {
+    };
+    const onDragLeave: DragEventHandler = (_) => {
         setIsDraggingOver(false);
-    }, []);
-    const onDragOver: DragEventHandler = useCallback((e) => {
+    };
+    const onDragOver: DragEventHandler = (e) => {
         e.preventDefault();
         e.stopPropagation();
-    }, []);
-    const onDrop: DragEventHandler = useCallback((e) => {
+    };
+    const onDrop: DragEventHandler = (e) => {
         e.preventDefault();
         setIsDraggingOver(false);
         const files = extractFilesFromDropEvent(e.nativeEvent);
@@ -38,23 +38,23 @@ export const useDropZone = (options: Options) => {
         }
 
         userOnDrop(files[0]);
-    }, []);
+    };
 
-    const handleManualSelect = useCallback(async () => {
+    const handleManualSelect = async () => {
         if (isManualSelecting || !inputRef.current) {
             return true;
         }
         setIsManualSelecting(true);
         inputRef.current.click();
-    }, []);
-    const onClick: MouseEventHandler = useCallback((e) => {
+    };
+    const onClick: MouseEventHandler = (e) => {
         e.preventDefault();
         handleManualSelect();
-    }, []);
-    const onTouchEnd: TouchEventHandler = useCallback((e) => {
+    };
+    const onTouchEnd: TouchEventHandler = (e) => {
         e.preventDefault();
         handleManualSelect();
-    }, []);
+    };
 
     useEffect(() => {
         if (!inputRef.current) {

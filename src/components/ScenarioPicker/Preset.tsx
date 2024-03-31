@@ -34,7 +34,6 @@ export const Preset = ({preset, index}: Props) => {
         }));
         navigate(VIDEO_TITLE_ENABLED ? '/title-setup' : '/edit-scenario');
     };
-    console.log(preset);
     const items = preset.items
         .map(presetItem => store.getCollectionAndItem(presetItem.collectionId, presetItem.itemId));
 

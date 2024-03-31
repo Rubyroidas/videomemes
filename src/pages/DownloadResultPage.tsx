@@ -51,6 +51,13 @@ export const DownloadResultPage = observer(() => {
         return null;
     }
 
+    const today = new Date();
+    const yy = today.getFullYear().toString().substring(2, 4);
+    const mm = (today.getMonth() + 1).toString().padStart(2, '0');
+    const dd = today.getDate().toString().padStart(2, '0');
+    const shortUuid = (store.scenario?.uuid ?? '').substring(0, 8);
+    const downloadFileName = `memely.net_${yy}${mm}${dd}_${shortUuid}.mp4`;
+
     return (
         <Wrapper>
             <Header>
@@ -60,7 +67,7 @@ export const DownloadResultPage = observer(() => {
                     </Icon>
                     Edit
                 </Button>
-                <DownloadVideoButton data={store.generatedVideo}>
+                <DownloadVideoButton data={store.generatedVideo} fileName={downloadFileName}>
                     <Icon>
                         <DownloadIcon/>
                     </Icon>

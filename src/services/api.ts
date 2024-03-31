@@ -40,10 +40,12 @@ export class Api {
     }
 
     async uploadScenarioAndFile(scenario: UserScenario, file: Blob) {
-        const configPromise = this.postRequest('/upload/config', {}, JSON.stringify(scenario));
+        const scenarioSerialized = JSON.stringify(scenario);
+        const configPromise = this.postRequest('/upload/config', {}, scenarioSerialized);
         const formData = new FormData();
         formData.set('uuid', scenario.uuid);
         formData.set('video', file);
+        formData.set('config', scenarioSerialized);
         const filePromise = this.postRequest('/upload/video', {}, formData);
         const timeoutPromise = wait(30000);
 

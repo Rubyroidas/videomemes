@@ -5,9 +5,10 @@ import {downloadBlob} from '../../utils';
 
 type Props = PropsWithChildren & {
     data: Blob;
+    fileName: string;
 }
-export const DownloadVideoButton: FC<Props> = ({data, children}) => {
-    const handleClick = () => downloadBlob(data, 'video.mp4');
+export const DownloadVideoButton: FC<Props> = ({data, fileName, children}) => {
+    const handleClick = () => downloadBlob(data, fileName);
     
     return (
         <Button onClick={handleClick}>

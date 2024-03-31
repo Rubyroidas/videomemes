@@ -1,7 +1,7 @@
 import {Link} from 'react-router-dom';
 
 import {Feed} from '../components/Feed';
-import {AppTitle} from '../components/App.styles';
+import {AppTitle, ListTitle} from '../components/App.styles';
 import {HomeIcon} from '../icons/HomeIcon';
 
 export const FeedPage = () => (
@@ -12,6 +12,7 @@ export const FeedPage = () => (
             </Link>
             Feed
         </AppTitle>
+        <ListTitle>Users uploaded these videos</ListTitle>
         <Feed/>
     </div>
 );

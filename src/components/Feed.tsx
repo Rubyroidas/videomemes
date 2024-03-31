@@ -4,6 +4,7 @@ import {useApi} from '../services/apiContext';
 import {FeedItem} from '../types';
 import {FeedItemEl} from './FeedItem';
 import {consoleLog} from '../utils';
+import {FeedListWrapper} from './Feed/Feed.styles';
 
 export const Feed = () => {
     const api = useApi();
@@ -24,14 +25,13 @@ export const Feed = () => {
     }
 
     return (
-        <div>
-            feed here
+        <FeedListWrapper>
             {feed.map(feedItem => (
                 <FeedItemEl
                     key={feedItem.id}
                     item={feedItem}
                 />
             ))}
-        </div>
+        </FeedListWrapper>
     );
 };

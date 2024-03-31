@@ -2,14 +2,15 @@ import {FC} from 'react';
 import {Link} from 'react-router-dom';
 
 import {FeedItem} from '../types';
+import {FeedListElWrapper} from './Feed/Feed.styles';
 
 type Props = {
     item: FeedItem;
 }
 export const FeedItemEl: FC<Props> = ({item}) => (
-    <div>
+    <FeedListElWrapper>
         <Link to={`/feed/${item.id}`}>
-            <img src={item.snapshot} crossOrigin="anonymous" width={200}/>
+            <img src={item.snapshot} crossOrigin="anonymous"/>
         </Link>
-    </div>
+    </FeedListElWrapper>
 );

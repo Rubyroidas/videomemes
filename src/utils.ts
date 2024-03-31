@@ -189,10 +189,16 @@ export const wait = (ms: number) => new Promise(resolve => {
     setTimeout(resolve, ms);
 });
 
-export const consoleLog = __DEV__
-    ? (...args: any[]) => console.log(...args)
-    : () => {};
+export const consoleLog = (...args: any[]) => {
+    if (!((window as any).__DEBUG__LOGS__ || __DEV__)) {
+        return;
+    }
+    console.log(...args);
+};
 
-export const consoleError = __DEV__
-    ? (...args: any[]) => console.error(...args)
-    : () => {};
+export const consoleError = (...args: any[]) => {
+    if (!((window as any).__DEBUG__LOGS__ || __DEV__)) {
+        return;
+    }
+    console.error(...args);
+};

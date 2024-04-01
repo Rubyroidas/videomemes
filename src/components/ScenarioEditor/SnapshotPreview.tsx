@@ -15,6 +15,11 @@ export const Wrapper = styled.div`
 
     & > img {
         width: 100%;
+        pointer-events: none;
+    }
+
+    & > video {
+        pointer-events: none;
     }
 `;
 

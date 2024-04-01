@@ -12,7 +12,7 @@ export interface ProgressEvent {
     time: number;
 }
 
-export const ffmpegExec = async (ffmpeg: FFmpeg, args: string[], progressCallback?: (e: ProgressEvent) => void) => {
+export const ffmpegExec = async (ffmpeg: FFmpeg, args: string[], progressCallback?: (e: ProgressEvent) => void, signal?: AbortSignal) => {
     const logs: Record<string, string[]> = {};
 
     ffmpeg.on('log', ({message, type}) => {
@@ -25,7 +25,7 @@ export const ffmpegExec = async (ffmpeg: FFmpeg, args: string[], progressCallbac
         ffmpeg.on('progress', progressCallback);
     }
     try {
-        await ffmpeg.exec(args);
+        await ffmpeg.exec(args, undefined, {signal});
     } catch (e) {
         consoleError('ffmpegExec err', e);
     }

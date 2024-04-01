@@ -1,3 +1,4 @@
+import {PropsWithChildren} from 'react';
 import styled from '@emotion/styled';
 
 import {LoadingSpinner} from '../../icons/LoadingSpinner';
@@ -72,7 +73,7 @@ const SpinnerText = styled.div`
     }
 `;
 
-export const ProgressCurtain = () => (
+export const ProgressCurtain = ({children}: PropsWithChildren) => (
     <Wrapper>
         <LoadingSpinner/>
         <SpinnerText>
@@ -80,5 +81,6 @@ export const ProgressCurtain = () => (
             <div>That can take up to several minutes</div>
             <div>Don't close this tab</div>
         </SpinnerText>
+        {children}
     </Wrapper>
 );

@@ -225,6 +225,7 @@ export const generateVideo = async (
     collections: Collection[],
     format: Format,
     setEncodingProgress?: ((progress: number) => void),
+    signal?: AbortSignal
 ): Promise<Blob> => {
     const updateEncodingStatus = ({progress}: ProgressEvent) => {
         setEncodingProgress?.(progress);
@@ -344,7 +345,7 @@ export const generateVideo = async (
     consoleLog(compileCommandArgs.join(' '));
 
     // montage
-    const output = await ffmpegExec(ffmpeg, compileCommandArgs, updateEncodingStatus);
+    const output = await ffmpegExec(ffmpeg, compileCommandArgs, updateEncodingStatus, signal);
     consoleLog(output.stderr);
     consoleLog('AFTER >>> dir [.]', await ffmpegListFilesRaw(ffmpeg, '.'));
 

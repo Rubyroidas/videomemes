@@ -1,4 +1,4 @@
-import {FC, useCallback, useState} from 'react';
+import {FC, useCallback, useRef, useState} from 'react';
 import {useNavigate} from 'react-router-dom';
 import {observer} from 'mobx-react';
 
@@ -12,7 +12,7 @@ import {useStore} from '../../store';
 import {ProgressCurtain} from './ProgressCurtain';
 import {useApi} from '../../services/apiContext';
 import {UserPhraseType} from '../../types';
-import {consoleLog} from '../../utils';
+import {consoleError, consoleLog} from '../../utils';
 
 export const VideoEditor: FC = observer(() => {
     const store = useStore();
@@ -20,6 +20,7 @@ export const VideoEditor: FC = observer(() => {
     const navigate = useNavigate();
 
     const [isEncoding, setIsEncoding] = useState(false);
+    const abortController = useRef<AbortController | null>(null);
     consoleLog('store.scenario.title', store.scenario?.title);
 
     const handleGenerateClick = useCallback(() => {
@@ -30,21 +31,37 @@ export const VideoEditor: FC = observer(() => {
 
             setIsEncoding(true);
             consoleLog('start generate');
-            const vid = await generateVideo(
-                store.ffmpeg!,
-                store.scenario.title,
-                store.scenario.phrases,
-                store.collections,
-                store.scenario.format
-            );
-            store.generatedVideo = vid;
-            consoleLog('end generate', vid);
+            abortController.current = new AbortController();
+            try {
+                const vid = await generateVideo(
+                    store.ffmpeg!,
+                    store.scenario.title,
+                    store.scenario.phrases,
+                    store.collections,
+                    store.scenario.format,
+                    () => {
+                    },
+                    abortController.current.signal
+                );
+                consoleLog('end generating', vid);
+                if (!abortController.current?.signal.aborted) {
+                    store.generatedVideo = vid;
+                }
 
-            // upload scenario and file, or timeout - what comes first
-            await api.uploadScenarioAndFile(store.scenario, store.generatedVideo);
-
-            setIsEncoding(false);
-            navigate('/download-result');
+                // upload scenario and file, or timeout - what comes first
+                if (!abortController.current?.signal.aborted) {
+                    await api.uploadScenarioAndFile(store.scenario, store.generatedVideo!);
+                    consoleLog('end uploading', vid);
+                }
+                if (!abortController.current?.signal.aborted) {
+                    navigate('/download-result');
+                }
+            } catch (e) {
+                consoleError('video generation error', e);
+            } finally {
+                consoleLog('end of handleGenerateClick');
+                abortController.current = null;
+            }
         };
 
         doGenerate();
@@ -52,6 +69,11 @@ export const VideoEditor: FC = observer(() => {
     const handleEditScenario = useCallback(() => {
         navigate('/edit-scenario');
     }, []);
+    const handleAbortVideoGeneration = () => {
+        abortController.current?.abort();
+        store.generatedVideo = undefined;
+        setIsEncoding(false);
+    };
 
     if (!store.scenario?.phrases) {
         return null;
@@ -85,7 +107,11 @@ export const VideoEditor: FC = observer(() => {
                 disabled={isEncoding}
             />
             {isEncoding && (
-                <ProgressCurtain/>
+                <ProgressCurtain>
+                    <Button onClick={handleAbortVideoGeneration}>
+                        Cancel
+                    </Button>
+                </ProgressCurtain>
             )}
         </>
     );

@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import {useRef, useState} from 'react';
+import {useEffect, useRef, useState} from 'react';
 
 import {CollectionItem, Point} from '../../types';
 import {PlayButton} from '../PhrasesEditor/PhraseEditor.styles';
@@ -51,6 +51,23 @@ export const SnapshotPreview = (props: Props) => {
         x: 50,
         y: 50,
     };
+
+    const handleVideoEnded = () => {
+        setIsVideoPlaying(false);
+    };
+
+    useEffect(() => {
+        if (!videoRef.current) {
+            return;
+        }
+
+        const videoEl = videoRef.current;
+        videoEl.addEventListener('ended', handleVideoEnded);
+
+        return () => {
+            videoEl.removeEventListener('ended', handleVideoEnded);
+        }
+    }, [collectionItem.preview]);
 
     return (
         <Wrapper

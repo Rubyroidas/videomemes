@@ -19,7 +19,7 @@
   status = 200
   force = true
 [[redirects]]
-  from = "/edit-phrases"
+  from = "/edit-fragments"
   to = "/index.html"
   status = 200
   force = true

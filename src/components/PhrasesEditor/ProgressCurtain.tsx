@@ -1,7 +1,8 @@
-import {PropsWithChildren} from 'react';
+import {PropsWithChildren, useEffect, useState} from 'react';
 import styled from '@emotion/styled';
 
 import {LoadingSpinner} from '../../icons/LoadingSpinner';
+import {progressCurtainTexts} from '../../statics';
 
 const Wrapper = styled.div`
     position: fixed;
@@ -73,14 +74,34 @@ const SpinnerText = styled.div`
     }
 `;
 
-export const ProgressCurtain = ({children}: PropsWithChildren) => (
-    <Wrapper>
-        <LoadingSpinner/>
+const AnimatedText = () => {
+    const [dots, setDots] = useState(0);
+    const [textId, setTextId] = useState(0);
+
+    useEffect(() => {
+        setTimeout(() => {
+            if (dots === 3) {
+                setDots(0);
+                setTextId(id => (id + 1) % progressCurtainTexts.length);
+            } else {
+                setDots(d => d + 1);
+            }
+        }, 500);
+    }, [dots]);
+
+    return (
         <SpinnerText>
-            <div>Generating your video...</div>
+            <div>{progressCurtainTexts[textId]}{'.'.repeat(dots)}</div>
             <div>That can take up to several minutes</div>
             <div>Don't close this tab</div>
         </SpinnerText>
+    );
+};
+
+export const ProgressCurtain = ({children}: PropsWithChildren) => (
+    <Wrapper>
+        <LoadingSpinner/>
+        <AnimatedText/>
         {children}
     </Wrapper>
 );

@@ -3,7 +3,7 @@ import {useNavigate} from 'react-router-dom';
 import {observer} from 'mobx-react';
 import shortUuid from 'short-uuid';
 
-import {Button, FloatingButton, ListTitle} from '../App.styles';
+import {Button, FloatingButton, ListDescription, ListTitle} from '../App.styles';
 import {Icon} from '../PhrasesEditor/PhraseEditor.styles';
 import {EditListIcon} from '../../icons/EditListIcon';
 import {ScenarioList} from './ScenarioList';
@@ -13,6 +13,7 @@ import {useStore} from '../../store';
 import {AddIcon} from '../../icons/AddIcon';
 import {ArrowLeft} from '../../icons/ArrowLeft';
 import {ButtonSelector} from '../ButtonSelector';
+import {FingerDragIcon} from '../../icons/FingerDragIcon.tsx';
 
 const formatSelectorValues: {
     value: Format,
@@ -99,6 +100,10 @@ export const ScenarioEditor = observer(() => {
                         onChange={handleChangeFormat}
                     />
                     <ListTitle>Scenario total duration: {scenarioTotalDuration}s (max 60s)</ListTitle>
+                    <ListDescription>
+                        Swap the fragments to change the order
+                        <FingerDragIcon/>
+                    </ListDescription>
                     <ScenarioList/>
                 </>
             )}

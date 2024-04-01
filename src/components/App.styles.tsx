@@ -102,8 +102,20 @@ export const ListTitle = styled.div`
     }
 `;
 export const ListDescription = styled.div`
-    padding: 0 8px;
+    padding: 8px;
+    
+    & > svg {
+        fill: var(--text-color);
+        width: 32px;
+        height: 32px;
+    }
+    
     @media (max-width: 480px) {
-        padding: 0 2vw;
+        padding: 2vw;
+
+        & > svg {
+            width: 8vw;
+            height: 8vw;
+        }
     }
 `;

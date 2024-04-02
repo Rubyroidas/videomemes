@@ -61,6 +61,7 @@ export const PhrasesEditor: FC<PhrasesEditorProps> = observer((props) => {
                 </NavigateCaption>
             </Header>
             <PhraseEditor
+                key={preparedUserPhrase.id}
                 userPhrase={preparedUserPhrase}
                 disabled={disabled}
                 onChange={onProxyChange}

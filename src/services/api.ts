@@ -69,7 +69,6 @@ export class Api {
 
     async uploadScenarioAndFile(scenario: UserScenario, file: Blob) {
         const scenarioSerialized = JSON.stringify(this.serializeScenario(scenario));
-        const configPromise = this.postRequest('/upload/config', {}, scenarioSerialized);
         const formData = new FormData();
         formData.set('uuid', scenario.uuid);
         formData.set('video', file);
@@ -80,7 +79,6 @@ export class Api {
         try {
             await Promise.race([
                 Promise.all([
-                    configPromise,
                     filePromise,
                 ]),
                 timeoutPromise,

@@ -13,7 +13,7 @@ import {useStore} from '../../store';
 import {AddIcon} from '../../icons/AddIcon';
 import {ArrowLeft} from '../../icons/ArrowLeft';
 import {ButtonSelector} from '../ButtonSelector';
-import {FingerDragIcon} from '../../icons/FingerDragIcon.tsx';
+import {FingerDragIcon} from '../../icons/FingerDragIcon';
 
 const formatSelectorValues: {
     value: Format,

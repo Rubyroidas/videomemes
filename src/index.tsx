@@ -1,5 +1,6 @@
 import {createRoot} from 'react-dom/client';
 
+import './i18n';
 import {App} from './components/App';
 import {createStoreContextProvider} from './store';
 import {createApiContextProvider} from './services/apiContext';

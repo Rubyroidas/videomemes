@@ -92,7 +92,7 @@ export class Api {
         return this.getRequest<FeedItem[]>('/feed');
     }
 
-    async getFeedItem(id: number) {
+    async getFeedItem(id: string) {
         return this.getRequest<FeedItem>(`/feed/${id}`);
     }
 }

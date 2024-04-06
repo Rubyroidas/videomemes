@@ -48,13 +48,7 @@ export const FeedItemPage = () => {
             return;
         }
 
-        const parsedId = parseInt(params.id, 10);
-        consoleLog('parsedId', parsedId);
-        if (isNaN(parsedId)) {
-            navigate('/feed');
-            return;
-        }
-
+        const parsedId = params.id;
         const load = async() => {
             const data = await api.getFeedItem(parsedId);
             consoleLog('FEED ITEM', data);

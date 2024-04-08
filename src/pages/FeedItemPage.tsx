@@ -1,15 +1,18 @@
 import {MouseEventHandler, TouchEventHandler, useEffect, useRef, useState} from 'react';
 import {Link, useNavigate, useParams} from 'react-router-dom';
+import shortUuid from 'short-uuid';
 
-import {AppTitle} from '../components/App.styles';
+import {AppTitle, Button} from '../components/App.styles';
 import {consoleError, consoleLog} from '../utils';
 import {useApi} from '../services/apiContext';
-import {FeedItem, Point, Size} from '../types';
+import {FeedItem, Format, Point, Size} from '../types';
 import {PlayButton} from '../components/PhrasesEditor/PhraseEditor.styles';
 import {PlayIcon} from '../icons/PlayIcon';
 import styled from '@emotion/styled';
 import {formatSizes} from '../statics';
 import {HomeIcon} from '../icons/HomeIcon';
+import {useStore} from '../store';
+import {VIDEO_TITLE_ENABLED} from '../config';
 
 const VideoContainer = styled.div<Size>`
     width: ${props => props.width}px;
@@ -30,6 +33,7 @@ export const FeedItemPage = () => {
     const params = useParams();
     const navigate = useNavigate();
     const api = useApi();
+    const store = useStore();
     const [item, setItem] = useState<FeedItem | null>(null);
     const [isVideoPlaying, setIsVideoPlaying] = useState(false);
 
@@ -45,6 +49,26 @@ export const FeedItemPage = () => {
     };
     const handleVideoEnded = () => {
         setIsVideoPlaying(false);
+    };
+    const handleReuseVideoClick = () => {
+        if (!item) {
+            return;
+        }
+        store.scenario = {
+            uuid: shortUuid().uuid(),
+            format: Format.InstagramStory,
+            phrases: [],
+        };
+        store.scenario!.phrases = item.config.fragments.map(item => ({
+            id: shortUuid().uuid(),
+            type: item.type,
+            collectionId: item.collectionId,
+            phraseId: item.phraseId,
+            text: item.text ?? 'Your text here',
+            textSize: item.textSize,
+            imageSize: item.imageSize,
+        }));
+        navigate(VIDEO_TITLE_ENABLED ? '/title-setup' : '/edit-scenario');
     };
 
     useEffect(() => {
@@ -84,6 +108,9 @@ export const FeedItemPage = () => {
     }
 
     const size: Size = formatSizes[item.format];
+    const coeff = 600 / size.width;
+    size.width *= coeff;
+    size.height *= coeff;
     const playButtonPosition: Point = {
         x: 50,
         y: 50,
@@ -97,6 +124,7 @@ export const FeedItemPage = () => {
                 </Link>
                 Video
             </AppTitle>
+            <Button onClick={handleReuseVideoClick}>Use this video as a template</Button>
             <VideoContainer {...size}>
                 <Video
                     ref={videoRef}

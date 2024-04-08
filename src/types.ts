@@ -81,4 +81,6 @@ export type FeedItem = {
     snapshot: string;
     format: Format;
     created_at: string;
+    duration: number;
+    config: UserScenario;
 }

@@ -1,4 +1,4 @@
-import {MouseEventHandler, TouchEventHandler, useEffect, useState} from 'react';
+import {MouseEventHandler, TouchEventHandler, useEffect, useRef, useState} from 'react';
 import {Link, useNavigate, useParams} from 'react-router-dom';
 
 import {AppTitle} from '../components/App.styles';
@@ -26,6 +26,7 @@ const Video = styled.video`
 `;
 
 export const FeedItemPage = () => {
+    const videoRef = useRef<HTMLVideoElement>(null);
     const params = useParams();
     const navigate = useNavigate();
     const api = useApi();
@@ -41,6 +42,9 @@ export const FeedItemPage = () => {
             video.pause();
             setIsVideoPlaying(false);
         }
+    };
+    const handleVideoEnded = () => {
+        setIsVideoPlaying(false);
     };
 
     useEffect(() => {
@@ -62,6 +66,19 @@ export const FeedItemPage = () => {
             });
     }, [params.id]);
 
+    useEffect(() => {
+        if (!videoRef.current) {
+            return;
+        }
+
+        const videoEl = videoRef.current;
+        videoEl.addEventListener('ended', handleVideoEnded);
+
+        return () => {
+            videoEl.removeEventListener('ended', handleVideoEnded);
+        }
+    }, [item]);
+
     if (!item) {
         return null;
     }
@@ -82,6 +99,7 @@ export const FeedItemPage = () => {
             </AppTitle>
             <VideoContainer {...size}>
                 <Video
+                    ref={videoRef}
                     onClick={handleVideoClick}
                     onTouchEnd={(handleVideoClick as unknown) as TouchEventHandler}
                     controls={true}

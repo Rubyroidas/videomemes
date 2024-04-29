@@ -4,7 +4,7 @@ import {Box, Slider, Typography} from '@mui/material';
 import clsx from 'clsx';
 
 import {PlayIcon} from '../../icons/PlayIcon';
-import {Point, Rect, TextSize, UserPhrase, UserPhraseType} from '../../types';
+import {Point, Rect, UserPhrase, UserPhraseType} from '../../types';
 import {FONT_SIZE, TEXT_PADDING} from '../../config';
 import {
     EditingAreaContainer,
@@ -17,7 +17,6 @@ import {
 } from './PhraseEditor.styles';
 import {useStore} from '../../store';
 import {Button} from '../App.styles';
-import {ButtonSelector} from '../ButtonSelector';
 import {DebugImage} from '../DebugImage';
 import {formatSizes} from '../../statics';
 import {useDropZone} from '../DropZone/DropZone';
@@ -29,17 +28,6 @@ type PhraseEditorProps = {
     userPhrase: UserPhrase;
     onChange: (phrases: UserPhrase) => void;
 }
-
-const textSizeValues = [{
-    value: TextSize.Small,
-    text: 'small',
-}, {
-    value: TextSize.Normal,
-    text: 'normal',
-}, {
-    value: TextSize.Big,
-    text: 'big',
-}];
 
 export const PhraseEditor: FC<PhraseEditorProps> = (props) => {
     const {disabled, userPhrase, onChange} = props;
@@ -74,7 +62,7 @@ export const PhraseEditor: FC<PhraseEditorProps> = (props) => {
             setIsVideoPlaying(false);
         }
     };
-    const handleChangeTextSize = (value: TextSize) => {
+    const handleChangeTextSize = (value: number) => {
         onChange({
             ...userPhrase,
             textSize: value,
@@ -111,18 +99,9 @@ export const PhraseEditor: FC<PhraseEditorProps> = (props) => {
         width: textAreaRect.width / collectionSize.width * 100,
         height: textAreaRect.height / collectionSize.height * 100,
     };
-    let textSizeCoeff = 1;
-    switch (userPhrase.textSize) {
-        case TextSize.Small:
-            textSizeCoeff = 0.5;
-            break;
-        case TextSize.Big:
-            textSizeCoeff = 1.5;
-            break;
-    }
     const minCollectionSize = Math.min(collectionSize.width, collectionSize.height);
-    const fontSizeDesktop = textSizeCoeff * FONT_SIZE * minCollectionSize;
-    const fontSizeMobile = textSizeCoeff * FONT_SIZE * 100;
+    const fontSizeDesktop = userPhrase.textSize * FONT_SIZE * minCollectionSize;
+    const fontSizeMobile = userPhrase.textSize * FONT_SIZE * 100;
     const paddingDesktop = TEXT_PADDING * minCollectionSize / 100;
     const paddingMobile = TEXT_PADDING;
     const inputClassName = TextAreaClass(fontSizeDesktop, fontSizeMobile, paddingDesktop, paddingMobile);
@@ -139,12 +118,19 @@ export const PhraseEditor: FC<PhraseEditorProps> = (props) => {
                 image
             </Button>
             {userPhrase.type === UserPhraseType.PlainText && (
-                <ButtonSelector
-                    caption="Text size"
-                    value={userPhrase.textSize}
-                    values={textSizeValues}
-                    onChange={handleChangeTextSize}
-                />
+                <Box mr={2} ml={2}>
+                    <Typography>Image size</Typography>
+                    <Slider
+                        aria-label="Text size"
+                        min={0.5}
+                        step={0.1}
+                        marks
+                        max={3}
+                        valueLabelDisplay="on"
+                        value={userPhrase.textSize}
+                        onChange={(_, value) => handleChangeTextSize(value as number)}
+                    />
+                </Box>
             )}
             {userPhrase.type === UserPhraseType.PlainImage && (
                 <Box mr={2} ml={2}>

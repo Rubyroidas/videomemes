@@ -45,12 +45,6 @@ export enum UserPhraseType {
     PlainImage = 'plainImage',
 }
 
-export enum TextSize {
-    Small = 'small',
-    Normal = 'normal',
-    Big = 'big',
-}
-
 export enum Format {
     InstagramStory = 'ig_story',
     InstagramPost = 'ig_post',
@@ -70,7 +64,7 @@ export type UserPhrase = {
     collectionId: string;
     phraseId: number;
     text: string;
-    textSize: TextSize;
+    textSize: number;
     imageSize: number;
     image?: HTMLCanvasElement;
 }

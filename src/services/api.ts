@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-import {FeedItem, TextSize, UserScenario} from '../types';
+import {FeedItem, UserScenario} from '../types';
 import {consoleError, consoleLog, wait} from '../utils';
 
 export class Api {
@@ -49,21 +49,7 @@ export class Api {
             uuid,
             format,
             title,
-            fragments: phrases.map(p => {
-                let textSizeCoeff = 1;
-                switch (p.textSize) {
-                    case TextSize.Small:
-                        textSizeCoeff = 0.5;
-                        break;
-                    case TextSize.Big:
-                        textSizeCoeff = 1.5;
-                        break;
-                }
-                return {
-                    ...p,
-                    textSize: textSizeCoeff,
-                }
-            }),
+            fragments: phrases,
         }
     }
 

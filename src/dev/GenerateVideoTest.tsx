@@ -2,7 +2,7 @@ import {useRef, useState} from 'react';
 import shortUuid from 'short-uuid';
 
 import {generateVideo} from '../generate';
-import {Format, TextSize, UserPhrase, UserPhraseType} from '../types';
+import {Format, UserPhrase, UserPhraseType} from '../types';
 import {useStore} from '../store';
 
 const userPhrases: UserPhrase[] = [
@@ -10,7 +10,7 @@ const userPhrases: UserPhrase[] = [
         id: shortUuid().uuid(),
         collectionId: 'tinkoff',
         phraseId: 1,
-        textSize: TextSize.Normal,
+        textSize: 1,
         text: 'first text',
         imageSize: 1,
         type: UserPhraseType.PlainText,
@@ -19,7 +19,7 @@ const userPhrases: UserPhrase[] = [
         id: shortUuid().uuid(),
         collectionId: 'tinkoff',
         phraseId: 2,
-        textSize: TextSize.Normal,
+        textSize: 1,
         text: 'second text',
         imageSize: 1,
         type: UserPhraseType.PlainText,

@@ -1,7 +1,7 @@
 import {useNavigate} from 'react-router-dom';
 import shortUuid from 'short-uuid';
 
-import {ScenarioPreset, TextSize, UserPhraseType} from '../../types';
+import {ScenarioPreset, UserPhraseType} from '../../types';
 import {useStore} from '../../store';
 import {PresetSnapshotImage, PresetWrapper} from './ScenarioPicker.styles';
 import {VIDEO_TITLE_ENABLED} from '../../config';
@@ -29,7 +29,7 @@ export const Preset = ({preset, index}: Props) => {
             collectionId: item.collectionId,
             phraseId: item.itemId,
             text: item.placeholder,
-            textSize: TextSize.Normal,
+            textSize: 1,
             imageSize: 1,
         }));
         navigate(VIDEO_TITLE_ENABLED ? '/title-setup' : '/edit-scenario');

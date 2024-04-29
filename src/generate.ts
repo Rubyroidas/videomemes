@@ -1,7 +1,7 @@
 import {FFmpeg} from '@ffmpeg/ffmpeg';
 import {fetchFile} from '@ffmpeg/util';
 
-import {Collection, Format, Rect, Size, TextSize, UserPhrase, UserPhraseType} from './types';
+import {Collection, Format, Rect, Size, UserPhrase, UserPhraseType} from './types';
 import {
     consoleLog,
     ffmpegExec,
@@ -16,21 +16,12 @@ import watermarkRaw2 from './icons/watermark.svg?raw';
 import {formatSizes} from './statics';
 import silence from './500ms-silence.mp3?raw-hex';
 
-export const renderTextSlide = async (videoSize: Size, width: number, height: number, text: string, textSize: TextSize) => {
+export const renderTextSlide = async (videoSize: Size, width: number, height: number, text: string, textSizeCoeff: number) => {
     text = (text ?? '').trim();
     const canvas = document.createElement('canvas');
     canvas.width = width;
     canvas.height = height;
 
-    let textSizeCoeff = 1;
-    switch (textSize) {
-        case TextSize.Small:
-            textSizeCoeff = 0.5;
-            break;
-        case TextSize.Big:
-            textSizeCoeff = 1.5;
-            break;
-    }
     const minVideoSize = Math.min(videoSize.width, videoSize.height);
     const fontSize = textSizeCoeff * FONT_SIZE * minVideoSize;
     const lineHeight = fontSize * LINE_HEIGHT;
@@ -176,7 +167,7 @@ export const generateVideoTitleImage = async (text: string, format: Format): Pro
     return await renderTextSlide(
         size,
         size.width, size.height,
-        text, TextSize.Normal
+        text, 1
     );
 };
 

@@ -4,14 +4,14 @@ import {useStore} from '../../store';
 import {Collection, CollectionItem} from '../../types';
 import {CollectionItemElement} from './CollectionItemElement';
 import {MAX_VIDEO_LENGTH_SECONDS} from '../../config';
-import {AddPhraseCollectionItemList, AddPhraseCollectionList, CollectionElement} from './ScenarioEditor.styles';
+import {AddFragmentCollectionItemList, AddFragmentCollectionList, CollectionElement} from './ScenarioEditor.styles';
 import {Button, ListTitle} from '../App.styles';
 
 type Props = {
     onSelect: (collection: Collection, item: CollectionItem) => void;
 }
 
-export const AddPhrase = observer(({onSelect}: Props) => {
+export const AddFragment = observer(({onSelect}: Props) => {
     const store = useStore();
 
     const handlePickCollection = (collection: Collection | undefined) => {
@@ -31,7 +31,7 @@ export const AddPhrase = observer(({onSelect}: Props) => {
     return !selectedCollection ? (
         <div>
             <ListTitle>Pick a collection</ListTitle>
-            <AddPhraseCollectionList>
+            <AddFragmentCollectionList>
                 {collections.map(collection => (
                     <CollectionElement
                         key={collection.id}
@@ -42,7 +42,7 @@ export const AddPhrase = observer(({onSelect}: Props) => {
                         <div className="videos-count">{collection.items.length} videos</div>
                     </CollectionElement>
                 ))}
-            </AddPhraseCollectionList>
+            </AddFragmentCollectionList>
         </div>
     ) : (
         <div>
@@ -50,7 +50,7 @@ export const AddPhrase = observer(({onSelect}: Props) => {
             <Button onClick={() => handlePickCollection(undefined)}>
                 Pick another collection
             </Button>
-            <AddPhraseCollectionItemList>
+            <AddFragmentCollectionItemList>
                 {selectedCollection.items.map(((item, index) => (
                     <CollectionItemElement
                         key={item.id}
@@ -60,7 +60,7 @@ export const AddPhrase = observer(({onSelect}: Props) => {
                         disabled={store.scenarioTotalDuration + item.duration > MAX_VIDEO_LENGTH_SECONDS}
                     />
                 )))}
-            </AddPhraseCollectionItemList>
+            </AddFragmentCollectionItemList>
         </div>
     );
 });

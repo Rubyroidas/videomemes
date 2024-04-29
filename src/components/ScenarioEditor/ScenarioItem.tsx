@@ -14,7 +14,7 @@ import {SnapshotPreview} from './SnapshotPreview';
 type ScenarioItemProps = {
     index: number;
     isDragging: boolean;
-    phrase: UserFragment;
+    fragment: UserFragment;
     disabled: boolean;
     onDelete: () => void;
 }
@@ -22,12 +22,12 @@ export const ScenarioItem: FC<ScenarioItemProps> = (props) => {
     const {
         index,
         isDragging,
-        phrase,
+        fragment,
         disabled,
         onDelete,
     } = props;
     const store = useStore();
-    const {collection, item: collectionItem} = store.getCollectionAndItem(phrase.collectionId, phrase.fragmentId);
+    const {collection, item: collectionItem} = store.getCollectionAndItem(fragment.collectionId, fragment.fragmentId);
     if (!collection || !collectionItem) {
         return null;
     }
@@ -42,7 +42,7 @@ export const ScenarioItem: FC<ScenarioItemProps> = (props) => {
                     #{index}
                 </ScenarioItemIndexNumber>
                 <ScenarioItemUserText>
-                    {phrase.type === UserFragmentType.PlainText ? phrase.text : (<i>image</i>)}
+                    {fragment.type === UserFragmentType.PlainText ? fragment.text : (<i>image</i>)}
                 </ScenarioItemUserText>
                 {!isDragging && (
                     <ScenarioItemDeleteButton

@@ -129,14 +129,14 @@ export const ScenarioItemDuration = styled.div`
     }
 `;
 
-export const AddPhraseCollectionList = styled.div`
+export const AddFragmentCollectionList = styled.div`
     width: 600px;
 
     @media (max-width: 480px) {
         width: 100vw;
     }
 `;
-export const AddPhraseCollectionItemList = styled.div`
+export const AddFragmentCollectionItemList = styled.div`
     width: 600px;
 
     @media (max-width: 480px) {

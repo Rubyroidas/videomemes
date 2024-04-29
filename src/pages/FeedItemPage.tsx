@@ -6,7 +6,7 @@ import {AppTitle, Button} from '../components/App.styles';
 import {consoleError, consoleLog} from '../utils';
 import {useApi} from '../services/apiContext';
 import {FeedItem, Format, Point, Size} from '../types';
-import {PlayButton} from '../components/PhrasesEditor/PhraseEditor.styles';
+import {PlayButton} from '../components/FragmentsEditor/FragmentEditor.styles';
 import {PlayIcon} from '../icons/PlayIcon';
 import styled from '@emotion/styled';
 import {formatSizes} from '../statics';

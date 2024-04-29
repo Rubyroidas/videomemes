@@ -3,7 +3,7 @@ import styled from '@emotion/styled';
 
 import {ArrowLeft} from '../../icons/ArrowLeft';
 import {ArrowRight} from '../../icons/ArrowRight';
-import {Icon} from './PhraseEditor.styles';
+import {Icon} from './FragmentEditor.styles';
 
 type Props = {
     canGoLeft: boolean;

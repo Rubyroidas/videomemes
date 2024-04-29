@@ -1,4 +1,4 @@
-import {ClipboardEventHandler, FC, MouseEventHandler, useState} from 'react';
+import {ClipboardEventHandler, MouseEventHandler, useState} from 'react';
 import ContentEditable, {ContentEditableEvent} from 'react-contenteditable';
 import {Box, Slider, Typography} from '@mui/material';
 import clsx from 'clsx';
@@ -11,10 +11,10 @@ import {
     EditingVideo,
     FileDropArea,
     InputBackground,
-    PhraserEditorWrapper,
+    FragmentEditorWrapper,
     PlayButton,
     TextAreaClass,
-} from './PhraseEditor.styles';
+} from './FragmentEditor.styles';
 import {useStore} from '../../store';
 import {Button} from '../App.styles';
 import {DebugImage} from '../DebugImage';
@@ -23,26 +23,26 @@ import {useDropZone} from '../DropZone/DropZone';
 import {blobToCanvas} from '../../generate';
 import {SliderCheckbox} from '../SliderCheckbox';
 
-type PhraseEditorProps = {
+type FragmentEditorProps = {
     disabled: boolean;
-    userPhrase: UserFragment;
+    userFragment: UserFragment;
     onChange: (fragment: UserFragment) => void;
 }
 
-export const PhraseEditor: FC<PhraseEditorProps> = (props) => {
-    const {disabled, userPhrase, onChange} = props;
+export const FragmentEditor = (props: FragmentEditorProps) => {
+    const {disabled, userFragment, onChange} = props;
     const store = useStore();
     const [isVideoPlaying, setIsVideoPlaying] = useState(false);
 
-    const handlePhraseChange =  (e: ContentEditableEvent) => {
+    const handleFragmentChange =  (e: ContentEditableEvent) => {
         onChange({
-            ...userPhrase,
+            ...userFragment,
             text: e.target.value,
         });
     };
     const handleDrop = async (file: File) => {
         onChange({
-            ...userPhrase,
+            ...userFragment,
             type: UserFragmentType.PlainImage,
             image: await blobToCanvas(file),
         });
@@ -64,20 +64,20 @@ export const PhraseEditor: FC<PhraseEditorProps> = (props) => {
     };
     const handleChangeTextSize = (value: number) => {
         onChange({
-            ...userPhrase,
+            ...userFragment,
             textSize: value,
         });
     };
     const handleChangeImageSize = (value: number) => {
         onChange({
-            ...userPhrase,
+            ...userFragment,
             imageSize: value,
         });
     };
     const handleSwitchMode = () => {
         onChange({
-            ...userPhrase,
-            type: userPhrase.type === UserFragmentType.PlainText
+            ...userFragment,
+            type: userFragment.type === UserFragmentType.PlainText
                 ? UserFragmentType.PlainImage
                 : UserFragmentType.PlainText
         });
@@ -88,8 +88,8 @@ export const PhraseEditor: FC<PhraseEditorProps> = (props) => {
     }
 
     const format = store.scenario.format;
-    const collection = store.getCollection(userPhrase.collectionId)!;
-    const item = store.getCollectionItem(userPhrase.collectionId, userPhrase.fragmentId)!;
+    const collection = store.getCollection(userFragment.collectionId)!;
+    const item = store.getCollectionItem(userFragment.collectionId, userFragment.fragmentId)!;
     const collectionSize = formatSizes[store.scenario.format];
     const textAreaRect = collection.textArea[format];
 
@@ -100,8 +100,8 @@ export const PhraseEditor: FC<PhraseEditorProps> = (props) => {
         height: textAreaRect.height / collectionSize.height * 100,
     };
     const minCollectionSize = Math.min(collectionSize.width, collectionSize.height);
-    const fontSizeDesktop = userPhrase.textSize * FONT_SIZE * minCollectionSize;
-    const fontSizeMobile = userPhrase.textSize * FONT_SIZE * 100;
+    const fontSizeDesktop = userFragment.textSize * FONT_SIZE * minCollectionSize;
+    const fontSizeMobile = userFragment.textSize * FONT_SIZE * 100;
     const paddingDesktop = TEXT_PADDING * minCollectionSize / 100;
     const paddingMobile = TEXT_PADDING;
     const inputClassName = TextAreaClass(fontSizeDesktop, fontSizeMobile, paddingDesktop, paddingMobile);
@@ -111,13 +111,13 @@ export const PhraseEditor: FC<PhraseEditorProps> = (props) => {
     };
 
     return (
-        <PhraserEditorWrapper {...collectionSize}>
+        <FragmentEditorWrapper {...collectionSize}>
             <Button onClick={handleSwitchMode}>
                 text
-                <SliderCheckbox defaultChecked={userPhrase.type === UserFragmentType.PlainImage}/>
+                <SliderCheckbox defaultChecked={userFragment.type === UserFragmentType.PlainImage}/>
                 image
             </Button>
-            {userPhrase.type === UserFragmentType.PlainText && (
+            {userFragment.type === UserFragmentType.PlainText && (
                 <Box mr={2} ml={2}>
                     <Typography>Image size</Typography>
                     <Slider
@@ -127,12 +127,12 @@ export const PhraseEditor: FC<PhraseEditorProps> = (props) => {
                         marks
                         max={3}
                         valueLabelDisplay="on"
-                        value={userPhrase.textSize}
+                        value={userFragment.textSize}
                         onChange={(_, value) => handleChangeTextSize(value as number)}
                     />
                 </Box>
             )}
-            {userPhrase.type === UserFragmentType.PlainImage && (
+            {userFragment.type === UserFragmentType.PlainImage && (
                 <Box mr={2} ml={2}>
                     <Typography>Image size</Typography>
                     <Slider
@@ -142,35 +142,35 @@ export const PhraseEditor: FC<PhraseEditorProps> = (props) => {
                         marks
                         max={3}
                         valueLabelDisplay="on"
-                        value={userPhrase.imageSize}
+                        value={userFragment.imageSize}
                         onChange={(_, value) => handleChangeImageSize(value as number)}
                     />
                 </Box>
             )}
             <EditingAreaContainer {...collectionSize}>
                 <InputBackground {...virtualRect}>
-                    {userPhrase.type === UserFragmentType.PlainText && (
+                    {userFragment.type === UserFragmentType.PlainText && (
                         <ContentEditable
                             onPaste={handlePaste}
                             disabled={disabled}
                             className={inputClassName}
-                            html={userPhrase.text}
-                            onChange={handlePhraseChange}
+                            html={userFragment.text}
+                            onChange={handleFragmentChange}
                         />
                     )}
-                    {userPhrase.type === UserFragmentType.PlainImage && (
+                    {userFragment.type === UserFragmentType.PlainImage && (
                         <>
-                            { userPhrase.image && (
+                            { userFragment.image && (
                                 <DebugImage
                                     background="#fff"
                                     collection={collection}
                                     format={format}
-                                    userPhrase={userPhrase}
+                                    userFragment={userFragment}
                                 />
                             ) }
                             <FileDropArea
                                 {...dropZoneProps}
-                                className={clsx({big: isDraggingOver || !userPhrase.image})}
+                                className={clsx({big: isDraggingOver || !userFragment.image})}
                             >
                                 <div>Drop image here ...</div>
                             </FileDropArea>
@@ -196,6 +196,6 @@ export const PhraseEditor: FC<PhraseEditorProps> = (props) => {
                     <PlayIcon/>
                 </PlayButton>
             </EditingAreaContainer>
-        </PhraserEditorWrapper>
+        </FragmentEditorWrapper>
     );
 };

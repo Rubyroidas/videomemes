@@ -86,7 +86,7 @@ export const ScenarioList = observer(() => {
                                         <ScenarioItem
                                             isDragging={snapshot.isDragging}
                                             index={index + 1}
-                                            phrase={fragment}
+                                            fragment={fragment}
                                             disabled={false}
                                             onDelete={() => handleDelete(index)}
                                         />

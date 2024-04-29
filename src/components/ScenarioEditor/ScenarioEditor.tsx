@@ -4,10 +4,10 @@ import {observer} from 'mobx-react';
 import shortUuid from 'short-uuid';
 
 import {Button, FloatingButton, ListDescription, ListTitle} from '../App.styles';
-import {Icon} from '../PhrasesEditor/PhraseEditor.styles';
+import {Icon} from '../FragmentsEditor/FragmentEditor.styles';
 import {EditListIcon} from '../../icons/EditListIcon';
 import {ScenarioList} from './ScenarioList';
-import {AddPhrase} from './AddPhrase';
+import {AddFragment} from './AddFragment';
 import {Collection, CollectionItem, Format, UserFragmentType} from '../../types';
 import {useStore} from '../../store';
 import {AddIcon} from '../../icons/AddIcon';
@@ -40,7 +40,7 @@ export const ScenarioEditor = observer(() => {
     const toggleAddClip = useCallback(() => {
         setIsAddingVisible(v => !v);
     }, []);
-    const handleEditPhrases = useCallback(() => {
+    const handleEditFragments = useCallback(() => {
         navigate('/edit-fragments');
     }, []);
     const handleAddItem = useCallback((collection: Collection, item: CollectionItem) => {
@@ -74,7 +74,7 @@ export const ScenarioEditor = observer(() => {
     return (
         <div>
             {store.scenario.fragments.length > 0 && (
-                <Button onClick={handleEditPhrases}>
+                <Button onClick={handleEditFragments}>
                     <Icon>
                         <EditListIcon/>
                     </Icon>
@@ -90,7 +90,7 @@ export const ScenarioEditor = observer(() => {
                 )}
             </div>
             {isAddingVisible ? (
-                <AddPhrase onSelect={handleAddItem}/>
+                <AddFragment onSelect={handleAddItem}/>
             ) : (
                 <>
                     <ButtonSelector

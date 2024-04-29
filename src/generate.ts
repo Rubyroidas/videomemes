@@ -212,7 +212,7 @@ const TITLE_FILE = 'title.mp4';
 export const generateVideo = async (
     ffmpeg: FFmpeg,
     videoTitle: string | undefined,
-    userPhrases: UserFragment[],
+    userFragments: UserFragment[],
     collections: Collection[],
     format: Format,
     setEncodingProgress?: ((progress: number) => void),
@@ -236,9 +236,9 @@ export const generateVideo = async (
         timeShift += TITLE_LENGTH;
     }
 
-    for (const userPhrase of userPhrases) {
-        const collection = collections.find(c => c.id === userPhrase.collectionId)!;
-        const itemIndex = collection.items.findIndex(item => item.id === userPhrase.fragmentId);
+    for (const userFragment of userFragments) {
+        const collection = collections.find(c => c.id === userFragment.collectionId)!;
+        const itemIndex = collection.items.findIndex(item => item.id === userFragment.fragmentId);
         const item = collection.items[itemIndex];
         const fileNumberSuffix = imageNumber.toString().padStart(5, '0');
 
@@ -247,9 +247,9 @@ export const generateVideo = async (
         await ffmpeg.writeFile(videoFileName, fetchedFile);
 
         const {x, y, width, height} = collection.textArea[format];
-        const blob = userPhrase.type === UserFragmentType.PlainText
-            ? await renderTextSlide(collectionSize, width, height, userPhrase.text, userPhrase.textSize)
-            : await renderImageSlide(width, height, userPhrase.image!, userPhrase.imageSize, '#fff');
+        const blob = userFragment.type === UserFragmentType.PlainText
+            ? await renderTextSlide(collectionSize, width, height, userFragment.text, userFragment.textSize)
+            : await renderImageSlide(width, height, userFragment.image!, userFragment.imageSize, '#fff');
         const imageFileName = `captions/${fileNumberSuffix}.png`;
         const imageBlob = await canvasToBlob(blob);
         await ffmpeg.writeFile(imageFileName, new Uint8Array(await imageBlob.arrayBuffer()));
@@ -308,7 +308,7 @@ export const generateVideo = async (
     }
 
     // watermark
-    const collection = collections.find(c => c.id === userPhrases[0].collectionId)!;
+    const collection = collections.find(c => c.id === userFragments[0].collectionId)!;
     const watermarkArea = collection.watermarkArea[format];
 
     const watermarkFile = await createWaterMarkData(watermarkArea);

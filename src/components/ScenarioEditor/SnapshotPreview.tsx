@@ -2,7 +2,7 @@ import styled from '@emotion/styled';
 import {useEffect, useRef, useState} from 'react';
 
 import {CollectionItem, Point} from '../../types';
-import {PlayButton} from '../PhrasesEditor/PhraseEditor.styles';
+import {PlayButton} from '../FragmentsEditor/FragmentEditor.styles';
 import {PlayIcon} from '../../icons/PlayIcon';
 
 export const Wrapper = styled.div`

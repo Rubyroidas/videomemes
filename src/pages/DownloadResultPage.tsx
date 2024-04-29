@@ -3,8 +3,8 @@ import {useNavigate} from 'react-router-dom';
 import {observer} from 'mobx-react';
 import styled from '@emotion/styled';
 
-import {DownloadVideoButton} from '../components/PhrasesEditor/DownloadVideoButton';
-import {Header, Icon, ResultVideo} from '../components/PhrasesEditor/PhraseEditor.styles';
+import {DownloadVideoButton} from '../components/FragmentsEditor/DownloadVideoButton';
+import {Header, Icon, ResultVideo} from '../components/FragmentsEditor/FragmentEditor.styles';
 import {DownloadIcon} from '../icons/DownloadIcon';
 import {useStore} from '../store';
 import {Button} from '../components/App.styles';
@@ -42,7 +42,7 @@ export const DownloadResultPage = observer(() => {
         video.addEventListener('load', clear);
     }, [store.generatedVideo]);
 
-    const handleEditPhrases = useCallback(() => {
+    const handleEditFragments = useCallback(() => {
         store.generatedVideo = undefined;
         navigate('/edit-fragments');
     }, []);
@@ -61,7 +61,7 @@ export const DownloadResultPage = observer(() => {
     return (
         <Wrapper>
             <Header>
-                <Button onClick={handleEditPhrases}>
+                <Button onClick={handleEditFragments}>
                     <Icon>
                         <RedoIcon/>
                     </Icon>

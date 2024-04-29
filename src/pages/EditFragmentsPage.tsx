@@ -1,6 +1,6 @@
 import {Link, useNavigate} from 'react-router-dom';
 
-import {VideoEditor} from '../components/PhrasesEditor/VideoEditor';
+import {VideoEditor} from '../components/FragmentsEditor/VideoEditor';
 import {AppTitle} from '../components/App.styles';
 import {useEffect} from 'react';
 import {useStore} from '../store';

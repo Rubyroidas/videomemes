@@ -17,11 +17,11 @@ type Props = {
     background: string;
     format: Format;
     collection: Collection;
-    userPhrase: UserFragment;
+    userFragment: UserFragment;
 }
 
-export const DebugImage: FC<Props> = ({background, collection, format, userPhrase}) => {
-    const {type, text, textSize, image, imageSize} = userPhrase;
+export const DebugImage: FC<Props> = ({background, collection, format, userFragment}) => {
+    const {type, text, textSize, image, imageSize} = userFragment;
     const canvasRef = useRef<HTMLCanvasElement>(null);
 
     useEffect(() => {

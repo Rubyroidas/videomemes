@@ -3,9 +3,9 @@ import {useNavigate} from 'react-router-dom';
 import {observer} from 'mobx-react';
 
 import {Button} from '../App.styles';
-import {PhrasesEditor} from './PhrasesEditor';
+import {FragmentsEditor} from './FragmentsEditor';
 import {generateVideo} from '../../generate';
-import {Icon} from './PhraseEditor.styles';
+import {Icon} from './FragmentEditor.styles';
 import {PlayIcon} from '../../icons/PlayIcon';
 import {EditListIcon} from '../../icons/EditListIcon';
 import {useStore} from '../../store';
@@ -103,7 +103,7 @@ export const VideoEditor: FC = observer(() => {
                     </Button>
                 )}
             </div>
-            <PhrasesEditor
+            <FragmentsEditor
                 disabled={isEncoding}
             />
             {isEncoding && (

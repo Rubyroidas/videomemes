@@ -6,7 +6,7 @@ import {LINE_HEIGHT, TEXT_COLOR} from '../../config';
 
 export const Header = styled.div`
 `;
-export const PhraserEditorWrapper = styled.div<Size>`
+export const FragmentEditorWrapper = styled.div<Size>`
     width: ${props => props.width}px;
     height: ${props => props.height}px;
     position: relative;

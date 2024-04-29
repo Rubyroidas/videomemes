@@ -18,7 +18,7 @@ export const FeedPage = () => {
                 </Link>
                 {t('feed.title')}
             </AppTitle>
-            <ListTitle>Users uploaded these videos</ListTitle>
+            <ListTitle>{t('feed.listTitle')}</ListTitle>
             <Feed/>
         </div>
     );

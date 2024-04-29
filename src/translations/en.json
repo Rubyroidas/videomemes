@@ -1,5 +1,16 @@
 {
   "feed": {
-    "title": "Feed"
+    "title": "Feed",
+    "listTitle": "Users uploaded these videos"
+  },
+  "mainPage": {
+    "title": "Free service for short funny videos creation",
+    "menuButtons": {
+      "choosePreset": "Choose preset scenario",
+      "createFromScratch": "Create your scenario",
+      "gotoFeed": "See what people posted",
+      "about": "About the project",
+      "contactUs": "Contact us"
+    }
   }
 }

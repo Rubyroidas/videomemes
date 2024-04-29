@@ -38,12 +38,12 @@ export const Button = styled.div<{disabled?: boolean}>`
     padding: 8px 16px;
     margin: 0 8px 0 0;
     font-family: sans-serif;
-    font-size: 24px;
     cursor: pointer;
     opacity: ${props => props.disabled ? '0.5' : '1'};
     user-select: none;
     --button-size: 40px;
-    border-radius: 8px;
+    font-size: calc(var(--button-size) * 0.6);
+    border-radius: calc(var(--button-size) * 0.4);
 
     & > div {
         margin-right: 12px;
@@ -57,7 +57,6 @@ export const Button = styled.div<{disabled?: boolean}>`
 
     @media (max-width: 480px) {
         --button-size: 8vw;
-        border-radius: 2vw;
     }
 `;
 export const FloatingButton = styled.div`

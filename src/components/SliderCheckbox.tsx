@@ -4,7 +4,7 @@ import styled from '@emotion/styled';
 export type SliderCheckboxProps = HTMLAttributes<HTMLInputElement>;
 
 const SliderCheckboxWrapper = styled.input`
-    --size: 40px;
+    --size: 32px;
     width: calc(var(--size) * 2);
     height: calc(var(--size) * 1.05);
     background-color: #acacac;
@@ -41,7 +41,7 @@ const SliderCheckboxWrapper = styled.input`
     }
 
     @media (max-width: 480px) {
-        --size: 10vw;
+        --size: 8vw;
     }
 `;
 

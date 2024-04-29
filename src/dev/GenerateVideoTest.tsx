@@ -2,10 +2,10 @@ import {useRef, useState} from 'react';
 import shortUuid from 'short-uuid';
 
 import {generateVideo} from '../generate';
-import {Format, UserPhrase, UserPhraseType} from '../types';
+import {Format, UserFragment, UserFragmentType} from '../types';
 import {useStore} from '../store';
 
-const userPhrases: UserPhrase[] = [
+const userFragments: UserFragment[] = [
     {
         id: shortUuid().uuid(),
         collectionId: 'tinkoff',
@@ -13,7 +13,7 @@ const userPhrases: UserPhrase[] = [
         textSize: 1,
         text: 'first text',
         imageSize: 1,
-        type: UserPhraseType.PlainText,
+        type: UserFragmentType.PlainText,
     },
     {
         id: shortUuid().uuid(),
@@ -22,7 +22,7 @@ const userPhrases: UserPhrase[] = [
         textSize: 1,
         text: 'second text',
         imageSize: 1,
-        type: UserPhraseType.PlainText,
+        type: UserFragmentType.PlainText,
     },
 ];
 
@@ -37,7 +37,7 @@ export const GenerateVideoTest = () => {
         const blob = await generateVideo(
             store.ffmpeg,
             includeTitle ? 'Hello, world' : undefined,
-            userPhrases,
+            userFragments,
             store.collections!,
             Format.InstagramPost,
             setProgress

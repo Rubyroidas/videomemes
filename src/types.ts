@@ -40,7 +40,7 @@ export type GlobalContentConfig = {
     scenarioTemplates: ScenarioPreset[];
 }
 
-export enum UserPhraseType {
+export enum UserFragmentType {
     PlainText = 'plainText',
     PlainImage = 'plainImage',
 }
@@ -55,12 +55,12 @@ export type UserScenario = {
     uuid: string;
     format: Format;
     title?: string;
-    fragments: UserPhrase[];
+    fragments: UserFragment[];
 }
 
-export type UserPhrase = {
+export type UserFragment = {
     id: string;
-    type: UserPhraseType;
+    type: UserFragmentType;
     collectionId: string;
     fragmentId: number;
     text: string;

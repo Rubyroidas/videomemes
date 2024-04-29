@@ -4,7 +4,7 @@ import {Box, Slider, Typography} from '@mui/material';
 import clsx from 'clsx';
 
 import {PlayIcon} from '../../icons/PlayIcon';
-import {Point, Rect, UserPhrase, UserPhraseType} from '../../types';
+import {Point, Rect, UserFragment, UserFragmentType} from '../../types';
 import {FONT_SIZE, TEXT_PADDING} from '../../config';
 import {
     EditingAreaContainer,
@@ -25,8 +25,8 @@ import {SliderCheckbox} from '../SliderCheckbox';
 
 type PhraseEditorProps = {
     disabled: boolean;
-    userPhrase: UserPhrase;
-    onChange: (fragment: UserPhrase) => void;
+    userPhrase: UserFragment;
+    onChange: (fragment: UserFragment) => void;
 }
 
 export const PhraseEditor: FC<PhraseEditorProps> = (props) => {
@@ -43,7 +43,7 @@ export const PhraseEditor: FC<PhraseEditorProps> = (props) => {
     const handleDrop = async (file: File) => {
         onChange({
             ...userPhrase,
-            type: UserPhraseType.PlainImage,
+            type: UserFragmentType.PlainImage,
             image: await blobToCanvas(file),
         });
     };
@@ -77,9 +77,9 @@ export const PhraseEditor: FC<PhraseEditorProps> = (props) => {
     const handleSwitchMode = () => {
         onChange({
             ...userPhrase,
-            type: userPhrase.type === UserPhraseType.PlainText
-                ? UserPhraseType.PlainImage
-                : UserPhraseType.PlainText
+            type: userPhrase.type === UserFragmentType.PlainText
+                ? UserFragmentType.PlainImage
+                : UserFragmentType.PlainText
         });
     };
 
@@ -114,10 +114,10 @@ export const PhraseEditor: FC<PhraseEditorProps> = (props) => {
         <PhraserEditorWrapper {...collectionSize}>
             <Button onClick={handleSwitchMode}>
                 text
-                <SliderCheckbox defaultChecked={userPhrase.type === UserPhraseType.PlainImage}/>
+                <SliderCheckbox defaultChecked={userPhrase.type === UserFragmentType.PlainImage}/>
                 image
             </Button>
-            {userPhrase.type === UserPhraseType.PlainText && (
+            {userPhrase.type === UserFragmentType.PlainText && (
                 <Box mr={2} ml={2}>
                     <Typography>Image size</Typography>
                     <Slider
@@ -132,7 +132,7 @@ export const PhraseEditor: FC<PhraseEditorProps> = (props) => {
                     />
                 </Box>
             )}
-            {userPhrase.type === UserPhraseType.PlainImage && (
+            {userPhrase.type === UserFragmentType.PlainImage && (
                 <Box mr={2} ml={2}>
                     <Typography>Image size</Typography>
                     <Slider
@@ -149,7 +149,7 @@ export const PhraseEditor: FC<PhraseEditorProps> = (props) => {
             )}
             <EditingAreaContainer {...collectionSize}>
                 <InputBackground {...virtualRect}>
-                    {userPhrase.type === UserPhraseType.PlainText && (
+                    {userPhrase.type === UserFragmentType.PlainText && (
                         <ContentEditable
                             onPaste={handlePaste}
                             disabled={disabled}
@@ -158,7 +158,7 @@ export const PhraseEditor: FC<PhraseEditorProps> = (props) => {
                             onChange={handlePhraseChange}
                         />
                     )}
-                    {userPhrase.type === UserPhraseType.PlainImage && (
+                    {userPhrase.type === UserFragmentType.PlainImage && (
                         <>
                             { userPhrase.image && (
                                 <DebugImage

@@ -11,7 +11,7 @@ import {EditListIcon} from '../../icons/EditListIcon';
 import {useStore} from '../../store';
 import {ProgressCurtain} from './ProgressCurtain';
 import {useApi} from '../../services/apiContext';
-import {UserPhraseType} from '../../types';
+import {UserFragmentType} from '../../types';
 import {consoleError, consoleLog} from '../../utils';
 
 export const VideoEditor: FC = observer(() => {
@@ -81,8 +81,8 @@ export const VideoEditor: FC = observer(() => {
 
     const canGenerate = store.scenario.fragments.every(
         fragment =>
-            fragment.type === UserPhraseType.PlainText
-            || fragment.type === UserPhraseType.PlainImage && fragment.image !== undefined
+            fragment.type === UserFragmentType.PlainText
+            || fragment.type === UserFragmentType.PlainImage && fragment.image !== undefined
     );
 
     return (

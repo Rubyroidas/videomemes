@@ -8,7 +8,7 @@ import {Icon} from '../PhrasesEditor/PhraseEditor.styles';
 import {EditListIcon} from '../../icons/EditListIcon';
 import {ScenarioList} from './ScenarioList';
 import {AddPhrase} from './AddPhrase';
-import {Collection, CollectionItem, Format, UserPhraseType} from '../../types';
+import {Collection, CollectionItem, Format, UserFragmentType} from '../../types';
 import {useStore} from '../../store';
 import {AddIcon} from '../../icons/AddIcon';
 import {ArrowLeft} from '../../icons/ArrowLeft';
@@ -49,7 +49,7 @@ export const ScenarioEditor = observer(() => {
         }
         store.scenario.fragments.push({
             id: shortUuid().uuid(),
-            type: UserPhraseType.PlainText,
+            type: UserFragmentType.PlainText,
             collectionId: collection.id,
             fragmentId: item.id,
             text: item.text,

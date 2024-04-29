@@ -1,7 +1,7 @@
 import {FC} from 'react';
 import clsx from 'clsx';
 
-import {UserPhrase, UserPhraseType} from '../../types';
+import {UserFragment, UserFragmentType} from '../../types';
 import {useStore} from '../../store';
 import {
     ScenarioItemClipTitle, ScenarioItemDeleteButton,
@@ -14,7 +14,7 @@ import {SnapshotPreview} from './SnapshotPreview';
 type ScenarioItemProps = {
     index: number;
     isDragging: boolean;
-    phrase: UserPhrase;
+    phrase: UserFragment;
     disabled: boolean;
     onDelete: () => void;
 }
@@ -42,7 +42,7 @@ export const ScenarioItem: FC<ScenarioItemProps> = (props) => {
                     #{index}
                 </ScenarioItemIndexNumber>
                 <ScenarioItemUserText>
-                    {phrase.type === UserPhraseType.PlainText ? phrase.text : (<i>image</i>)}
+                    {phrase.type === UserFragmentType.PlainText ? phrase.text : (<i>image</i>)}
                 </ScenarioItemUserText>
                 {!isDragging && (
                     <ScenarioItemDeleteButton

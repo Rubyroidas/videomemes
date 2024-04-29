@@ -1,7 +1,7 @@
 import {FFmpeg} from '@ffmpeg/ffmpeg';
 import {fetchFile} from '@ffmpeg/util';
 
-import {Collection, Format, Rect, Size, UserPhrase, UserPhraseType} from './types';
+import {Collection, Format, Rect, Size, UserFragment, UserFragmentType} from './types';
 import {
     consoleLog,
     ffmpegExec,
@@ -212,7 +212,7 @@ const TITLE_FILE = 'title.mp4';
 export const generateVideo = async (
     ffmpeg: FFmpeg,
     videoTitle: string | undefined,
-    userPhrases: UserPhrase[],
+    userPhrases: UserFragment[],
     collections: Collection[],
     format: Format,
     setEncodingProgress?: ((progress: number) => void),
@@ -247,7 +247,7 @@ export const generateVideo = async (
         await ffmpeg.writeFile(videoFileName, fetchedFile);
 
         const {x, y, width, height} = collection.textArea[format];
-        const blob = userPhrase.type === UserPhraseType.PlainText
+        const blob = userPhrase.type === UserFragmentType.PlainText
             ? await renderTextSlide(collectionSize, width, height, userPhrase.text, userPhrase.textSize)
             : await renderImageSlide(width, height, userPhrase.image!, userPhrase.imageSize, '#fff');
         const imageFileName = `captions/${fileNumberSuffix}.png`;

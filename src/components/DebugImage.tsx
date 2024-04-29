@@ -3,7 +3,7 @@ import styled from '@emotion/styled';
 
 import {renderImageSlide, renderTextSlide} from '../generate';
 import {html2text} from '../utils';
-import {Collection, Format, UserPhrase, UserPhraseType} from '../types';
+import {Collection, Format, UserFragment, UserFragmentType} from '../types';
 import {formatSizes} from '../statics';
 
 const Wrapper = styled.canvas`
@@ -17,7 +17,7 @@ type Props = {
     background: string;
     format: Format;
     collection: Collection;
-    userPhrase: UserPhrase;
+    userPhrase: UserFragment;
 }
 
 export const DebugImage: FC<Props> = ({background, collection, format, userPhrase}) => {
@@ -38,7 +38,7 @@ export const DebugImage: FC<Props> = ({background, collection, format, userPhras
             canvasRef.current.width = width;
             canvasRef.current.height = height;
 
-            if (type === UserPhraseType.PlainText) {
+            if (type === UserFragmentType.PlainText) {
                 canvas = await renderTextSlide(collectionSize, width, height, html2text(text), textSize);
             } else {
                 canvas = await renderImageSlide(width, height, image!, imageSize, background);

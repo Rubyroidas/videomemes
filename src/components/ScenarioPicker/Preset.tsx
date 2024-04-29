@@ -1,7 +1,7 @@
 import {useNavigate} from 'react-router-dom';
 import shortUuid from 'short-uuid';
 
-import {ScenarioPreset, UserPhraseType} from '../../types';
+import {ScenarioPreset, UserFragmentType} from '../../types';
 import {useStore} from '../../store';
 import {PresetSnapshotImage, PresetWrapper} from './ScenarioPicker.styles';
 import {VIDEO_TITLE_ENABLED} from '../../config';
@@ -25,7 +25,7 @@ export const Preset = ({preset, index}: Props) => {
     const handleClick = () => {
         store.scenario!.fragments = preset.items.map(item => ({
             id: shortUuid().uuid(),
-            type: UserPhraseType.PlainText,
+            type: UserFragmentType.PlainText,
             collectionId: item.collectionId,
             fragmentId: item.itemId,
             text: item.placeholder,

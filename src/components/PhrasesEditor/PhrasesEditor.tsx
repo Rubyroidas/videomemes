@@ -2,7 +2,7 @@ import {FC, useState} from 'react';
 import {observer} from 'mobx-react';
 
 import {useStore} from '../../store';
-import {UserPhrase} from '../../types';
+import {UserFragment} from '../../types';
 import {escapeHTML, html2text} from '../../utils';
 import {Header, NavigateCaption} from './PhraseEditor.styles';
 import {NavigationBar} from './NavigationBar';
@@ -21,7 +21,7 @@ export const PhrasesEditor: FC<PhrasesEditorProps> = observer((props) => {
     }
     const userPhrases = store.scenario.fragments;
 
-    const onProxyChange = (phrase: UserPhrase) => {
+    const onProxyChange = (phrase: UserFragment) => {
         if (!store.scenario?.fragments) {
             return;
         }

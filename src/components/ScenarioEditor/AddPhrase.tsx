@@ -1,24 +1,32 @@
-import {FC, useState} from 'react';
+import {observer} from 'mobx-react';
 
 import {useStore} from '../../store';
 import {Collection, CollectionItem} from '../../types';
 import {CollectionItemElement} from './CollectionItemElement';
 import {MAX_VIDEO_LENGTH_SECONDS} from '../../config';
 import {AddPhraseCollectionItemList, AddPhraseCollectionList, CollectionElement} from './ScenarioEditor.styles';
-import {ListTitle} from '../App.styles';
+import {Button, ListTitle} from '../App.styles';
 
 type Props = {
     onSelect: (collection: Collection, item: CollectionItem) => void;
 }
 
-export const AddPhrase: FC<Props> = ({onSelect}) => {
+export const AddPhrase = observer(({onSelect}: Props) => {
     const store = useStore();
-    const [selectedCollection, setSelectedCollection] = useState<Collection | null>(null);
+
+    const handlePickCollection = (collection: Collection | undefined) => {
+        store.lastUsedCollectionId = collection?.id;
+    };
 
     const collections = store.collections;
     if (!collections) {
         return null;
     }
+
+    const {lastUsedCollectionId} = store;
+    const selectedCollection = lastUsedCollectionId
+        ? store.getCollection(lastUsedCollectionId)
+        : undefined;
 
     return !selectedCollection ? (
         <div>
@@ -27,7 +35,7 @@ export const AddPhrase: FC<Props> = ({onSelect}) => {
                 {collections.map(collection => (
                     <CollectionElement
                         key={collection.id}
-                        onClick={() => setSelectedCollection(collection)}
+                        onClick={() => handlePickCollection(collection)}
                     >
                         <img src={collection.cover} crossOrigin="anonymous" alt={collection.name}/>
                         <div className="name">{collection.name}</div>
@@ -39,6 +47,9 @@ export const AddPhrase: FC<Props> = ({onSelect}) => {
     ) : (
         <div>
             <ListTitle>Pick a fragment</ListTitle>
+            <Button onClick={() => handlePickCollection(undefined)}>
+                Pick another collection
+            </Button>
             <AddPhraseCollectionItemList>
                 {selectedCollection.items.map(((item, index) => (
                     <CollectionItemElement
@@ -52,4 +63,4 @@ export const AddPhrase: FC<Props> = ({onSelect}) => {
             </AddPhraseCollectionItemList>
         </div>
     );
-}
+});

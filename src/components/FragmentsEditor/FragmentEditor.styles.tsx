@@ -16,6 +16,14 @@ export const FragmentEditorWrapper = styled.div<Size>`
         height: ${props => props.height / props.width * 100}vw;
     }
 `;
+export const FragmentSizeContainer = styled.div`
+    display: flex;
+    flex-direction: row;
+    
+    & > .slider {
+        flex: 1 1 auto;
+    }
+`;
 export const EditingAreaContainer = styled.div<Size>`
     width: ${props => props.width}px;
     height: ${props => props.height}px;

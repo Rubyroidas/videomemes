@@ -7,6 +7,7 @@ import {PlayIcon} from '../../icons/PlayIcon';
 import {Point, Rect, UserFragment, UserFragmentType} from '../../types';
 import {FONT_SIZE, TEXT_PADDING} from '../../config';
 import {
+    FragmentSizeContainer,
     EditingAreaContainer,
     EditingVideo,
     FileDropArea,
@@ -109,47 +110,52 @@ export const FragmentEditor = (props: FragmentEditorProps) => {
         x: collection.playButton[format].x / collectionSize.width * 100,
         y: collection.playButton[format].y / collectionSize.height * 100,
     };
+    const isImage = userFragment.type === UserFragmentType.PlainImage;
 
     return (
         <FragmentEditorWrapper {...collectionSize}>
-            <Button onClick={handleSwitchMode}>
-                text
-                <SliderCheckbox defaultChecked={userFragment.type === UserFragmentType.PlainImage}/>
-                image
-            </Button>
-            {userFragment.type === UserFragmentType.PlainText && (
-                <Box mr={2} ml={2}>
-                    <Typography>Image size</Typography>
-                    <Slider
-                        aria-label="Text size"
-                        min={0.5}
-                        step={0.1}
-                        marks
-                        max={3}
-                        valueLabelDisplay="on"
-                        value={userFragment.textSize}
-                        onChange={(_, value) => handleChangeTextSize(value as number)}
-                    />
+            <FragmentSizeContainer>
+                <Button onClick={handleSwitchMode}>
+                    text
+                    <SliderCheckbox defaultChecked={isImage}/>
+                    image
+                </Button>
+                <Box mr={2} ml={2} className="slider">
+                {!isImage && (
+                    <>
+                        <Typography>Image size</Typography>
+                        <Slider
+                            aria-label="Text size"
+                            min={0.5}
+                            step={0.1}
+                            marks
+                            max={3}
+                            valueLabelDisplay="on"
+                            value={userFragment.textSize}
+                            onChange={(_, value) => handleChangeTextSize(value as number)}
+                        />
+                    </>
+                )}
+                {isImage && (
+                    <>
+                        <Typography>Image size</Typography>
+                        <Slider
+                            aria-label="Image size"
+                            min={0.5}
+                            step={0.1}
+                            marks
+                            max={3}
+                            valueLabelDisplay="on"
+                            value={userFragment.imageSize}
+                            onChange={(_, value) => handleChangeImageSize(value as number)}
+                        />
+                    </>
+                )}
                 </Box>
-            )}
-            {userFragment.type === UserFragmentType.PlainImage && (
-                <Box mr={2} ml={2}>
-                    <Typography>Image size</Typography>
-                    <Slider
-                        aria-label="Image size"
-                        min={0.5}
-                        step={0.1}
-                        marks
-                        max={3}
-                        valueLabelDisplay="on"
-                        value={userFragment.imageSize}
-                        onChange={(_, value) => handleChangeImageSize(value as number)}
-                    />
-                </Box>
-            )}
+            </FragmentSizeContainer>
             <EditingAreaContainer {...collectionSize}>
                 <InputBackground {...virtualRect}>
-                    {userFragment.type === UserFragmentType.PlainText && (
+                    {!isImage && (
                         <ContentEditable
                             onPaste={handlePaste}
                             disabled={disabled}
@@ -158,7 +164,7 @@ export const FragmentEditor = (props: FragmentEditorProps) => {
                             onChange={handleFragmentChange}
                         />
                     )}
-                    {userFragment.type === UserFragmentType.PlainImage && (
+                    {isImage && (
                         <>
                             { userFragment.image && (
                                 <DebugImage

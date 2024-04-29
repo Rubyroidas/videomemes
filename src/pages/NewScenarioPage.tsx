@@ -16,7 +16,7 @@ export const NewScenarioPage = () => {
         store.scenario = {
             uuid: shortUuid().uuid(),
             format: Format.InstagramStory,
-            phrases: [],
+            fragments: [],
         };
         if (isFromPreset) {
             navigate('/pick-preset-scenario');

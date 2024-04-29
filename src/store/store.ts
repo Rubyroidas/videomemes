@@ -21,7 +21,7 @@ export class Store {
     }
 
     get scenarioTotalDuration() {
-        const items = this.scenario?.phrases ?? [];
+        const items = this.scenario?.fragments ?? [];
         const collections = this.collections ?? [];
 
         return items.reduce((acc, item) => {

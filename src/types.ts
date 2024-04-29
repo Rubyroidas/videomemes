@@ -55,7 +55,7 @@ export type UserScenario = {
     uuid: string;
     format: Format;
     title?: string;
-    phrases: UserPhrase[];
+    fragments: UserPhrase[];
 }
 
 export type UserPhrase = {
@@ -69,8 +69,6 @@ export type UserPhrase = {
     image?: HTMLCanvasElement;
 }
 
-export type FeedItemConfig = Omit<UserScenario, 'phrases'> & {fragments: UserPhrase[]};
-
 export type FeedItem = {
     id: number;
     url: string;
@@ -78,5 +76,5 @@ export type FeedItem = {
     format: Format;
     created_at: string;
     duration: number;
-    config: FeedItemConfig;
+    config: UserScenario;
 }

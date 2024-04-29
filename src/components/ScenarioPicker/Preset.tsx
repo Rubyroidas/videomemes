@@ -23,7 +23,7 @@ export const Preset = ({preset, index}: Props) => {
     const store = useStore();
     const navigate = useNavigate();
     const handleClick = () => {
-        store.scenario!.phrases = preset.items.map(item => ({
+        store.scenario!.fragments = preset.items.map(item => ({
             id: shortUuid().uuid(),
             type: UserPhraseType.PlainText,
             collectionId: item.collectionId,

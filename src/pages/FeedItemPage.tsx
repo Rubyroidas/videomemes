@@ -57,9 +57,9 @@ export const FeedItemPage = () => {
         store.scenario = {
             uuid: shortUuid().uuid(),
             format: Format.InstagramStory,
-            phrases: [],
+            fragments: [],
         };
-        store.scenario!.phrases = item.config.fragments.map(item => ({
+        store.scenario!.fragments = item.config.fragments.map(item => ({
             id: shortUuid().uuid(),
             type: item.type,
             collectionId: item.collectionId,

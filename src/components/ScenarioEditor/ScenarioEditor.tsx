@@ -47,7 +47,7 @@ export const ScenarioEditor = observer(() => {
         if (!store.scenario) {
             return;
         }
-        store.scenario.phrases.push({
+        store.scenario.fragments.push({
             id: shortUuid().uuid(),
             type: UserPhraseType.PlainText,
             collectionId: collection.id,
@@ -65,7 +65,7 @@ export const ScenarioEditor = observer(() => {
         store.scenario.format = format;
     }, []);
 
-    if (!store.scenario?.phrases) {
+    if (!store.scenario?.fragments) {
         return null;
     }
 
@@ -73,7 +73,7 @@ export const ScenarioEditor = observer(() => {
 
     return (
         <div>
-            {store.scenario.phrases.length > 0 && (
+            {store.scenario.fragments.length > 0 && (
                 <Button onClick={handleEditPhrases}>
                     <Icon>
                         <EditListIcon/>

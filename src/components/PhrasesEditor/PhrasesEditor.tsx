@@ -16,17 +16,17 @@ export const PhrasesEditor: FC<PhrasesEditorProps> = observer((props) => {
     const store = useStore();
     const {disabled} = props;
     const [phraseIndex, setPhraseIndex] = useState(0);
-    if (!store.scenario?.phrases) {
+    if (!store.scenario?.fragments) {
         return null;
     }
-    const userPhrases = store.scenario.phrases;
+    const userPhrases = store.scenario.fragments;
 
     const onProxyChange = (phrase: UserPhrase) => {
-        if (!store.scenario?.phrases) {
+        if (!store.scenario?.fragments) {
             return;
         }
 
-        store.scenario.phrases[phraseIndex] = {
+        store.scenario.fragments[phraseIndex] = {
             ...phrase,
             text: html2text(phrase.text),
         };

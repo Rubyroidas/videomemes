@@ -36,7 +36,7 @@ export const VideoEditor: FC = observer(() => {
                 const vid = await generateVideo(
                     store.ffmpeg!,
                     store.scenario.title,
-                    store.scenario.phrases,
+                    store.scenario.fragments,
                     store.collections,
                     store.scenario.format,
                     () => {
@@ -75,14 +75,14 @@ export const VideoEditor: FC = observer(() => {
         setIsEncoding(false);
     };
 
-    if (!store.scenario?.phrases) {
+    if (!store.scenario?.fragments) {
         return null;
     }
 
-    const canGenerate = store.scenario.phrases.every(
-        phrase =>
-            phrase.type === UserPhraseType.PlainText
-            || phrase.type === UserPhraseType.PlainImage && phrase.image !== undefined
+    const canGenerate = store.scenario.fragments.every(
+        fragment =>
+            fragment.type === UserPhraseType.PlainText
+            || fragment.type === UserPhraseType.PlainImage && fragment.image !== undefined
     );
 
     return (

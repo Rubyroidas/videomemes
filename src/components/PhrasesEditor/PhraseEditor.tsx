@@ -26,7 +26,7 @@ import {SliderCheckbox} from '../SliderCheckbox';
 type PhraseEditorProps = {
     disabled: boolean;
     userPhrase: UserPhrase;
-    onChange: (phrases: UserPhrase) => void;
+    onChange: (fragment: UserPhrase) => void;
 }
 
 export const PhraseEditor: FC<PhraseEditorProps> = (props) => {

@@ -34,11 +34,11 @@ export const ScenarioList = observer(() => {
         return null;
     }
 
-    const phrases = store.scenario.phrases;
+    const fragments = store.scenario.fragments;
     const handleDelete = useCallback((index: number) => {
-        store.scenario!.phrases = [
-            ...store.scenario!.phrases.slice(0, index),
-            ...store.scenario!.phrases.slice(index + 1),
+        store.scenario!.fragments = [
+            ...store.scenario!.fragments.slice(0, index),
+            ...store.scenario!.fragments.slice(index + 1),
         ];
     }, []);
     const onDragEnd: OnDragEndResponder = useCallback((result) => {
@@ -47,10 +47,10 @@ export const ScenarioList = observer(() => {
             return;
         }
 
-        store.scenario.phrases = moveItem(store.scenario.phrases, result.source.index, result.destination.index);
+        store.scenario.fragments = moveItem(store.scenario.fragments, result.source.index, result.destination.index);
     }, []);
 
-    if (phrases.length === 0) {
+    if (fragments.length === 0) {
         return (
             <ListDescription>
                 There are no fragments here yet. Use "plus" icon to add them to your scenario.
@@ -71,10 +71,10 @@ export const ScenarioList = observer(() => {
                                 : ''
                         }}
                     >
-                        {phrases.map((phrase, index) => (
+                        {fragments.map((fragment, index) => (
                             <Draggable
-                                key={phrase.id}
-                                draggableId={phrase.id}
+                                key={fragment.id}
+                                draggableId={fragment.id}
                                 index={index}
                             >
                                 {(provided, snapshot) => (
@@ -86,7 +86,7 @@ export const ScenarioList = observer(() => {
                                         <ScenarioItem
                                             isDragging={snapshot.isDragging}
                                             index={index + 1}
-                                            phrase={phrase}
+                                            phrase={fragment}
                                             disabled={false}
                                             onDelete={() => handleDelete(index)}
                                         />

@@ -44,13 +44,13 @@ export class Api {
     }
 
     serializeScenario(scenario: UserScenario) {
-        const {uuid, format, title, phrases} = scenario;
+        const {uuid, format, title, fragments} = scenario;
         return {
             uuid,
             format,
             title,
-            fragments: phrases,
-        }
+            fragments,
+        };
     }
 
     async uploadScenarioAndFile(scenario: UserScenario, file: Blob) {

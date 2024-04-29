@@ -26,7 +26,7 @@ export class Store {
 
         return items.reduce((acc, item) => {
             const collection = collections.find(c => c.id === item.collectionId);
-            const colItem = collection?.items.find(i => i.id === item.phraseId);
+            const colItem = collection?.items.find(i => i.id === item.fragmentId);
             const duration = colItem?.duration ?? 0;
             return acc + duration;
         }, 0);

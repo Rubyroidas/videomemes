@@ -51,7 +51,7 @@ export const ScenarioEditor = observer(() => {
             id: shortUuid().uuid(),
             type: UserPhraseType.PlainText,
             collectionId: collection.id,
-            phraseId: item.id,
+            fragmentId: item.id,
             text: item.text,
             textSize: 1,
             imageSize: 1,

@@ -27,7 +27,7 @@ export const ScenarioItem: FC<ScenarioItemProps> = (props) => {
         onDelete,
     } = props;
     const store = useStore();
-    const {collection, item: collectionItem} = store.getCollectionAndItem(phrase.collectionId, phrase.phraseId);
+    const {collection, item: collectionItem} = store.getCollectionAndItem(phrase.collectionId, phrase.fragmentId);
     if (!collection || !collectionItem) {
         return null;
     }

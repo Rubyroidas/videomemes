@@ -62,7 +62,7 @@ export type UserPhrase = {
     id: string;
     type: UserPhraseType;
     collectionId: string;
-    phraseId: number;
+    fragmentId: number;
     text: string;
     textSize: number;
     imageSize: number;

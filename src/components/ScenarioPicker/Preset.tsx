@@ -27,7 +27,7 @@ export const Preset = ({preset, index}: Props) => {
             id: shortUuid().uuid(),
             type: UserPhraseType.PlainText,
             collectionId: item.collectionId,
-            phraseId: item.itemId,
+            fragmentId: item.itemId,
             text: item.placeholder,
             textSize: 1,
             imageSize: 1,

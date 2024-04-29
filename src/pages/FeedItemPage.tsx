@@ -63,7 +63,7 @@ export const FeedItemPage = () => {
             id: shortUuid().uuid(),
             type: item.type,
             collectionId: item.collectionId,
-            phraseId: item.phraseId,
+            fragmentId: item.fragmentId,
             text: item.text ?? 'Your text here',
             textSize: item.textSize,
             imageSize: item.imageSize,

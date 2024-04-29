@@ -238,7 +238,7 @@ export const generateVideo = async (
 
     for (const userPhrase of userPhrases) {
         const collection = collections.find(c => c.id === userPhrase.collectionId)!;
-        const itemIndex = collection.items.findIndex(item => item.id === userPhrase.phraseId);
+        const itemIndex = collection.items.findIndex(item => item.id === userPhrase.fragmentId);
         const item = collection.items[itemIndex];
         const fileNumberSuffix = imageNumber.toString().padStart(5, '0');
 

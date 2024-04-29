@@ -9,7 +9,7 @@ const userPhrases: UserPhrase[] = [
     {
         id: shortUuid().uuid(),
         collectionId: 'tinkoff',
-        phraseId: 1,
+        fragmentId: 1,
         textSize: 1,
         text: 'first text',
         imageSize: 1,
@@ -18,7 +18,7 @@ const userPhrases: UserPhrase[] = [
     {
         id: shortUuid().uuid(),
         collectionId: 'tinkoff',
-        phraseId: 2,
+        fragmentId: 2,
         textSize: 1,
         text: 'second text',
         imageSize: 1,

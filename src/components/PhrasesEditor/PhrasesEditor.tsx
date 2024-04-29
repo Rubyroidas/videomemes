@@ -44,7 +44,7 @@ export const PhrasesEditor: FC<PhrasesEditorProps> = observer((props) => {
     const canGoRight = phraseIndex < userPhrases.length - 1;
 
     const collection = store.getCollection(userPhrase.collectionId)!;
-    const item = store.getCollectionItem(userPhrase.collectionId, userPhrase.phraseId)!;
+    const item = store.getCollectionItem(userPhrase.collectionId, userPhrase.fragmentId)!;
 
     return (
         <div>

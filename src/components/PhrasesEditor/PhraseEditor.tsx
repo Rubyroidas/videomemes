@@ -89,7 +89,7 @@ export const PhraseEditor: FC<PhraseEditorProps> = (props) => {
 
     const format = store.scenario.format;
     const collection = store.getCollection(userPhrase.collectionId)!;
-    const item = store.getCollectionItem(userPhrase.collectionId, userPhrase.phraseId)!;
+    const item = store.getCollectionItem(userPhrase.collectionId, userPhrase.fragmentId)!;
     const collectionSize = formatSizes[store.scenario.format];
     const textAreaRect = collection.textArea[format];
 

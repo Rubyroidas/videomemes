@@ -1,5 +1,6 @@
-import {Button, Header, LinksList, MinorLink, Paragraph} from './HomePage.styles';
 import {useTranslation} from 'react-i18next';
+
+import {Button, Header, LinksList, MinorLink, Paragraph} from './HomePage.styles';
 
 export const HomePage = () => {
     const {t} = useTranslation();

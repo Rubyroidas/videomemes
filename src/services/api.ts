@@ -1,7 +1,15 @@
 import axios from 'axios';
 
-import {FeedItem, UserScenario} from '../types';
+import {FeedItem, Format, UserFragment, UserScenario} from '../types';
 import {consoleError, consoleLog, wait} from '../utils';
+
+export type SerializedConfig = {
+    uuid: string;
+    format: Format,
+    title?: string;
+    fragments: UserFragment[];
+    version: string;
+}
 
 export class Api {
     url: string;
@@ -43,13 +51,14 @@ export class Api {
         }
     }
 
-    serializeScenario(scenario: UserScenario) {
+    serializeScenario(scenario: UserScenario): SerializedConfig {
         const {uuid, format, title, fragments} = scenario;
         return {
             uuid,
             format,
             title,
             fragments,
+            version: '0.0.1',
         };
     }
 

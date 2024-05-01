@@ -8,3 +8,4 @@ declare module '\*.mp3?raw-hex' {
 }
 
 declare const __DEV__: boolean;
+declare const __VER__: string;

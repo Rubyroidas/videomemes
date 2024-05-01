@@ -58,7 +58,7 @@ export class Api {
             format,
             title,
             fragments,
-            version: '0.0.1',
+            version: __VER__,
         };
     }
 

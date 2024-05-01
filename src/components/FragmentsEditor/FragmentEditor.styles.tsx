@@ -184,15 +184,15 @@ export const PlayButton = styled.div<PlayButtonProps>`
     pointer-events: none;
     translate: -50% -50%;
     --button-size: 100px;
-    border-radius: calc(var(--button-size) * 0.4);
+    border-radius: calc(var(--button-size));
     padding: calc(var(--button-size) * 0.2);
-    opacity: ${props => props.visible ? '1' : '0'};
+    opacity: ${props => props.visible ? '0.75' : '0'};
     transition: opacity 150ms linear;
     
     & > svg {
         width: var(--button-size);
         height: var(--button-size);
-        fill: #fff;
+        fill: #ffffffaa;
     }
 
     @media (max-width: 480px) {

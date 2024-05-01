@@ -44,9 +44,13 @@ export const Preset = ({preset, index}: Props) => {
     const totalDuration = items.reduce((curr, item) => curr + (item?.item?.duration ?? 0), 0);
 
     return (
-        <PresetWrapper onClick={handleClick}>
+        <PresetWrapper
+            onClick={handleClick}
+            className="preloading"
+        >
             <ScenarioItemWrapper>
                 <PresetSnapshotImage
+                    loading="lazy"
                     src={imageUrl}
                     crossOrigin="anonymous"
                 />

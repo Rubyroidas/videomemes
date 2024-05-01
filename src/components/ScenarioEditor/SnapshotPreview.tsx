@@ -75,6 +75,7 @@ export const SnapshotPreview = (props: Props) => {
         >
             {!startedPlaying && (
                 <img
+                    loading="lazy"
                     alt={collectionItem.text}
                     src={collectionItem.snapshot}
                     crossOrigin="anonymous"

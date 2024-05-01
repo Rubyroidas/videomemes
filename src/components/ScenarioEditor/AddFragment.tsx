@@ -34,10 +34,16 @@ export const AddFragment = observer(({onSelect}: Props) => {
             <AddFragmentCollectionList>
                 {collections.map(collection => (
                     <CollectionElement
+                        className="preloading"
                         key={collection.id}
                         onClick={() => handlePickCollection(collection)}
                     >
-                        <img src={collection.cover} crossOrigin="anonymous" alt={collection.name}/>
+                        <img
+                            loading="lazy"
+                            alt={collection.name}
+                            src={collection.cover}
+                            crossOrigin="anonymous"
+                        />
                         <div className="name">{collection.name}</div>
                         <div className="videos-count">{collection.items.length} videos</div>
                     </CollectionElement>

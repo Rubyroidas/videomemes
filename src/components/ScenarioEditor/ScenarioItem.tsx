@@ -33,7 +33,7 @@ export const ScenarioItem: FC<ScenarioItemProps> = (props) => {
     }
 
     return (
-        <ScenarioItemWrapper className={clsx({isDragging})}>
+        <ScenarioItemWrapper className={clsx('preloading', {isDragging})}>
             <SnapshotPreview
                 collectionItem={collectionItem}
             />

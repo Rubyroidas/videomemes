@@ -16,7 +16,7 @@ type Props = {
     item: CollectionItem;
 }
 export const CollectionItemElement: FC<HTMLProps<HTMLDivElement> & Props> = ({index, item, disabled, onClick}) => (
-    <ScenarioItemWrapper className={clsx({disabled})}>
+    <ScenarioItemWrapper className={clsx('preloading', {disabled})}>
         <SnapshotPreview
             collectionItem={item}
         />

@@ -10,7 +10,11 @@ type Props = {
 export const FeedItemEl: FC<Props> = ({item}) => (
     <FeedListElWrapper>
         <Link to={`/feed/${item.id}`}>
-            <img src={item.snapshot} crossOrigin="anonymous"/>
+            <img
+                loading="lazy"
+                src={item.snapshot}
+                crossOrigin="anonymous"
+            />
         </Link>
         <FeedListDuration>{item.duration}</FeedListDuration>
     </FeedListElWrapper>

@@ -145,7 +145,6 @@ export const AddFragmentCollectionItemList = styled.div`
 `;
 export const CollectionElement = styled.div`
     cursor: pointer;
-    background: transparent center/contain no-repeat;
     position: relative;
     width: 600px;
     height: 337.5px;

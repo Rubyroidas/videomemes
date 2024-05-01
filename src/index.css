@@ -40,3 +40,22 @@ body {
         --bg-color: #454545;
     }
 }
+
+.preloading {
+    background-image: linear-gradient(0deg, rgba(58,58,58,0.5) 0%, rgba(128,128,128,0.5) 50%, rgba(58,58,58,0.5) 100%);
+    background-position: 0 0;
+    background-repeat: repeat;
+    background-size: 200% 200%;
+    border: none;
+    outline: none;
+    animation: image-loading 2s infinite linear;
+}
+
+@keyframes image-loading {
+    0% {
+        background-position: 0 0;
+    }
+    100% {
+        background-position: 0 -200%;
+    }
+}

@@ -4,11 +4,12 @@ import clsx from 'clsx';
 import {UserFragment, UserFragmentType} from '../../types';
 import {useStore} from '../../store';
 import {
-    ScenarioItemClipTitle, ScenarioItemDeleteButton,
+    ScenarioItemClipTitle, ScenarioItemDeleteButton, ScenarioItemDragger,
     ScenarioItemDuration, ScenarioItemIndexNumber,
     ScenarioItemUserText, ScenarioItemWrapper, ScenarioItemWrapperGrid,
 } from './ScenarioEditor.styles';
 import {DeleteIcon} from '../../icons/DeleteIcon';
+import {HamburgerIcon} from '../../icons/HamburgerIcon';
 import {SnapshotPreview} from './SnapshotPreview';
 
 type ScenarioItemProps = {
@@ -38,6 +39,9 @@ export const ScenarioItem: FC<ScenarioItemProps> = (props) => {
                 collectionItem={collectionItem}
             />
             <ScenarioItemWrapperGrid>
+                <ScenarioItemDragger>
+                    <HamburgerIcon/>
+                </ScenarioItemDragger>
                 <ScenarioItemIndexNumber>
                     #{index}
                 </ScenarioItemIndexNumber>

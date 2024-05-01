@@ -33,7 +33,7 @@ export const ScenarioItemWrapperGrid = styled.div`
     display: grid;
     grid-template-areas:
 "index cliptitle close"
-"empty empty empty"
+"dragger empty empty"
 "usertext usertext duration";
     grid-template-columns: 52px 1fr 52px;
     grid-template-rows: 34px 1fr 34px;
@@ -57,6 +57,29 @@ export const ScenarioItemIndexNumber = styled.div`
     flex-direction: row;
     align-items: center;
     justify-content: center;
+`;
+export const ScenarioItemDragger = styled.div`
+    grid-area: dragger;
+    background: rgba(0, 0, 0, 0.25);
+    box-sizing: border-box;
+    text-align: center;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    
+    & > svg {
+        width: 52px;
+        height: 52px;
+        fill: #fff;
+    }
+
+    @media (max-width: 480px) {
+        & > svg {
+            width: 12vw;
+            height: 12vw;
+        }
+    }
 `;
 export const ScenarioItemUserText = styled.div`
     grid-area: usertext;

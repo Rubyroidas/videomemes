@@ -14,6 +14,7 @@ import {useApi} from '../../services/apiContext';
 import {UserFragmentType} from '../../types';
 import {consoleError, consoleLog} from '../../utils';
 import {ConsentDialog} from './ConsentDialog';
+import {sendAnalyticsEvent} from '../../services/analytics';
 
 export const VideoEditor: FC = observer(() => {
     const store = useStore();
@@ -30,6 +31,9 @@ export const VideoEditor: FC = observer(() => {
             return;
         }
 
+        sendAnalyticsEvent('generate_video_started', {
+            duration: store.scenarioTotalDuration,
+        });
         setIsEncoding(true);
         consoleLog('start generate');
         abortController.current = new AbortController();
@@ -61,6 +65,15 @@ export const VideoEditor: FC = observer(() => {
             consoleError('video generation error', e);
         } finally {
             consoleLog('end of handleGenerateClick');
+            if (abortController.current?.signal.aborted) {
+                sendAnalyticsEvent('generate_video_user_aborted', {
+                    duration: store.scenarioTotalDuration,
+                });
+            } else {
+                sendAnalyticsEvent('generate_video_finished', {
+                    duration: store.scenarioTotalDuration,
+                });
+            }
             abortController.current = null;
         }
     }, []);
@@ -73,11 +86,14 @@ export const VideoEditor: FC = observer(() => {
         setIsEncoding(false);
     };
     const handleGenerateClick = () => {
+        sendAnalyticsEvent('generate_video_consent_dialog_shown');
         setIsConsentDialogVisible(true);
     };
     const handleConsentResult = (result: boolean) => {
-        console.log('handleConsentResult', result);
         setIsConsentDialogVisible(false);
+        sendAnalyticsEvent('generate_video_consent_dialog_result', {
+            result: result ? 'accepted' : 'rejected',
+        });
         if (result) {
             doGenerate();
         }

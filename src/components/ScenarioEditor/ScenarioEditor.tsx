@@ -14,6 +14,7 @@ import {AddIcon} from '../../icons/AddIcon';
 import {ArrowLeft} from '../../icons/ArrowLeft';
 import {ButtonSelector} from '../ButtonSelector';
 import {FingerDragIcon} from '../../icons/FingerDragIcon';
+import {sendAnalyticsEvent} from '../../services/analytics.ts';
 
 const formatSelectorValues: {
     value: Format,
@@ -47,6 +48,10 @@ export const ScenarioEditor = observer(() => {
         if (!store.scenario) {
             return;
         }
+        sendAnalyticsEvent('generate_video_user_aborted', {
+            collection_id: collection.id,
+            fragment_id: item.id,
+        });
         store.scenario.fragments.push({
             id: shortUuid().uuid(),
             type: UserFragmentType.PlainText,
@@ -62,6 +67,10 @@ export const ScenarioEditor = observer(() => {
         if (!store.scenario) {
             return;
         }
+
+        sendAnalyticsEvent('generate_video_user_aborted', {
+            format,
+        });
         store.scenario.format = format;
     }, []);
 

@@ -13,6 +13,7 @@
   "author": "Denis Klyuev <denis.klyuev@gmail.com>",
   "license": "unlicensed",
   "dependencies": {
+    "@amplitude/analytics-browser": "^2.7.0",
     "@emotion/css": "^11.11.2",
     "@emotion/styled": "^11.11.0",
     "@ffmpeg/ffmpeg": "^0.12.10",

@@ -23,6 +23,9 @@ export const HomePage = () => {
                 <MinorLink to="/contact-us">{t('mainPage.menuButtons.contactUs')}</MinorLink>
                 {/*<MinorLink to="/donate">Donate for development</MinorLink>*/}
             </LinksList>
+            <button onClick={() => {
+                throw new Error('I am an error');
+            }}>break it</button>
         </div>
     );
 };

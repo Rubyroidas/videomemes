@@ -5,9 +5,12 @@ import {App} from './components/App';
 import {createStoreContextProvider} from './store';
 import {createApiContextProvider} from './services/apiContext';
 import {AppRouter} from './AppRouter';
+import {mountSentry} from './services/sentry';
 
 const StoreContextProvider = createStoreContextProvider();
 const ApiContextProvider = createApiContextProvider();
+
+mountSentry();
 
 const root = createRoot(document.querySelector('#root') as HTMLDivElement);
 root.render(

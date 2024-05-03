@@ -14,7 +14,7 @@ import {AddIcon} from '../../icons/AddIcon';
 import {ArrowLeft} from '../../icons/ArrowLeft';
 import {ButtonSelector} from '../ButtonSelector';
 import {FingerDragIcon} from '../../icons/FingerDragIcon';
-import {sendAnalyticsEvent} from '../../services/analytics.ts';
+import {sendAnalyticsEvent} from '../../services/analytics';
 
 const formatSelectorValues: {
     value: Format,

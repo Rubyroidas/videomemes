@@ -8,6 +8,7 @@ export const sendAnalyticsEvent = (event: Lowercase<string>, data: Record<Lowerc
     const page = window.location.pathname;
     const eventParams: Record<Lowercase<string>, any> = {
         page,
+        build: __VER__,
         ...data,
     };
     consoleLog('sendAnalyticsEvent', event, eventParams);

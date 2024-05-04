@@ -2,6 +2,7 @@ import {ChangeEventHandler} from 'react';
 import {useTranslation} from 'react-i18next';
 
 import {consoleLog} from '../utils';
+import {AnalyticsEvent, sendAnalyticsEvent} from '../services/analytics';
 
 export const LanguageSelector = () => {
     const {i18n} = useTranslation();
@@ -13,6 +14,9 @@ export const LanguageSelector = () => {
         consoleLog('save lang to localStorage', lang);
         localStorage.setItem('selectedLanguage', lang);
         i18n.changeLanguage(lang);
+        sendAnalyticsEvent(AnalyticsEvent.Language_Changed, {
+            lang,
+        });
     };
 
     return (

@@ -19,6 +19,7 @@ export const CollectionItemElement: FC<HTMLProps<HTMLDivElement> & Props> = ({in
     <ScenarioItemWrapper className={clsx('preloading', {disabled})}>
         <SnapshotPreview
             collectionItem={item}
+            source="collection-item"
         />
         <ScenarioItemWrapperGrid>
             <ScenarioItemIndexNumber>

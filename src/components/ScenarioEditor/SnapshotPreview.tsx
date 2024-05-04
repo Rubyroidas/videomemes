@@ -4,6 +4,7 @@ import {useEffect, useRef, useState} from 'react';
 import {CollectionItem, Point} from '../../types';
 import {PlayButton} from '../FragmentsEditor/FragmentEditor.styles';
 import {PlayIcon} from '../../icons/PlayIcon';
+import {AnalyticsEvent, sendAnalyticsEvent} from '../../services/analytics';
 
 export const Wrapper = styled.div`
     grid-column: 1 / 4;
@@ -25,6 +26,7 @@ export const Wrapper = styled.div`
 
 type Props = {
     collectionItem: CollectionItem;
+    source: string;
 }
 export const SnapshotPreview = (props: Props) => {
     const videoRef = useRef<HTMLVideoElement>(null);
@@ -38,6 +40,10 @@ export const SnapshotPreview = (props: Props) => {
             return;
         }
 
+        sendAnalyticsEvent(AnalyticsEvent.SnapshotPreview_VideoPlayed, {
+            source: props.source,
+            play: videoRef.current.paused,
+        });
         if (videoRef.current.paused) {
             videoRef.current.play();
             setIsVideoPlaying(true);

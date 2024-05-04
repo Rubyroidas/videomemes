@@ -13,6 +13,7 @@ import {formatSizes} from '../statics';
 import {HomeIcon} from '../icons/HomeIcon';
 import {useStore} from '../store';
 import {VIDEO_TITLE_ENABLED} from '../config';
+import {AnalyticsEvent, sendAnalyticsEvent} from '../services/analytics';
 
 const VideoContainer = styled.div<Size>`
     width: ${props => props.width}px;
@@ -39,6 +40,10 @@ export const FeedItemPage = () => {
 
     const handleVideoClick: MouseEventHandler = (e) => {
         const video = e.target as HTMLVideoElement;
+        sendAnalyticsEvent(AnalyticsEvent.FeedItem_VideoViewClicked, {
+            item_id: item?.id,
+            play: video.paused,
+        });
         if (video.paused) {
             video.play();
             setIsVideoPlaying(true);
@@ -54,6 +59,9 @@ export const FeedItemPage = () => {
         if (!item) {
             return;
         }
+        sendAnalyticsEvent(AnalyticsEvent.FeedItem_ConfigReused, {
+            item_id: item?.id,
+        });
         store.scenario = {
             uuid: shortUuid().uuid(),
             format: Format.InstagramStory,

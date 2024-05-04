@@ -37,6 +37,7 @@ export const ScenarioItem: FC<ScenarioItemProps> = (props) => {
         <ScenarioItemWrapper className={clsx('preloading', {isDragging})}>
             <SnapshotPreview
                 collectionItem={collectionItem}
+                source="scenario-editor"
             />
             <ScenarioItemWrapperGrid>
                 <ScenarioItemDragger>

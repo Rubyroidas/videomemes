@@ -1,4 +1,4 @@
-import {useState} from 'react';
+import {useEffect, useState} from 'react';
 import {observer} from 'mobx-react';
 
 import {useStore} from '../../store';
@@ -7,6 +7,7 @@ import {escapeHTML, html2text} from '../../utils';
 import {Header, NavigateCaption} from './FragmentEditor.styles';
 import {NavigationBar} from './NavigationBar';
 import {FragmentEditor} from './FragmentEditor';
+import {AnalyticsEvent, sendAnalyticsEvent} from '../../services/analytics';
 
 type FragmentsEditorProps = {
     disabled: boolean;
@@ -20,6 +21,13 @@ export const FragmentsEditor = observer((props: FragmentsEditorProps) => {
         return null;
     }
     const userFragments = store.scenario.fragments;
+
+    useEffect(() => {
+        sendAnalyticsEvent(AnalyticsEvent.EditFragment_IndexChanged, {
+            index: fragmentIndex,
+            total: userFragments.length,
+        });
+    }, [fragmentIndex]);
 
     const onProxyChange = (fragment: UserFragment) => {
         if (!store.scenario?.fragments) {

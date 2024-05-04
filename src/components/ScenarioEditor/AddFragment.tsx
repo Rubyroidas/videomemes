@@ -6,6 +6,7 @@ import {CollectionItemElement} from './CollectionItemElement';
 import {MAX_VIDEO_LENGTH_SECONDS} from '../../config';
 import {AddFragmentCollectionItemList, AddFragmentCollectionList, CollectionElement} from './ScenarioEditor.styles';
 import {Button, ListTitle} from '../App.styles';
+import {AnalyticsEvent, sendAnalyticsEvent} from '../../services/analytics';
 
 type Props = {
     onSelect: (collection: Collection, item: CollectionItem) => void;
@@ -15,6 +16,9 @@ export const AddFragment = observer(({onSelect}: Props) => {
     const store = useStore();
 
     const handlePickCollection = (collection: Collection | undefined) => {
+        sendAnalyticsEvent(AnalyticsEvent.Scenario_OpenedCollection, {
+            collection_id: collection?.id,
+        });
         store.lastUsedCollectionId = collection?.id;
     };
 

@@ -13,6 +13,7 @@ import {
     ScenarioItemWrapper,
     ScenarioItemWrapperGrid
 } from '../ScenarioEditor/ScenarioEditor.styles';
+import {AnalyticsEvent, sendAnalyticsEvent} from '../../services/analytics';
 
 type Props = {
     preset: ScenarioPreset;
@@ -23,6 +24,9 @@ export const Preset = ({preset, index}: Props) => {
     const store = useStore();
     const navigate = useNavigate();
     const handleClick = () => {
+        sendAnalyticsEvent(AnalyticsEvent.Preset_Selected, {
+            preset_id: preset.id,
+        });
         store.scenario!.fragments = preset.items.map(item => ({
             id: shortUuid().uuid(),
             type: UserFragmentType.PlainText,

@@ -14,7 +14,7 @@ import {AddIcon} from '../../icons/AddIcon';
 import {ArrowLeft} from '../../icons/ArrowLeft';
 import {ButtonSelector} from '../ButtonSelector';
 import {FingerDragIcon} from '../../icons/FingerDragIcon';
-import {sendAnalyticsEvent} from '../../services/analytics';
+import {AnalyticsEvent, sendAnalyticsEvent} from '../../services/analytics';
 
 const formatSelectorValues: {
     value: Format,
@@ -48,7 +48,7 @@ export const ScenarioEditor = observer(() => {
         if (!store.scenario) {
             return;
         }
-        sendAnalyticsEvent('generate_video_user_aborted', {
+        sendAnalyticsEvent(AnalyticsEvent.Scenario_AddedItem, {
             collection_id: collection.id,
             fragment_id: item.id,
         });
@@ -68,7 +68,7 @@ export const ScenarioEditor = observer(() => {
             return;
         }
 
-        sendAnalyticsEvent('generate_video_user_aborted', {
+        sendAnalyticsEvent(AnalyticsEvent.Scenario_ChangedFormat, {
             format,
         });
         store.scenario.format = format;

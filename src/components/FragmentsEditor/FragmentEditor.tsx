@@ -7,12 +7,12 @@ import {PlayIcon} from '../../icons/PlayIcon';
 import {Point, Rect, UserFragment, UserFragmentType} from '../../types';
 import {FONT_SIZE, TEXT_PADDING} from '../../config';
 import {
-    FragmentSizeContainer,
     EditingAreaContainer,
     EditingVideo,
     FileDropArea,
-    InputBackground,
     FragmentEditorWrapper,
+    FragmentSizeContainer,
+    InputBackground,
     PlayButton,
     TextAreaClass,
 } from './FragmentEditor.styles';
@@ -23,6 +23,7 @@ import {formatSizes} from '../../statics';
 import {useDropZone} from '../DropZone/DropZone';
 import {blobToCanvas} from '../../generate';
 import {SliderCheckbox} from '../SliderCheckbox';
+import {AnalyticsEvent, sendAnalyticsEvent} from '../../services/analytics';
 
 type FragmentEditorProps = {
     disabled: boolean;
@@ -55,6 +56,9 @@ export const FragmentEditor = (props: FragmentEditorProps) => {
     };
     const handleVideoClick: MouseEventHandler = (e) => {
         const video = e.target as HTMLVideoElement;
+        sendAnalyticsEvent(AnalyticsEvent.EditFragment_VideoPreviewClicked, {
+            play: video.paused,
+        });
         if (video.paused) {
             video.play();
             setIsVideoPlaying(true);
@@ -76,11 +80,15 @@ export const FragmentEditor = (props: FragmentEditorProps) => {
         });
     };
     const handleSwitchMode = () => {
+        const type = userFragment.type === UserFragmentType.PlainText
+            ? UserFragmentType.PlainImage
+            : UserFragmentType.PlainText;
+        sendAnalyticsEvent(AnalyticsEvent.EditFragment_SwitchImageMode, {
+            type,
+        });
         onChange({
             ...userFragment,
-            type: userFragment.type === UserFragmentType.PlainText
-                ? UserFragmentType.PlainImage
-                : UserFragmentType.PlainText
+            type,
         });
     };
 

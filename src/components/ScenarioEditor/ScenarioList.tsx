@@ -1,10 +1,11 @@
 import {useCallback} from 'react';
-import {DragDropContext, Droppable, Draggable, OnDragEndResponder} from 'react-beautiful-dnd';
+import {DragDropContext, Draggable, Droppable, OnDragEndResponder} from 'react-beautiful-dnd';
 import {observer} from 'mobx-react';
 
 import {useStore} from '../../store';
 import {ScenarioItem} from './ScenarioItem';
 import {ListDescription} from '../App.styles';
+import {AnalyticsEvent, sendAnalyticsEvent} from '../../services/analytics';
 
 const moveItem = <T extends object>(array: T[], fromIndex: number, toIndex: number) => {
     const minIndex = Math.min(fromIndex, toIndex);
@@ -36,6 +37,12 @@ export const ScenarioList = observer(() => {
 
     const fragments = store.scenario.fragments;
     const handleDelete = useCallback((index: number) => {
+        sendAnalyticsEvent(AnalyticsEvent.Scenario_DeletedItem, {
+            index,
+            total: fragments.length,
+            collection_id: store.scenario!.fragments[index].collectionId,
+            fragment_id: store.scenario!.fragments[index].fragmentId,
+        });
         store.scenario!.fragments = [
             ...store.scenario!.fragments.slice(0, index),
             ...store.scenario!.fragments.slice(index + 1),
@@ -47,6 +54,11 @@ export const ScenarioList = observer(() => {
             return;
         }
 
+        sendAnalyticsEvent(AnalyticsEvent.Scenario_DraggedItem, {
+            from: result.source.index,
+            to: result.destination.index,
+            total: store.scenario.fragments.length,
+        });
         store.scenario.fragments = moveItem(store.scenario.fragments, result.source.index, result.destination.index);
     }, []);
 

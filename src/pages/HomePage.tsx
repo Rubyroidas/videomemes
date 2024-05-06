@@ -20,7 +20,7 @@ export const HomePage = () => {
             </LinksList>
             <LinksList>
                 <MinorLink to="/about">{t('mainPage.menuButtons.about')}</MinorLink>
-                <MinorLink to="https://jq6tjtcmc5w.typeform.com/to/BFJ4VAXs" target="_blank">{t('mainPage.menuButtons.contactUs')}</MinorLink>
+                <MinorLink to="https://forms.gle/Unm9F9aQbqZ8yDTj6" target="_blank">{t('mainPage.menuButtons.contactUs')}</MinorLink>
                 {/*<MinorLink to="/donate">Donate for development</MinorLink>*/}
             </LinksList>
             <button onClick={() => {

@@ -1,6 +1,7 @@
 import {FC, useCallback, useRef, useState} from 'react';
 import {useNavigate} from 'react-router-dom';
 import {observer} from 'mobx-react';
+import {useTranslation} from 'react-i18next';
 
 import {Button} from '../App.styles';
 import {FragmentsEditor} from './FragmentsEditor';
@@ -17,6 +18,7 @@ import {ConsentDialog} from './ConsentDialog';
 import {AnalyticsEvent, sendAnalyticsEvent} from '../../services/analytics';
 
 export const VideoEditor: FC = observer(() => {
+    const {t} = useTranslation();
     const store = useStore();
     const api = useApi();
     const navigate = useNavigate();
@@ -115,14 +117,14 @@ export const VideoEditor: FC = observer(() => {
                     <Icon>
                         <EditListIcon/>
                     </Icon>
-                    Edit scenario
+                    {t('editFragments.backToScenario')}
                 </Button>
                 {!isEncoding && (
                     <Button onClick={handleGenerateClick} disabled={!canGenerate}>
                         <Icon>
                             <PlayIcon/>
                         </Icon>
-                        Generate
+                        {t('editFragments.generateButton')}
                     </Button>
                 )}
             </div>
@@ -132,14 +134,14 @@ export const VideoEditor: FC = observer(() => {
             {isEncoding && (
                 <ProgressCurtain>
                     <Button onClick={handleAbortVideoGeneration}>
-                        Cancel
+                        {t('editFragments.cancelGenerateButton')}
                     </Button>
                 </ProgressCurtain>
             )}
             {isConsentDialogVisible && (
                 <ConsentDialog
-                    title="Are you consent?"
-                    message="You should accept our terms of publicly available videos. It means when you generate one, it will be availably to everyone's discovery on Feed page."
+                    title={t('editFragments.generateConsentDialog.title')}
+                    message={t('editFragments.generateConsentDialog.description')}
                     onClose={handleConsentResult}
                 />
             )}

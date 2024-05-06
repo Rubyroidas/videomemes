@@ -1,4 +1,5 @@
 import {observer} from 'mobx-react';
+import {useTranslation} from 'react-i18next';
 
 import {useStore} from '../../store';
 import {Collection, CollectionItem} from '../../types';
@@ -13,6 +14,7 @@ type Props = {
 }
 
 export const AddFragment = observer(({onSelect}: Props) => {
+    const {t} = useTranslation();
     const store = useStore();
 
     const handlePickCollection = (collection: Collection | undefined) => {
@@ -34,7 +36,9 @@ export const AddFragment = observer(({onSelect}: Props) => {
 
     return !selectedCollection ? (
         <div>
-            <ListTitle>Pick a collection</ListTitle>
+            <ListTitle>
+                {t('editScenario.addFragment.pickCollection')}
+            </ListTitle>
             <AddFragmentCollectionList>
                 {collections.map(collection => (
                     <CollectionElement
@@ -56,9 +60,11 @@ export const AddFragment = observer(({onSelect}: Props) => {
         </div>
     ) : (
         <div>
-            <ListTitle>Pick a fragment</ListTitle>
+            <ListTitle>
+                {t('editScenario.addFragment.pickFragment')}
+            </ListTitle>
             <Button onClick={() => handlePickCollection(undefined)}>
-                Pick another collection
+                {t('editScenario.addFragment.pickAnotherCollection')}
             </Button>
             <AddFragmentCollectionItemList>
                 {selectedCollection.items.map(((item, index) => (

@@ -3,6 +3,10 @@
     "title": "Feed",
     "listTitle": "Users uploaded these videos"
   },
+  "feedItem": {
+    "title": "Video",
+    "reuseConfigButton": "Use this video as a template"
+  },
   "mainPage": {
     "title": "Free service for short funny videos creation",
     "menuButtons": {
@@ -12,5 +16,38 @@
       "about": "About the project",
       "contactUs": "Contact us"
     }
+  },
+  "editScenario": {
+    "title": "Edit scenario",
+    "chooseVideoFormat":  "Video format",
+    "totalDuration": "Scenario total duration: {scenarioTotalDuration}s (max 60s)",
+    "swapFragmentsToOrder": "Swap the fragments to change the order",
+    "scenarioIsEmpty": "There are no fragments here yet. Use \"plus\" icon to add them to your scenario.",
+    "backToFragmentsList": "Back to fragments list",
+    "editFragments": "Edit fragments",
+    "addFragment": {
+      "pickCollection": "Pick a collection",
+      "pickFragment": "Pick a fragment",
+      "pickAnotherCollection": "Pick another collection"
+    }
+  },
+  "editFragments": {
+    "title": "Edit fragments",
+    "backToScenario": "Edit scenario",
+    "generateButton": "Generate",
+    "cancelGenerateButton": "Cancel",
+    "generateConsentDialog": {
+      "title": "Are you consent?",
+      "description": "You should accept our terms of publicly available videos. It means when you generate one, it will be availably to everyone's discovery on Feed page."
+    },
+    "text": "text",
+    "image": "image",
+    "textSize": "Text size",
+    "imageSize": "Image size",
+    "dropImageHere": "Drop image here ..."
+  },
+  "dialog": {
+    "ok": "Ok",
+    "cancel": "Cancel"
   }
 }

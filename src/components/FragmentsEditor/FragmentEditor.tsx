@@ -2,6 +2,7 @@ import {ClipboardEventHandler, MouseEventHandler, useState} from 'react';
 import ContentEditable, {ContentEditableEvent} from 'react-contenteditable';
 import {Box, Slider, Typography} from '@mui/material';
 import clsx from 'clsx';
+import {useTranslation} from 'react-i18next';
 
 import {PlayIcon} from '../../icons/PlayIcon';
 import {Point, Rect, UserFragment, UserFragmentType} from '../../types';
@@ -32,6 +33,7 @@ type FragmentEditorProps = {
 }
 
 export const FragmentEditor = (props: FragmentEditorProps) => {
+    const {t} = useTranslation();
     const {disabled, userFragment, onChange} = props;
     const store = useStore();
     const [isVideoPlaying, setIsVideoPlaying] = useState(false);
@@ -124,14 +126,14 @@ export const FragmentEditor = (props: FragmentEditorProps) => {
         <FragmentEditorWrapper {...collectionSize}>
             <FragmentSizeContainer>
                 <Button onClick={handleSwitchMode}>
-                    text
+                    {t('editFragments.text')}
                     <SliderCheckbox defaultChecked={isImage}/>
-                    image
+                    {t('editFragments.image')}
                 </Button>
                 <Box mr={1} ml={1} className="slider">
                 {!isImage && (
                     <>
-                        <Typography>Image size</Typography>
+                        <Typography>{t('editFragments.textSize')}</Typography>
                         <Slider
                             aria-label="Text size"
                             min={0.5}
@@ -146,7 +148,7 @@ export const FragmentEditor = (props: FragmentEditorProps) => {
                 )}
                 {isImage && (
                     <>
-                        <Typography>Image size</Typography>
+                        <Typography>{t('editFragments.imageSize')}</Typography>
                         <Slider
                             aria-label="Image size"
                             min={0.5}
@@ -186,7 +188,7 @@ export const FragmentEditor = (props: FragmentEditorProps) => {
                                 {...dropZoneProps}
                                 className={clsx({big: isDraggingOver || !userFragment.image})}
                             >
-                                <div>Drop image here ...</div>
+                                <div>{t('editFragments.dropImageHere')}</div>
                             </FileDropArea>
                         </>
                     )}

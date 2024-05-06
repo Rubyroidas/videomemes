@@ -1,5 +1,6 @@
 import {useEffect, useRef} from 'react'
 import styled from '@emotion/styled';
+import {useTranslation} from 'react-i18next';
 
 import {Button} from '../App.styles';
 
@@ -47,6 +48,7 @@ const Message = styled.div`
 `;
 
 export const ConsentDialog = (props: ConsentDialogProps) => {
+    const {t} = useTranslation();
     const {title, message, onClose} = props;
     const dlgRef = useRef<HTMLDialogElement>(null);
 
@@ -68,8 +70,8 @@ export const ConsentDialog = (props: ConsentDialogProps) => {
             <div>
                 <Title>{title}</Title>
                 <Message>{message}</Message>
-                <Button onClick={() => handleResult(true)}>Ok</Button>
-                <Button onClick={() => handleResult(false)}>Cancel</Button>
+                <Button onClick={() => handleResult(true)}>{t('dialog.ok')}</Button>
+                <Button onClick={() => handleResult(false)}>{t('dialog.cancel')}</Button>
             </div>
         </DialogWrapper>
     );

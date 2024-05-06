@@ -2,6 +2,7 @@ import {useCallback, useState} from 'react';
 import {useNavigate} from 'react-router-dom';
 import {observer} from 'mobx-react';
 import shortUuid from 'short-uuid';
+import {useTranslation} from 'react-i18next';
 
 import {Button, FloatingButton, ListDescription, ListTitle} from '../App.styles';
 import {Icon} from '../FragmentsEditor/FragmentEditor.styles';
@@ -35,6 +36,7 @@ const formatSelectorValues: {
 ];
 
 export const ScenarioEditor = observer(() => {
+    const {t} = useTranslation();
     const navigate = useNavigate();
     const store = useStore();
     const [isAddingVisible, setIsAddingVisible] = useState(false);
@@ -87,14 +89,14 @@ export const ScenarioEditor = observer(() => {
                     <Icon>
                         <EditListIcon/>
                     </Icon>
-                    Edit fragments
+                    {t('editScenario.editFragments')}
                 </Button>
             )}
             <div>
                 {isAddingVisible && (
                     <Button onClick={toggleAddClip}>
                         <ArrowLeft/>
-                        Back to fragments list
+                        {t('editScenario.backToFragmentsList')}
                     </Button>
                 )}
             </div>
@@ -103,14 +105,14 @@ export const ScenarioEditor = observer(() => {
             ) : (
                 <>
                     <ButtonSelector
-                        caption="Video format"
+                        caption={t('editScenario.chooseVideoFormat')}
                         value={store.scenario.format}
                         values={formatSelectorValues}
                         onChange={handleChangeFormat}
                     />
-                    <ListTitle>Scenario total duration: {scenarioTotalDuration}s (max 60s)</ListTitle>
+                    <ListTitle>{t('editScenario.totalDuration').replace('{scenarioTotalDuration}', scenarioTotalDuration)}</ListTitle>
                     <ListDescription>
-                        Swap the fragments to change the order
+                        {t('editScenario.swapFragmentsToOrder')}
                         <FingerDragIcon/>
                     </ListDescription>
                     <ScenarioList/>

@@ -1,4 +1,5 @@
 import {Link, useNavigate} from 'react-router-dom';
+import {useTranslation} from 'react-i18next';
 
 import {VideoEditor} from '../components/FragmentsEditor/VideoEditor';
 import {AppTitle} from '../components/App.styles';
@@ -7,6 +8,7 @@ import {useStore} from '../store';
 import {HomeIcon} from '../icons/HomeIcon';
 
 export const EditFragmentsPage = () => {
+    const {t} = useTranslation();
     const store = useStore();
     const navigate = useNavigate();
     useEffect(() => {
@@ -21,7 +23,7 @@ export const EditFragmentsPage = () => {
                 <Link to="/">
                     <HomeIcon/>
                 </Link>
-                Video meme generator
+                {t('editFragments.title')}
             </AppTitle>
             <VideoEditor/>
         </div>

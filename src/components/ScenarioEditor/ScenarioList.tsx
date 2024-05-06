@@ -1,6 +1,7 @@
 import {useCallback} from 'react';
 import {DragDropContext, Draggable, Droppable, OnDragEndResponder} from 'react-beautiful-dnd';
 import {observer} from 'mobx-react';
+import {useTranslation} from 'react-i18next';
 
 import {useStore} from '../../store';
 import {ScenarioItem} from './ScenarioItem';
@@ -30,6 +31,7 @@ const moveItem = <T extends object>(array: T[], fromIndex: number, toIndex: numb
 };
 
 export const ScenarioList = observer(() => {
+    const {t} = useTranslation();
     const store = useStore();
     if (!store.scenario || !store.collections) {
         return null;
@@ -65,7 +67,7 @@ export const ScenarioList = observer(() => {
     if (fragments.length === 0) {
         return (
             <ListDescription>
-                There are no fragments here yet. Use "plus" icon to add them to your scenario.
+                {t('editScenario.scenarioIsEmpty')}
             </ListDescription>
         );
     }

@@ -1,6 +1,7 @@
 import {MouseEventHandler, TouchEventHandler, useEffect, useRef, useState} from 'react';
 import {Link, useNavigate, useParams} from 'react-router-dom';
 import shortUuid from 'short-uuid';
+import {useTranslation} from 'react-i18next';
 
 import {AppTitle, Button} from '../components/App.styles';
 import {consoleError, consoleLog} from '../utils';
@@ -30,6 +31,7 @@ const Video = styled.video`
 `;
 
 export const FeedItemPage = () => {
+    const {t} = useTranslation();
     const videoRef = useRef<HTMLVideoElement>(null);
     const params = useParams();
     const navigate = useNavigate();
@@ -130,9 +132,9 @@ export const FeedItemPage = () => {
                 <Link to="/">
                     <HomeIcon/>
                 </Link>
-                Video
+                {t('feedItem.title')}
             </AppTitle>
-            <Button onClick={handleReuseVideoClick}>Use this video as a template</Button>
+            <Button onClick={handleReuseVideoClick}>{t('feedItem.reuseConfigButton')}</Button>
             <VideoContainer {...size}>
                 <Video
                     ref={videoRef}

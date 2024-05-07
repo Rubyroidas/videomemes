@@ -35,13 +35,14 @@ export const ButtonSelectorItem = styled.div`
         padding: 2vw 3vw;
     }
 `;
+export type ButtonSelectorValue<T> = {
+    value: T,
+    text: string,
+};
 type ButtonSelectorProps<T> = {
     caption: string;
     value: T;
-    values: {
-        value: T,
-        text: string,
-    }[];
+    values: ButtonSelectorValue<T>[];
     onChange: (value: T) => void;
 }
 export const ButtonSelector = <T extends string | number>({caption, value, values, onChange}: ButtonSelectorProps<T>) => (

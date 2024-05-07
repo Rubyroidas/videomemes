@@ -16,11 +16,8 @@ const DialogWrapper = styled.dialog`
     border: none;
     outline: none;
     position: fixed;
-    left: 50%;
-    top: 50%;
     z-index: 100;
     border-radius: 16px;
-    translate: -50% -50%;
     
     &::backdrop {
         background-color: rgba(0, 0, 0, 0.5);

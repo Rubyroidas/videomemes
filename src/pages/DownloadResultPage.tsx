@@ -2,6 +2,7 @@ import {useCallback, useEffect, useRef} from 'react';
 import {useNavigate} from 'react-router-dom';
 import {observer} from 'mobx-react';
 import styled from '@emotion/styled';
+import {useTranslation} from 'react-i18next';
 
 import {DownloadVideoButton} from '../components/FragmentsEditor/DownloadVideoButton';
 import {Header, Icon, ResultVideo} from '../components/FragmentsEditor/FragmentEditor.styles';
@@ -18,6 +19,7 @@ const Wrapper = styled.div`
 `;
 
 export const DownloadResultPage = observer(() => {
+    const {t} = useTranslation();
     const store = useStore();
     const navigate = useNavigate();
     const videoRef = useRef<HTMLVideoElement>(null);
@@ -65,13 +67,13 @@ export const DownloadResultPage = observer(() => {
                     <Icon>
                         <RedoIcon/>
                     </Icon>
-                    Edit
+                    {t('generatedVideoPage.returnToEditButton')}
                 </Button>
                 <DownloadVideoButton data={store.generatedVideo} fileName={downloadFileName}>
                     <Icon>
                         <DownloadIcon/>
                     </Icon>
-                    Download
+                    {t('generatedVideoPage.downloadButton')}
                 </DownloadVideoButton>
             </Header>
             <ResultVideo

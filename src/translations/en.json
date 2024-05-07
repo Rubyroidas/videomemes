@@ -17,6 +17,11 @@
       "contactUs": "Contact us"
     }
   },
+  "pickPreset": {
+    "title": "Pick scenario",
+    "pickPreset": "Pick a preset",
+    "editFromScratchButton": "Edit from scratch"
+  },
   "editScenario": {
     "title": "Edit scenario",
     "chooseVideoFormat":  "Video format",
@@ -46,8 +51,29 @@
     "imageSize": "Image size",
     "dropImageHere": "Drop image here ..."
   },
+  "generatedVideoPage": {
+    "returnToEditButton": "Edit",
+    "downloadButton": "Download",
+    "progressCurtainTexts": [
+      "Generating your video",
+      "Wait for it",
+      "text 1",
+      "text 2",
+      "text 3"
+    ],
+    "progressCurtainLine1": "That can take up to several minutes",
+    "progressCurtainLine2": "Don't close this tab"
+  },
   "dialog": {
     "ok": "Ok",
     "cancel": "Cancel"
+  },
+  "general": {
+    "or": "or"
+  },
+  "videoFormats": {
+    "ig_story": "Instagram story",
+    "ig_post": "Instagram post",
+    "yt_video": "YouTube video"
   }
 }

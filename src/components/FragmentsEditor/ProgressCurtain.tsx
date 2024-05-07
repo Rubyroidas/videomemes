@@ -1,8 +1,8 @@
 import {PropsWithChildren, useEffect, useState} from 'react';
 import styled from '@emotion/styled';
+import {useTranslation} from 'react-i18next';
 
 import {LoadingSpinner} from '../../icons/LoadingSpinner';
-import {progressCurtainTexts} from '../../statics';
 
 const Wrapper = styled.div`
     position: fixed;
@@ -77,6 +77,8 @@ const SpinnerText = styled.div`
 const AnimatedText = () => {
     const [dots, setDots] = useState(0);
     const [textId, setTextId] = useState(0);
+    const {t} = useTranslation();
+    const progressCurtainTexts = t('generatedVideoPage.progressCurtainTexts', { returnObjects: true }) as string[];
 
     useEffect(() => {
         setTimeout(() => {
@@ -92,8 +94,8 @@ const AnimatedText = () => {
     return (
         <SpinnerText>
             <div>{progressCurtainTexts[textId]}{'.'.repeat(dots)}</div>
-            <div>That can take up to several minutes</div>
-            <div>Don't close this tab</div>
+            <div>{t('generatedVideoPage.progressCurtainLine1')}</div>
+            <div>{t('generatedVideoPage.progressCurtainLine2')}</div>
         </SpinnerText>
     );
 };

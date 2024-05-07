@@ -17,10 +17,15 @@
       "contactUs": "Контакти"
     }
   },
+  "pickPreset": {
+    "title": "Оберіть сценарій",
+    "pickPreset": "Оберіть шаблон",
+    "editFromScratchButton": "Почніть з чистого аркуша"
+  },
   "editScenario": {
     "title": "Редагування сценарію",
     "chooseVideoFormat": "Формат відео",
-    "totalDuration": "Загальна довжина сценарію: {scenarioTotalDuration}с (макс 60с)",
+    "totalDuration": "Довжина сценарію: {scenarioTotalDuration}с (макс 60с)",
     "swapFragmentsToOrder": "Поміняйте фрагменти місцями, щоб змінити порядок",
     "scenarioIsEmpty": "Сценарій не містить фрагментів. Використайте іконку \"плюс\" щоб додати їх до вашого сценарію",
     "backToFragmentsList": "Назад до фрагментів",
@@ -46,8 +51,29 @@
     "imageSize": "Розмір зображення",
     "dropImageHere": "Скиньте зображення сюди ..."
   },
+  "generatedVideoPage": {
+    "returnToEditButton": "Редагувати",
+    "downloadButton": "Завантажити",
+    "progressCurtainTexts": [
+      "Генеруємо ваше відео",
+      "Зачекайте",
+      "Текст 1",
+      "Текст 2",
+      "Текст 3"
+    ],
+    "progressCurtainLine1": "Це може зайняти декілька хвилин",
+    "progressCurtainLine2": "Не закривайте цю вкладку"
+  },
   "dialog": {
     "ok": "Добре",
     "cancel": "Скасувати"
+  },
+  "general": {
+    "or": "чи"
+  },
+  "videoFormats": {
+    "ig_story": "Інстаграм сторі",
+    "ig_post": "Інстаграм пост",
+    "yt_video": "Ютуб відео"
   }
 }

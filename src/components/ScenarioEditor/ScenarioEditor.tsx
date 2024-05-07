@@ -13,27 +13,9 @@ import {Collection, CollectionItem, Format, UserFragmentType} from '../../types'
 import {useStore} from '../../store';
 import {AddIcon} from '../../icons/AddIcon';
 import {ArrowLeft} from '../../icons/ArrowLeft';
-import {ButtonSelector} from '../ButtonSelector';
+import {ButtonSelector, ButtonSelectorValue} from '../ButtonSelector';
 import {FingerDragIcon} from '../../icons/FingerDragIcon';
 import {AnalyticsEvent, sendAnalyticsEvent} from '../../services/analytics';
-
-const formatSelectorValues: {
-    value: Format,
-    text: string,
-}[] = [
-    {
-        value: Format.InstagramStory,
-        text: 'Instagram story',
-    },
-    {
-        value: Format.InstagramPost,
-        text: 'Instagram post',
-    },
-    {
-        value: Format.YoutubeVideo,
-        text: 'Youtube video',
-    },
-];
 
 export const ScenarioEditor = observer(() => {
     const {t} = useTranslation();
@@ -81,6 +63,8 @@ export const ScenarioEditor = observer(() => {
     }
 
     const scenarioTotalDuration = store.scenarioTotalDuration.toFixed(1);
+    const formatSelectorValues = Object.entries(t('videoFormats', {returnObjects: true}))
+        .map(([value, text]) => ({value, text})) as ButtonSelectorValue<Format>[];
 
     return (
         <div>

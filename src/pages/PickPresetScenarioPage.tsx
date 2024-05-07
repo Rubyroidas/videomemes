@@ -1,4 +1,5 @@
 import {Link, useNavigate} from 'react-router-dom';
+import {useTranslation} from 'react-i18next';
 
 import {AppTitle, ListTitle} from '../components/App.styles';
 import {ScenarioPicker} from '../components/ScenarioPicker/ScenarioPicker';
@@ -8,6 +9,7 @@ import {useStore} from '../store';
 import {HomeIcon} from '../icons/HomeIcon';
 
 export const PickPresetScenarioPage = () => {
+    const {t} = useTranslation();
     const store = useStore();
     const navigate = useNavigate();
 
@@ -27,12 +29,16 @@ export const PickPresetScenarioPage = () => {
                 <Link to="/">
                     <HomeIcon/>
                 </Link>
-                Pick scenario
+                {t('pickPreset.title')}
             </AppTitle>
-            <ListTitle>Pick a preset</ListTitle>
+            <ListTitle>
+                {t('pickPreset.pickPreset')}
+            </ListTitle>
             <ScenarioPicker/>
-            <ListTitle>or</ListTitle>
-            <Button to="/new-scenario">Edit from scratch</Button>
+            <ListTitle>{t('general.or')}</ListTitle>
+            <Button to="/new-scenario">
+                {t('pickPreset.editFromScratchButton')}
+            </Button>
         </div>
     );
 };

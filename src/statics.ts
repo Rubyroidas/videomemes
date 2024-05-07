@@ -14,11 +14,3 @@ export const formatSizes: Record<Format, Size> = {
         height: 720
     },
 };
-
-export const progressCurtainTexts = [
-    'Generating your video',
-    'Wait for it',
-    'text 1',
-    'text 2',
-    'text 3',
-];

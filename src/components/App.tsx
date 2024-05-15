@@ -1,20 +1,22 @@
+import {FC, PropsWithChildren} from 'react';
 import {observer} from 'mobx-react';
+import {useTranslation} from 'react-i18next';
 
 import {useStore} from '../store';
 import {useLoadInitialData} from '../hooks/useLoadInitialData';
-import {FC, PropsWithChildren} from 'react';
 
 export const App: FC<PropsWithChildren> = observer(({children}) => {
+    const {t} = useTranslation();
     const store = useStore();
     const {failedBrowser} = useLoadInitialData();
     if (failedBrowser) {
         return (
-            <div>your browser is outdated. Please upgrade to the newest version</div>
+            <div>{t('general.yourBrowserIsNotSupported')}</div>
         );
     }
 
     return !store.ffmpeg || !store.collections || !store.presets ? (
-        <div>Loading...</div>
+        <div>{t('general.pageLoading')}</div>
     ) : (
         children
     )

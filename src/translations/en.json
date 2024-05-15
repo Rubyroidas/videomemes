@@ -69,6 +69,8 @@
     "cancel": "Cancel"
   },
   "general": {
+    "pageLoading": "Loading...",
+    "yourBrowserIsNotSupported": "Your browser is outdated. Please consider to upgrade to the newest version.",
     "or": "or"
   },
   "videoFormats": {

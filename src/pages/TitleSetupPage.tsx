@@ -6,6 +6,7 @@ import {AppTitle} from '../components/App.styles';
 import {TitleSetup} from '../components/TitleSetup';
 import {useStore} from '../store';
 import {HomeIcon} from '../icons/HomeIcon';
+import {LanguageSelector} from '../components/LanguageSelector';
 
 export const TitleSetupPage = observer(() => {
     const store = useStore();
@@ -28,6 +29,7 @@ export const TitleSetupPage = observer(() => {
                     <HomeIcon/>
                 </Link>
                 Do you want video to have a title?
+                <LanguageSelector/>
             </AppTitle>
             <TitleSetup/>
         </div>

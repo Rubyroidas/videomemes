@@ -7,6 +7,7 @@ import {Button} from './HomePage.styles';
 import {useEffect} from 'react';
 import {useStore} from '../store';
 import {HomeIcon} from '../icons/HomeIcon';
+import {LanguageSelector} from '../components/LanguageSelector';
 
 export const PickPresetScenarioPage = () => {
     const {t} = useTranslation();
@@ -30,6 +31,7 @@ export const PickPresetScenarioPage = () => {
                     <HomeIcon/>
                 </Link>
                 {t('pickPreset.title')}
+                <LanguageSelector/>
             </AppTitle>
             <ListTitle>
                 {t('pickPreset.pickPreset')}

@@ -15,6 +15,7 @@ import {HomeIcon} from '../icons/HomeIcon';
 import {useStore} from '../store';
 import {VIDEO_TITLE_ENABLED} from '../config';
 import {AnalyticsEvent, sendAnalyticsEvent} from '../services/analytics';
+import {LanguageSelector} from '../components/LanguageSelector';
 
 const VideoContainer = styled.div<Size>`
     width: ${props => props.width}px;
@@ -133,6 +134,7 @@ export const FeedItemPage = () => {
                     <HomeIcon/>
                 </Link>
                 {t('feedItem.title')}
+                <LanguageSelector/>
             </AppTitle>
             <Button onClick={handleReuseVideoClick}>{t('feedItem.reuseConfigButton')}</Button>
             <VideoContainer {...size}>

@@ -6,6 +6,7 @@ import {AppTitle} from '../components/App.styles';
 import {useEffect} from 'react';
 import {useStore} from '../store';
 import {HomeIcon} from '../icons/HomeIcon';
+import {LanguageSelector} from '../components/LanguageSelector';
 
 export const EditFragmentsPage = () => {
     const {t} = useTranslation();
@@ -24,6 +25,7 @@ export const EditFragmentsPage = () => {
                     <HomeIcon/>
                 </Link>
                 {t('editFragments.title')}
+                <LanguageSelector/>
             </AppTitle>
             <VideoEditor/>
         </div>

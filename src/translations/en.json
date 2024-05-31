@@ -69,6 +69,7 @@
     "cancel": "Cancel"
   },
   "general": {
+    "language": "Language",
     "pageLoading": "Loading...",
     "yourBrowserIsNotSupported": "Your browser is outdated. Please consider to upgrade to the newest version.",
     "or": "or"

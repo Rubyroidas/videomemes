@@ -1,8 +1,17 @@
 import {ChangeEventHandler} from 'react';
 import {useTranslation} from 'react-i18next';
+import styled from '@emotion/styled';
 
 import {consoleLog} from '../utils';
 import {AnalyticsEvent, sendAnalyticsEvent} from '../services/analytics';
+
+const Wrapper = styled.div`
+    margin: 0 0 0 20px;
+
+    @media (max-width: 480px) {
+        margin: 0 0 0 5vw;
+    }
+`;
 
 export const LanguageSelector = () => {
     const {i18n} = useTranslation();
@@ -20,8 +29,7 @@ export const LanguageSelector = () => {
     };
 
     return (
-        <div>
-            lang: {currentLang}
+        <Wrapper>
             <select onChange={handleSelect} value={currentLang}>
                 {langs.map(lang => (
                     <option
@@ -30,6 +38,6 @@ export const LanguageSelector = () => {
                     >{lang}</option>
                 ))}
             </select>
-        </div>
+        </Wrapper>
     )
 }

@@ -7,6 +7,7 @@ import {AppTitle} from '../components/App.styles';
 import {ScenarioEditor} from '../components/ScenarioEditor/ScenarioEditor';
 import {useStore} from '../store';
 import {HomeIcon} from '../icons/HomeIcon';
+import {LanguageSelector} from '../components/LanguageSelector';
 
 export const EditScenarioPage = observer(() => {
     const {t} = useTranslation();
@@ -29,6 +30,7 @@ export const EditScenarioPage = observer(() => {
                     <HomeIcon/>
                 </Link>
                 {t('editScenario.title')}
+                <LanguageSelector/>
             </AppTitle>
             <ScenarioEditor/>
         </div>

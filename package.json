@@ -34,6 +34,7 @@
     "short-uuid": "^4.2.2"
   },
   "devDependencies": {
+    "@modyfi/vite-plugin-yaml": "^1.1.0",
     "@types/react": "^18.2.55",
     "@types/react-beautiful-dnd": "^13.1.8",
     "@types/react-dom": "^18.2.19",

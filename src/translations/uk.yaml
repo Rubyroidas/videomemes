@@ -1,0 +1,66 @@
+feed:
+  title: Стрічка
+  listTitle: Користувачі завантажили ці відео
+feedItem:
+  title: Відео
+  reuseConfigButton: Використати цей сценарій
+mainPage:
+  title: Безкоштовний сервіс для коротких смішних відео
+  menuButtons:
+    choosePreset: Оберіть з шаблонів
+    createFromScratch: Створіть свій сценарій
+    gotoFeed: Що створили користувачі
+    about: О проєкті
+    contactUs: Контакти
+pickPreset:
+  title: Оберіть сценарій
+  pickPreset: Оберіть шаблон
+  editFromScratchButton: Почніть з чистого аркуша
+editScenario:
+  title: Редагування сценарію
+  chooseVideoFormat: Формат відео
+  totalDuration: 'Довжина сценарію: {scenarioTotalDuration}с (макс 60с)'
+  swapFragmentsToOrder: Поміняйте фрагменти місцями, щоб змінити порядок
+  scenarioIsEmpty: Сценарій не містить фрагментів. Використайте іконку "плюс" щоб додати їх до вашого сценарію
+  backToFragmentsList: Назад до фрагментів
+  editFragments: Редагувати фрагменти
+  addFragment:
+    pickCollection: Оберіть колекцію
+    pickFragment: Оберіть фрагмент
+    pickAnotherCollection: Оберіть іншу колекцію
+editFragments:
+  title: Редагувати фрагменти
+  backToScenario: Редагувати сценарій
+  generateButton: Генерувати
+  cancelGenerateButton: Скасувати
+  generateConsentDialog:
+    title: Маєете згоду?
+    description: Вам треба прийняти умови публічно доступних відео. Це означає, що коли ви генеруєте його, воно буде доступне для всіх на сторінці Лента.
+  text: текст
+  image: зображення
+  textSize: Розмір тексту
+  imageSize: Розмір зображення
+  dropImageHere: Скиньте зображення сюди ...
+generatedVideoPage:
+  returnToEditButton: Редагувати
+  downloadButton: Завантажити
+  progressCurtainTexts:
+    - Генеруємо ваше відео
+    - Зачекайте
+    - Текст 1
+    - Текст 2
+    - Текст 3
+  progressCurtainLine1: Це може зайняти декілька хвилин
+  progressCurtainLine2: Не закривайте цю вкладку
+dialog:
+  ok: Добре
+  cancel: Скасувати
+general:
+  language: Мова
+  pageLoading: Завантажуємось...
+  yourBrowserIsNotSupported: Ваш браузер застарий. Будь ласка, оновіть його до останньої версії.
+  or: чи
+videoFormats:
+  ig_story: Інстаграм сторі
+  ig_post: Інстаграм пост
+  yt_video: Ютуб відео

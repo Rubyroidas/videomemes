@@ -1,6 +1,7 @@
 import fs from 'fs';
-import {defineConfig, Plugin} from "vite";
-import react from "@vitejs/plugin-react";
+import {defineConfig, Plugin} from 'vite';
+import react from '@vitejs/plugin-react';
+import ViteYaml from '@modyfi/vite-plugin-yaml';
 
 const hexLoader: Plugin = {
     name: 'hex-loader',
@@ -24,7 +25,7 @@ export default defineConfig({
         __DEV__: process.env.NODE_ENV !== 'production',
         __VER__: JSON.stringify(process.env.npm_package_version),
     },
-    plugins: [react(), hexLoader],
+    plugins: [react(), hexLoader, ViteYaml()],
     optimizeDeps: {
         exclude: ["@ffmpeg/ffmpeg", "@ffmpeg/util"],
     },

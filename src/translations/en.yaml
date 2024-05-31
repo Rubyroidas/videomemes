@@ -1,0 +1,66 @@
+feed:
+  title: Feed
+  listTitle: Users uploaded these videos
+feedItem:
+  title: Video
+  reuseConfigButton: Use this video as a template
+mainPage:
+  title: Free service for short funny videos creation
+  menuButtons:
+    choosePreset: Choose preset scenario
+    createFromScratch: Create your scenario
+    gotoFeed: See what people posted
+    about: About the project
+    contactUs: Contact us
+pickPreset:
+  title: Pick scenario
+  pickPreset: Pick a preset
+  editFromScratchButton: Edit from scratch
+editScenario:
+  title: Edit scenario
+  chooseVideoFormat: Video format
+  totalDuration: 'Scenario total duration: {scenarioTotalDuration}s (max 60s)'
+  swapFragmentsToOrder: Swap the fragments to change the order
+  scenarioIsEmpty: There are no fragments here yet. Use "plus" icon to add them to your scenario.
+  backToFragmentsList: Back to fragments list
+  editFragments: Edit fragments
+  addFragment:
+    pickCollection: Pick a collection
+    pickFragment: Pick a fragment
+    pickAnotherCollection: Pick another collection
+editFragments:
+  title: Edit fragments
+  backToScenario: Edit scenario
+  generateButton: Generate
+  cancelGenerateButton: Cancel
+  generateConsentDialog:
+    title: Are you consent?
+    description: You should accept our terms of publicly available videos. It means when you generate one, it will be availably to everyone's discovery on Feed page.
+  text: text
+  image: image
+  textSize: Text size
+  imageSize: Image size
+  dropImageHere: Drop image here ...
+generatedVideoPage:
+  returnToEditButton: Edit
+  downloadButton: Download
+  progressCurtainTexts:
+    - Generating your video
+    - Wait for it
+    - text 1
+    - text 2
+    - text 3
+  progressCurtainLine1: That can take up to several minutes
+  progressCurtainLine2: Don't close this tab
+dialog:
+  ok: Ok
+  cancel: Cancel
+general:
+  language: Language
+  pageLoading: Loading...
+  yourBrowserIsNotSupported: Your browser is outdated. Please consider to upgrade to the newest version.
+  or: or
+videoFormats:
+  ig_story: Instagram story
+  ig_post: Instagram post
+  yt_video: YouTube video

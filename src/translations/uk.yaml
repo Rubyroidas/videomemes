@@ -11,7 +11,7 @@ mainPage:
     createFromScratch: Створіть свій сценарій
     gotoFeed: Що створили користувачі
     about: О проєкті
-    contactUs: Контакти
+    contactUs: Зворотній зв'язок
 pickPreset:
   title: Оберіть сценарій
   pickPreset: Оберіть шаблон
@@ -19,9 +19,9 @@ pickPreset:
 editScenario:
   title: Редагування сценарію
   chooseVideoFormat: Формат відео
-  totalDuration: 'Довжина сценарію: {scenarioTotalDuration}с (макс 60с)'
+  totalDuration: 'Тривалість сценарію: {scenarioTotalDuration}с (макс 60с)'
   swapFragmentsToOrder: Поміняйте фрагменти місцями, щоб змінити порядок
-  scenarioIsEmpty: Сценарій не містить фрагментів. Використайте іконку "плюс" щоб додати їх до вашого сценарію
+  scenarioIsEmpty: Сценарій не містить фрагментів. Використайте іконку "плюс" щоб додати їх до вашого сценарію.
   backToFragmentsList: Назад до фрагментів
   editFragments: Редагувати фрагменти
   addFragment:
@@ -61,6 +61,6 @@ general:
   yourBrowserIsNotSupported: Ваш браузер застарий. Будь ласка, оновіть його до останньої версії.
   or: чи
 videoFormats:
-  ig_story: Інстаграм сторі
+  ig_story: Інстаграм сторіс
   ig_post: Інстаграм пост
   yt_video: Ютуб відео

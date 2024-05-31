@@ -1,0 +1,66 @@
+feed:
+  title: Лента
+  listTitle: Пользователи загрузили эти видео
+feedItem:
+  title: Видео
+  reuseConfigButton: Использовать это видео как шаблон
+mainPage:
+  title: Бесплатный сервис для создания коротких забавных видео
+  menuButtons:
+    choosePreset: Выберите шаблон сценария
+    createFromScratch: Создать свой сценарий
+    gotoFeed: Что запостили пользователи
+    about: О проекте
+    contactUs: Обратная связь
+pickPreset:
+  title: Выберите сценарий
+  pickPreset: Выберите шаблон
+  editFromScratchButton: Создать с чистого листа
+editScenario:
+  title: Редактировать сценарий
+  chooseVideoFormat: Формат видео
+  totalDuration: 'Длительность сценария: {scenarioTotalDuration}с (макс 60с)'
+  swapFragmentsToOrder: Поменяйте фрагменты местами, чтобы изменить порядок
+  scenarioIsEmpty: Сценарий не содержит фрагменты. Используйте иконку "плюс" чтобы добавить их в свой сценарий.
+  backToFragmentsList: Назад к фрагментам
+  editFragments: Редактировать фрагменты
+  addFragment:
+    pickCollection: Выберите коллекцию
+    pickFragment: Выберите фрагмент
+    pickAnotherCollection: Выберите другую коллекцию
+editFragments:
+  title: Редактировать фрагменты
+  backToScenario: Редактировать сценарий
+  generateButton: Создать
+  cancelGenerateButton: Отмента
+  generateConsentDialog:
+    title: Вы согласны?
+    description: Вам нужно принять условия публично доступных видео. Это означает, что когда вы генерируете его, оно будет доступно всем на странице Лента.
+  text: текст
+  image: изображение
+  textSize: Размер текста
+  imageSize: Размер изображения
+  dropImageHere: Скиньте файлы сюда ...
+generatedVideoPage:
+  returnToEditButton: Редактировать
+  downloadButton: Загрузить
+  progressCurtainTexts:
+    - Генерируем ваше видео
+    - Подождите
+    - текст 1
+    - текст 2
+    - текст 3
+  progressCurtainLine1: Это может занять до нескольких минут
+  progressCurtainLine2: Не закрывайте эту вкладку
+dialog:
+  ok: Ok
+  cancel: Отмена
+general:
+  language: Язык
+  pageLoading: Загрузка...
+  yourBrowserIsNotSupported: Ваш браузер устарел. Пожалуйста, рассмотрите возможность обновления до последней версии.
+  or: или
+videoFormats:
+  ig_story: Instagram сторис
+  ig_post: Instagram пост
+  yt_video: YouTube видео

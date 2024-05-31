@@ -2,16 +2,13 @@ import i18n from 'i18next';
 import {initReactI18next} from 'react-i18next';
 
 import {consoleLog} from './utils';
-import {en, uk} from './translations';
+import * as translations from './translations';
 
-const resources = {
-    en: {
-        translation: en,
-    },
-    uk: {
-        translation: uk,
-    },
-};
+const resources = Object.entries(translations)
+    .reduce((result, [lang, translation]) => ({
+        ...result,
+        [lang]: {translation},
+    }), {});
 
 let lng = 'en';
 const supportedLangs = Object.keys(resources);

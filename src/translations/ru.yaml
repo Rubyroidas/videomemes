@@ -64,3 +64,7 @@ videoFormats:
   ig_story: Instagram сторис
   ig_post: Instagram пост
   yt_video: YouTube видео
+templatePage:
+  title: Выберите шаблон
+  listTitle: Эти видео включены в шаблон
+  useTemplateButton: Использовать этот шаблон

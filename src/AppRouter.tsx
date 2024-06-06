@@ -12,6 +12,7 @@ import {DownloadResultPage} from './pages/DownloadResultPage';
 import {FeedPage} from './pages/FeedPage';
 import {TitleSetupPage} from './pages/TitleSetupPage';
 import {FeedItemPage} from './pages/FeedItemPage';
+import {TemplatePage} from './pages/TemplatePage';
 
 const router = createBrowserRouter([
     {
@@ -49,6 +50,10 @@ const router = createBrowserRouter([
     {
         path: '/feed/:id',
         element: <FeedItemPage/>,
+    },
+    {
+        path: '/t/:id',
+        element: <TemplatePage/>,
     },
     {
         path: '/about',

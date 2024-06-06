@@ -64,3 +64,7 @@ videoFormats:
   ig_story: Instagram story
   ig_post: Instagram post
   yt_video: YouTube video
+templatePage:
+  title: Pick template
+  listTitle: These videos are included in the template
+  useTemplateButton: Use this template

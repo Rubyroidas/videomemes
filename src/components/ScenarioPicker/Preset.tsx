@@ -26,6 +26,7 @@ export const Preset = ({preset, index}: Props) => {
     const handleClick = () => {
         sendAnalyticsEvent(AnalyticsEvent.Preset_Selected, {
             preset_id: preset.id,
+            source: 'template-list-page',
         });
         store.scenario!.fragments = preset.items.map(item => ({
             id: shortUuid().uuid(),

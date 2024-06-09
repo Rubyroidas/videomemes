@@ -47,12 +47,13 @@ export const Preset = ({preset, index}: Props) => {
     const items = preset.items
         .map(presetItem => store.getCollectionAndItem(presetItem.collectionId, presetItem.itemId));
 
-    const handleSharePresetClick = () => {
+    const handleSharePresetClick = (e) => {
         navigator?.share({
             url: `${location.origin}/t/${preset.id}`,
             title: preset.name,
             text: t('pickPreset.shareTemplateText'),
         });
+        e.preventDefault();
     };
 
     const imageUrl = items[0].item?.snapshot;

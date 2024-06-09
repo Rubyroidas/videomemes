@@ -16,6 +16,7 @@ pickPreset:
   title: Pick scenario
   pickPreset: Pick a preset
   editFromScratchButton: Edit from scratch
+  shareTemplateText: Check out this video memes preset on Memely!
 editScenario:
   title: Edit scenario
   chooseVideoFormat: Video format

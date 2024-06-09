@@ -16,6 +16,7 @@ pickPreset:
   title: Выберите сценарий
   pickPreset: Выберите шаблон
   editFromScratchButton: Создать с чистого листа
+  shareTemplateText: Зацените эту подборку видеомемов на Memely!
 editScenario:
   title: Редактировать сценарий
   chooseVideoFormat: Формат видео

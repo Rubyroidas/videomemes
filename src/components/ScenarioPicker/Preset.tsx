@@ -1,5 +1,6 @@
 import {useNavigate} from 'react-router-dom';
 import shortUuid from 'short-uuid';
+import {useTranslation} from 'react-i18next';
 
 import {ScenarioPreset, UserFragmentType} from '../../types';
 import {useStore} from '../../store';
@@ -7,6 +8,7 @@ import {PresetSnapshotImage, PresetWrapper} from './ScenarioPicker.styles';
 import {VIDEO_TITLE_ENABLED} from '../../config';
 import {
     ScenarioItemClipTitle,
+    ScenarioItemDeleteButton,
     ScenarioItemDuration,
     ScenarioItemIndexNumber,
     ScenarioItemUserText,
@@ -14,6 +16,7 @@ import {
     ScenarioItemWrapperGrid
 } from '../ScenarioEditor/ScenarioEditor.styles';
 import {AnalyticsEvent, sendAnalyticsEvent} from '../../services/analytics';
+import {ShareIcon} from '../../icons/ShareIcon';
 
 type Props = {
     preset: ScenarioPreset;
@@ -23,6 +26,8 @@ type Props = {
 export const Preset = ({preset, index}: Props) => {
     const store = useStore();
     const navigate = useNavigate();
+    const {t} = useTranslation();
+
     const handleClick = () => {
         sendAnalyticsEvent(AnalyticsEvent.Preset_Selected, {
             preset_id: preset.id,
@@ -41,6 +46,14 @@ export const Preset = ({preset, index}: Props) => {
     };
     const items = preset.items
         .map(presetItem => store.getCollectionAndItem(presetItem.collectionId, presetItem.itemId));
+
+    const handleSharePresetClick = () => {
+        navigator?.share({
+            url: `${location.origin}/t/${preset.id}`,
+            title: preset.name,
+            text: t('pickPreset.shareTemplateText'),
+        });
+    };
 
     const imageUrl = items[0].item?.snapshot;
     if (!imageUrl) {
@@ -64,6 +77,9 @@ export const Preset = ({preset, index}: Props) => {
                     <ScenarioItemIndexNumber>
                         #{index}
                     </ScenarioItemIndexNumber>
+                    <ScenarioItemDeleteButton title="share" onClick={handleSharePresetClick}>
+                        <ShareIcon/>
+                    </ScenarioItemDeleteButton>
                     <ScenarioItemUserText>
                         {preset.items.length} videos
                     </ScenarioItemUserText>

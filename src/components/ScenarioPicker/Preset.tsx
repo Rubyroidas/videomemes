@@ -17,6 +17,7 @@ import {
 } from '../ScenarioEditor/ScenarioEditor.styles';
 import {AnalyticsEvent, sendAnalyticsEvent} from '../../services/analytics';
 import {ShareIcon} from '../../icons/ShareIcon';
+import {MouseEventHandler} from 'react';
 
 type Props = {
     preset: ScenarioPreset;
@@ -47,13 +48,14 @@ export const Preset = ({preset, index}: Props) => {
     const items = preset.items
         .map(presetItem => store.getCollectionAndItem(presetItem.collectionId, presetItem.itemId));
 
-    const handleSharePresetClick = (e) => {
+    const handleSharePresetClick: MouseEventHandler<HTMLDivElement> = (e) => {
+        e.preventDefault();
+        e.stopPropagation();
         navigator?.share({
             url: `${location.origin}/t/${preset.id}`,
             title: preset.name,
             text: t('pickPreset.shareTemplateText'),
         });
-        e.preventDefault();
     };
 
     const imageUrl = items[0].item?.snapshot;

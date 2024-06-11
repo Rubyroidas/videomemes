@@ -215,9 +215,13 @@ export const generateVideo = async (
     userFragments: UserFragment[],
     collections: Collection[],
     format: Format,
+    config: {fullQuality: boolean},
     setEncodingProgress?: ((progress: number) => void),
-    signal?: AbortSignal
+    signal?: AbortSignal,
 ): Promise<Blob> => {
+    const startTime = Date.now();
+    const {fullQuality} = config;
+    consoleLog('generate config', {fullQuality});
     const updateEncodingStatus = ({progress}: ProgressEvent) => {
         setEncodingProgress?.(progress);
     };
@@ -228,7 +232,7 @@ export const generateVideo = async (
     const imageTimePairs: ImageTimePair[] = [];
     let imageNumber = 0;
     let timeShift = 0;
-    const collectionSize = formatSizes[format];
+    const formatSize = formatSizes[format];
 
     consoleLog('videoTitle', videoTitle);
     if (videoTitle) {
@@ -248,7 +252,7 @@ export const generateVideo = async (
 
         const {x, y, width, height} = collection.textArea[format];
         const blob = userFragment.type === UserFragmentType.PlainText
-            ? await renderTextSlide(collectionSize, width, height, userFragment.text, userFragment.textSize)
+            ? await renderTextSlide(formatSize, width, height, userFragment.text, userFragment.textSize)
             : await renderImageSlide(width, height, userFragment.image!, userFragment.imageSize, '#fff');
         const imageFileName = `captions/${fileNumberSuffix}.png`;
         const imageBlob = await canvasToBlob(blob);
@@ -315,11 +319,14 @@ export const generateVideo = async (
     await ffmpeg.writeFile('watermark.png', watermarkFile);
 
     const watermarkIndex = fileIndexOffset + imageTimePairs.length * 2;
-    complexFilter.push(`[cap${imageTimePairs.length}][${watermarkIndex}:v]overlay=${watermarkArea.x}:${watermarkArea.y}[watermark]`)
+    complexFilter.push(`[cap${imageTimePairs.length}][${watermarkIndex}:v]overlay=${watermarkArea.x}:${watermarkArea.y}[watermark]`);
+    const finalWidth = Math.ceil(formatSize.width * (fullQuality ? 1 : 0.5));
+    const finalHeight = Math.ceil(formatSize.height * (fullQuality ? 1 : 0.5));
+    complexFilter.push(`[watermark]scale=${finalWidth}:${finalHeight}[vfinal]`);
 
     compileCommandArgs.push(
         '-filter_complex', complexFilter.join(';'),
-        '-map', `[watermark]`,
+        '-map', `[vfinal]`,
         '-map', '[araw]',
 
         ...codecsParams.video,
@@ -358,6 +365,7 @@ export const generateVideo = async (
     await ffmpeg.deleteFile('output.mp4');
     await ffmpeg.deleteFile('watermark.png');
     consoleLog('dir [.]', await ffmpegListFilesRaw(ffmpeg, '.'));
+    consoleLog(`generateVideo done in ${Date.now() - startTime}ms`);
 
     return result;
 };

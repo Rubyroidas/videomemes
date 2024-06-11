@@ -16,6 +16,7 @@ import {UserFragmentType} from '../../types';
 import {consoleError, consoleLog} from '../../utils';
 import {ConsentDialog} from './ConsentDialog';
 import {AnalyticsEvent, sendAnalyticsEvent} from '../../services/analytics';
+import {SliderCheckbox} from '../SliderCheckbox';
 
 export const VideoEditor: FC = observer(() => {
     const {t} = useTranslation();
@@ -24,10 +25,11 @@ export const VideoEditor: FC = observer(() => {
     const navigate = useNavigate();
 
     const [isEncoding, setIsEncoding] = useState(false);
+    const [isFullQuality, setIsFullQuality] = useState(false);
     const [isConsentDialogVisible, setIsConsentDialogVisible] = useState(false);
     const abortController = useRef<AbortController | null>(null);
 
-    const doGenerate = useCallback( async () => {
+    const doGenerate =  async () => {
         if (isEncoding || !store.scenario || !store.collections) {
             return;
         }
@@ -45,6 +47,7 @@ export const VideoEditor: FC = observer(() => {
                 store.scenario.fragments,
                 store.collections,
                 store.scenario.format,
+                {fullQuality: isFullQuality},
                 () => {
                 },
                 abortController.current.signal
@@ -77,7 +80,7 @@ export const VideoEditor: FC = observer(() => {
             }
             abortController.current = null;
         }
-    }, []);
+    };
     const handleEditScenario = useCallback(() => {
         navigate('/edit-scenario');
     }, []);
@@ -127,6 +130,11 @@ export const VideoEditor: FC = observer(() => {
                         {t('editFragments.generateButton')}
                     </Button>
                 )}
+                <SliderCheckbox
+                    defaultChecked={isFullQuality}
+                    onClick={() => setIsFullQuality(v => !v)}
+                />
+                Full quality
             </div>
             <FragmentsEditor
                 disabled={isEncoding}

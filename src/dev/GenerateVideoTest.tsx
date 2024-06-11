@@ -40,6 +40,7 @@ export const GenerateVideoTest = () => {
             userFragments,
             store.collections!,
             Format.InstagramPost,
+            {fullQuality: false},
             setProgress
         );
         const dataurl = URL.createObjectURL(blob);

@@ -27,19 +27,20 @@ export const Wrapper = styled.div`
 type Props = {
     collectionItem: CollectionItem;
     source: string;
+    disabled: boolean;
 }
 export const SnapshotPreview = (props: Props) => {
     const videoRef = useRef<HTMLVideoElement>(null);
     const [startedPlaying, setStartedPlaying] = useState(false);
     const [isVideoPlaying, setIsVideoPlaying] = useState(false);
-    const {collectionItem} = props;
+    const {collectionItem, disabled} = props;
 
     const handleClick = () => {
-        setStartedPlaying(true);
-        if (!videoRef.current) {
+        if (!videoRef.current || disabled) {
             return;
         }
 
+        setStartedPlaying(true);
         sendAnalyticsEvent(AnalyticsEvent.SnapshotPreview_VideoPlayed, {
             source: props.source,
             play: videoRef.current.paused,

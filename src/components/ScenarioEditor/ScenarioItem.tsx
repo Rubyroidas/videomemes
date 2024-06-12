@@ -38,6 +38,7 @@ export const ScenarioItem: FC<ScenarioItemProps> = (props) => {
             <SnapshotPreview
                 collectionItem={collectionItem}
                 source="scenario-editor"
+                disabled={isDragging}
             />
             <ScenarioItemWrapperGrid>
                 <ScenarioItemDragger>

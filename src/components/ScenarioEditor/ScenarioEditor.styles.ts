@@ -171,6 +171,7 @@ export const CollectionElement = styled.div`
     position: relative;
     width: 600px;
     height: 337.5px;
+    margin: 0 0 16px 0;
     
     & > img {
         width: 100%;
@@ -203,6 +204,7 @@ export const CollectionElement = styled.div`
     @media (max-width: 480px) {
         width: 100vw;
         height: 56.25vw;
+        margin: 0 0 2vw 0;
 
         & > img {
             width: 100vw;

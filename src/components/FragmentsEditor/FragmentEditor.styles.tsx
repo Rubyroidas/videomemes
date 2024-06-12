@@ -204,3 +204,8 @@ export const ResultVideo = styled.video`
         width: 100vw;
     }
 `;
+export const ButtonsToolbar = styled.div`
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+`;

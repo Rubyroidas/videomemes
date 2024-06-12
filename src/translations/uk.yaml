@@ -42,6 +42,7 @@ editFragments:
   textSize: Розмір тексту
   imageSize: Розмір зображення
   dropImageHere: Скиньте зображення сюди ...
+  fullQuality: Повна якість
 generatedVideoPage:
   returnToEditButton: Редагувати
   downloadButton: Завантажити

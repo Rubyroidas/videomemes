@@ -42,6 +42,7 @@ editFragments:
   textSize: Размер текста
   imageSize: Размер изображения
   dropImageHere: Скиньте файлы сюда ...
+  fullQuality: Полное качество
 generatedVideoPage:
   returnToEditButton: Редактировать
   downloadButton: Загрузить

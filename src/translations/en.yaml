@@ -42,6 +42,7 @@ editFragments:
   textSize: Text size
   imageSize: Image size
   dropImageHere: Drop image here ...
+  fullQuality: Full quality
 generatedVideoPage:
   returnToEditButton: Edit
   downloadButton: Download

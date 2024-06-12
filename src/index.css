@@ -15,11 +15,6 @@ body {
     width: 100%;
 }
 
-.buttons {
-    display: flex;
-    flex-direction: row;
-}
-
 /* themes */
 :root {
     --button-bg-color: #aaa;

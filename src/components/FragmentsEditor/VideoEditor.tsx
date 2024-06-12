@@ -6,7 +6,7 @@ import {useTranslation} from 'react-i18next';
 import {Button} from '../App.styles';
 import {FragmentsEditor} from './FragmentsEditor';
 import {generateVideo} from '../../generate';
-import {Icon} from './FragmentEditor.styles';
+import {Icon, ButtonsToolbar} from './FragmentEditor.styles';
 import {PlayIcon} from '../../icons/PlayIcon';
 import {EditListIcon} from '../../icons/EditListIcon';
 import {useStore} from '../../store';
@@ -16,7 +16,7 @@ import {UserFragmentType} from '../../types';
 import {consoleError, consoleLog} from '../../utils';
 import {ConsentDialog} from './ConsentDialog';
 import {AnalyticsEvent, sendAnalyticsEvent} from '../../services/analytics';
-import {SliderCheckbox} from '../SliderCheckbox';
+import {SliderCheckboxWithLabel} from '../SliderCheckbox';
 
 export const VideoEditor: FC = observer(() => {
     const {t} = useTranslation();
@@ -115,7 +115,7 @@ export const VideoEditor: FC = observer(() => {
 
     return (
         <>
-            <div className="buttons">
+            <ButtonsToolbar>
                 <Button onClick={handleEditScenario}>
                     <Icon>
                         <EditListIcon/>
@@ -130,12 +130,12 @@ export const VideoEditor: FC = observer(() => {
                         {t('editFragments.generateButton')}
                     </Button>
                 )}
-                <SliderCheckbox
+                <SliderCheckboxWithLabel
                     defaultChecked={isFullQuality}
                     onClick={() => setIsFullQuality(v => !v)}
+                    label={t('editFragments.fullQuality')}
                 />
-                Full quality
-            </div>
+            </ButtonsToolbar>
             <FragmentsEditor
                 disabled={isEncoding}
             />

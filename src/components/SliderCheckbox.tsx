@@ -51,3 +51,25 @@ export const SliderCheckbox = (rest: SliderCheckboxProps) => (
         type="checkbox"
     />
 );
+
+export type SliderCheckboxWithLabel = SliderCheckboxProps & {
+    label: string;
+}
+
+const SliderCheckboxWithLabelWrapper = styled.label`
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-items: flex-start;
+    cursor: pointer;
+`;
+const SliderCheckboxLabel = styled.div`
+    display: inline-block;
+`;
+
+export const SliderCheckboxWithLabel = ({label, ...rest}: SliderCheckboxWithLabel) => (
+    <SliderCheckboxWithLabelWrapper>
+        <SliderCheckbox {...rest} />
+        <SliderCheckboxLabel>{label}</SliderCheckboxLabel>
+    </SliderCheckboxWithLabelWrapper>
+);

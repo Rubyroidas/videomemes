@@ -10,7 +10,7 @@ import {HomeIcon} from '../icons/HomeIcon';
 import {LanguageSelector} from '../components/LanguageSelector';
 import {AppTitle, Button, ListTitle} from '../components/App.styles';
 import {AnalyticsEvent, sendAnalyticsEvent} from '../services/analytics';
-import {VIDEO_TITLE_ENABLED} from '../config';
+import {PREDEFINED_BACKGROUND_COLORS, PREDEFINED_TEXT_COLORS, VIDEO_TITLE_ENABLED} from '../config';
 
 export const TemplatePage = () => {
     const {t} = useTranslation();
@@ -36,6 +36,8 @@ export const TemplatePage = () => {
         store.scenario = {
             uuid: shortUuid().uuid(),
             format: Format.InstagramStory,
+            textColor: PREDEFINED_TEXT_COLORS[0],
+            backgroundColor: PREDEFINED_BACKGROUND_COLORS[0],
             fragments: preset.items.map(item => ({
                 id: shortUuid().uuid(),
                 type: UserFragmentType.PlainText,

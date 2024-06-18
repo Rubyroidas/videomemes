@@ -3,6 +3,7 @@ import ContentEditable, {ContentEditableEvent} from 'react-contenteditable';
 import {Box, Slider, Typography} from '@mui/material';
 import clsx from 'clsx';
 import {useTranslation} from 'react-i18next';
+import {observer} from 'mobx-react';
 
 import {PlayIcon} from '../../icons/PlayIcon';
 import {Point, Rect, UserFragment, UserFragmentType} from '../../types';
@@ -32,7 +33,7 @@ type FragmentEditorProps = {
     onChange: (fragment: UserFragment) => void;
 }
 
-export const FragmentEditor = (props: FragmentEditorProps) => {
+export const FragmentEditor = observer((props: FragmentEditorProps) => {
     const {t} = useTranslation();
     const {disabled, userFragment, onChange} = props;
     const store = useStore();
@@ -115,7 +116,7 @@ export const FragmentEditor = (props: FragmentEditorProps) => {
     const fontSizeMobile = userFragment.textSize * FONT_SIZE * 100;
     const paddingDesktop = TEXT_PADDING * minCollectionSize / 100;
     const paddingMobile = TEXT_PADDING;
-    const inputClassName = TextAreaClass(fontSizeDesktop, fontSizeMobile, paddingDesktop, paddingMobile);
+    const inputClassName = TextAreaClass(fontSizeDesktop, fontSizeMobile, paddingDesktop, paddingMobile, store.scenario.textColor);
     const playButtonPosition: Point = {
         x: collection.playButton[format].x / collectionSize.width * 100,
         y: collection.playButton[format].y / collectionSize.height * 100,
@@ -164,7 +165,7 @@ export const FragmentEditor = (props: FragmentEditorProps) => {
                 </Box>
             </FragmentSizeContainer>
             <EditingAreaContainer {...collectionSize}>
-                <InputBackground {...virtualRect}>
+                <InputBackground {...virtualRect} color={store.scenario.backgroundColor}>
                     {!isImage && (
                         <ContentEditable
                             onPaste={handlePaste}
@@ -178,7 +179,8 @@ export const FragmentEditor = (props: FragmentEditorProps) => {
                         <>
                             { userFragment.image && (
                                 <DebugImage
-                                    background="#fff"
+                                    backgroundColor={store.scenario.backgroundColor}
+                                    textColor={store.scenario.textColor}
                                     collection={collection}
                                     format={format}
                                     userFragment={userFragment}
@@ -214,4 +216,4 @@ export const FragmentEditor = (props: FragmentEditorProps) => {
             </EditingAreaContainer>
         </FragmentEditorWrapper>
     );
-};
+});

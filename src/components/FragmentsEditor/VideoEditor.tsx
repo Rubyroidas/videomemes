@@ -17,6 +17,8 @@ import {consoleError, consoleLog} from '../../utils';
 import {ConsentDialog} from './ConsentDialog';
 import {AnalyticsEvent, sendAnalyticsEvent} from '../../services/analytics';
 import {SliderCheckboxWithLabel} from '../SliderCheckbox';
+import {GithubPicker} from 'react-color';
+import {PREDEFINED_BACKGROUND_COLORS, PREDEFINED_TEXT_COLORS} from '../../config';
 
 export const VideoEditor: FC = observer(() => {
     const {t} = useTranslation();
@@ -27,6 +29,8 @@ export const VideoEditor: FC = observer(() => {
     const [isEncoding, setIsEncoding] = useState(false);
     const [isFullQuality, setIsFullQuality] = useState(false);
     const [isConsentDialogVisible, setIsConsentDialogVisible] = useState(false);
+    const [isBGColorPickerVisible, setIsBGColorPickerVisible] = useState(false);
+    const [isFGColorPickerVisible, setIsFGColorPickerVisible] = useState(false);
     const abortController = useRef<AbortController | null>(null);
 
     const doGenerate =  async () => {
@@ -47,7 +51,11 @@ export const VideoEditor: FC = observer(() => {
                 store.scenario.fragments,
                 store.collections,
                 store.scenario.format,
-                {fullQuality: isFullQuality},
+                {
+                    fullQuality: isFullQuality,
+                    textColor: store.scenario.textColor,
+                    backgroundColor: store.scenario.backgroundColor,
+                },
                 () => {
                 },
                 abortController.current.signal
@@ -103,7 +111,7 @@ export const VideoEditor: FC = observer(() => {
         }
     };
 
-    if (!store.scenario?.fragments) {
+    if (!store.scenario) {
         return null;
     }
 
@@ -135,6 +143,32 @@ export const VideoEditor: FC = observer(() => {
                     onClick={() => setIsFullQuality(v => !v)}
                     label={t('editFragments.fullQuality')}
                 />
+                <Button
+                    onClick={() => setIsBGColorPickerVisible(v => !v)}
+                    disabled={isEncoding}
+                >BG color</Button>
+                {isBGColorPickerVisible && (
+                    <GithubPicker
+                        color={store.scenario.backgroundColor}
+                        colors={PREDEFINED_BACKGROUND_COLORS}
+                        onChange={color => {
+                            store.scenario!.backgroundColor = color.hex;
+                        }}
+                    />
+                )}
+                <Button
+                    onClick={() => setIsFGColorPickerVisible(v => !v)}
+                    disabled={isEncoding}
+                >FG color</Button>
+                {isFGColorPickerVisible && (
+                    <GithubPicker
+                        color={store.scenario.textColor}
+                        colors={PREDEFINED_TEXT_COLORS}
+                        onChange={color => {
+                            store.scenario!.textColor = color.hex;
+                        }}
+                    />
+                )}
             </ButtonsToolbar>
             <FragmentsEditor
                 disabled={isEncoding}

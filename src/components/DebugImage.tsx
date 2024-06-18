@@ -1,4 +1,4 @@
-import {FC, useEffect, useRef} from 'react';
+import {useEffect, useRef} from 'react';
 import styled from '@emotion/styled';
 
 import {renderImageSlide, renderTextSlide} from '../generate';
@@ -14,13 +14,14 @@ const Wrapper = styled.canvas`
 `;
 
 type Props = {
-    background: string;
+    backgroundColor: string;
+    textColor: string;
     format: Format;
     collection: Collection;
     userFragment: UserFragment;
 }
 
-export const DebugImage: FC<Props> = ({background, collection, format, userFragment}) => {
+export const DebugImage = ({textColor, backgroundColor, collection, format, userFragment}: Props) => {
     const {type, text, textSize, image, imageSize} = userFragment;
     const canvasRef = useRef<HTMLCanvasElement>(null);
 
@@ -39,9 +40,12 @@ export const DebugImage: FC<Props> = ({background, collection, format, userFragm
             canvasRef.current.height = height;
 
             if (type === UserFragmentType.PlainText) {
-                canvas = await renderTextSlide(collectionSize, width, height, html2text(text), textSize);
+                canvas = await renderTextSlide(collectionSize, width, height, html2text(text), textSize, {
+                    textColor,
+                    backgroundColor,
+                });
             } else {
-                canvas = await renderImageSlide(width, height, image!, imageSize, background);
+                canvas = await renderImageSlide(width, height, image!, imageSize, {backgroundColor});
             }
 
             ctx.clearRect(0, 0, width, height);

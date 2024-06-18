@@ -11,12 +11,17 @@ import {
     reduceWideLines,
     ProgressEvent,
 } from './utils';
-import {FONT_SIZE, LINE_HEIGHT, TEXT_COLOR, TEXT_PADDING} from './config';
+import {FONT_SIZE, LINE_HEIGHT, TEXT_PADDING} from './config';
 import watermarkRaw2 from './icons/watermark.svg?raw';
 import {formatSizes} from './statics';
 import silence from './500ms-silence.mp3?raw-hex';
 
-export const renderTextSlide = async (videoSize: Size, width: number, height: number, text: string, textSizeCoeff: number) => {
+export const renderTextSlide = async (videoSize: Size, width: number, height: number, text: string, textSizeCoeff: number, {
+    textColor, backgroundColor,
+}: {
+    textColor: string,
+    backgroundColor: string,
+}) => {
     text = (text ?? '').trim();
     const canvas = document.createElement('canvas');
     canvas.width = width;
@@ -35,10 +40,10 @@ export const renderTextSlide = async (videoSize: Size, width: number, height: nu
 
     const ctx = canvas.getContext('2d')!;
 
-    ctx.fillStyle = '#fff';
+    ctx.fillStyle = backgroundColor;
     ctx.fillRect(0, 0, width, height);
 
-    ctx.fillStyle = TEXT_COLOR;
+    ctx.fillStyle = textColor;
     ctx.textBaseline = 'alphabetic';
     ctx.textAlign = 'center';
     ctx.font = `bold ${fontSize}px sans-serif`;
@@ -94,7 +99,11 @@ export const canvasToBlob = async (canvas: HTMLCanvasElement, mimeType: string =
     });
 };
 
-export const renderImageSlide = async (width: number, height: number, blob: Blob | HTMLCanvasElement, imageSize: number, background?: string) => {
+export const renderImageSlide = async (width: number, height: number, blob: Blob | HTMLCanvasElement, imageSize: number, {
+    backgroundColor,
+}: {
+    backgroundColor: string,
+}) => {
     const canvas = document.createElement('canvas');
     canvas.width = width;
     canvas.height = height;
@@ -102,10 +111,8 @@ export const renderImageSlide = async (width: number, height: number, blob: Blob
     const ctx = canvas.getContext('2d')!;
 
     ctx.clearRect(0, 0, width, height);
-    if (background) {
-        ctx.fillStyle = background;
-        ctx.fillRect(0, 0, width, height);
-    }
+    ctx.fillStyle = backgroundColor;
+    ctx.fillRect(0, 0, width, height);
 
     const image = blob.constructor === Blob
         ? await blobToCanvas(blob)
@@ -157,7 +164,9 @@ const createWaterMarkData = async (size: Size) => new Uint8Array(
                 size.width,
                 size.height,
                 new Blob([watermarkRaw2], {type: 'image/svg+xml'}),
-                1)
+                1, {
+                    backgroundColor: 'transparent',
+                })
         ))
     ).arrayBuffer()
 );
@@ -167,7 +176,10 @@ export const generateVideoTitleImage = async (text: string, format: Format): Pro
     return await renderTextSlide(
         size,
         size.width, size.height,
-        text, 1
+        text, 1, {
+            textColor: '#ff0000',
+            backgroundColor: '#ffffff',
+        }
     );
 };
 
@@ -215,12 +227,12 @@ export const generateVideo = async (
     userFragments: UserFragment[],
     collections: Collection[],
     format: Format,
-    config: {fullQuality: boolean},
+    config: {fullQuality: boolean, textColor: string, backgroundColor: string},
     setEncodingProgress?: ((progress: number) => void),
     signal?: AbortSignal,
 ): Promise<Blob> => {
     const startTime = Date.now();
-    const {fullQuality} = config;
+    const {fullQuality, textColor, backgroundColor} = config;
     consoleLog('generate config', {fullQuality});
     const updateEncodingStatus = ({progress}: ProgressEvent) => {
         setEncodingProgress?.(progress);
@@ -252,8 +264,8 @@ export const generateVideo = async (
 
         const {x, y, width, height} = collection.textArea[format];
         const blob = userFragment.type === UserFragmentType.PlainText
-            ? await renderTextSlide(formatSize, width, height, userFragment.text, userFragment.textSize)
-            : await renderImageSlide(width, height, userFragment.image!, userFragment.imageSize, '#fff');
+            ? await renderTextSlide(formatSize, width, height, userFragment.text, userFragment.textSize, {textColor, backgroundColor})
+            : await renderImageSlide(width, height, userFragment.image!, userFragment.imageSize, {backgroundColor});
         const imageFileName = `captions/${fileNumberSuffix}.png`;
         const imageBlob = await canvasToBlob(blob);
         await ffmpeg.writeFile(imageFileName, new Uint8Array(await imageBlob.arrayBuffer()));

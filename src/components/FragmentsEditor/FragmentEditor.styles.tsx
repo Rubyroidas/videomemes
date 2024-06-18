@@ -34,25 +34,25 @@ export const EditingAreaContainer = styled.div<Size>`
         height: ${props => props.height / props.width * 100}vw;
     }
 `;
-export const InputBackground = styled.div<Rect>`
+export const InputBackground = styled.div<Rect & {color: string}>`
     position: absolute;
     left: ${props => props.x}%;
     top: ${props => props.y}%;
     width: ${props => props.width}%;
     height: ${props => props.height}%;
-    background-color: #fff;
+    background-color: ${props => props.color};
     z-index: 1;
     background-size: contain;
     background-repeat: no-repeat;
     background-position: center center;
 `;
-export const TextAreaClass = (fontSizeDesktop: number, fontSizeMobile: number, paddingDesktop: number, paddingMobile: number) => css`
+export const TextAreaClass = (fontSizeDesktop: number, fontSizeMobile: number, paddingDesktop: number, paddingMobile: number, textColor: string) => css`
     position: absolute;
     width: 100%;
     height: 100%;
 
     background-color: transparent;
-    color: ${TEXT_COLOR};
+    color: ${textColor};
     font-family: sans-serif;
     line-height: ${LINE_HEIGHT * 100}%;
     font-weight: bold;

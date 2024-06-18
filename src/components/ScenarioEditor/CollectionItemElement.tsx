@@ -20,6 +20,7 @@ export const CollectionItemElement: FC<HTMLProps<HTMLDivElement> & Props> = ({in
         <SnapshotPreview
             collectionItem={item}
             source="collection-item"
+            disabled={disabled}
         />
         <ScenarioItemWrapperGrid>
             <ScenarioItemIndexNumber>

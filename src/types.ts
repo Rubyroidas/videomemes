@@ -54,6 +54,8 @@ export enum Format {
 export type UserScenario = {
     uuid: string;
     format: Format;
+    textColor: string;
+    backgroundColor: string;
     title?: string;
     fragments: UserFragment[];
 }

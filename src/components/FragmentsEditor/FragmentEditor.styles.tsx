@@ -138,7 +138,7 @@ export const EditingVideo = styled.video`
 export const NavigateCaption = styled.div`
     font-size: 2rem;
     text-align: center;
-    width: 720px;
+    width: var(--page-width);
 
     @media (max-width: 480px) {
         font-size: 4vw;
@@ -200,9 +200,7 @@ export const PlayButton = styled.div<PlayButtonProps>`
     }
 `;
 export const ResultVideo = styled.video`
-    @media (max-width: 480px) {
-        width: 100vw;
-    }
+    width: var(--page-width);
 `;
 export const ButtonsToolbar = styled.div`
     display: flex;

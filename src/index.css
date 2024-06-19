@@ -23,6 +23,7 @@ body {
     --switch-button-bg-color-selected: #563333;
     --text-color: #000;
     --bg-color: #fff;
+    --page-width: 720px;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -33,6 +34,12 @@ body {
         --switch-button-bg-color-selected: #563333;
         --text-color: #D7D7D7;
         --bg-color: #454545;
+    }
+}
+
+@media (max-width: 480px) {
+    :root {
+        --page-width: 100vw;
     }
 }
 

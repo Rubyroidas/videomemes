@@ -21,7 +21,7 @@ const Wrapper = styled.div`
     box-sizing: border-box;
     grid-template-areas:
 "left text right";
-    width: 720px;
+    width: var(--page-width);
 
     @media (max-width: 480px) {
         grid-template-columns: 12vw 1fr 12vw;

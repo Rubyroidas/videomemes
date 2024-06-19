@@ -8,7 +8,7 @@ import {GenerateTitleImageTest} from './GenerateTitleImageTest';
 import {GenerateVideoTest} from './GenerateVideoTest';
 import {GenerateTitleVideoTest} from './GenerateTitleVideoTest';
 import {SliderCheckbox} from '../components/SliderCheckbox';
-import {ColorPickerTest} from './ColorPickerTest.tsx';
+import {ColorPickerTest} from './ColorPickerTest';
 
 const StoreContextProvider = createStoreContextProvider();
 const ApiContextProvider = createApiContextProvider();

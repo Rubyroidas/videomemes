@@ -4,7 +4,7 @@ import shortUuid from 'short-uuid';
 import {generateVideo} from '../generate';
 import {Format, UserFragment, UserFragmentType} from '../types';
 import {useStore} from '../store';
-import {PREDEFINED_BACKGROUND_COLORS, PREDEFINED_TEXT_COLORS} from '../config.ts';
+import {PREDEFINED_BACKGROUND_COLORS, PREDEFINED_TEXT_COLORS} from '../config';
 
 const userFragments: UserFragment[] = [
     {

@@ -43,6 +43,8 @@ editFragments:
   imageSize: Розмір зображення
   dropImageHere: Скиньте зображення сюди ...
   fullQuality: Повна якість
+  backgroundColorPickerButton: Колір фону
+  textColorPickerButton: Колір тексту
 generatedVideoPage:
   returnToEditButton: Редагувати
   downloadButton: Завантажити

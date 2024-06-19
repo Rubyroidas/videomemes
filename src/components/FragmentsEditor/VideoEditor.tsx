@@ -150,7 +150,7 @@ export const VideoEditor: FC = observer(() => {
                         onClick={() => setIsBGColorPickerVisible(v => !v)}
                         disabled={isEncoding}
                     >
-                        Background color
+                        {t('editFragments.backgroundColorPickerButton')}
                         {isBGColorPickerVisible && (
                             <GithubPicker
                                 color={store.scenario.backgroundColor}
@@ -165,7 +165,7 @@ export const VideoEditor: FC = observer(() => {
                         onClick={() => setIsFGColorPickerVisible(v => !v)}
                         disabled={isEncoding}
                     >
-                        Text color
+                        {t('editFragments.textColorPickerButton')}
                         {isFGColorPickerVisible && (
                             <GithubPicker
                                 color={store.scenario.textColor}

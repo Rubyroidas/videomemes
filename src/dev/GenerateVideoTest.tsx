@@ -4,6 +4,7 @@ import shortUuid from 'short-uuid';
 import {generateVideo} from '../generate';
 import {Format, UserFragment, UserFragmentType} from '../types';
 import {useStore} from '../store';
+import {PREDEFINED_BACKGROUND_COLORS, PREDEFINED_TEXT_COLORS} from '../config.ts';
 
 const userFragments: UserFragment[] = [
     {
@@ -40,7 +41,11 @@ export const GenerateVideoTest = () => {
             userFragments,
             store.collections!,
             Format.InstagramPost,
-            {fullQuality: false},
+            {
+                fullQuality: false,
+                backgroundColor: PREDEFINED_BACKGROUND_COLORS[0],
+                textColor: PREDEFINED_TEXT_COLORS[0],
+            },
             setProgress
         );
         const dataurl = URL.createObjectURL(blob);

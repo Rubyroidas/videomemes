@@ -206,6 +206,11 @@ export const ResultVideo = styled.video`
 `;
 export const ButtonsToolbar = styled.div`
     display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+`;
+export const ToolbarRow = styled.div`
+    display: flex;
     flex-direction: row;
     flex-wrap: wrap;
 `;

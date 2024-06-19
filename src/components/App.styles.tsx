@@ -31,6 +31,7 @@ export const BasicLink = styled(Link)`
 `;
 
 export const Button = styled.div<{disabled?: boolean}>`
+    position: relative;
     display: inline-flex;
     align-items: center;
     background-color: var(--button-bg-color);
@@ -48,6 +49,14 @@ export const Button = styled.div<{disabled?: boolean}>`
     & > div {
         margin-right: 12px;
     }
+
+    & > .github-picker {
+        position: absolute !important;
+        top: 100%;
+        left: 0;
+        margin-right: 0;
+    }
+
 
     & > svg {
         width: var(--button-size);

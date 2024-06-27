@@ -5,6 +5,7 @@ export const FeedListWrapper = styled.div`
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: space-between;
+    align-items: flex-start;
 
     @media (max-width: 480px) {
         flex-direction: column;

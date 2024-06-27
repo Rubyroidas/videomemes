@@ -1,20 +1,26 @@
 import styled from '@emotion/styled';
 
 export const FeedListWrapper = styled.div`
-    width: min(600px, 100vw);
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
 
     @media (max-width: 480px) {
-        width: 100vw;
+        flex-direction: column;
+        flex-wrap: nowrap;
     }
 `;
 export const FeedListElWrapper = styled.div`
     position: relative;
+    margin: 4px;
     
     & > a > img {
         width: 600px;
     }
 
     @media (max-width: 480px) {
+        margin: 2vw 0 0 0;
         & > a > img {
             width: 100vw;
         }
